@@ -183,13 +183,13 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebycategoryannonceventeslug(annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
     {
-        visits($annoncevente)->seconds(60)->increment();
+        visits($annoncevente)->seconds(10)->increment();
 
         $annoncevente = new AnnonceventeResource(annoncevente::whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
-            ->where(['status' => 1,'status_admin' => 1])
+            ->where(['status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereSlug($annoncevente->slug)->firstOrFail());
 
@@ -388,7 +388,7 @@ class AnnonceventeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
     public function store(StoreRequest $request,annoncetype $annoncetype)
     {
@@ -401,7 +401,9 @@ class AnnonceventeController extends Controller
 
         $annoncevente->save();
 
-        return response('Created',Response::HTTP_CREATED);
+        AnnonceventeService::sendMessageToUser($request,$annoncetype);
+
+        return ['redirect' => route('annonceventesedit_site',[$annoncetype->slug,$annoncevente->slugin])];
     }
 
     /**

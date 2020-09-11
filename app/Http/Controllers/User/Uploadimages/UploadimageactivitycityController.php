@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UploadimageResource;
 use App\Model\activitycity;
 use App\Model\city;
-use File;
 use App\Model\uploadimage;
 use App\Model\user;use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -45,15 +45,14 @@ class UploadimageactivitycityController extends Controller
 
             $image = $request->photo;
             $imageExt = explode(";",explode('/', $image)[1])[0];
-            $imageEncoded = explode(",", $image)[1];
             $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
             $filenametostore='img/activitycity/'. $imageName;
             $imagedecode = base64_decode(explode(",", $image)[1]);
 
 
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
-            \Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
-            
+            Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
+
             $myfilename = config('app.aws_url')."/img/activitycity/{$imageName}";
         }
 

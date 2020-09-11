@@ -55,7 +55,7 @@ class Navlinknewannoncelocation extends PureComponent {
                     </>
                     :
                     <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="btn btn-danger">
-                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien a location</b>
+                        <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre bien en location</b>
                     </a>
                 }
 

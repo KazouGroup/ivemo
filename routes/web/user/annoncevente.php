@@ -64,7 +64,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annonceventeinteresse_site');
 
     Route::get(
-        'av/{annoncetype}/{annoncevente:slugin}',
+        'av_show/{annoncetype}/{annoncevente:slugin}',
         'AnnonceventeController@apiannonceventesbyannoncetypebyannoncevente'
     )->name('api.annonceventesbyannoncetypebyannoncevente_site');
 
@@ -83,21 +83,6 @@ Route::get(
 )->name('annonceventesbyannoncetypebycity_site');
 
 Route::get(
-    'avs_status/{id}/status',
-    'AnnonceventeController@statusitem'
-)->name('annonces_ventes_status.site');
-
-Route::get(
-    'avs_status_comments/{id}/comment_status',
-    'AnnonceventeController@statuscomments'
-)->name('annonces_ventes_status_comments.site');
-
-Route::get(
-    'avs_admin_status/{id}/status_admin',
-    'AnnonceventeController@adminstatusitem'
-)->name('annonces_ventes_admin_status.dashboard');
-
-Route::get(
     'avs/{annoncetype}/{categoryannoncevente}',
     'AnnonceventeController@annonceventebycategoryannoncevente'
 )->name('annonceventebycategoryannonceventes_site');
@@ -108,36 +93,67 @@ Route::get(
 )->name('annonceventecities_site');
 
 Route::get(
-    'profile/{user}/personal_settings/annonces_ventes',
-    'AnnonceventeController@annoncesventesbyuser'
-)->name('annoncesventesbyuser_site');
-
-Route::get(
-    'profile/{user}/personal_settings/annonces_ventes/{categoryannoncevente}',
-    'AnnonceventeController@annoncesventesbyusercategory'
-)->name('annoncesventesbyusercategory_site');
-
-Route::get(
     'avs/{annoncetype}/{categoryannoncevente}/{city}/{user:slug}/{annoncevente}',
     'AnnonceventeController@annonceventebycategoryannonceventeslug'
 )->name('annonceventebycategoryannonceventeslug_site');
 
+
+
+Route::group(['middleware' => 'verified'], function(){
+
+    Route::group(['middleware' => 'verified_status_user'],function (){
+
+
+        Route::get(
+            'profile/{user}/personal_settings/avs',
+            'AnnonceventeController@annoncesventesbyuser'
+        )->name('annoncesventesbyuser_site');
+
+        Route::get(
+            'avs_status/{id}/status',
+            'AnnonceventeController@statusitem'
+        )->name('annonces_ventes_status.site');
+
+        Route::get(
+            'als_active_comments/{annoncelocation:id}/active',
+            'AnnoncelocationController@activecomments'
+        )->name('annoncelocations_active_comments_site');
+
+        Route::get(
+            'avs_status_comments/{id}/comment_status',
+            'AnnonceventeController@statuscomments'
+        )->name('annonces_ventes_status_comments.site');
+
+        Route::get(
+            'av_data/{annoncetype}/new',
+            'AnnonceventeController@create'
+        )->name('annonceventesnew_site');
+
+        Route::post(
+            'av_data/{annoncetype}/new',
+            'AnnonceventeController@store'
+        )->name('annonceventesstore_site');
+
+        Route::get(
+            'av_data/{annoncetype}/{annoncevente:slugin}/edit',
+            'AnnonceventeController@edit'
+        )->name('annonceventesedit_site');
+
+        Route::put(
+            'av_data/{annoncetype}/{annoncevente:slugin}',
+            'AnnonceventeController@update'
+        )->name('annonceventesupdate_site');
+
+        Route::delete(
+            'als_delete/{id}/delete',
+            'AnnonceventeController@destroy'
+        )->name('annonces_ventes_delete.site');
+
+    });
+
+});
+
 Route::get(
-    'av_data/{annoncetype}/{annoncevente:slugin}/edit',
-    'AnnonceventeController@edit'
-)->name('annonceventesedit_site');
-
-Route::put(
-    'av_data/{annoncetype}/{annoncevente:slugin}',
-    'AnnonceventeController@update'
-)->name('annonceventesupdate_site');
-
-Route::get(
-    'av_data/{annoncetype}/new',
-    'AnnonceventeController@create'
-)->name('annonceventesnew_site');
-
-Route::post(
-    'av_data/{annoncetype}/new',
-    'AnnonceventeController@store'
-)->name('annonceventesstore_site');
+    'avs_admin_status/{id}/status_admin',
+    'AnnonceventeController@adminstatusitem'
+)->name('annonces_ventes_admin_status.dashboard');

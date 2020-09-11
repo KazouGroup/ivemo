@@ -11,6 +11,7 @@ import Navlinknewannoncelocation from "./Navlinknewannoncelocation";
 import FieldInput from "../../../../inc/vendor/FieldInput";
 import Navannoncelocationsbyuser from "../inc/Navannoncelocationsbyuser";
 import NavlinkconfigurationUser from "../../../configurations/inc/NavlinkconfigurationUser";
+import NavProfileTraitement from "../../inc/NavProfileTraitement";
 
 
 class AnnoncelocationCreate extends Component {
@@ -212,24 +213,8 @@ class AnnoncelocationCreate extends Component {
                                             <div className="card">
                                                 <div className="card-body">
                                                     <div className="card-header d-flex align-items-center">
-                                                        <div className="d-flex align-items-center">
-                                                            {$userIvemo.avatar === null ?
-                                                                <img style={{height: "40px", width: "80px"}} alt={$userIvemo.first_name}
-                                                                     src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                                :
-                                                                <img src={$userIvemo.avatar}
-                                                                     style={{height: "40px", width: "80px"}} alt={$userIvemo.first_name}
-                                                                     className="avatar"/>
-                                                            }
-                                                            <div className="mx-3">
-                                                                <span className="text-dark font-weight-600 text-sm">
-                                                                    <b>{$userIvemo.first_name}</b>
-                                                                    <small className="d-block text-muted">
-                                                                        <b>{moment($userIvemo.created_at).format('LL')}</b>
-                                                                    </small>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                        <NavProfileTraitement/>
+
                                                         <div className="text-right ml-auto">
 
                                                         </div>

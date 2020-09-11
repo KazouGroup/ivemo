@@ -50,7 +50,6 @@ class UploadimageannoncelocationController extends Controller
 
             $image = $request->photo;
             $imageExt = explode(";",explode('/', $image)[1])[0];
-            $imageEncoded = explode(",", $image)[1];
             $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
             $filenametostore='img/locations/'. $imageName;
             $imagedecode = base64_decode(explode(",", $image)[1]);
@@ -58,7 +57,7 @@ class UploadimageannoncelocationController extends Controller
 
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
             Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
-            
+
             $myfilename = config('app.aws_url')."/img/locations/{$imageName}";
         }
 

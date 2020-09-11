@@ -6,6 +6,9 @@ namespace App\Services;
 
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnonceventeResource;
+use App\Http\Resources\Profile\PrivateAnnonceventeResource;
+use App\Jobs\NewannonceJob;
+use App\Model\abonne\subscribeannonce;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
@@ -17,7 +20,7 @@ class AnnonceventeService
 
     public static function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
     {
-        $data = new AnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
+        $data = new PrivateAnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
 
         return $data;
     }
@@ -191,5 +194,20 @@ class AnnonceventeService
             ])->first();
 
         return $annoncelocations;
+    }
+
+
+    public static function sendMessageToUser($request,$annoncetype)
+    {
+        $fromUser = auth()->user();
+
+        $emailsubscribannonce = subscribeannonce::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewannonceJob($emailsubscribannonce,$fromUser,$annoncetype));
+
+        dispatch($emailuserJob);
+
     }
 }

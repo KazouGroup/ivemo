@@ -12,6 +12,7 @@ import FieldInput from "../../../../inc/vendor/FieldInput";
 import LoaderLdsDefaultPage from "../../../../inc/user/annimation/LoaderLdsDefaultPage";
 import LazyLoad from "react-lazyload";
 import Navannoncelocationsbyuser from "../inc/Navannoncelocationsbyuser";
+import NavProfileTraitement from "../../inc/NavProfileTraitement";
 
 class AnnoncelocationEdit extends Component {
     constructor(props) {
@@ -461,10 +462,6 @@ class AnnoncelocationEdit extends Component {
 
     }
 
-    numberWithCommas() {
-        return this.state.price.toLocaleString(navigator.language, {minimumFractionDigits: 0});
-    }
-
     render() {
         const {categoryannoncelocations, cities,periodeannonces, visiable, uploadimages} = this.state;
         const avatar_style = {
@@ -527,26 +524,8 @@ class AnnoncelocationEdit extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <div className="card-header d-flex align-items-center">
-                                                    <div className="d-flex align-items-center">
-                                                        {$userIvemo.avatar === null ?
-                                                            <img style={{height: "40px", width: "80px"}}
-                                                                 alt={$userIvemo.first_name}
-                                                                 src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                            :
-                                                            <img src={$userIvemo.avatar}
-                                                                 style={{height: "40px", width: "80px"}}
-                                                                 alt={$userIvemo.first_name}
-                                                                 className="avatar"/>
-                                                        }
-                                                        <div className="mx-3">
-                                                                <span className="text-dark font-weight-600 text-sm">
-                                                                    <b>{$userIvemo.first_name}</b>
-                                                                    <small className="d-block text-muted">
-                                                                        <b>{moment($userIvemo.created_at).format('LL')}</b>
-                                                                    </small>
-                                                                </span>
-                                                        </div>
-                                                    </div>
+                                                    <NavProfileTraitement/>
+
                                                     <div className="text-right ml-auto">
                                                         <NavLink to={`/profile/${this.state.user.slug}/statistics/als/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
@@ -554,7 +533,7 @@ class AnnoncelocationEdit extends Component {
                                                         {!this.state.status ?
                                                             <>
                                                                 <Button
-                                                                    onClick={() => this.activeItem(this.state.id)}
+                                                                    onClick={() => this.unactiveItem(this.state.id)}
                                                                     className="btn btn-primary btn-icon btn-sm"
                                                                     title="Annonce activé">
                                                                     <i className="now-ui-icons ui-1_simple-delete"/>
@@ -563,7 +542,7 @@ class AnnoncelocationEdit extends Component {
                                                             :
                                                             <>
                                                                 <Button
-                                                                    onClick={() => this.unactiveItem(this.state.id)}
+                                                                    onClick={() => this.activeItem(this.state.id)}
                                                                     className="btn btn-success btn-icon btn-sm"
                                                                     title="Annonce déactivé">
                                                                     <i className="now-ui-icons ui-1_check"/>
@@ -1161,83 +1140,6 @@ class AnnoncelocationEdit extends Component {
                                         </div>
                                     </div>
 
-
-                                    {/*
-                                        <div className="col-lg-4 col-md-12 mx-auto">
-                                            <div className="submit text-center">
-                                                <Navlinknewannoncelocation {...this.props} />
-                                            </div>
-
-                                            <div className="card">
-                                                <div className="card-body">
-                                                    <div className="row">
-                                                        <div className="col-md-12">
-                                                            <div id="accordion" role="tablist" aria-multiselectable="true"
-                                                                 className="card-collapse">
-                                                                <div className="card-header text-center">
-                                                                    {this.state.price && (
-                                                                        <div className="ml-auto">
-                                                                            <h5 className="text-dark"><b>{this.numberWithCommas()} <small>FCFA/mois</small></b></h5>
-                                                                        </div>
-                                                                    )}
-                                                                    <div className="card-title">
-                                                                        <b>Quel est le montant de votre bien ?</b>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="input-group">
-                                                                    <div className="input-group-prepend">
-                                                                        <span className="input-group-text">
-                                                                            <i className="now-ui-icons business_money-coins"></i>
-                                                                        </span>
-                                                                    </div>
-                                                                    <Input id='price'
-                                                                           type='number'
-                                                                           maxLength="13"
-                                                                           minLength="4"
-                                                                           className={`form-control ${this.hasErrorFor('price') ? 'is-invalid' : ''}`}
-                                                                           name='price'
-                                                                           placeholder="Montant de votre bien"
-                                                                           aria-label="Montant de votre bien"
-                                                                           autoComplete="price"
-                                                                           value={this.state.price}
-                                                                           onChange={this.handleFieldChange}
-                                                                    />
-                                                                    {this.renderErrorFor('price')}
-                                                                </div>
-                                                                <div id="accordion" role="tablist"
-                                                                     aria-multiselectable="true" className="card-collapse">
-
-                                                                    <div className="card card-plain">
-                                                                        <div className="card-header" role="tab"
-                                                                             id="headingAsavoir1">
-                                                                            <a className="collapsed" data-toggle="collapse"
-                                                                               data-parent="#accordion"
-                                                                               href="#collapseAsavoir1"
-                                                                               aria-expanded="false"
-                                                                               aria-controls="collapseAsavoir1">
-                                                                                Bon a savoir sur la vente !
-                                                                                <i className="now-ui-icons arrows-1_minimal-down"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div id="collapseAsavoir1" className="collapse"
-                                                                             role="tabpanel"
-                                                                             aria-labelledby="headingAsavoir1">
-                                                                            <div className="card-body text-info">
-                                                                                Pour trouver un client rapidement, il est
-                                                                                préférable de fixer un prix conforme au
-                                                                                marché locatif local.
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        */}
                                 </div>
 
                             </div>
