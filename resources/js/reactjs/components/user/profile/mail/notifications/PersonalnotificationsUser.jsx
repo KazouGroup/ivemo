@@ -14,6 +14,7 @@ import {
     readnotificationItem,
 } from "../../../../../redux/actions/contactuserActions";
 import NotificationsList from "./inc/NotificationsList";
+import EmptyItems from "../../../../inc/user/EmptyItems";
 
 
 class PersonalnotificationsUser extends Component {
@@ -121,7 +122,7 @@ class PersonalnotificationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {mapNotifications}
+                                                        {mapNotifications.length ? <>{mapNotifications}</> : <EmptyItems syntaxe={"de Message"} title={"Notifications"}/>}
 
                                                     </tbody>
                                                 </table>

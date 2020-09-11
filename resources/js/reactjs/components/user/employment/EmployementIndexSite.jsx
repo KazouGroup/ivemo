@@ -1,10 +1,8 @@
-import React, {Component} from "react";
-import {Link,NavLink } from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import moment from 'moment'
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
-import {Button, Form,Alert,Input} from "reactstrap";
-import Swal from "sweetalert2";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
 import Navemployements from "./inc/Navemployements";
 import EmploymentListSkeleton from "../../inc/user/employment/EmploymentListSkeleton";
@@ -14,7 +12,7 @@ import EmployementList from "./inc/EmployementList";
 import HelmetSite from "../../inc/user/HelmetSite";
 import Navemployementsbycity from "./inc/Navemployementsbycity";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import {
     deleteItem,
     favoriteItem,
@@ -23,6 +21,7 @@ import {
     unfavoriteItem
 } from "../../../redux/actions/employment/employmentActions";
 import EmptyItems from "../../inc/user/EmptyItems";
+
 require("moment/min/locales.min");
 moment.locale('fr');
 
@@ -38,14 +37,13 @@ class EmployementIndexSite extends Component {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiable: old.visiable + 10 }
+            return {visiable: old.visiable + 10}
         })
     }
 
     componentDidMount() {
-       this.props.loademployments()
+        this.props.loademployments()
     }
-
 
 
     render() {
@@ -53,16 +51,17 @@ class EmployementIndexSite extends Component {
         const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
             employments.slice(0, visiable).map(item => {
-                return(
-
-                    <EmployementList key={item.id} {...item}
-                                     favoriteItem={this.props.favoriteItem}
-                                     unfavoriteItem={this.props.unfavoriteItem}
-                                     deleteItem={this.props.deleteItem}
-                                     unactiveItem={this.props.unactiveItem} />
+                return (
+                    <>
+                        <EmployementList key={item.id} {...item}
+                                         favoriteItem={this.props.favoriteItem}
+                                         unfavoriteItem={this.props.unfavoriteItem}
+                                         deleteItem={this.props.deleteItem}
+                                         unactiveItem={this.props.unactiveItem}/>
+                    </>
                 )
             })
-        ):(
+        ) : (
             <EmploymentListSkeleton/>
         );
         return (
@@ -71,18 +70,21 @@ class EmployementIndexSite extends Component {
 
                 <div className="landing-page sidebar-collapse">
 
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400" >
-                        <NavUserSite />
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent"
+                         color-on-scroll="400">
+                        <NavUserSite/>
                     </nav>
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project16.jpg' + ")" }}>
+                            <div className="page-header-image" data-parallax="true"
+                                 style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project16.jpg' + ")"}}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-10 mx-auto">
-                                        <h3 className="title">Proposez vos services, cherchez des partenaires et gérez tous vos événements & recrutements facilement et Gratuitement.</h3>
+                                        <h3 className="title">Proposez vos services, cherchez des partenaires et gérez
+                                            tous vos événements & recrutements facilement et Gratuitement.</h3>
                                     </div>
                                 </div>
                             </div>
@@ -96,25 +98,31 @@ class EmployementIndexSite extends Component {
                             </div>
 
                             <div className="container">
-                                <br />
+                                <br/>
                                 <div className="row">
 
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
+                                                {!$userIvemo.email_verified_at && (
                                                     <LinkValicationEmail/>
                                                 )}
                                             </>
                                         )}
 
-                                        {employments.length !== 0 ? <>{mapEmployments}</> : <EmptyItems syntaxe="d'" title={"Emplois & Services"} />}
+                                        {employments.length !== 0 ? <><Link
+                                                className="btn btn-neutral btn-sm ivemoEmptyItemsCta mb-3" to="/"><i
+                                                className="now-ui-icons arrows-1_minimal-left"></i> <b>Retour à
+                                                l'Accueil</b></Link>
+                                                {mapEmployments}</> :
+                                            <EmptyItems syntaxe="d'" title={"Emplois & Services"}/>}
 
                                         <div className="text-center">
                                             {visiable < employments.length ?
-                                                <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-lg btn-block">
-                                                    <b>Voir plus d'annonce</b>
+                                                <button type="button" onClick={this.loadmoresItem}
+                                                        className="btn btn-primary btn-lg btn-block">
+                                                    <b>Voir plus d'annonces</b>
                                                 </button>
                                                 : null}
                                         </div>
@@ -130,7 +138,8 @@ class EmployementIndexSite extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                             className="card-collapse">
 
                                                             <Navemployements/>
 
@@ -144,7 +153,8 @@ class EmployementIndexSite extends Component {
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                             className="card-collapse">
 
                                                             <Navemployementsbycity/>
 
@@ -162,7 +172,7 @@ class EmployementIndexSite extends Component {
                             </div>
                         </div>
 
-                        <FooterBigUserSite />
+                        <FooterBigUserSite/>
                     </div>
                 </div>
 
@@ -171,6 +181,7 @@ class EmployementIndexSite extends Component {
     }
 
 }
+
 EmployementIndexSite.propTypes = {
     loademployments: PropTypes.func.isRequired,
 };
@@ -183,7 +194,7 @@ const mapStoreToProps = store => ({
 export default connect(mapStoreToProps,
     {
         loademployments,
-        favoriteItem,unfavoriteItem,
-        deleteItem,unactiveItem,
+        favoriteItem, unfavoriteItem,
+        deleteItem, unactiveItem,
     }
 )(EmployementIndexSite);

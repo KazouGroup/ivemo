@@ -17,6 +17,7 @@ import {
     deletecontactItem
 } from "../../../../../redux/actions/annoncelocation/contactuserannoncelocationActions";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
+import EmptyItems from "../../../../inc/user/EmptyItems";
 
 
 class PersonalmessagesannonceslocationsUser extends Component {
@@ -121,7 +122,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception des location</strong>
+                                                <strong>Boite de réception des locations</strong>
                                             </div>
                                         </div>
 
@@ -139,7 +140,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                    {mapContactusers}
+                                                    {mapContactusers.length ? <>{mapContactusers}</> : <EmptyItems syntaxe={"de Message"} title={"Contacts Locations"}/>}
 
                                                     </tbody>
                                                 </table>

@@ -17,6 +17,7 @@ import {
     deletecontactItem
 } from "../../../../../redux/actions/employment/contactuseremploymentActions";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
+import EmptyItems from "../../../../inc/user/EmptyItems";
 
 
 class PersonalmessagesemploymentsUser extends Component {
@@ -140,7 +141,7 @@ class PersonalmessagesemploymentsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {mapContactusers}
+                                                        {mapContactusers.length ? <>{mapContactusers}</> : <EmptyItems syntaxe={"de Message"} title={"Emplois & Services"}/>}
 
                                                     </tbody>
                                                 </table>

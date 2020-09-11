@@ -325,8 +325,8 @@ export const unfavoriteItem = props => dispatch => {
 export const activeItem = props => dispatch => {
 
     Swal.fire({
-        title: 'Afficher cette annonce?',
-        text: "êtes vous sure de vouloir confirmer cette action?",
+        title: 'Activer cette annonce?',
+        text: "Êtes-vous sûre de vouloir confirmer cette action?",
         type: 'warning',
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",
@@ -349,14 +349,14 @@ export const activeItem = props => dispatch => {
 
                 /** Alert notify bootstrapp **/
                 $.notify({
-                        message: "Annonce masquée aux utilisateurs",
+                        message: "Annonce activée avec succés.",
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -384,8 +384,8 @@ export const activeItem = props => dispatch => {
 export const unactiveprivateItem = props => dispatch => {
 
     Swal.fire({
-        title: 'Masquer cette annonce?',
-        text: "êtes vous sure de vouloir confirmer cette action?",
+        title: 'Désactiver cette annonce?',
+        text: "Êtes-vous sûre de vouloir confirmer cette action?",
         type: 'warning',
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",
@@ -408,14 +408,14 @@ export const unactiveprivateItem = props => dispatch => {
 
                 /** Alert notify bootstrapp **/
                 $.notify({
-                        message: "Annonce masquée aux utilisateurs",
+                        message: "Annonce désactivée avec succés.",
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -444,7 +444,7 @@ export const unactiveItem = props => dispatch => {
 
     Swal.fire({
         title: 'Masquer cette annonce?',
-        text: "êtes vous sure de vouloir confirmer cette action?",
+        text: "Êtes-vous sûre de vouloir confirmer cette action?",
         type: 'warning',
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",

@@ -1,3 +1,37 @@
+.ivemoColorOrange {
+    color: #f96332 !important;
+}
+
+.ivemoCardDescription {
+    top: 15px;
+    position: relative;
+    text-align: justify;
+    cursor: pointer;
+}
+
+.ivemoIconText {
+    top: -3px;
+    left: 2px;
+    position: relative;
+}
+
+.ivemoNavbarNotifications {
+    background: #f96332 !important;
+    border-radius: 21px;
+    padding: 5px;
+    width: 25px;
+    position: relative;
+    top: -10px;
+    left: -10px;
+    border: 1px solid transparent;
+    height: 25px;
+}
+
+.ivemoCardContainer:hover {
+    box-shadow: 0 6px 25px 0 rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+
 .ivemoAvatar {
     height: 80px;
     width: 80px;
@@ -54,6 +88,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .ivemoItemsTitle {
     position: relative;
     left: 5px;
+}
+
+.ivemoEmptyItemsCta:hover {
+    text-decoration: underline;
+}
+
+.ivemUserConnected {
+    top: -20px;
+    left: -10px;
+    position: relative;
+    border: 4px solid white;
+    border-radius: 21px;
 }
 
 .ivemoAvisAvatar {
