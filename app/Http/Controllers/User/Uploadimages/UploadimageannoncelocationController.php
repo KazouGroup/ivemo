@@ -52,7 +52,7 @@ class UploadimageannoncelocationController extends Controller
             $imageExt = explode(";",explode('/', $image)[1])[0];
             $imageEncoded = explode(",", $image)[1];
             $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
-            $filenametostore='img/location/'. $imageName;
+            $filenametostore='img/locations/'. $imageName;
             $imagedecode = base64_decode(explode(",", $image)[1]);
 
 

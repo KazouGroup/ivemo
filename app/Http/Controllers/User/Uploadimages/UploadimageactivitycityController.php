@@ -65,26 +65,4 @@ class UploadimageactivitycityController extends Controller
 
     }
 
-    public function updateuploadimage(Request $request,$activitycity,uploadimage $uploadimage)
-    {
-        $currentPhoto = $uploadimage->photo;
-
-        if ($request->photo != $currentPhoto){
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
-                ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/uploadimage/';
-            if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->fit(1200,703)->save(public_path('assets/img/cities/').$name);
-            $request->merge(['photo' =>  "/assets/img/uploadimage/{$name}"]);
-            $oldFilename = $currentPhoto;
-            File::delete(public_path($oldFilename));
-        }
-
-        $uploadimage->update($request->all());
-
-        return response('Success',Response::HTTP_ACCEPTED);
-
-    }
-
 }
