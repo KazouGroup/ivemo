@@ -7,14 +7,16 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
-import { Button, FormText } from "reactstrap";
+import { Button } from "reactstrap";
 import {connect} from "react-redux";
 import {
     activecontactaddItem, activecontactremoveItem,
     unactiveprivateItem, activeItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
-    loadContactservicelocationshow,deletecontactItem
+    loadContactservicelocationshow, deletecontactItem,
+    activeaslItem, unactiveprivatealsItem,
+
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
 import Navannoncelocationsbyuser from "../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
@@ -176,7 +178,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                                         {annoncelocation.title ?
 
                                             <>
-                                                <PrivateUserAnnonceslocationList {...this.props} {...annoncelocation} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeItem={this.props.activeItem} deleteItem={this.deleteItem} />
+                                                <PrivateUserAnnonceslocationList {...this.props} {...annoncelocation} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeaslItem={this.props.activeaslItem} deleteItem={this.deleteItem} />
 
                                                 <div className="card">
                                                     <div className="social-line social-line-big-icons">
@@ -278,5 +280,6 @@ export default connect(mapStateToProps, {
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
-    unactiveprivateItem,activeItem,deletecontactItem
+    unactiveprivateItem,activeItem,deletecontactItem,
+    activeaslItem, unactiveprivatealsItem,
 })(ContactserviceAnnoncelocationShow);

@@ -367,7 +367,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <div className="card-body">
                                                 {annoncelocation.slug && (
                                                     <h5 className="card-title">
-                                                        À propos de <b>{annoncelocation.categoryannoncelocation.label} {annoncelocation.pieces} pièces à {annoncelocation.city.name} - {annoncelocation.district}</b>
+                                                        À propos de <b><span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> {annoncelocation.pieces} pièces à {annoncelocation.city.name} - {annoncelocation.district}</b>
                                                     </h5>
                                                 )}
 
@@ -401,14 +401,14 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <div className="social-line social-line-big-icons">
                                                 <div className="container">
                                                     <div className="row">
-                                                        <div className="col-md-6">
-                                                            <h5 className="info-title"><b>La location {annoncelocation.categoryannoncelocation.label} est de</b></h5>
+                                                        <div className="col-md-6 mx-auto">
+                                                            <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
                                                             {annoncelocation.price && (
 
                                                                 <h3 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
                                                             )}
                                                         </div>
-                                                        <div className="col-md-6">
+                                                        <div className="col-md-6 mx-auto">
                                                             <h5 className="info-title"><b>Informations supplémentaires</b></h5>
                                                             {annoncelocation.award_price && (
                                                                 <p>

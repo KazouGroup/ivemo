@@ -10,8 +10,10 @@ use App\Model\annoncetype;
 use App\Model\categoryannoncelocation;
 use App\Model\city;
 use File;
+use Illuminate\Support\Facades\Storage;
 use App\Model\uploadimage;
-use App\Model\user;use Illuminate\Http\Request;
+use App\Model\user;
+use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -44,19 +46,20 @@ class UploadimageannoncelocationController extends Controller
 
     public function storeuploadimage(Request $request,annoncelocation $annoncelocation)
     {
+        if($request->photo){
 
-        if ($request->photo) {
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
-                ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/uploadimage/';
-            if(!file_exists($dir)){
-                mkdir($dir, 0775, true);
-            }
-            $destinationPath = public_path("assets/img/uploadimage/{$name}");
-            Image::make($request->photo)->fit(1200,703)->save($destinationPath);
+            $image = $request->photo;
+            $imageExt = explode(";",explode('/', $image)[1])[0];
+            $imageEncoded = explode(",", $image)[1];
+            $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
+            $filenametostore='img/location/'. $imageName;
+            $imagedecode = base64_decode(explode(",", $image)[1]);
 
-            $myfilename = "/assets/img/uploadimage/{$name}";
+
+            $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
+            Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
+            
+            $myfilename = config('app.aws_url')."/img/location/{$imageName}";
         }
 
         $annoncelocation->uploadimages()->create([

@@ -50,6 +50,14 @@ export default produce((draft, action = {}) => {
                 let datadelete =  draft.annoncelocation.contactservices.findIndex(i => i.id === action.payload);
                 if (datadelete !== -1)  draft.annoncelocation.contactservices.splice(datadelete, 1);
                 return draft;
+
+            case 'ACTIVE_CO_ANNONCELOCATION':
+                draft.annoncelocation.status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_CO_ANNONCELOCATION':
+                draft.annoncelocation.status = !action.payload;
+                return draft;
         }
     },
     initialState

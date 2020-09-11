@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Uploadimages;
 use App\Http\Controllers\Controller;
 use File;
 use App\Model\uploadimage;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,8 +32,8 @@ class UploadimageController extends Controller
     public function destroy(uploadimage $uploadimage)
     {
         $oldFilename = $uploadimage->photo;
-
-        File::delete(public_path($oldFilename));
+        
+        Storage::disk('s3')->delete($oldFilename);
 
         $uploadimage->delete();
 

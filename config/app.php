@@ -12,6 +12,9 @@ return [
     'money_country'     => env('APP_MONEY_COUNTRY', 'FCFA'),
 
     'email'       => env('EMAIL_ADDRESS', 'temgua2013@yahoo.fr'),
+
+    'aws_url'       => env('AWS_URL', 'https://ivemo.s3.eu-central-1.amazonaws.com'),
+
     /*
     |-------------------------------------------------------------------------
     | Link social net

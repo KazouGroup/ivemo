@@ -766,11 +766,11 @@ class AnnoncelocationEdit extends Component {
                                                                                 <div className="text-center">
                                                                                     <img src={this.state.showDefaultNewPhotoImage ? '' : this.state.photo} alt={'Selectioner une image'} />
                                                                                     <input id="photo" type="file" onChange={this.uploadPhotoImage} className={`form-control ${this.hasErrorFor('photo') ? 'is-invalid' : ''} IvemoImageCarouses-file-upload`} name="photo" accept="image/*" />
-                                                                                    {this.renderErrorFor('photo')}
                                                                                     <div className="text-center">
                                                                                         <label htmlFor="photo" className="btn btn-primary">
                                                                                             <span className="btn-inner--text">Selectioner / Changer</span>
                                                                                         </label>
+                                                                                        {this.renderErrorFor('photo')}
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
