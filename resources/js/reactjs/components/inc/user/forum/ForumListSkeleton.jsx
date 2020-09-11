@@ -9,7 +9,9 @@ function ForumListSkeleton(props) {
 
     return(
        <>
-
+            <br/>
+            <br/>
+            <br/>
            <div className="card">
                <div className="card-body">
                    <div className="card-header d-flex align-items-center">

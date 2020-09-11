@@ -1,5 +1,6 @@
-import React, { Component,Fragment } from "react";
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import React, { Component, Fragment } from "react";
+import { NavLink, withRouter } from 'react-router-dom';
+import Skeleton from "react-loading-skeleton";
 
 
 class NavlinkmailmessageUser extends Component {
@@ -15,57 +16,78 @@ class NavlinkmailmessageUser extends Component {
         return (
 
             <Fragment>
-                <div className="card-body">
+                <div className="card card-plain">
+                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                         className="card-collapse">
+                    <div className="card-header" role="tab" id="headingOne">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <b>Mes Messages</b>
+                            <i className="now-ui-icons arrows-1_minimal-down"/>
+                        </a>
+                    </div>
+
+                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingTwo">
+                        <div className="card-body">
                     <table>
                         <tbody>
-
 
                         {$userIvemo.status_profile ?
                             <>
                                 <tr>
-                                    <td>
+                                    <td className="pb-2 pt-2">
                                         <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
                                             <b>Contacts</b>
                                         </NavLink>
                                     </td>
-                                    <td> <span className="text-right">{this.props.contactusers_count} </span></td>
+                                    <td>
+                                        {this.props.contactusers_count >= 0 ? <span
+                                            className="text-right ivemoItemsCount">{this.props.contactusers_count} </span> : <Skeleton height={25} width={25} />}
+                                    </td>
                                 </tr>
 
                                 <tr>
-                                    <td>
+                                    <td className="pb-2 pt-2">
                                         <NavLink to={`/profile/${this.props.slug}/personal_mails/employments/`}>
                                             <b>Contacts emplois & services</b>
                                         </NavLink>
                                     </td>
-                                    <td> <span className="text-right">{this.props.contactservicesemployments_count} </span></td>
+                                    <td>{this.props.contactservicesemployments_count >= 0 ? <span
+                                        className="text-right ivemoItemsCount">{this.props.contactservicesemployments_count} </span> : <Skeleton height={25} width={25} />}
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td className="pb-2 pt-2">
                                         <NavLink to={`/profile/${this.props.slug}/personal_mails/als/`}>
                                             <b>Contacts Locations</b>
                                         </NavLink>
                                     </td>
-                                    <td> <span className="text-right">{this.props.contactservicesannoncelocations_count} </span></td>
+                                    <td>{this.props.contactservicesannoncelocations_count >= 0 ? <span
+                                        className="text-right ivemoItemsCount">{this.props.contactservicesannoncelocations_count} </span> : <Skeleton height={25} width={25} />}
+                                    </td>
                                 </tr>
 
                                 <tr>
-                                    <td>
+                                    <td className="pb-2 pt-2">
                                         <NavLink to={`/profile/${this.props.slug}/notifications/`}>
                                             <b>Notifications</b>
                                         </NavLink>
                                     </td>
-                                    <td> <span className="text-right">{this.props.unread_notifications_count} </span></td>
+                                    <td>{this.props.unread_notifications_count >= 0 ? <span
+                                        className="text-right ivemoItemsCount">{this.props.unread_notifications_count}</span> : <Skeleton height={25} width={25} />}
+                                    </td>
                                 </tr>
                             </>
                             :
                             <>
                                 <tr>
-                                    <td>
+                                    <td className="pb-2 pt-2">
                                         <NavLink to={`/profile/${this.props.slug}/notifications/`}>
                                             <b>Notifications</b>
                                         </NavLink>
                                     </td>
-                                    <td> <span className="text-right">{this.props.unread_notifications_count} </span></td>
+                                    <td>{this.props.unread_notifications_count >= 0 ? <span
+                                        className="text-right ivemoItemsCount">{this.props.unread_notifications_count} </span> : <Skeleton height={25} width={25} />}
+                                    </td>
                                 </tr>
                             </>
                         }
@@ -102,9 +124,11 @@ class NavlinkmailmessageUser extends Component {
                         */}
 
 
-
                         </tbody>
                     </table>
+                        </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/*ö*/}
@@ -113,9 +137,8 @@ class NavlinkmailmessageUser extends Component {
             </Fragment>
 
 
-
-
         )
     }
 }
+
 export default withRouter(NavlinkmailmessageUser);

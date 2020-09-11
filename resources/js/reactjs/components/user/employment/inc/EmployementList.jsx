@@ -15,7 +15,7 @@ class EmployementList extends PureComponent {
     render() {
         return (
 
-            <div className="card">
+            <div className="card ivemoCardContainer">
                 <div className="card-body">
 
                     <div className="card card-plain card-blog">
@@ -26,12 +26,12 @@ class EmployementList extends PureComponent {
                                 <div className="row">
                                     <div className="col-md-5 col-6">
                                         <NavLink to={`/employments/${this.props.categoryemployment.slug}/`}>
-                                            <span className="ml-auto mr-auto">
+                                            <span className="ml-auto mr-auto ivemoColorOrange">
                                                 <strong>{this.props.categoryemployment.name} </strong>
                                             </span>
                                         </NavLink>
                                     </div>
-                                    <div className="col-md-7 col-6">
+                                    <div className="col-md-7 col-6 text-right">
                                         <NavLink to={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.city.name} </strong>
@@ -43,22 +43,17 @@ class EmployementList extends PureComponent {
                                 </div>
 
                                      <span className="title">
-                                         <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="card-link">
+                                         <a href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="card-link">
                                               {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                          </a>
                                      </span>
-                                    <br/>
 
-
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                    <a className="ivemoCardDescription" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <span dangerouslySetInnerHTML={this.getDescription()}/>
                                     </a>
 
-
-
                                 <br/>
                                 <div className="card-header d-flex align-items-center">
-
 
                                     <div className="d-flex align-items-center">
                                         {this.props.user.avatar ?
@@ -79,7 +74,7 @@ class EmployementList extends PureComponent {
 
                                     <div className="text-right mx-auto">
                                         {this.props.price && (
-                                            <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} {$money_country.length > 2 ? <small>{$money_country}</small> : <>{$money_country}</>}</b></h5>
+                                            <h5 className="text-dark ivemoColorOrange"><b>{this.props.price.formatMoney(2,'.',',') || "0"} {$money_country.length > 2 ? <small>{$money_country}</small> : <>{$money_country}</>}</b></h5>
                                         )}
 
                                         {/*
@@ -96,7 +91,7 @@ class EmployementList extends PureComponent {
                             <div className="col-md-4">
 
                                 <div className="card-image">
-                                    <a target="_blank" href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                    <a href={`/employments/${this.props.categoryemployment.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         <LazyLoad>
                                             <img className="img  rounded"
                                                  src={this.props.photo} alt={this.props.title}/>

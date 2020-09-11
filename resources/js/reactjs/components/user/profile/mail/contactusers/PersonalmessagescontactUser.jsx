@@ -16,6 +16,7 @@ import {
     favoriteaddItem,favoriteremoveItem,
     loadAllcontactservices,
 } from "../../../../../redux/actions/contactuserActions";
+import EmptyItems from "../../../../inc/user/EmptyItems";
 
 
 class PersonalmessagescontactUser extends Component {
@@ -118,7 +119,7 @@ class PersonalmessagescontactUser extends Component {
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception</strong>
+                                                <strong>Boite de Réception</strong>
                                             </div>
                                         </div>
 
@@ -136,7 +137,7 @@ class PersonalmessagescontactUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {mapContactusers}
+                                                        {mapContactusers.length ? <>{mapContactusers}</> : <EmptyItems syntaxe={"de Message"} title={"Contacts"}/>}
 
                                                     </tbody>
                                                 </table>

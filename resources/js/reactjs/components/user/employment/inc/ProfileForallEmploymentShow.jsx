@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Remarkable } from 'remarkable';
 import { Button } from "reactstrap";
 import moment from "moment";
-import Skeleton from "react-loading-skeleton";
 
 
 class ProfileForallEmploymentShow extends Component {
@@ -12,31 +10,36 @@ class ProfileForallEmploymentShow extends Component {
     data_countvisiteFormatter(visits_count, precision) {
         const abbrev = ['', 'k', 'M', 'B', 'T'];
         const unrangifiedOrder = Math.floor(Math.log10(Math.abs(visits_count)) / 3);
-        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length - 1));
         const suffix = abbrev[order];
         return (visits_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
+
     render() {
         return (
 
             <>
                 <div className="card-title">
-                    <b>Contacter l'agence</b>
+                    <b>Contacter l'Agence</b>
                 </div>
                 <div className="card-header d-flex align-items-center">
                     <div className="d-flex align-items-center">
                         {this.props.user.avatar ?
                             <NavLink to={`/pro/${this.props.user.slug}/employments/`}>
                                 <img src={this.props.user.avatar}
-                                     style={{ height: "40px", width: "80px" }}
+                                     style={{height: "40px", width: "80px"}}
                                      alt={this.props.user.first_name}
-                                     className="avatar" />
+                                     className="avatar"/>
                             </NavLink>
-                            :    <img className="avatar" style={{ height: "40px", width: "80px" }}
-                                      src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
+                            : <img className="avatar" style={{height: "40px", width: "80px"}}
+                                   src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                         <div className="mx-3">
-                            <NavLink to={`/pro/${this.props.user.slug}/employments/`} className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
-                                <small className="d-block text-muted">{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</small>
+                            <NavLink to={`/pro/${this.props.user.slug}/employments/`}
+                                     className="text-dark font-weight-600 text-sm"><b>{this.props.user.first_name} </b>
+                                <small className="d-block text-muted">{this.props.statusOnline && (
+                                    <i className="fas fa-circle text-success"></i>)}
+                                    <i className="now-ui-icons tech_watch-time"></i> {moment(this.props.created_at).format('LL')}
+                                </small>
                             </NavLink>
                         </div>
                     </div>
@@ -47,48 +50,56 @@ class ProfileForallEmploymentShow extends Component {
                             </Button>
                         )}
                         {$guest ?
-                            <Button  data-toggle="modal" data-target="#loginModal"
-                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                            <Button data-toggle="modal" data-target="#loginModal"
+                                    className="btn btn-facebook btn-icon btn-sm btn-neutral"
+                                    title="Ajouter à vos favoris">
                                 <i className="far fa-bookmark"></i>
                             </Button>
                             :
                             <>
                                 {this.props.favoriteted ?
                                     <Button onClick={() => this.props.unfavoriteItem(this.props)}
-                                            className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
+                                            className="btn btn-danger btn-icon btn-sm" title="Rétirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
 
                                     :
                                     <Button onClick={() => this.props.favoriteItem(this.props)}
-                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
+                                            className="btn btn-facebook btn-icon btn-sm btn-neutral"
+                                            title="Ajouter à vos favoris">
                                         <i className="far fa-bookmark"></i>
                                     </Button>
                                 }
                             </>
                         }
-                        <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.props.copyToClipboard()}>
+                        <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien"
+                                onClick={() => this.props.copyToClipboard()}>
                             <i className="fas fa-copy"></i>
                         </Button>
                         {this.props.showPhonenumber ?
-                            <button type="button" className="btn btn-sm btn-outline-info">
+                            <button type="button" title="Cacher le numéro"
+                                    onClick={() => this.props.showPhonenumberItem()}
+                                    className="btn btn-sm btn-outline-info">
                                 <i className="now-ui-icons tech_mobile"/><b>{this.props.user.phone !== null ? this.props.user.phone : <>absent</>}</b>
                             </button>
                             :
-                            <button type="button" onClick={() => this.props.showPhonenumberItem()} className="btn btn-icon btn-sm btn-info">
+                            <button title="Afficher le numéro" type="button"
+                                    onClick={() => this.props.showPhonenumberItem()}
+                                    className="btn btn-icon btn-sm btn-info">
                                 <i className="now-ui-icons tech_mobile"/>
                             </button>
                         }
                         {this.props.user.profile.site_internet && (
-                            <a href={`${this.props.user.profile.site_internet}`} className="btn btn-icon btn-sm btn-primary" target="_banck">
+                            <a href={`${this.props.user.profile.site_internet}`} title="Aller sur le site du propriétaire"
+                               className="btn btn-icon btn-sm btn-primary" target="_blank">
                                 <i className="now-ui-icons objects_globe"/>
                             </a>
                         )}
 
                         {$guest ?
 
-                            <button type="button" data-toggle="modal" data-target="#loginModal" title="Signaler"
-                                className="btn btn-instagram btn-icon btn-sm">
+                            <button type="button" data-toggle="modal" data-target="#loginModal" title="Signaler cette annonce"
+                                    className="btn btn-instagram btn-icon btn-sm">
                                 <i className="far fa-flag"></i>
                             </button>
                             :
@@ -96,41 +107,54 @@ class ProfileForallEmploymentShow extends Component {
                                 {($userIvemo.id === this.props.user.id && $userIvemo.id === this.props.user_id) && (
                                     <>
                                         <a href={`#${this.props.visits_count}`}
-                                           className="btn btn-sm btn-secondary" title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
-                                            <i className="far fa-eye"></i> <b>{this.data_countvisiteFormatter(this.props.visits_count)}</b>
+                                           className="btn btn-sm btn-secondary"
+                                           title={`${this.props.visits_count} ${this.props.visits_count > 1 ? "vues" : "vue"}`}>
+                                            <i className="far fa-eye"></i>
+                                            <b className="ml-1">{this.data_countvisiteFormatter(this.props.visits_count)}</b>
                                         </a>
-                                        <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                        <NavLink
+                                            to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`}
+                                            className="btn btn-sm btn-icon btn-secondary" title="Statistiques de l'annonce">
                                             <i className="now-ui-icons business_chart-bar-32"/>
                                         </NavLink>
-                                        <button type="button" rel="tooltip" onClick={() => this.props.statusItem(this.props)}
-                                                className="btn btn-success btn-icon btn-sm" title="Desactiver cette annonce">
+                                        <button type="button" rel="tooltip"
+                                                onClick={() => this.props.statusItem(this.props)}
+                                                className="btn btn-success btn-icon btn-sm"
+                                                title="Désactiver cette annonce">
                                             <i className="now-ui-icons ui-1_check"/>
                                         </button>
                                         {this.props.status_comments ?
                                             <Button onClick={() => this.props.statuscommentremoveItem(this.props)}
-                                                    className="btn btn-primary btn-icon btn-sm" title="Commentaire activé">
+                                                    className="btn btn-primary btn-icon btn-sm"
+                                                    title="Commentaires activés">
                                                 <i className="fas fa-comments"/>
                                             </Button>
                                             :
                                             <Button onClick={() => this.props.statuscommentaddItem(this.props)}
-                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Commentaire désactivé">
+                                                    className="btn btn-facebook btn-icon btn-sm btn-neutral"
+                                                    title="Commentaires désactivés">
                                                 <i className="far fa-comments"/>
                                             </Button>
 
                                         }
-                                        <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">
+                                        <NavLink to={`/employment/ab/${this.props.slugin}/edit/`}
+                                                 className="btn btn-sm btn-info btn-icon btn-sm"
+                                                 title="Éditer cette annonce">
                                             <i className="now-ui-icons ui-2_settings-90"/>
                                         </NavLink>
                                         <Button onClick={() => this.props.deleteItem(this.props.id)}
-                                                className="btn btn-icon btn-sm btn-danger" title="Supprimer cette annonce">
+                                                className="btn btn-icon btn-sm btn-danger"
+                                                title="Supprimer cette annonce">
                                             <i className="now-ui-icons ui-1_simple-remove"/>
                                         </Button>
                                     </>
                                 )}
 
-                                <button type="button" title="Signaler" onClick={() => this.props.signalerUser(this.props)}
+                                <button type="button" title="Signaler cette annonce"
+                                        onClick={() => this.props.signalerUser(this.props)}
                                         className="btn btn-instagram btn-sm">
-                                    <i className="far fa-flag"></i> <b>{$userIvemoIsadmin.status_user && (<>{this.props.countsignals}</>)}</b>
+                                    <i className="far fa-flag"></i>
+                                    <b>{$userIvemoIsadmin.status_user && (<>{this.props.countsignals}</>)}</b>
                                 </button>
 
                             </>
@@ -142,21 +166,26 @@ class ProfileForallEmploymentShow extends Component {
                     {this.props.user.profile.address && (
                         <>
                             <i className="now-ui-icons location_pin"/>
-                            <b>{this.props.user.profile.address}</b>
+                            <b className="ivemoIconText">{this.props.user.profile.address}</b>
                         </>
                     )}
-                    <br />
-                    <div className="container">
+                    <br/>
+                    <div className="mt-2">
                         <div className="row">
                             <div className="col-md-6 col-6">
-                                <Link to={`/pro/${this.props.user.slug}/`}  title={`Profile de ${this.props.user.first_name}`}>
-                                    <small><b>Consulter le profil de l'utilisateur</b></small>
+                                <Link to={`/pro/${this.props.user.slug}/`}
+                                      title={`Profile de ${this.props.user.first_name}`}>
+                                    <i className="now-ui-icons users_circle-08"/>
+                                    <small><b className="ivemoIconText">Consulter le profil de l'utilisateur</b></small>
                                 </Link>
                             </div>
                             {this.props.user.profile.site_internet && (
                                 <div className="col-md-6 col-6">
-                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank" title={this.props.user.profile.site_internet}>
-                                        <small><b>Consulter le site de l'utilisateur</b></small>
+                                    <a href={`${this.props.user.profile.site_internet}`} target="_blank"
+                                       title={this.props.user.profile.site_internet}>
+                                        <i className="now-ui-icons objects_globe"/>
+                                        <small><b className="ivemoIconText">Consulter le site de l'utilisateur</b>
+                                        </small>
                                     </a>
                                 </div>
                             )}
@@ -164,20 +193,18 @@ class ProfileForallEmploymentShow extends Component {
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr/>
                 {this.props.user.profile.description && (
                     <>
-                        <b>Informations légales de l'utilisateur</b>
-                        <br />
-                        <b dangerouslySetInnerHTML={{__html: (this.props.user.profile.description)}}/>
+                        <b>Description de l'utilisateur</b>
+                        <br/>
+                        <small dangerouslySetInnerHTML={{__html: (this.props.user.profile.description)}}/>
                     </>
                 )}
             </>
 
-
         )
     }
-
 }
 
 export default ProfileForallEmploymentShow;

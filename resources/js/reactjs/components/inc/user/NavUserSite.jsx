@@ -228,17 +228,16 @@ class NavUserSite extends PureComponent {
                                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
-                                                                    {contactusersprofile.contactusers_count} Contact
+                                                                    <span className="ivemoItemsCount">{contactusersprofile.contactusers_count}</span> {contactusersprofile.contactusers_count > 1 ? "Contacts" : "Contact"}
                                                                 </Link>
 
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="dropdown-item">
-                                                                    {contactusersprofile.contactservicesemployments_count} Emplois & Services
+                                                                    <span className="ivemoItemsCount">{contactusersprofile.contactservicesemployments_count}</span> Emplois & Services
                                                                 </Link>
 
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/als/`} className="dropdown-item">
-                                                                    {contactusersprofile.contactservicesannoncelocations_count} Locations
+                                                                    <span className="ivemoItemsCount">{contactusersprofile.contactservicesannoncelocations_count}</span> {contactusersprofile.contactservicesannoncelocations_count > 1 ? "Locations" : "Location"}
                                                                 </Link>
-
                                                             </div>
                                                         </li>
 
