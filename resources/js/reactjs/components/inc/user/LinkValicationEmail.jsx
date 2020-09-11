@@ -33,8 +33,8 @@ class LinkValicationEmail extends PureComponent {
                     </div>
 
                     <strong style={{ cursor: "pointer" }} onClick={() => this.sendItem()}>Confirmez votre adresse e-mail </strong>
-                    pour accéder à toutes les fonctionnalités de <b>{$name_site}</b>.
-                    Un message de confirmation a été à: <b>{$userIvemo.email}</b> <Link to={`/aide/`} className={`text-white`} >Aide?</Link>
+                    pour accéder à toutes les fonctionnalitées de <b>{$name_site}</b>.
+                    Un message de confirmation a été envoyé via: <b>{$userIvemo.email}</b> <Link to={`/aide/`} className={`text-white`} >Aide?</Link>
                     {/*
                        <button type="button" className="close" data-dismiss="alert"
                             aria-label="Close">

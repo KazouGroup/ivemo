@@ -59,7 +59,7 @@ class UploadimageannonceventeController extends Controller
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
             \Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
             
-            $myfilename = config('app.aws_url')."/img/vente/{$imageName}";
+            $myfilename = config('app.aws_url')."/img/ventes/{$imageName}";
         }
 
         $annoncevente->uploadimages()->create([

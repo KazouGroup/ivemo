@@ -223,7 +223,7 @@ class NavUserSite extends PureComponent {
                                                         <li className="nav-item dropdown">
                                                             <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                                                 <i className="now-ui-icons ui-1_email-85"/>
-                                                                <span className="notification"><b>{unreadmailTotal >= 1 &&(this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
+                                                                <span className="notification"><b>{unreadmailTotal >= 1 && (this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
                                                             </a>
                                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
@@ -365,16 +365,16 @@ class NavUserSite extends PureComponent {
                                                     <i className="now-ui-icons location_bookmark"/>Mes favoris
                                                 </NavLink>
                                                 <NavLink to={`/pro/${$userIvemo.slug}/`} className="dropdown-item">
-                                                    <i className="now-ui-icons users_single-02"/> Profile
+                                                    <i className="now-ui-icons users_single-02"/> Profil
                                                 </NavLink>
                                             </>
                                             :
                                             <NavLink to={`/user/${$userIvemo.slug}/`} className="dropdown-item">
-                                                <i className="now-ui-icons users_single-02"/> Profile
+                                                <i className="now-ui-icons users_single-02"/> Profil
                                             </NavLink>
                                         }
                                         <NavLink to={`/profile/account/`}  className="dropdown-item">
-                                            <i className="now-ui-icons users_circle-08"/> Editer mon profile
+                                            <i className="now-ui-icons users_circle-08"/> Editer mon profil
                                         </NavLink>
                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/> Forums

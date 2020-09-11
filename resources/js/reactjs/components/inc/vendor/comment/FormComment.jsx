@@ -19,7 +19,7 @@ class FormComment extends Component {
                        </a>
                        <div className="media-body">
 
-                           <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis ou un commentaire..."  value={value}
+                           <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laisser votre avis ou un commentaire..."  value={value}
                                        handleFieldChange={handleFieldChange}
                                        hasErrorFor={hasErrorFor}
                                        renderErrorFor={renderErrorFor} rows="4"/>
@@ -65,7 +65,7 @@ class FormComment extends Component {
                        </a>
                        <div className="media-body">
 
-                           <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laiser votre avis ou un commentaire..."  value={value}
+                           <FieldInput name="body" type='textarea' maxLength="5000" placeholder="Laisser votre avis ou un commentaire..."  value={value}
                                        handleFieldChange={handleFieldChange}
                                        hasErrorFor={hasErrorFor}
                                        renderErrorFor={renderErrorFor} rows="4"/>

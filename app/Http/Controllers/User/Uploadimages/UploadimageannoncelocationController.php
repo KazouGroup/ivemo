@@ -59,7 +59,7 @@ class UploadimageannoncelocationController extends Controller
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
             Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
             
-            $myfilename = config('app.aws_url')."/img/location/{$imageName}";
+            $myfilename = config('app.aws_url')."/img/locations/{$imageName}";
         }
 
         $annoncelocation->uploadimages()->create([
