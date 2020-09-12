@@ -59,7 +59,7 @@ class ProfileForallEmploymentShow extends Component {
                             <>
                                 {this.props.favoriteted ?
                                     <Button onClick={() => this.props.unfavoriteItem(this.props)}
-                                            className="btn btn-danger btn-icon btn-sm" title="Rétirer de vos favoris">
+                                            className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                         <i className="fas fa-bookmark"></i>
                                     </Button>
 

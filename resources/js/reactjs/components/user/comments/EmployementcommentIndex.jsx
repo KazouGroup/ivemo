@@ -1,7 +1,5 @@
-import React, {PureComponent, Fragment, Suspense} from "react";
-import { Link, NavLink } from 'react-router-dom';
-import {Button, Form} from "reactstrap";
-import FieldInput from "../../inc/vendor/FieldInput";
+import React, { Fragment, PureComponent, Suspense } from "react";
+import { Button, Form } from "reactstrap";
 import ReadMoreAndLess from "react-read-more-less";
 import Swal from "sweetalert2";
 import moment from "moment";
@@ -11,8 +9,14 @@ import CommentViewList from "./inc/CommentViewList";
 import StatusComment from "./inc/StatusComment";
 import CommentListSkeleton from "../../inc/user/comment/CommentListSkeleton";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {loadCommentsEmployments,likeItem,unlikeItem,unactiveItem,deleteItem} from "../../../redux/actions/commentsActions";
+import { connect } from "react-redux";
+import {
+    deleteItem,
+    likeItem,
+    loadCommentsEmployments,
+    unactiveItem,
+    unlikeItem
+} from "../../../redux/actions/commentsActions";
 
 
 class EmployementcommentIndex extends PureComponent {
@@ -26,7 +30,7 @@ class EmployementcommentIndex extends PureComponent {
             editresponsecomment: false,
             visiablecomment: 6,
             visiableresponsecomment: 1,
-            itemData:[],
+            itemData: [],
             errors: [],
         };
 
@@ -72,24 +76,24 @@ class EmployementcommentIndex extends PureComponent {
 
     loadmoresItem() {
         this.setState((old) => {
-            return { visiablecomment: old.visiablecomment + 6 }
+            return {visiablecomment: old.visiablecomment + 6}
         })
     }
 
     loadmoresresponseItem() {
         this.setState((old) => {
-            return { visiableresponsecomment: old.visiableresponsecomment + 4 }
+            return {visiableresponsecomment: old.visiableresponsecomment + 4}
         })
     }
 
-    cancelresponseCourse(){
-        this.setState({body: "",editcomment: false,responsecomment: false,editresponsecomment:false});
+    cancelresponseCourse() {
+        this.setState({body: "", editcomment: false, responsecomment: false, editresponsecomment: false});
     };
 
     responsecommentFromItem(item) {
         this.setState({
             responsecomment: true,
-            id:item.id,
+            id: item.id,
             itemData: item
         });
     }
@@ -97,8 +101,8 @@ class EmployementcommentIndex extends PureComponent {
     editresponsecommentFromItem(lk) {
         this.setState({
             editresponsecomment: true,
-            id:lk.id,
-            body:lk.body,
+            id: lk.id,
+            body: lk.body,
             itemData: lk
         });
     }
@@ -106,8 +110,8 @@ class EmployementcommentIndex extends PureComponent {
     editcommentFromItem(item) {
         this.setState({
             editcomment: true,
-            id:item.id,
-            body:item.body,
+            id: item.id,
+            body: item.body,
             itemData: item
         });
     }
@@ -124,7 +128,7 @@ class EmployementcommentIndex extends PureComponent {
         let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
         let Id = this.state.itemData.id;
-        let url = route('employmentssendresponsecomment_site',[itemCategoryemployment,itemCity,itemuser,itemEmployment,Id]);
+        let url = route('employmentssendresponsecomment_site', [itemCategoryemployment, itemCity, itemuser, itemEmployment, Id]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -135,8 +139,8 @@ class EmployementcommentIndex extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -144,7 +148,7 @@ class EmployementcommentIndex extends PureComponent {
                         },
                     });
 
-                this.setState({body: "",responsecomment: false,});
+                this.setState({body: "", responsecomment: false,});
 
                 this.loadItems();
 
@@ -165,7 +169,7 @@ class EmployementcommentIndex extends PureComponent {
         let itemCity = this.props.match.params.city;
         let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
-        let url = route('employmentsendcomment_site',[itemCategoryemployment,itemCity,itemuser,itemEmployment]);
+        let url = route('employmentsendcomment_site', [itemCategoryemployment, itemCity, itemuser, itemEmployment]);
         dyaxios.post(url, itemData)
             .then(() => {
 
@@ -176,8 +180,8 @@ class EmployementcommentIndex extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -208,11 +212,11 @@ class EmployementcommentIndex extends PureComponent {
         let itemuser = this.props.match.params.user;
         let itemEmployment = this.props.match.params.employment;
         let Id = this.state.itemData.id;
-        let url = route('employmentupdatecomment_site', [itemCategoryemployment,itemCity,itemuser,itemEmployment,Id]);
+        let url = route('employmentupdatecomment_site', [itemCategoryemployment, itemCity, itemuser, itemEmployment, Id]);
         dyaxios.put(url, item)
             .then(response => {
 
-                this.setState({body: "",editcomment: false,});
+                this.setState({body: "", editcomment: false,});
                 this.loadItems();
 
                 $.notify({
@@ -222,8 +226,8 @@ class EmployementcommentIndex extends PureComponent {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -250,7 +254,7 @@ class EmployementcommentIndex extends PureComponent {
         dyaxios.put(url, item)
             .then(response => {
 
-                this.setState({body: "",editresponsecomment: false,});
+                this.setState({body: "", editresponsecomment: false,});
                 this.loadItems();
 
                 $.notify({
@@ -384,17 +388,17 @@ class EmployementcommentIndex extends PureComponent {
         });
     }
 
-    loadItems(){
+    loadItems() {
         this.props.loadCommentsEmployments(this.props);
     }
 
     componentDidMount() {
-      this.loadItems()
+        this.loadItems()
     }
 
     render() {
         const {comments} = this.props;
-        const {visiablecomment,visiableresponsecomment,itemData,editcomment,editresponsecomment,responsecomment} = this.state;
+        const {visiablecomment, visiableresponsecomment, itemData, editcomment, editresponsecomment, responsecomment} = this.state;
         return (
             <>
                 <div className="card">
@@ -409,9 +413,8 @@ class EmployementcommentIndex extends PureComponent {
 
                                 )}
 
-
                                 <h5 className="title text-center">
-                                    <b>{comments.length > 1 ? `${comments.length || ""} Commentaires` : `${comments.length || ""} Commentaire`}</b>
+                                    <b><span className="ivemoItemsCount">{comments.length}</span> <span>{comments.length > 1 ? `Commentaires` : `Commentaire`}</span></b>
                                 </h5>
 
 
@@ -421,9 +424,12 @@ class EmployementcommentIndex extends PureComponent {
                                         {!editcomment && !responsecomment && !editresponsecomment && (
                                             <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
 
-                                                <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                             renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                             handleFieldChange={this.handleFieldChange} namesubmit={`POSTER MON COMMENTAIRE`}/>
+                                                <FormComment value={this.state.body} disabled={!this.state.body}
+                                                             cancelresponseCourse={this.cancelresponseCourse}
+                                                             renderErrorFor={this.renderErrorFor}
+                                                             hasErrorFor={this.hasErrorFor}
+                                                             handleFieldChange={this.handleFieldChange}
+                                                             namesubmit={`POSTER MON COMMENTAIRE`}/>
 
                                             </Form>
                                         )}
@@ -438,11 +444,16 @@ class EmployementcommentIndex extends PureComponent {
                                                     <>
                                                         {editcomment && (
 
-                                                            <Form onSubmit={this.updatecommentItem} acceptCharset="UTF-8">
+                                                            <Form onSubmit={this.updatecommentItem}
+                                                                  acceptCharset="UTF-8">
 
-                                                                <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                             renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                             handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
+                                                                <FormComment value={this.state.body}
+                                                                             disabled={!this.state.body}
+                                                                             cancelresponseCourse={this.cancelresponseCourse}
+                                                                             renderErrorFor={this.renderErrorFor}
+                                                                             hasErrorFor={this.hasErrorFor}
+                                                                             handleFieldChange={this.handleFieldChange}
+                                                                             namesubmit={`METTRE À JOUR`}/>
 
                                                             </Form>
 
@@ -457,20 +468,29 @@ class EmployementcommentIndex extends PureComponent {
 
                                                     <div className="media-body">
 
-                                                        <CommentViewList {...item} responsecommentFromItem={this.responsecommentFromItem}
-                                                                         unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem} deleteItem={this.props.deleteItem}
-                                                                         editcommentFromItem={this.editcommentFromItem} unactiveItem={this.props.unactiveItem}/>
+                                                        <CommentViewList {...item}
+                                                                         responsecommentFromItem={this.responsecommentFromItem}
+                                                                         unlikeItem={this.props.unlikeItem}
+                                                                         likeItem={this.props.likeItem}
+                                                                         deleteItem={this.props.deleteItem}
+                                                                         editcommentFromItem={this.editcommentFromItem}
+                                                                         unactiveItem={this.props.unactiveItem}/>
 
 
                                                         {(item.id === itemData.id) && (
                                                             <>
                                                                 {responsecomment && (
 
-                                                                    <Form onSubmit={this.sendresponsecommentItem} acceptCharset="UTF-8">
+                                                                    <Form onSubmit={this.sendresponsecommentItem}
+                                                                          acceptCharset="UTF-8">
 
-                                                                        <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                                     renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                     handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
+                                                                        <FormComment value={this.state.body}
+                                                                                     disabled={!this.state.body}
+                                                                                     cancelresponseCourse={this.cancelresponseCourse}
+                                                                                     renderErrorFor={this.renderErrorFor}
+                                                                                     hasErrorFor={this.hasErrorFor}
+                                                                                     handleFieldChange={this.handleFieldChange}
+                                                                                     namesubmit={`POSTER UNE RÉPONSE`}/>
 
                                                                     </Form>
 
@@ -483,8 +503,7 @@ class EmployementcommentIndex extends PureComponent {
 
                                                             {item.responsecomments.slice(0, visiableresponsecomment).map((lk) =>
 
-                                                                <Fragment key={lk.id} >
-
+                                                                <Fragment key={lk.id}>
 
 
                                                                     <div className="media">
@@ -493,7 +512,8 @@ class EmployementcommentIndex extends PureComponent {
 
                                                                         <div className="media-body">
                                                                             <h6 className="media-heading">{lk.user.first_name}
-                                                                                <small className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
+                                                                                <small
+                                                                                    className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
                                                                             </h6>
                                                                             <ReadMoreAndLess
                                                                                 className="read-more-content"
@@ -505,29 +525,34 @@ class EmployementcommentIndex extends PureComponent {
                                                                             </ReadMoreAndLess>
                                                                             <div className="media-footer">
                                                                                 {$guest ?
-                                                                                    <Button data-toggle="modal" data-target="#loginModal"
+                                                                                    <Button data-toggle="modal"
+                                                                                            data-target="#loginModal"
                                                                                             className="btn btn-default btn-neutral pull-right">
                                                                                         <i className="now-ui-icons travel_info"></i>
                                                                                     </Button>
                                                                                     :
                                                                                     <>
 
-                                                                                        {lk.user.id !== $userIvemo.id &&(
-                                                                                            <button type="button" onClick={() => this.responsecommentFromItem(item)}
-                                                                                                    className="btn btn-default btn-neutral pull-right" title="Répondre a ce commentaire">
+                                                                                        {lk.user.id !== $userIvemo.id && (
+                                                                                            <button type="button"
+                                                                                                    onClick={() => this.responsecommentFromItem(item)}
+                                                                                                    className="btn btn-default btn-neutral pull-right"
+                                                                                                    title="Répondre a ce commentaire">
                                                                                                 <i className="now-ui-icons files_single-copy-04"></i> Répondre
                                                                                             </button>
                                                                                         )}
 
                                                                                         {$userIvemo.id === lk.user.id && (
                                                                                             <>
-                                                                                                <button onClick={() => this.deleteresponseItem(lk.id) }
-                                                                                                        className="btn btn-danger btn-neutral pull-right">
+                                                                                                <button
+                                                                                                    onClick={() => this.deleteresponseItem(lk.id)}
+                                                                                                    className="btn btn-danger btn-neutral pull-right">
                                                                                                     <i className="now-ui-icons ui-1_simple-remove"></i> Supprimer
                                                                                                 </button>
 
-                                                                                                <Button onClick={() => this.editresponsecommentFromItem(lk)}
-                                                                                                        className="btn btn-info btn-neutral pull-right">
+                                                                                                <Button
+                                                                                                    onClick={() => this.editresponsecommentFromItem(lk)}
+                                                                                                    className="btn btn-info btn-neutral pull-right">
                                                                                                     <i className="now-ui-icons ui-2_settings-90"></i> Editer
                                                                                                 </Button>
 
@@ -536,8 +561,10 @@ class EmployementcommentIndex extends PureComponent {
 
                                                                                         {/* Ce button donne l'autorisation a l'utilisateur de l'annonce de la masquer */}
                                                                                         {$userIvemo.id === item.commentable.user_id && (
-                                                                                            <button onClick={() => this.unactiveresponseItem(lk.id) }
-                                                                                                    className="btn btn-success btn-neutral pull-right" title="Masquer ce commentaire">
+                                                                                            <button
+                                                                                                onClick={() => this.unactiveresponseItem(lk.id)}
+                                                                                                className="btn btn-success btn-neutral pull-right"
+                                                                                                title="Masquer ce commentaire">
                                                                                                 <i className="now-ui-icons ui-1_check"></i> Masquer
                                                                                             </button>
                                                                                         )}
@@ -552,11 +579,16 @@ class EmployementcommentIndex extends PureComponent {
 
                                                                     {(lk.id === itemData.id && editresponsecomment) && (
 
-                                                                        <Form onSubmit={this.updateresponsecommentItem} acceptCharset="UTF-8">
+                                                                        <Form onSubmit={this.updateresponsecommentItem}
+                                                                              acceptCharset="UTF-8">
 
-                                                                            <FormComment value={this.state.body} disabled={!this.state.body} cancelresponseCourse={this.cancelresponseCourse}
-                                                                                         renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
-                                                                                         handleFieldChange={this.handleFieldChange} namesubmit={`METTRE À JOUR`}/>
+                                                                            <FormComment value={this.state.body}
+                                                                                         disabled={!this.state.body}
+                                                                                         cancelresponseCourse={this.cancelresponseCourse}
+                                                                                         renderErrorFor={this.renderErrorFor}
+                                                                                         hasErrorFor={this.hasErrorFor}
+                                                                                         handleFieldChange={this.handleFieldChange}
+                                                                                         namesubmit={`METTRE À JOUR`}/>
 
                                                                         </Form>
 
@@ -564,15 +596,15 @@ class EmployementcommentIndex extends PureComponent {
 
 
                                                                 </Fragment>
-
-
-
                                                             )}
 
                                                             {visiableresponsecomment < item.responsecomments.length && (
                                                                 <div className="col-md-8 ml-auto mr-auto text-center">
-                                                                    <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
-                                                                        <b>{item.responsecomments.length} Afficher plus de réponses</b>
+                                                                    <a style={{cursor: "pointer"}}
+                                                                       onClick={this.loadmoresresponseItem}
+                                                                       className="text-info">
+                                                                        <b>{item.responsecomments.length} Afficher plus
+                                                                            de réponses</b>
                                                                     </a>
                                                                 </div>
                                                             )}
@@ -590,12 +622,12 @@ class EmployementcommentIndex extends PureComponent {
 
                                     {visiablecomment < comments.length && (
                                         <div className="col-md-8 ml-auto mr-auto text-center">
-                                            <a style={{cursor:"pointer"}} onClick={this.loadmoresItem} className="text-info">
+                                            <a style={{cursor: "pointer"}} onClick={this.loadmoresItem}
+                                               className="text-info">
                                                 <b>Afficher plus de commentaires</b>
                                             </a>
                                         </div>
                                     )}
-
 
 
                                 </div>
@@ -603,7 +635,7 @@ class EmployementcommentIndex extends PureComponent {
 
                             :
 
-                            <CommentListSkeleton />
+                            <CommentListSkeleton/>
                         }
 
                     </div>
@@ -614,6 +646,7 @@ class EmployementcommentIndex extends PureComponent {
         )
     }
 }
+
 EmployementcommentIndex.propTypes = {
     loadCommentsEmployments: PropTypes.func.isRequired,
 };
@@ -623,5 +656,5 @@ const mapStoreToProps = store => ({
 
 });
 export default connect(mapStoreToProps, {
-    loadCommentsEmployments,likeItem,unlikeItem,unactiveItem,deleteItem
+    loadCommentsEmployments, likeItem, unlikeItem, unactiveItem, deleteItem
 })(EmployementcommentIndex);
