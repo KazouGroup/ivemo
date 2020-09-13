@@ -1,7 +1,4 @@
-import React, { PureComponent,Fragment } from "react";
-import {Button, Form} from "reactstrap";
-import ReadMoreAndLess from "react-read-more-less";
-import moment from "moment";
+import React, { PureComponent } from "react";
 
 
 class StatusComment extends PureComponent {
@@ -12,12 +9,12 @@ class StatusComment extends PureComponent {
                 <div className="alert alert-danger" role="alert">
                     <div className="container">
                         <div className="text-center">
-                            <b>Les commentaires sont désactivés de cette annonce vous êtes à présent la seule personne à voir et à commenter</b>
+                            <b>Vous avez désactivé les commentaires pour cette annonce. Vous êtes à présent la seule
+                                personne à voir et à commenter.</b>
                         </div>
                     </div>
                 </div>
             </>
-
         )
     }
 }

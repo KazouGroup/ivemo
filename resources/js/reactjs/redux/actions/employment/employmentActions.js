@@ -1,28 +1,28 @@
 import {
-    SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD,
-    SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
-    FAVORITE_EMPLOYEMENT_ADD,
-    FAVORITE_EMPLOYEMENT_REMOVE,
-    GET_CATEGORYEMPLOYMENTS,
-    GET_CITYEMPLOYMENTS,
-    GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
-    GET_CATEGORYEMPLOYMENTS_BY_USER,
-    GET_EMPLOYEMENT_BY_USER_PUBLIC,
-    GET_EMPLOYEMENT_BY_USER_PRIVATE,
-    GET_EMPLOYEMENT_INTERESSE,
-    GET_ALL_EMPLOYEMENTS,
-    GET_EMPLOYEMENT_BY_CATEGORY,
-    GET_EMPLOYEMENT_CATEGORY_COUNT,
-    GET_EMPLOYEMENT_BY_CATEGORY_COUNT,
-    GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
-    UNACTIVE_PRIVATE_EMPLOYEMENT,
-    UNACTIVE_EMPLOYEMENT,
     ACTIVE_EMPLOYEMENT,
     DELETE_EMPLOYEMENT,
-    GET_PROFILE_USER_FOR_PUBLIC,
-    GET_PROFILE_USER_FOR_PRIVATE,
+    FAVORITE_EMPLOYEMENT_ADD,
+    FAVORITE_EMPLOYEMENT_REMOVE,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
+    GET_ALL_EMPLOYEMENTS,
+    GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
+    GET_CATEGORYEMPLOYMENTS,
+    GET_CATEGORYEMPLOYMENTS_BY_CATEGORY,
+    GET_CATEGORYEMPLOYMENTS_BY_USER,
+    GET_CITYEMPLOYMENTS,
+    GET_EMPLOYEMENT_BY_CATEGORY,
+    GET_EMPLOYEMENT_BY_CATEGORY_COUNT,
+    GET_EMPLOYEMENT_BY_USER_PRIVATE,
+    GET_EMPLOYEMENT_BY_USER_PUBLIC,
+    GET_EMPLOYEMENT_CATEGORY_COUNT,
+    GET_EMPLOYEMENT_INTERESSE,
+    GET_PROFILE_USER_FOR_PRIVATE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD,
+    SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
+    UNACTIVE_EMPLOYEMENT,
+    UNACTIVE_PRIVATE_EMPLOYEMENT,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -30,7 +30,7 @@ import Swal from "sweetalert2";
 export const loadProfileusersforpublic = (props) => dispatch => {
 
     let itemuser = props.match.params.user;
-    let url = route('api.profilpublique',[itemuser]);
+    let url = route('api.profilpublique', [itemuser]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PUBLIC,
@@ -94,7 +94,7 @@ export const loademployments = () => dispatch => {
 export const loademploymentsbycategory = (props) => dispatch => {
 
     let itemCategoryemployment = props.match.params.categoryemployment;
-    let url = route('api.employmentscategory_site',[itemCategoryemployment]);
+    let url = route('api.employmentscategory_site', [itemCategoryemployment]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_BY_CATEGORY,
@@ -106,7 +106,7 @@ export const loademploymentsbycategory = (props) => dispatch => {
 export const loademploymentscategorycount = (props) => dispatch => {
 
     let itemCategoryemployment = props.match.params.categoryemployment;
-    let url = route('api.employmentscategorycount_site',[itemCategoryemployment]);
+    let url = route('api.employmentscategorycount_site', [itemCategoryemployment]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_CATEGORY_COUNT,
@@ -118,7 +118,7 @@ export const loademploymentscategorycount = (props) => dispatch => {
 export const loademploymentbycategorybycount = (props) => dispatch => {
 
     let itemCategoryemployment = props.match.params.categoryemployment;
-    let url = route('api.employmentbycategorybycount_site',[itemCategoryemployment]);
+    let url = route('api.employmentbycategorybycount_site', [itemCategoryemployment]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_EMPLOYEMENT_BY_CATEGORY_COUNT,
@@ -154,7 +154,7 @@ export const loademploymentbyuserpublic = (props) => dispatch => {
 export const loadProfileusersforprivate = (props) => dispatch => {
 
     let itemuser = props.match.params.user;
-    let url = route('api.profilprivate',[itemuser]);
+    let url = route('api.profilprivate', [itemuser]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PRIVATE,
@@ -178,7 +178,7 @@ export const loademploymentbyuserprivate = (props) => dispatch => {
 /*
 Ici je fais des abonnement a le section dans de cas c'est employment
 */
-export const   subscribeItem = props => dispatch => {
+export const subscribeItem = props => dispatch => {
 
     const url = route('employments_subscribe.subscribe', [props.id]);
     dyaxios.post(url).then(() => {
@@ -191,7 +191,7 @@ export const   subscribeItem = props => dispatch => {
     ).catch(error => console.error(error));
 };
 
-export const  unsubscribeItem = props => dispatch => {
+export const unsubscribeItem = props => dispatch => {
 
     const url = route('employments_subscribe.subscribe', [props.id]);
     dyaxios.post(url).then(() => {
@@ -213,7 +213,7 @@ Avec le code ci dessous je recupere m'abonne à l'utilisateur
 export const followerItem = (props) => dispatch => {
 
 
-    let url = route('users_followeuser.follow',[props.id]);
+    let url = route('users_followeuser.follow', [props.id]);
     dyaxios.post(url)
         .then(() => dispatch({
                 type: FOLLOWERUSER_ADD,
@@ -225,7 +225,7 @@ export const followerItem = (props) => dispatch => {
 export const unfollowerItem = (props) => dispatch => {
 
     Swal.fire({
-        text:  "Se désabonner de "+props.first_name+" ?",
+        text: "Se désabonner de " + props.first_name + " ?",
         buttonsStyling: false,
         confirmButtonClass: "btn btn-info",
         cancelButtonClass: 'btn btn-danger',
@@ -236,7 +236,7 @@ export const unfollowerItem = (props) => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            let url = route('users_followeuser.follow',[props.id]);
+            let url = route('users_followeuser.follow', [props.id]);
             dyaxios.post(url)
                 .then(() => dispatch({
                         type: FOLLOWERUSER_REMOVE,
@@ -254,7 +254,7 @@ End
 export const loadContactserviceemployments = props => dispatch => {
 
     let itemUser = props.match.params.user;
-    let url = route('api.contactservice_employments_site',[itemUser]);
+    let url = route('api.contactservice_employments_site', [itemUser]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_ALL_EMPLOYMENTS_FOR_CONTACTSERVICE,
@@ -275,14 +275,14 @@ export const favoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "Annonce ajoutée à vos favoris",
+                    message: "L\'annonce a été ajoutée à vos favoris.",
                 },
                 {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {
-                        from: 'bottom',
-                        align: 'center'
+                        from: 'top',
+                        align: 'right'
                     },
                     animate: {
                         enter: "animate__animated animate__fadeInUp",
@@ -304,14 +304,14 @@ export const unfavoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "Annonce ajoutée à vos favoris",
+                    message: "L\'annonce a été retirée de vos favoris.",
                 },
                 {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {
-                        from: 'bottom',
-                        align: 'center'
+                        from: 'top',
+                        align: 'right'
                     },
                     animate: {
                         enter: "animate__animated animate__fadeInUp",
@@ -338,7 +338,7 @@ export const activeItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('employmentsactivated_site',[props.id]);
+            const url = route('employmentsactivated_site', [props.id]);
             //Envoyer la requet au server
             dyaxios.get(url).then(() => {
 
@@ -397,7 +397,7 @@ export const unactiveprivateItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('employmentsunactivated_site',[props.id]);
+            const url = route('employmentsunactivated_site', [props.id]);
             //Envoyer la requet au server
             dyaxios.get(url).then(() => {
 
@@ -456,7 +456,7 @@ export const unactiveItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('employmentsunactivated_site',[props.id]);
+            const url = route('employmentsunactivated_site', [props.id]);
             //Envoyer la requet au server
             dyaxios.get(url).then(() => {
 
@@ -467,14 +467,14 @@ export const unactiveItem = props => dispatch => {
 
                 /** Alert notify bootstrapp **/
                 $.notify({
-                        message: "Annonce masquée aux utilisateurs",
+                        message: "L\'annonce a été masquée aux utilisateurs.",
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -503,7 +503,7 @@ export const deleteItem = props => dispatch => {
 
     Swal.fire({
         title: 'Confirmer la supression?',
-        text: "êtes-vous sûr de vouloir executer cette action",
+        text: "Êtes-vous sûre de vouloir exécuter cette action?",
         type: 'warning',
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",
@@ -515,7 +515,7 @@ export const deleteItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('employmentsdelete_site',[props.id]);
+            const url = route('employmentsdelete_site', [props.id]);
             //Envoyer la requet au server
             dyaxios.delete(url).then(() => {
 
@@ -527,13 +527,13 @@ export const deleteItem = props => dispatch => {
                 /** Alert notify bootstrapp **/
                 $.notify({
                         // title: 'Update',
-                        message: 'Annonce suprimée avec success'
+                        message: 'L\'annonce a été suprimée avec success.'
                     },
                     {
                         allow_dismiss: false,
                         type: 'primary',
                         placement: {
-                            from: 'bottom',
+                            from: 'top',
                             align: 'right'
                         },
                         animate: {

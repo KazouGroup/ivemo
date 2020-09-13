@@ -32,6 +32,7 @@ import {
 } from "../../../redux/actions/employment/employmentshowActions";
 import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedEmployment from "../../inc/vendor/ButonMiniSubscribedEmployment";
+import PrivacyInformationsEmployment from "./inc/PrivacyInformationsEmployment";
 
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -114,14 +115,14 @@ class EmployementShowUserSite extends Component {
             .then(() => {
 
                 $.notify({
-                        message: `Message bien envoyé à cette utilisateur`
+                        message: `Votre message a été bien envoyé au propriétaire de l'annonce.`
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
                             from: 'top',
-                            align: 'center'
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInDown",
@@ -165,14 +166,14 @@ class EmployementShowUserSite extends Component {
         //});
 
         $.notify({
-                message: "Lien copié correctement avec succès",
+                message: "Le lien a été copié avec succès.",
             },
             {
                 allow_dismiss: false,
                 type: 'info',
                 placement: {
-                    from: 'bottom',
-                    align: 'center'
+                    from: 'top',
+                    align: 'right'
                 },
                 animate: {
                     enter: "animate__animated animate__fadeInUp",
@@ -196,7 +197,7 @@ class EmployementShowUserSite extends Component {
     statusItem(id) {
         Swal.fire({
             title: 'Masquer cette annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
+            text: "Êtes-vous sûr de vouloir exécuter cette action",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -214,14 +215,14 @@ class EmployementShowUserSite extends Component {
 
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            message: "Annonce masquée aux utilisateurs",
+                            message: "L\'annonce est masquée aux utilisateurs.",
                         },
                         {
                             allow_dismiss: false,
                             type: 'info',
                             placement: {
-                                from: 'bottom',
-                                align: 'center'
+                                from: 'top',
+                                align: 'right'
                             },
                             animate: {
                                 enter: "animate__animated animate__fadeInUp",
@@ -249,7 +250,7 @@ class EmployementShowUserSite extends Component {
     deleteItem(id) {
         Swal.fire({
             title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
+            text: "Êtes-vous sûr de vouloir exécuter cette action",
             type: 'warning',
             buttonsStyling: false,
             confirmButtonClass: "btn btn-success",
@@ -268,13 +269,13 @@ class EmployementShowUserSite extends Component {
                     /** Alert notify bootstrapp **/
                     $.notify({
                             // title: 'Update',
-                            message: 'Annonce suprimée avec succès'
+                            message: 'L\'annonce a été supprimée avec succès.'
                         },
                         {
                             allow_dismiss: false,
                             type: 'primary',
                             placement: {
-                                from: 'bottom',
+                                from: 'top',
                                 align: 'right'
                             },
                             animate: {
@@ -503,7 +504,7 @@ class EmployementShowUserSite extends Component {
                                                                             <Button
                                                                                 onClick={() => this.props.unfavoriteItem(employment)}
                                                                                 className="btn btn-danger btn-sm"
-                                                                                title="Rétirer de vos favoris">
+                                                                                title="Retirer de vos favoris">
                                                                                 <i className="fas fa-bookmark"></i>
                                                                             </Button>
                                                                         </>
@@ -532,7 +533,6 @@ class EmployementShowUserSite extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-
 
                                                 <ProfileForallEmploymentShow {...employment}
                                                                              favoriteItem={this.props.favoriteItem}
@@ -635,7 +635,7 @@ class EmployementShowUserSite extends Component {
                                                                                                     type='textarea'
                                                                                                     minLength="5"
                                                                                                     maxLength="5000"
-                                                                                                    placeholder="Bonjour, je suis vivement intéressé par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
+                                                                                                    placeholder="Bonjour, je suis vivement intéressé(e) par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
                                                                                                     value={this.state.message}
                                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                                     hasErrorFor={this.hasErrorFor}
@@ -661,7 +661,12 @@ class EmployementShowUserSite extends Component {
                                                                                                 {employment.iscontactservice ?
                                                                                                     <a style={{cursor: "pointer"}}
                                                                                                        className="btn btn-outline-primary btn-lg">
-                                                                                                        <b>Vous avez déjà contacté le propriétaire de l'annonce.</b>
+                                                                                                        <b>Vous avez
+                                                                                                            déjà
+                                                                                                            contacté le
+                                                                                                            propriétaire
+                                                                                                            de
+                                                                                                            l'annonce.</b>
                                                                                                     </a>
                                                                                                     :
                                                                                                     <button
@@ -677,19 +682,19 @@ class EmployementShowUserSite extends Component {
                                                                                                data-toggle="modal"
                                                                                                data-target="#loginModal"
                                                                                                className="btn btn-primary btn-lg">
+                                                                                                <i className="now-ui-icons ui-1_send"></i>
                                                                                                 <b>Postuler</b>
                                                                                             </a>
                                                                                         }
                                                                                     </div>
+                                                                                    <PrivacyInformationsEmployment />
                                                                                 </Form>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                     :
 
@@ -697,11 +702,13 @@ class EmployementShowUserSite extends Component {
                                                         {employment.link_contact === null ?
                                                             <a href={route('employments_site')} target="_blank"
                                                                className="btn btn-primary btn-lg">
+                                                                <i className="now-ui-icons ui-1_send"></i>
                                                                 <b>Postuler</b>
                                                             </a>
                                                             :
                                                             <a href={`${employment.link_contact}`} target="_blank"
                                                                className="btn btn-primary btn-lg">
+                                                                <i className="now-ui-icons ui-1_send"></i>
                                                                 <b>Postuler</b>
                                                             </a>
                                                         }
@@ -747,12 +754,11 @@ class EmployementShowUserSite extends Component {
                                                                  aria-multiselectable="true" className="card-collapse">
                                                                 <div className="card-header text-center">
                                                                     <div className="card-title">
-                                                                        <b>Envoyez vos contacts</b>
+                                                                        <b>Contacter le propriétaire</b>
                                                                     </div>
                                                                 </div>
 
-
-                                                                <Form role="form" id="contact-form"
+                                                                <Form role="form" id="contact-form" className="mb-4"
                                                                       onSubmit={this.sendmessageItem}
                                                                       acceptCharset="UTF-8">
 
@@ -763,7 +769,7 @@ class EmployementShowUserSite extends Component {
                                                                         </div>
                                                                         <FieldInput name="full_name" type='text'
                                                                                     minLength="3" maxLength="50"
-                                                                                    placeholder="Nom complete"
+                                                                                    placeholder="Votre Nom Complet"
                                                                                     value={this.state.full_name}
                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                     hasErrorFor={this.hasErrorFor}
@@ -776,7 +782,7 @@ class EmployementShowUserSite extends Component {
                                                                         </div>
                                                                         <FieldInput name="email" type='email'
                                                                                     minLength="3" maxLength="50"
-                                                                                    placeholder="Email"
+                                                                                    placeholder="Votre Email"
                                                                                     value={this.state.email}
                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                     hasErrorFor={this.hasErrorFor}
@@ -794,7 +800,7 @@ class EmployementShowUserSite extends Component {
                                                                         </div>
                                                                         <FieldInput name="phone" type='number'
                                                                                     minLength="3" maxLength="15"
-                                                                                    placeholder="Téléphone"
+                                                                                    placeholder="Votre Numéro de Téléphone"
                                                                                     value={this.state.phone}
                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                     hasErrorFor={this.hasErrorFor}
@@ -803,7 +809,7 @@ class EmployementShowUserSite extends Component {
                                                                     <div className="form-group">
                                                                         <FieldInput name="message" type='textarea'
                                                                                     minLength="5" maxLength="5000"
-                                                                                    placeholder="Message"
+                                                                                    placeholder="Bonjour, je suis vivement intéressé(e) par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
                                                                                     value={this.state.message}
                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                     hasErrorFor={this.hasErrorFor}
@@ -829,12 +835,15 @@ class EmployementShowUserSite extends Component {
                                                                                 {employment.iscontactservice ?
                                                                                     <a style={{cursor: "pointer"}}
                                                                                        className="btn btn-outline-primary btn-lg">
-                                                                                        <b>Vous avez déjà contacté le propriétaire de l'annonce.</b>
+                                                                                        <b>Vous avez déjà contacté le
+                                                                                            propriétaire de
+                                                                                            l'annonce.</b>
                                                                                     </a>
                                                                                     :
                                                                                     <button
                                                                                         className="btn btn-primary btn-lg"
                                                                                         type="submit">
+                                                                                        <i className="now-ui-icons ui-1_send"></i>
                                                                                         <b>Postuler</b>
                                                                                     </button>
                                                                                 }
@@ -843,10 +852,12 @@ class EmployementShowUserSite extends Component {
                                                                             <a href={`/login`} data-toggle="modal"
                                                                                data-target="#loginModal"
                                                                                className="btn btn-primary btn-lg">
+                                                                                <i className="now-ui-icons ui-1_send"></i>
                                                                                 <b>Postuler</b>
                                                                             </a>
                                                                         }
                                                                     </div>
+                                                                    <PrivacyInformationsEmployment />
                                                                 </Form>
 
 
@@ -911,8 +922,6 @@ export default connect(mapStoreToProps, {
     statuscommentaddItem,
     likeItem, unlikeItem,
     favoriteItem, unfavoriteItem,
-
-
     loadProfileusersforpublic,
     unsubscribeItem, subscribeItem,
     unfollowerItem, followerItem,

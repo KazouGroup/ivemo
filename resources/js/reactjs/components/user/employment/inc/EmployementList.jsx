@@ -130,7 +130,7 @@ class EmployementList extends PureComponent {
 
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                 <>
-                                                    <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                    <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques de l'annonce">
                                                         <i className="now-ui-icons business_chart-bar-32"/>
                                                     </NavLink>
                                                     {this.props.status ?
@@ -148,7 +148,7 @@ class EmployementList extends PureComponent {
                                                             </button>
                                                         </>
                                                     }
-                                                    <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title=" Editer l'annonce">
+                                                    <NavLink to={`/employment/ab/${this.props.slugin}/edit/`} className="btn btn-sm btn-icon btn-info" title="Éditer l'annonce">
                                                         <i className="now-ui-icons ui-2_settings-90"/>
                                                     </NavLink>
                                                     <Button

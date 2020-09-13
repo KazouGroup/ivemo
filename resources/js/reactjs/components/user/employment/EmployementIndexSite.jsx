@@ -101,7 +101,6 @@ class EmployementIndexSite extends Component {
                                 <br/>
                                 <div className="row">
 
-
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         {!$guest && (
                                             <>
@@ -164,7 +163,6 @@ class EmployementIndexSite extends Component {
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <SignalFromEmployementForShow/>
 

@@ -128,14 +128,14 @@ export const statuscommentaddItem = props => dispatch => {
 
             $.notify({
 
-                    message: "Commentaires activés sur cette annonce",
+                    message: "Les commentaires sont activés sur cette annonce.",
                 },
                 {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {
-                        from: 'bottom',
-                        align: 'center'
+                        from: 'top',
+                        align: 'right'
                     },
                     animate: {
                         enter: "animate__animated animate__fadeInUp",
@@ -149,7 +149,7 @@ export const statuscommentaddItem = props => dispatch => {
 export const statuscommentremoveItem = props => dispatch => {
 
     Swal.fire({
-        text: "Desactiver les commentaires de cette annonce?",
+        text: "Désactiver les commentaires de cette annonce?",
         buttonsStyling: false,
         confirmButtonClass: "btn btn-success",
         cancelButtonClass: 'btn btn-danger',
@@ -171,14 +171,14 @@ export const statuscommentremoveItem = props => dispatch => {
 
                 $.notify({
 
-                        message: "Commentaires desactivé sur cette annonce",
+                        message: "Les commentaires sont désactivés sur cette annonce.",
                     },
                     {
                         allow_dismiss: false,
                         type: 'info',
                         placement: {
-                            from: 'bottom',
-                            align: 'center'
+                            from: 'top',
+                            align: 'right'
                         },
                         animate: {
                             enter: "animate__animated animate__fadeInUp",
@@ -229,14 +229,14 @@ export const favoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "Annonce ajoutée à vos favoris",
+                    message: "L\'annonce a été ajoutée à vos favoris.",
                 },
                 {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {
-                        from: 'bottom',
-                        align: 'center'
+                        from: 'top',
+                        align: 'right'
                     },
                     animate: {
                         enter: "animate__animated animate__fadeInUp",
@@ -258,14 +258,14 @@ export const unfavoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "Annonce ajoutée à vos favoris",
+                    message: "L\'annonce a été retirée de vos favoris.",
                 },
                 {
                     allow_dismiss: false,
                     type: 'info',
                     placement: {
-                        from: 'bottom',
-                        align: 'center'
+                        from: 'top',
+                        align: 'right'
                     },
                     animate: {
                         enter: "animate__animated animate__fadeInUp",
