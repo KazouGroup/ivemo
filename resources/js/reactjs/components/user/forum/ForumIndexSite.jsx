@@ -54,8 +54,7 @@ class ForumIndexSite extends Component {
             forums.slice(0, visiable).map(item => {
                 return (
                     <>
-                    <Link className="btn btn-neutral btn-sm ivemoEmptyItemsCta mb-3" to="/"><i
-                        className="now-ui-icons arrows-1_minimal-left"></i> <b>Retour à l'Accueil</b></Link>
+                   
                     <ForumList key={item.id} {...item}  unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem}
                                unfavoriteItem={this.props.unfavoriteItem} favoriteItem={this.props.favoriteItem} deleteItem={this.props.deleteItem}/>
                                </>
@@ -110,6 +109,8 @@ class ForumIndexSite extends Component {
                                                 )}
                                             </>
                                         )}
+                                         <Link className="btn btn-neutral btn-sm ivemoEmptyItemsCta mb-3" to="/">
+                                             <i className="now-ui-icons arrows-1_minimal-left"></i> <b>Retour à l'Accueil</b></Link>
 
                                         {mapForums.length !== 0 ? <>{mapForums}</> : <EmptyItems syntaxe="de" title="Forums" />}
 

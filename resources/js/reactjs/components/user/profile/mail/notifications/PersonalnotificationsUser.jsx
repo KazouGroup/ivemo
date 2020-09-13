@@ -122,7 +122,10 @@ class PersonalnotificationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {mapNotifications.length ? <>{mapNotifications}</> : <EmptyItems syntaxe={"de Message"} title={"Notifications"}/>}
+                                                    {contactusersprofile.notifications.length ?
+                                                        <>
+                                                            {contactusersprofile.notifications.length >= 1 ? <>{mapNotifications}</>:<EmptyItems syntaxe={"de Message"} title={"Notifications"}/>}
+                                                        </>:null}
 
                                                     </tbody>
                                                 </table>
