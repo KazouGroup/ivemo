@@ -138,7 +138,7 @@ class AnnonceslocationList extends PureComponent {
                                         </NavLink>
                                     </div>
                                     <div className="text-right ml-auto">
-                                        <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',') || "0"} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - " + this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> - le mois</b></small></>} </b></h5>
+                                        <h5 className="ivemoColorOrange"><b>{this.props.price.formatMoney(2,'.',',') || "0"} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - " + this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> - le mois</b></small></>} </b></h5>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-5 col-6">

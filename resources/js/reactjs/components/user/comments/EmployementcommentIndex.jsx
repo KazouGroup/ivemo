@@ -414,7 +414,7 @@ class EmployementcommentIndex extends PureComponent {
                                 )}
 
                                 <h5 className="title text-center">
-                                    <b><span className="ivemoItemsCount">{comments.length}</span> <span>{comments.length > 1 ? `Commentaires` : `Commentaire`}</span></b>
+                                    <b><span>{comments.length}</span> <span>{comments.length > 1 ? `Commentaires` : `Commentaire`}</span></b>
                                 </h5>
 
 

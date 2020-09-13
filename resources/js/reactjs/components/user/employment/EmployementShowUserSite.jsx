@@ -32,7 +32,7 @@ import {
 } from "../../../redux/actions/employment/employmentshowActions";
 import ButonFollowerUser from "../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedEmployment from "../../inc/vendor/ButonMiniSubscribedEmployment";
-import PrivacyInformationsEmployment from "./inc/PrivacyInformationsEmployment";
+import PrivacyInformationsFormContact from "../../inc/user/PrivacyInformationsFormContact";
 
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
@@ -624,7 +624,7 @@ class EmployementShowUserSite extends Component {
                                                                                                     type='number'
                                                                                                     minLength="3"
                                                                                                     maxLength="15"
-                                                                                                    placeholder="Votre Numèro de Téléphone"
+                                                                                                    placeholder="Votre numéro de Téléphone"
                                                                                                     value={this.state.phone}
                                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                                     hasErrorFor={this.hasErrorFor}
@@ -687,7 +687,7 @@ class EmployementShowUserSite extends Component {
                                                                                             </a>
                                                                                         }
                                                                                     </div>
-                                                                                    <PrivacyInformationsEmployment />
+                                                                                    <PrivacyInformationsFormContact />
                                                                                 </Form>
                                                                             </div>
                                                                         </div>
@@ -800,7 +800,7 @@ class EmployementShowUserSite extends Component {
                                                                         </div>
                                                                         <FieldInput name="phone" type='number'
                                                                                     minLength="3" maxLength="15"
-                                                                                    placeholder="Votre Numéro de Téléphone"
+                                                                                    placeholder="Votre numéro de Téléphone"
                                                                                     value={this.state.phone}
                                                                                     handleFieldChange={this.handleFieldChange}
                                                                                     hasErrorFor={this.hasErrorFor}
@@ -857,7 +857,7 @@ class EmployementShowUserSite extends Component {
                                                                             </a>
                                                                         }
                                                                     </div>
-                                                                    <PrivacyInformationsEmployment />
+                                                                    <PrivacyInformationsFormContact />
                                                                 </Form>
 
 

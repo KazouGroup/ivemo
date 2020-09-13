@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import FieldInput from "../../../../inc/vendor/FieldInput";
+import PrivacyInformationsFormContact from "../../../../inc/user/PrivacyInformationsFormContact";
+import {Form} from "reactstrap";
 
 
 class FormcontactuseronannonceventeShow extends Component {
@@ -102,7 +104,7 @@ class FormcontactuseronannonceventeShow extends Component {
         return (
 
 
-            <form role="form" id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
+            <Form id="contact-form" onSubmit={this.sendmessageItem} acceptCharset="UTF-8">
 
                 <div className="card-body">
 
@@ -116,7 +118,7 @@ class FormcontactuseronannonceventeShow extends Component {
                             <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
+                                        renderErrorFor={this.renderErrorFor} required="required"/>
 
                         </div>
                     </div>
@@ -131,7 +133,7 @@ class FormcontactuseronannonceventeShow extends Component {
                             <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
+                                        renderErrorFor={this.renderErrorFor} required="required"/>
 
                         </div>
                     </div>
@@ -142,10 +144,12 @@ class FormcontactuseronannonceventeShow extends Component {
                                                             <i className="now-ui-icons tech_mobile"/></span>
                             </div>
 
-                            <FieldInput name="phone" type='number' minLength="3" maxLength="15" placeholder="Téléphone" value={this.state.phone}
+                            <FieldInput name="phone" type='number' minLength="3" maxLength="50"
+                                        placeholder="Votre numéro de Téléphone"
+                                        value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
+                                        renderErrorFor={this.renderErrorFor} required="required"/>
                         </div>
 
 
@@ -168,10 +172,12 @@ class FormcontactuseronannonceventeShow extends Component {
 
                         <div className="input-group">
 
-                            <FieldInput name="message" type='textarea' minLength="5" maxLength="5000" placeholder="Posez ici toutes vos questions !" value={this.state.message}
+                            <FieldInput name="message" type='textarea' minLength="5" maxLength="5000"
+                                        placeholder="Bonjour, je suis vivement intéressé(e) par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
+                                        value={this.state.message}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor} rows="17"/>
+                                        renderErrorFor={this.renderErrorFor} rows="17" required="required"/>
                         </div>
                     </div>
                     <div className="submit text-center">
@@ -181,8 +187,9 @@ class FormcontactuseronannonceventeShow extends Component {
                     </div>
                 </div>
 
+                <PrivacyInformationsFormContact />
 
-            </form>
+            </Form>
 
         )
     }

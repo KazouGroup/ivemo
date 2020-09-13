@@ -788,7 +788,7 @@ class AnnoncelocationEdit extends Component {
                                                                     <b>Type de bien </b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseTypebien" className="collapse"
+                                                            <div id="collapseTypebien" className="collapse show"
                                                                  role="tabpanel" aria-labelledby="headingTypebien">
                                                                 <div className="card-body">
                                                                     <div className="row">
@@ -990,7 +990,7 @@ class AnnoncelocationEdit extends Component {
                                                                         (Appartement,Maison,Terrain)</b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseOne" className="collapse" role="tabpanel"
+                                                            <div id="collapseOne" className="collapse show" role="tabpanel"
                                                                  aria-labelledby="headingOne">
                                                                 <div className="card-body">
                                                                     <div className="row">
@@ -1074,7 +1074,7 @@ class AnnoncelocationEdit extends Component {
                                                                     <b>Description de l'annonce </b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseDescription" className="collapse"
+                                                            <div id="collapseDescription" className="collapse show"
                                                                  role="tabpanel" aria-labelledby="headingDescription">
                                                                 <div className="card-body">
                                                                     <div className="row">

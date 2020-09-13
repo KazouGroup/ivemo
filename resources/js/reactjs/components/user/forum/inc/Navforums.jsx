@@ -55,8 +55,7 @@ class Navforums extends Component {
                                                     <strong>{item.name || <Skeleton width={80}/>}</strong>
                                                 </NavLink>
                                             </td>
-                                            <td className="text-right"><span
-                                                className="ivemoItemsCount">{this.getcountcategoryString(item.forums_count)}</span>
+                                            <td className="text-right"><span>{this.getcountcategoryString(item.forums_count)}</span>
                                                 <span className="ivemoItemsTitle">{item.forums_count > 1 ? "posts" : "post"}</span></td>
                                         </tr>
                                     ))}

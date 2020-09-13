@@ -18,7 +18,6 @@ import {
     likeItem,unlikeItem,
     deleteItem
 } from "../../../redux/actions/forum/forumActions";
-import InfiniteScroll from 'react-infinite-scroller';
 import EmptyItems from "../../inc/user/EmptyItems";
 
 
@@ -54,7 +53,7 @@ class ForumIndexSite extends Component {
             forums.slice(0, visiable).map(item => {
                 return (
                     <>
-                   
+
                     <ForumList key={item.id} {...item}  unlikeItem={this.props.unlikeItem} likeItem={this.props.likeItem}
                                unfavoriteItem={this.props.unfavoriteItem} favoriteItem={this.props.favoriteItem} deleteItem={this.props.deleteItem}/>
                                </>
@@ -101,7 +100,7 @@ class ForumIndexSite extends Component {
                                             <input className="form-control" name="search" placeholder="Recherche + de 4000 questions posé chaque mois"/>
                                         </div>
                                         */}
-                                        
+
                                         {!$guest &&(
                                             <>
                                                 {!$userIvemo.email_verified_at &&(

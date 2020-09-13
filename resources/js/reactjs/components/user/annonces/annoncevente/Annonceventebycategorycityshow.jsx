@@ -377,7 +377,7 @@ class Annonceventebycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                 {annoncevente.price ?
-                                                    <h5 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h5>
+                                                    <h5 className="ivemoColorOrange"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h5>
                                                         :
                                                     <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
                                                 }
@@ -452,7 +452,7 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b> {annoncevente.categoryannoncevente.label || "Ce bien"} est au prix de</b></h5>
                                                             {annoncevente.price && (
-                                                                <h3 className="text-success"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
+                                                                <h3 className="ivemoColorOrange"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">

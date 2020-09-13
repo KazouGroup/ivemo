@@ -299,7 +299,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-right ml-auto">
                                                     {annoncelocation.price ?
-                                                        <h5 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></b></h5>
+                                                        <h5 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></b></h5>
                                                         :
                                                         <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
                                                     }
@@ -405,7 +405,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
                                                             {annoncelocation.price && (
 
-                                                                <h3 className="text-success"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
+                                                                <h3 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6 mx-auto">
@@ -413,7 +413,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             {annoncelocation.award_price && (
                                                                 <p>
                                                                     <b>Caution:</b>
-                                                                    <span className="title text-danger"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</>:null} </b></span>
+                                                                    <span className="title text-success"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</>:null} </b></span>
                                                                 </p>
                                                             )}
                                                         </div>
