@@ -19,7 +19,7 @@ class FieldInputCheck extends Component {
                             onChange={onChange}/>
                         <span
                             className="form-check-sign"/>
-                        <b>{namecheck}</b>
+                        {namecheck}
                     </label>
                 </div>
             </>

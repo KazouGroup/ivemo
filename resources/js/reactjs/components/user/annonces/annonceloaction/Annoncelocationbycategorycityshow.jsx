@@ -372,6 +372,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 )}
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} /> : <Skeleton count={3}/>}
+                                                <hr/>
+                                                <h5 className="info-title"><b>Les avantages</b></h5>
+
 
                                             </div>
                                         </div>

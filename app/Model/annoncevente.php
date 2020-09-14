@@ -93,6 +93,10 @@ class annoncevente extends Model
 
     protected $casts = [
         'status' => 'boolean',
+        'furniture' => 'boolean',
+        'terrace' => 'boolean',
+        'balcony' => 'boolean',
+        'elevator' => 'boolean',
         'status_comments' => 'boolean',
         'status_admin' => 'boolean',
     ];

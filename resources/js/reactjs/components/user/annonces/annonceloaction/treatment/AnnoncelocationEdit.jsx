@@ -13,6 +13,7 @@ import LoaderLdsDefaultPage from "../../../../inc/user/annimation/LoaderLdsDefau
 import LazyLoad from "react-lazyload";
 import Navannoncelocationsbyuser from "../inc/Navannoncelocationsbyuser";
 import NavProfileTraitement from "../../inc/NavProfileTraitement";
+import FieldInputCheck from "../../../../inc/vendor/FieldInputCheck";
 
 class AnnoncelocationEdit extends Component {
     constructor(props) {
@@ -35,6 +36,12 @@ class AnnoncelocationEdit extends Component {
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
+
+        this.handleStatusTerrace = this.handleStatusTerrace.bind(this);
+        this.handleStatusFurniture = this.handleStatusFurniture.bind(this);
+        this.handleStatusBalcony = this.handleStatusBalcony.bind(this);
+        this.handleStatusElevator = this.handleStatusElevator.bind(this);
+
         this.state = {
             id: '',
             status: '',
@@ -46,6 +53,10 @@ class AnnoncelocationEdit extends Component {
             rooms: '',
             description: '',
             city_id: '',
+            terrace: '',
+            furniture: '',
+            balcony: '',
+            elevator: '',
             slug: '',
             slugin: '',
             link_video: '',
@@ -95,6 +106,12 @@ class AnnoncelocationEdit extends Component {
         document.querySelector('.editor-control').classList.remove('is-invalid');
 
     }
+
+
+    handleStatusTerrace() {this.setState({terrace: !this.state.terrace});};
+    handleStatusFurniture() {this.setState({furniture: !this.state.furniture});};
+    handleStatusBalcony() {this.setState({balcony: !this.state.balcony});};
+    handleStatusElevator() {this.setState({elevator: !this.state.elevator});};
 
     handleFieldChange(event) {
         this.setState({
@@ -243,6 +260,10 @@ class AnnoncelocationEdit extends Component {
             award_price: this.state.award_price,
             link_video: this.state.link_video,
             city_id: this.state.city_id,
+            furniture: this.state.furniture,
+            terrace: this.state.terrace,
+            balcony: this.state.balcony,
+            elevator: this.state.elevator,
             categoryannoncelocation_id: this.state.categoryannoncelocation_id,
             periodeannonce_id: this.state.periodeannonce_id,
         };
@@ -433,6 +454,10 @@ class AnnoncelocationEdit extends Component {
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
+                furniture: response.data.furniture,
+                terrace: response.data.terrace,
+                balcony: response.data.balcony,
+                elevator: response.data.elevator,
                 link_video: response.data.link_video,
                 award_price: response.data.award_price,
                 slug: response.data.slug,
@@ -1063,6 +1088,73 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
 
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingTre">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseTre" aria-expanded="false"
+                                                                   aria-controls="collapseTre">
+                                                                    <b>Les avantages de mon bien</b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTre" className="collapse show" role="tabpanel"
+                                                                 aria-labelledby="headingTre">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="furniture"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Meublé`}
+                                                                                                         checked={this.state.furniture || false}
+                                                                                                         value={this.state.furniture}
+                                                                                                         onChange={this.handleStatusFurniture}/>
+
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="terrace"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Terrasse`}
+                                                                                                         checked={this.state.terrace || false}
+                                                                                                         value={this.state.terrace}
+                                                                                                         onChange={this.handleStatusTerrace}/>
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="balcony"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Balcon`}
+                                                                                                         checked={this.state.balcony || false}
+                                                                                                         value={this.state.balcony}
+                                                                                                         onChange={this.handleStatusBalcony}/>
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="elevator"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Ascenseur`}
+                                                                                                         checked={this.state.elevator || false}
+                                                                                                         value={this.state.elevator}
+                                                                                                         onChange={this.handleStatusElevator}/>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div id="accordion" role="tablist" aria-multiselectable="false"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
@@ -1131,7 +1223,7 @@ class AnnoncelocationEdit extends Component {
                                                         </button>
                                                         <button className="btn btn-primary" type="submit"
                                                                 title="Mettre à jour l'annonce">
-                                                            <b>Mettre à jour votre annonce</b>
+                                                            <b>Enregister</b>
                                                         </button>
                                                     </div>
                                                 </Form>

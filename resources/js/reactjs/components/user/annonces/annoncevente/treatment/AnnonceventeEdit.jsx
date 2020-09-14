@@ -13,6 +13,7 @@ import LoaderLdsDefaultPage from "../../../../inc/user/annimation/LoaderLdsDefau
 import FieldInput from "../../../../inc/vendor/FieldInput";
 import Navannonceventesbyuser from "../inc/Navannonceventesbyuser";
 import Navlinknewannoncevente from "./Navlinknewannoncevente";
+import FieldInputCheck from "../../../../inc/vendor/FieldInputCheck";
 
 
 class AnnonceventeEdit extends Component {
@@ -47,6 +48,11 @@ class AnnonceventeEdit extends Component {
             description: '',
             slugin: '',
             slug: '',
+            city_id: '',
+            terrace: '',
+            furniture: '',
+            balcony: '',
+            elevator: '',
             uploadimages_count: '',
             categoryannoncevente_id: '',
             categoryannoncevente: [],
@@ -237,6 +243,10 @@ class AnnonceventeEdit extends Component {
             pieces: this.state.pieces,
             price: this.state.price,
             city_id: this.state.city_id,
+            furniture: this.state.furniture,
+            terrace: this.state.terrace,
+            balcony: this.state.balcony,
+            elevator: this.state.elevator,
             categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -418,6 +428,10 @@ class AnnonceventeEdit extends Component {
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
+                furniture: response.data.furniture,
+                terrace: response.data.terrace,
+                balcony: response.data.balcony,
+                elevator: response.data.elevator,
                 city: response.data.city,
                 user_id: response.data.user_id,
                 user: response.data.user,
@@ -936,16 +950,15 @@ class AnnonceventeEdit extends Component {
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
-                                                            <div className="card-header" role="tab" id="headingOne">
+                                                            <div className="card-header" role="tab" id="headingTre">
                                                                 <a data-toggle="collapse" data-parent="#accordion"
-                                                                   href="#collapseOne" aria-expanded="true"
-                                                                   aria-controls="collapseOne">
-                                                                    <b>Caractéristique du bien uniquement pour
-                                                                        (Appartement,Maison,Terrain)</b>
+                                                                   href="#collapseTre" aria-expanded="false"
+                                                                   aria-controls="collapseTre">
+                                                                    <b>Les avantages de mon bien</b>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseOne" className="collapse show" role="tabpanel"
-                                                                 aria-labelledby="headingOne">
+                                                            <div id="collapseTre" className="collapse show" role="tabpanel"
+                                                                 aria-labelledby="headingTre">
                                                                 <div className="card-body">
                                                                     <div className="row">
                                                                         <div className="col-md-12">
@@ -954,45 +967,45 @@ class AnnonceventeEdit extends Component {
                                                                                  className="card-collapse">
 
                                                                                 <div className="row">
-                                                                                    <div
-                                                                                        className="col-md-4 ml-auto mr-auto">
-                                                                                        <label className="labels">
-                                                                                            Surface
-                                                                                            <span className="text-danger">*</span>
-                                                                                        </label>
-                                                                                        <div className="form-group">
-                                                                                            <FieldInput name="surface" type='number' placeholder="Surface" value={this.state.surface}
-                                                                                                        handleFieldChange={this.handleFieldChange}
-                                                                                                        hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
-                                                                                        </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="furniture"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Meublé`}
+                                                                                                         checked={this.state.furniture || false}
+                                                                                                         value={this.state.furniture}
+                                                                                                         onChange={this.handleStatusFurniture}/>
+
                                                                                     </div>
-                                                                                    <div className="col-md-4 ml-auto mr-auto">
-                                                                                        <label htmlFor="pieces">
-                                                                                            Pièces (optionnel)
-                                                                                        </label>
-                                                                                        <div className="form-group">
-                                                                                            <FieldInput name="pieces" type='number' placeholder="Pièces" value={this.state.pieces}
-                                                                                                        handleFieldChange={this.handleFieldChange}
-                                                                                                        hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}/>
-                                                                                        </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="terrace"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Terrasse`}
+                                                                                                         checked={this.state.terrace || false}
+                                                                                                         value={this.state.terrace}
+                                                                                                         onChange={this.handleStatusTerrace}/>
                                                                                     </div>
-                                                                                    <div
-                                                                                        className="col-md-4 ml-auto mr-auto">
-                                                                                        <label htmlFor="Chambres">Chambres
-                                                                                            (optionnel)</label>
-                                                                                        <div className="form-group">
-                                                                                            <FieldInput name="rooms" type='number' placeholder="Chambres" value={this.state.rooms}
-                                                                                                        handleFieldChange={this.handleFieldChange}
-                                                                                                        hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}/>
-                                                                                        </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="balcony"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Balcon`}
+                                                                                                         checked={this.state.balcony || false}
+                                                                                                         value={this.state.balcony}
+                                                                                                         onChange={this.handleStatusBalcony}/>
                                                                                     </div>
-                                                                                    <small>*optionnel: les champs ne sont
-                                                                                        pas obligatoires vous avez le choix
-                                                                                        de les remplire ou pas</small>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="elevator"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Ascenseur`}
+                                                                                                         checked={this.state.elevator || false}
+                                                                                                         value={this.state.elevator}
+                                                                                                         onChange={this.handleStatusElevator}/>
+                                                                                    </div>
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1048,7 +1061,7 @@ class AnnonceventeEdit extends Component {
                                                         </button>
                                                         <button className="btn btn-primary" type="submit"
                                                                 title="Mettre à jour l'annonce">
-                                                            <b>Mettre à jour votre annonce</b>
+                                                            <b>Enregister</b>
                                                         </button>
                                                     </div>
                                                 </Form>

@@ -54,6 +54,11 @@ class IndexSite extends Component {
                                             Forums
                                         </Link>
 
+
+                                        <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
+                                            Locations
+                                        </Link>
+
                                         {/*
                                         <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
                                             Locations

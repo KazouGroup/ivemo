@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import {Button, Form, FormGroup, Input} from "reactstrap";
+import {Button, CardBody, Form, FormGroup, Input} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import ReactQuill from "react-quill";
@@ -9,6 +9,7 @@ import HelmetSite from "../../../../inc/user/HelmetSite";
 import FieldInput from "../../../../inc/vendor/FieldInput";
 import NavProfileTraitement from "../../inc/NavProfileTraitement";
 import Navannonceventesbyuser from "../inc/Navannonceventesbyuser";
+import FieldInputCheck from "../../../../inc/vendor/FieldInputCheck";
 
 
 class AnnonceventeCreate extends Component {
@@ -22,6 +23,11 @@ class AnnonceventeCreate extends Component {
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
+        this.handleStatusTerrace = this.handleStatusTerrace.bind(this);
+        this.handleStatusFurniture = this.handleStatusFurniture.bind(this);
+        this.handleStatusBalcony = this.handleStatusBalcony.bind(this);
+        this.handleStatusElevator = this.handleStatusElevator.bind(this);
+
         this.state = {
             id: '',
             status: '',
@@ -33,6 +39,10 @@ class AnnonceventeCreate extends Component {
             rooms: '',
             description: '',
             city_id: '',
+            terrace: '',
+            furniture: '',
+            balcony: '',
+            elevator: '',
             categoryannoncevente_id: '',
             errors: [],
             cities: [],
@@ -65,6 +75,11 @@ class AnnonceventeCreate extends Component {
         document.querySelector('.editor-control').classList.remove('is-invalid');
 
     }
+
+    handleStatusTerrace() {this.setState({terrace: !this.state.terrace});};
+    handleStatusFurniture() {this.setState({furniture: !this.state.furniture});};
+    handleStatusBalcony() {this.setState({balcony: !this.state.balcony});};
+    handleStatusElevator() {this.setState({elevator: !this.state.elevator});};
 
     handleFieldChange(event) {
         this.setState({
@@ -100,6 +115,10 @@ class AnnonceventeCreate extends Component {
             pieces: this.state.pieces,
             price: this.state.price,
             city_id: this.state.city_id,
+            furniture: this.state.furniture,
+            terrace: this.state.terrace,
+            balcony: this.state.balcony,
+            elevator: this.state.elevator,
             categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -453,6 +472,73 @@ class AnnonceventeCreate extends Component {
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
                                                          className="card-collapse">
                                                         <div className="card card-plain">
+                                                            <div className="card-header" role="tab" id="headingTre">
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="#collapseTre" aria-expanded="false"
+                                                                   aria-controls="collapseTre">
+                                                                    <b>Les avantages de mon bien</b>
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTre" className="collapse show" role="tabpanel"
+                                                                 aria-labelledby="headingTre">
+                                                                <div className="card-body">
+                                                                    <div className="row">
+                                                                        <div className="col-md-12">
+                                                                            <div id="accordion" role="tablist"
+                                                                                 aria-multiselectable="true"
+                                                                                 className="card-collapse">
+
+                                                                                <div className="row">
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="furniture"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Meublé`}
+                                                                                                         checked={this.state.furniture || false}
+                                                                                                         value={this.state.furniture}
+                                                                                                         onChange={this.handleStatusFurniture}/>
+
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="terrace"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Terrasse`}
+                                                                                                         checked={this.state.terrace || false}
+                                                                                                         value={this.state.terrace}
+                                                                                                         onChange={this.handleStatusTerrace}/>
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="balcony"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Balcon`}
+                                                                                                         checked={this.state.balcony || false}
+                                                                                                         value={this.state.balcony}
+                                                                                                         onChange={this.handleStatusBalcony}/>
+                                                                                    </div>
+                                                                                    <div className="col-md-3 mx-auto">
+
+                                                                                        <FieldInputCheck name="elevator"
+                                                                                                         type='checkbox'
+                                                                                                         namecheck={`Ascenseur`}
+                                                                                                         checked={this.state.elevator || false}
+                                                                                                         value={this.state.elevator}
+                                                                                                         onChange={this.handleStatusElevator}/>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                         className="card-collapse">
+                                                        <div className="card card-plain">
                                                             <div className="card-header" role="tab" id="headingDescription">
                                                                 <a data-toggle="collapse" data-parent="#accordion"
                                                                    href="#collapseDescription" aria-expanded="true"
@@ -495,7 +581,7 @@ class AnnonceventeCreate extends Component {
                                                             <b>Annuler</b>
                                                         </button>
                                                         <button className="btn btn-primary" type="submit" title="Poster l'annonce">
-                                                            <b>Poster votre annonce</b>
+                                                            <b>Continuer</b>
                                                         </button>
                                                     </div>
                                                 </div>

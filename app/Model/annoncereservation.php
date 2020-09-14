@@ -82,9 +82,13 @@ class annoncereservation extends Model
     }
 
     public $dates = ['expired_at','created_at','updated_at'];
-    
+
     protected $casts = [
         'status' => 'boolean',
+        'furniture' => 'boolean',
+        'terrace' => 'boolean',
+        'balcony' => 'boolean',
+        'elevator' => 'boolean',
         'status_comments' => 'boolean',
         'status_admin' => 'boolean',
         'status_wifi' => 'boolean',

@@ -27,7 +27,7 @@ class AnnonceslocationList extends PureComponent {
         return (
 
             <>
-                <div className="card">
+                <div className="card ivemoCardContainer">
                     <div className="card-body">
                         <div className="card card-plain card-blog">
                             <div className="row">
@@ -208,9 +208,9 @@ class AnnonceslocationList extends PureComponent {
                                                 </>
                                             }
 
-                                            <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
-                                                <i className="far fa-envelope"/>
-                                            </Button>
+                                            <NavLink to={showlink} className="btn btn-icon btn-sm btn-warning" title={`Contacter ${this.props.user.first_name}`}>
+                                                <i className="now-ui-icons ui-1_email-85"/>
+                                            </NavLink>
                                             {/*
                                             <NavLink to={`/annonces_locations/locations/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-icon btn-sm btn-primary">
                                                 <i className="now-ui-icons location_pin"/>

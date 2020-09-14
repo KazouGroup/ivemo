@@ -15,7 +15,7 @@ class PrivateUserFavoriteAnnonceslocationList extends PureComponent {
         return (
 
             <>
-                <div className="card">
+                <div className="card ivemoCardContainer">
                     <div className="card-body">
                         <div className="card card-plain card-blog">
                             <div className="row">
