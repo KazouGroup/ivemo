@@ -150,6 +150,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                 this.loadItems();
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -192,6 +193,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                 this.loadItems();
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -235,6 +237,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -273,6 +276,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -318,6 +322,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
                     /** End alert ***/
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
@@ -372,6 +377,7 @@ class AnnoncereseventecommentIndex extends PureComponent {
 
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,

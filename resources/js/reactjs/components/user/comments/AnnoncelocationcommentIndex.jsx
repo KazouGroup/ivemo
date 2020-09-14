@@ -150,6 +150,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
                 this.loadItems();
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -169,29 +170,31 @@ class AnnoncelocationcommentIndex extends PureComponent {
         let itemannoncelocation = this.props.match.params.annoncelocation;
         let url = route('annoncelocationsendcomment_site',[itemannoncetype,itemCategoryannoncelocation,itemCity,itemuser,itemannoncelocation]);
         dyaxios.post(url, item)
-            .then(() => {
+            .then((response) => {
 
+                //console.log(res.status)
                 $.notify({
-                        message: `Commentaire sauvegarder`
+                    message: `Commentaire sauvegarder`
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
                     },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'bottom',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInUp",
-                            exit: "animate__animated animate__fadeOutDown"
-                        },
-                    });
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
 
-                this.setState({body: "",});
+            this.setState({body: "",});
 
-                this.loadItems();
+            this.loadItems();
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -235,6 +238,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -273,6 +277,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -318,6 +323,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
                     /** End alert ***/
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
@@ -372,6 +378,7 @@ class AnnoncelocationcommentIndex extends PureComponent {
 
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,

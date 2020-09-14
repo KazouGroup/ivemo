@@ -193,6 +193,7 @@ class AnnoncereservationcommentIndex extends PureComponent {
                 this.loadItems();
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -236,6 +237,7 @@ class AnnoncereservationcommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -274,6 +276,7 @@ class AnnoncereservationcommentIndex extends PureComponent {
                     });
 
             }).catch(error => {
+                window.location.reload(true);
             this.setState({
                 errors: error.response.data.errors
             });
@@ -319,6 +322,7 @@ class AnnoncereservationcommentIndex extends PureComponent {
                     /** End alert ***/
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
@@ -373,6 +377,7 @@ class AnnoncereservationcommentIndex extends PureComponent {
 
                     this.loadItems();
                 }).catch(() => {
+                    window.location.reload(true);
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
                         allow_dismiss: false,
