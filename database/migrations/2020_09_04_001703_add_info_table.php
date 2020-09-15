@@ -25,8 +25,8 @@ class AddInfoTable extends Migration
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
             $table->string('phone_seller')->after('link_video')->nullable();
-            $table->integer('terrace_number')->after('link_video')->default("1");
-            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->integer('terrace_number')->after('link_video')->nullable();
+            $table->integer('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
             $table->text('link_video')->after('title')->nullable();
             $table->unsignedBigInteger('periodeannonce_id')->after('user_id')->nullable()->index();
@@ -39,8 +39,8 @@ class AddInfoTable extends Migration
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
             $table->string('phone_seller')->after('link_video')->nullable();
-            $table->integer('terrace_number')->after('link_video')->default("1");
-            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->integer('terrace_number')->after('link_video')->nullable();
+            $table->integer('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
             $table->text('link_video')->after('title')->nullable();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
@@ -52,8 +52,8 @@ class AddInfoTable extends Migration
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
             $table->string('phone_seller')->after('link_video')->nullable();
-            $table->integer('terrace_number')->after('link_video')->default("1");
-            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->integer('terrace_number')->after('link_video')->nullable();
+            $table->integer('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
             $table->text('link_video')->after('title')->nullable();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');

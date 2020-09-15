@@ -83,8 +83,7 @@ class AnnoncelocationCreate extends Component {
     // Handle Change
     handleChangeBody(value) {
      this.setState({ description: value });
-     document.querySelector('editor-control').classList.remove('is-invalid');
-
+     //document.querySelector('editor-control').classList.remove('is-invalid');
     }
 
 
