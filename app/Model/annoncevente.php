@@ -2,8 +2,6 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoriteannoncevente;
-use App\Traits\Purify;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +11,6 @@ use Illuminate\Support\Str;
 
 class annoncevente extends Model
 {
-
-    use Purify;
 
    protected $guarded = [];
 

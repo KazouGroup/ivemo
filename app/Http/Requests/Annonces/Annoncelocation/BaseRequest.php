@@ -27,7 +27,7 @@ class BaseRequest extends Request
                 'rooms' => 'required|numeric|digits_between:1,3',
                 'pieces' => 'required|numeric|digits_between:1,3',
                 'city_id' => 'required|numeric|digits_between:1,3',
-                'terrace_number' => 'nullable|numeric|digits_between:1,2',
+                'terrace_number' => 'nullable|numeric|digits_between:1,2'
                 'balcony_number' => 'nullable|numeric|digits_between:1,2',
                 'periodeannonce_id' => 'required|numeric|digits_between:1,3',
                 'categoryannoncelocation_id' => 'required|numeric|digits_between:1,3',
@@ -44,7 +44,7 @@ class BaseRequest extends Request
                 'rooms' => 'required|numeric|digits_between:1,3',
                 'pieces' => 'required|numeric|digits_between:1,3',
                 'city_id' => 'required|numeric|digits_between:1,3',
-                'terrace_number' => 'nullable|numeric|digits_between:1,2',
+                'terrace_number' => 'nullable|numeric|digits_between:1,2'
                 'balcony_number' => 'nullable|numeric|digits_between:1,2',
                 'periodeannonce_id' => 'required|numeric|digits_between:1,3',
                 'categoryannoncelocation_id' => 'required|numeric|digits_between:1,3',

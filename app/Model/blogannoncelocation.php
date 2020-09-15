@@ -2,9 +2,7 @@
 
 namespace App\Model;
 
-use App\Model\favorite\favoriteblogannoncelocation;
-use App\Traits\Likesdata;
-use App\Traits\Purify;
+
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -16,7 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncelocation extends Model implements Auditable
 {
-    use Purify, AuditableTrait,LogsActivity;
+    use  AuditableTrait,LogsActivity;
 
     protected $guarded = [];
 
