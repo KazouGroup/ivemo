@@ -10,10 +10,14 @@ import {
     DELETE_ANNONCELOCATION,
     GET_PROFILE_USER_FOR_PUBLIC,
     GET_ANNONCELOCATION_BY_USER_PUBLIC,
+    GET_ANNONCELOCATION_BY_USER_PRIVATE,
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
     SUBSCRIBE_USER_FOR_ANNONCELOCATION_ADD,
     SUBSCRIBE_USER_FOR_ANNONCELOCATION_REMOVE,
+    GET_PROFILE_USER_FOR_PRIVATE,
+    ACTIVE_CO_ANNONCELOCATION,
+    UNACTIVE_CO_ANNONCELOCATION,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -80,6 +84,32 @@ export const loadProfileusersforpublic = (props) => dispatch => {
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadProfileusersforprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilprivate', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PRIVATE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+
+export const loadannoncebyuserprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let url = route('api.profilprivate_annoncelocations',[itemuser,itemannoncetype]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_ANNONCELOCATION_BY_USER_PRIVATE,
                 payload: response.data
             })
         ).catch(error => console.error(error));
@@ -181,6 +211,64 @@ export const unactiveItem = props => dispatch => {
         }
     });
 
+};
+
+export const activeaslItem = props => dispatch => {
+
+    const url = route('annonces_locations_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_CO_ANNONCELOCATION,
+                payload: props.id
+            });
+
+            $.notify({
+                    message: "Cette annonce est visible aux utilisateurs",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const unactiveprivatealsItem = props => dispatch => {
+
+    const url = route('annonces_locations_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: UNACTIVE_CO_ANNONCELOCATION,
+                payload: props.id
+            });
+
+            $.notify({
+                    message: "Cette annonce a été masquée aux utilisateurs",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+        }
+    ).catch(error => console.error(error));
 };
 
 export const deleteItem = props => dispatch => {

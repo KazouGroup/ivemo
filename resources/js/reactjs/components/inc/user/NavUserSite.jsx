@@ -300,6 +300,9 @@ class NavUserSite extends PureComponent {
                                                         <i className="now-ui-icons shopping_bag-16"/>Reservations
                                                     </a>
                                                   */}
+                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/locations/`} className="dropdown-item">
+                                                    <i className="now-ui-icons business_bank"/>Locations
+                                                </NavLink>
 
                                                 <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
                                                     <i className="now-ui-icons business_briefcase-24"/>Emplois & Services
@@ -314,9 +317,6 @@ class NavUserSite extends PureComponent {
                                         </a>
                                         */}
 
-                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
-                                                    <i className="now-ui-icons ui-1_email-85"/>Messages
-                                                </NavLink>
                                             </div>
                                         </li>
                                     </>

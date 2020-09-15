@@ -139,11 +139,11 @@ class AnnoncelocationController extends Controller
         return response()->json($data, 200);
     }
 
-    public function apiannonceslocationsbyuser(user $user)
+    public function apiannonceslocationsbyuser(user $user,annoncetype $annoncetype)
     {
         if (auth()->user()->id === $user->id){
 
-            $data = AnnoncelocationService::apiannonceslocationsbyuser($user);
+            $data = AnnoncelocationService::apiannonceslocationsbyuser($user,$annoncetype);
 
             return response()->json($data, 200);
 

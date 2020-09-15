@@ -29,6 +29,10 @@ export default produce((draft, action = {}) => {
                 draft.annoncelocations = action.payload;
                 return;
 
+            case 'GET_ANNONCELOCATION_BY_USER_PRIVATE':
+                draft.annoncelocations = action.payload;
+                return;
+
             case 'GET_ANNONCELOCATION_BY_USER_PUBLIC':
                 draft.annoncelocations = action.payload;
                 return;
@@ -46,6 +50,16 @@ export default produce((draft, action = {}) => {
             case 'UNACTIVE_ANNONCELOCATION':
                 let dataunactive = draft.annoncelocations.findIndex(i => i.id === action.payload);
                 if (dataunactive !== -1) draft.annoncelocations.splice(dataunactive, 1);
+                return draft;
+
+            case 'ACTIVE_CO_ANNONCELOCATION':
+                let datacounactive = draft.annoncelocations.findIndex(i => i.id === action.payload);
+                if (datacounactive !== -1) draft.annoncelocations[datacounactive].status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_CO_ANNONCELOCATION':
+                let datacoactive = draft.annoncelocations.findIndex(i => i.id === action.payload);
+                if (datacoactive !== -1) draft.annoncelocations[datacoactive].status = !action.payload;
                 return draft;
 
             case 'DELETE_ANNONCELOCATION':

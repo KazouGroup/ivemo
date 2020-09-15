@@ -148,20 +148,17 @@ class AnnoncelocationService
         return $annoncesbycities;
     }
 
-    public static function apiannonceslocationsbyuser($user)
+    public static function apiannonceslocationsbyuser($user,$annoncetype)
     {
-        $annonceslocations = HelpersService::helpersannonceteamcount($user)
-            ->with(['annoncelocations' => function ($q) use ($user){
-                $q->with('user','categoryannoncelocation','city','annoncetype','periodeannonce','uploadimages')
-                    ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->orderBy('created_at','DESC')
-                    ->distinct()->get()->toArray()
-                ;},
-            ])->first();
+        $personnalreservations = PrivateAnnoncelocationResource::collection($user->annoncelocations()
+            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('user_id',[$user->id])
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
+            ->distinct()->get());
 
-        return $annonceslocations;
+        return $personnalreservations;
     }
 
     public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$user,$annoncelocation)

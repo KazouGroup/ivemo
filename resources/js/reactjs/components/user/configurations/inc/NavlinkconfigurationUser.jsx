@@ -30,14 +30,24 @@ class NavlinkconfigurationUser extends Component {
                                                 <tbody>
                                                 {$userIvemo.status_profile && (
 
-                                                    <tr>
-                                                        <td>
-                                                            <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
-                                                                <b>Emplois & Services</b>
-                                                            </NavLink>
-                                                        </td>
-                                                        <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
-                                                    </tr>
+                                                    <>
+                                                        <tr>
+                                                            <td>
+                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/locations/`}>
+                                                                    <b>Locations</b>
+                                                                </NavLink>
+                                                            </td>
+                                                            <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
+                                                                    <b>Emplois & Services</b>
+                                                                </NavLink>
+                                                            </td>
+                                                            <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                        </tr>
+                                                    </>
 
                                                 )}
 

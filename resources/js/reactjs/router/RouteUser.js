@@ -17,8 +17,6 @@ import Annoncebycategoryannoncereservationcity
     from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcity";
 import PersonalannoncereservationsUser from "../components/user/profile/PersonalannoncereservationsUser";
 import Profileannoncesreservationsbooked from "../components/user/profile/Profileannoncesreservationsbooked";
-import Annoncebycategoryannoncereservationcityshow
-    from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import BlogannoncereservationShow from "../components/user/blog/blogannoncereservation/BlogannoncereservationShow";
 import ProfileAccountPublicUser from "../components/user/profile/ProfileAccountPublicUser";
 import BlogannoncereservationBycategoryreservation
@@ -155,6 +153,8 @@ import CityIndexSite from "../components/user/pages/CityIndexSite";
 import ActivitycityShowUserSite from "../components/user/pages/activitycity/ActivitycityShowUserSite";
 import ContactserviceAnnoncelocationShow
     from "../components/user/profile/mail/contactuserslocation/ContactserviceAnnoncelocationShow";
+import Annoncebycategoryannoncereservationcityshow
+    from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 
 
 const RouteUser = props => (
@@ -285,7 +285,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/teams/create/" component={TeamsUserCreate}/>
           <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
-          <Route exact path="/profile/:user/personal_settings/annonces_locations/" component={PrivateUserAnnonceLocations}/>
+          <Route exact path="/profile/:user/personal_settings/als/:annoncetype/" component={PrivateUserAnnonceLocations}/>
           <Route exact path="/profile/:user/personal_settings/annonces_ventes/" component={PrivateUserAnnonceVentes}/>
           <Route exact path="/profile/:user/personal_settings/annonces_ventes/:categoryannoncevente/" component={withRouter(PrivateUserAnnonceVentesByCategory)}/>
 

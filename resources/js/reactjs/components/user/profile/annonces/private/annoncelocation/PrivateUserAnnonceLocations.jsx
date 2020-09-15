@@ -1,28 +1,33 @@
 import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import { Button, UncontrolledTooltip } from "reactstrap";
 import NavUserSite from "../../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../../inc/user/FooterBigUserSite";
 import PrivateUserAnnonceslocationList from "../../../../annonces/annonceloaction/inc/PrivateUserAnnonceslocationList";
-import Swal from "sweetalert2";
 import NavlinkconfigurationUser from "../../../../configurations/inc/NavlinkconfigurationUser";
 import LinkValicationEmail from "../../../../../inc/user/LinkValicationEmail";
 import Navannoncelocationsbyuser from "../../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
 import HelmetSite from "../../../../../inc/user/HelmetSite";
 import AnnoncesListSkeleton from "../../../../../inc/user/annonce/AnnoncesListSkeleton";
+import Navlinknewannoncelocation from "../../../../annonces/annonceloaction/treatment/Navlinknewannoncelocation";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    deleteItem,
+    unactiveprivatealsItem,
+    activeaslItem,
+    loadannoncebyuserprivate,
+    loadProfileusersforprivate,
+} from "../../../../../../redux/actions/annoncelocation/annoncelocationActions";
 
 
 class PrivateUserAnnonceLocations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userannoncelocations: { annoncelocations: [] },
             visiable: 10,
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
-        this.statusItem = this.statusItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
     }
 
@@ -32,133 +37,9 @@ class PrivateUserAnnonceLocations extends Component {
         })
     }
 
-    statusItem(item){
-        Swal.fire({
-            title: 'Changer le status de l\'annonce?',
-            text: "êtes vous sure de vouloir confirmer cette action?",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                //Envoyer la requet au server
-                let url = route('annonces_locations_status.site',item.id);
-                dyaxios.get(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    if(item.status){
-                        $.notify({
-                                message: "Annonce masquée aux utilisateurs",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }else {
-                        $.notify({
-                                message: "Annonce activé avec succès",
-                            },
-                            {
-                                allow_dismiss: false,
-                                type: 'info',
-                                placement: {
-                                    from: 'bottom',
-                                    align: 'center'
-                                },
-                                animate: {
-                                    enter: "animate__animated animate__fadeInUp",
-                                    exit: "animate__animated animate__fadeOutDown"
-                                },
-                            });
-                    }
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooops! Something wrong. Try later", {
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmation?',
-            text: "êtes-vous sûr de vouloir exécuter cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, Confirmer',
-            cancelButtonText: 'Non, Annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('annonces_locations_delete.site', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                        // title: 'Update',
-                        message: 'Annonce suprimée avec succès'
-
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.loadItems();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooops! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
     loadItems() {
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.annonceslocationsbyuser_site', [itemuser])).then(response => this.setState({ userannoncelocations: response.data, }));
+        this.props.loadannoncebyuserprivate(this.props);
+        this.props.loadProfileusersforprivate(this.props);
     }
 
 
@@ -168,12 +49,13 @@ class PrivateUserAnnonceLocations extends Component {
     }
 
     render() {
-        const { userannoncelocations, visiable } = this.state;
-        const mapAnnoncelocations = userannoncelocations.annoncelocations.length >= 0 ? (
-            userannoncelocations.annoncelocations.slice(0, visiable).map(item => {
+        const { annoncelocations,userPrivate } = this.props;
+        const {  visiable } = this.state;
+        const mapAnnoncelocations = annoncelocations.length >= 0 ? (
+                annoncelocations.slice(0, visiable).map(item => {
                 return (
 
-                    <PrivateUserAnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} statusItem={this.statusItem} />
+                    <PrivateUserAnnonceslocationList key={item.id} {...item} deleteItem={this.deleteItem} activeaslItem={this.props.activeaslItem} unactiveprivatealsItem={this.props.unactiveprivatealsItem} />
                 )
             })
         ) : (
@@ -194,10 +76,11 @@ class PrivateUserAnnonceLocations extends Component {
                                 <div className="row">
                                     <div className="col-lg-4 col-md-12 mx-auto">
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Ajouter une nouvelle annonce sur la location</b>
-                                            </NavLink>
+                                            <Navlinknewannoncelocation {...this.props} />
                                         </div>
+
+                                        <NavlinkconfigurationUser {...this.props} {...userPrivate} />
+
 
                                         <div className="card">
                                             <div className="card-body">
@@ -213,8 +96,6 @@ class PrivateUserAnnonceLocations extends Component {
                                             </div>
                                         </div>
 
-                                        <NavlinkconfigurationUser {...userannoncelocations} />
-
                                     </div>
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
@@ -228,7 +109,7 @@ class PrivateUserAnnonceLocations extends Component {
 
                                         {mapAnnoncelocations}
 
-                                        {visiable < userannoncelocations.annoncelocations.length && (
+                                        {visiable < annoncelocations.length && (
                                             <div className="row">
                                                 <div className="col-md-4 ml-auto mr-auto text-center">
                                                     <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -252,4 +133,23 @@ class PrivateUserAnnonceLocations extends Component {
     }
 }
 
-export default PrivateUserAnnonceLocations;
+PrivateUserAnnonceLocations.propTypes = {
+    loadannoncebyuserprivate: PropTypes.func.isRequired,
+    loadProfileusersforprivate: PropTypes.func.isRequired,
+};
+
+const mapStoreToProps = store => ({
+    annoncelocations: store.annoncelocations.annoncelocations,
+    userPrivate: store.profile.profiluser,
+
+});
+
+export default connect(mapStoreToProps,
+    {
+        loadannoncebyuserprivate,
+        loadProfileusersforprivate,
+        unactiveprivatealsItem,
+        activeaslItem,
+        deleteItem,
+    }
+)(PrivateUserAnnonceLocations);
