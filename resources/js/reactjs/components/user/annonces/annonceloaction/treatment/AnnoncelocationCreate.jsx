@@ -467,7 +467,7 @@ class AnnoncelocationCreate extends Component {
                                                                                             <FieldInput name="surface" type='number' placeholder="Surface" value={this.state.surface}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-4 ml-auto mr-auto">
@@ -475,10 +475,13 @@ class AnnoncelocationCreate extends Component {
                                                                                             Pièces (optionnel)
                                                                                         </label>
                                                                                         <div className="form-group">
-                                                                                            <FieldInput name="pieces" type='number' placeholder="Pièces" value={this.state.pieces}
+                                                                                            <FieldInput name="pieces" type='number'
+                                                                                                        placeholder="Pièces"
+                                                                                                        maxLength="2"
+                                                                                                        value={this.state.pieces}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
@@ -486,10 +489,13 @@ class AnnoncelocationCreate extends Component {
                                                                                         <label htmlFor="Chambres">Chambres
                                                                                             (optionnel)</label>
                                                                                         <div className="form-group">
-                                                                                            <FieldInput name="rooms" type='number' placeholder="Chambres" value={this.state.rooms}
+                                                                                            <FieldInput name="rooms" type='number'
+                                                                                                        placeholder="Chambres"
+                                                                                                        value={this.state.rooms}
+                                                                                                        maxLength="2"
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne sont

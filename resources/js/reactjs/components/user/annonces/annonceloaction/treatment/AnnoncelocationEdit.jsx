@@ -362,6 +362,15 @@ class AnnoncelocationEdit extends Component {
         });
     }
 
+
+    statusuploadimagesItem(item) {
+        //Envoyer la requet au server
+        let url = route('statusuploadimage_site', [item.id]);
+        dyaxios.post(url).then(() => {
+            this.loadItems();
+        }).catch(error => console.error(error))
+    }
+
     activeItem(id) {
         //Envoyer la requet au server
         let url = route('annonces_locations_status.site', [id]);
@@ -397,14 +406,6 @@ class AnnoncelocationEdit extends Component {
             });
         })
 
-    }
-
-    statusuploadimagesItem(item) {
-        //Envoyer la requet au server
-        let url = route('statusuploadimage_site', [item.id]);
-        dyaxios.post(url).then(() => {
-            this.loadItems();
-        }).catch(error => console.error(error))
     }
 
     unactiveItem(id) {
@@ -566,22 +567,22 @@ class AnnoncelocationEdit extends Component {
                                                         <NavLink to={`/profile/${this.state.user.slug}/statistics/als/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
                                                         </NavLink>
-                                                        {!this.state.status ?
+                                                        {this.state.status ?
                                                             <>
                                                                 <Button
                                                                     onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-primary btn-icon btn-sm"
+                                                                    className="btn btn-success btn-icon btn-sm"
                                                                     title="Annonce activé">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                    <i className="now-ui-icons ui-1_check"/>
                                                                 </Button>
                                                             </>
                                                             :
                                                             <>
                                                                 <Button
                                                                     onClick={() => this.activeItem(this.state.id)}
-                                                                    className="btn btn-success btn-icon btn-sm"
+                                                                    className="btn btn-primary btn-icon btn-sm"
                                                                     title="Annonce déactivé">
-                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </Button>
                                                             </>
 
@@ -1050,8 +1051,7 @@ class AnnoncelocationEdit extends Component {
                                                                                                         value={this.state.surface}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}
-                                                                                                        required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
@@ -1062,12 +1062,12 @@ class AnnoncelocationEdit extends Component {
                                                                                         <div className="form-group">
                                                                                             <FieldInput name="pieces"
                                                                                                         type='number'
+                                                                                                        maxLength="2"
                                                                                                         placeholder="Pièces"
                                                                                                         value={this.state.pieces}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}
-                                                                                                        required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div
@@ -1077,12 +1077,12 @@ class AnnoncelocationEdit extends Component {
                                                                                         <div className="form-group">
                                                                                             <FieldInput name="rooms"
                                                                                                         type='number'
+                                                                                                        maxLength="2"
                                                                                                         placeholder="Chambres"
                                                                                                         value={this.state.rooms}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}
-                                                                                                        required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <small>*optionnel: les champs ne
