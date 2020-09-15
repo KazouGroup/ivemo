@@ -1,6 +1,7 @@
 import {
     GET_CATEGORYANNONCELOCATIONS,
     GET_CITYANNONCELOCATIONS,
+    GET_CATEGORYANNONCELOCATIONS_BY_USER,
     GET_ANNONCELOCATION_INTERESSE_BY_CATEGORY,
     GET_ANNONCELOCATION_INTERESSE_BY_USER,
     FAVORITE_ANNONCELOCATION_ADD,
@@ -22,6 +23,16 @@ export const loadCategoryannonces = () => dispatch => {
     dyaxios.get(route('api.categoryannoncelocation_site'))
         .then(response => dispatch({
                 type: GET_CATEGORYANNONCELOCATIONS,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadCategoryannoncesbyuser = () => dispatch => {
+
+    dyaxios.get(route('api.categoryannoncelocations_by_user_site'))
+        .then(response => dispatch({
+                type: GET_CATEGORYANNONCELOCATIONS_BY_USER,
                 payload: response.data
             })
         ).catch(error => console.error(error));

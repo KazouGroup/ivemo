@@ -13,6 +13,10 @@ export default produce((draft, action = {}) => {
                 draft.catgoryannoncelocations = action.payload;
                 return;
 
+            case 'GET_CATEGORYANNONCELOCATIONS_BY_USER':
+                draft.catgoryannoncelocations = action.payload;
+                return;
+
             case 'GET_CITYANNONCELOCATIONS':
                 draft.cityannoncelocations = action.payload;
                 return;

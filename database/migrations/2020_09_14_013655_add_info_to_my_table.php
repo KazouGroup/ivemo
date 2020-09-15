@@ -19,6 +19,11 @@ class AddInfoToMyTable extends Migration
             $table->boolean('terrace')->default(false)->after('status');
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
+            $table->string('phone_seller')->after('link_video')->nullable();
+            $table->integer('terrace_number')->after('link_video')->default("1");
+            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->string('contact_seller')->after('link_video')->nullable();
+
         });
 
         Schema::table('annoncereservations', function (Blueprint $table) {
@@ -26,6 +31,11 @@ class AddInfoToMyTable extends Migration
             $table->boolean('terrace')->default(false)->after('status');
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
+            $table->string('phone_seller')->after('link_video')->nullable();
+            $table->integer('terrace_number')->after('link_video')->default("1");
+            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->string('contact_seller')->after('link_video')->nullable();
+
         });
 
         Schema::table('annonceventes', function (Blueprint $table) {
@@ -33,6 +43,11 @@ class AddInfoToMyTable extends Migration
             $table->boolean('terrace')->default(false)->after('status');
             $table->boolean('balcony')->default(false)->after('status');
             $table->boolean('elevator')->default(false)->after('status');
+            $table->string('phone_seller')->after('link_video')->nullable();
+            $table->integer('terrace_number')->after('link_video')->default("1");
+            $table->integer('balcony_number')->after('link_video')->default("1");
+            $table->string('contact_seller')->after('link_video')->nullable();
+
         });
     }
 

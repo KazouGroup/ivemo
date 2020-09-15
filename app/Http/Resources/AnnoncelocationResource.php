@@ -41,8 +41,12 @@ class AnnoncelocationResource extends JsonResource
             'terrace' => $this->terrace,
             'balcony' => $this->balcony,
             'elevator' => $this->elevator,
+            'terrace_number' => $this->terrace_number,
+            'balcony_number' => $this->balcony_number,
             'status_comments' => $this->status_comments,
             'status_admin' => $this->status_admin,
+            'phone_seller' => $this->phone_seller,
+            'contact_seller' => $this->contact_seller,
             'favoriteted' => $this->favoriteted(),
             'likeked' => $this->likeked(),
             'countlikes' => $this->likes()

@@ -53,6 +53,10 @@ class AnnonceventeEdit extends Component {
             furniture: '',
             balcony: '',
             elevator: '',
+            terrace_number: '',
+            balcony_number: '',
+            phone_seller: '',
+            contact_seller: '',
             uploadimages_count: '',
             categoryannoncevente_id: '',
             categoryannoncevente: [],
@@ -247,6 +251,10 @@ class AnnonceventeEdit extends Component {
             terrace: this.state.terrace,
             balcony: this.state.balcony,
             elevator: this.state.elevator,
+            terrace_number: this.state.terrace_number,
+            balcony_number: this.state.balcony_number,
+            phone_seller: this.state.phone_seller,
+            contact_seller: this.state.contact_seller,
             categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -428,10 +436,14 @@ class AnnonceventeEdit extends Component {
                 rooms: response.data.rooms,
                 description: response.data.description,
                 city_id: response.data.city_id,
+                terrace_number: response.data.terrace_number,
+                balcony_number: response.data.balcony_number,
                 furniture: response.data.furniture,
                 terrace: response.data.terrace,
                 balcony: response.data.balcony,
                 elevator: response.data.elevator,
+                phone_seller: response.data.phone_seller,
+                contact_seller: response.data.contact_seller,
                 city: response.data.city,
                 user_id: response.data.user_id,
                 user: response.data.user,
@@ -1006,6 +1018,47 @@ class AnnonceventeEdit extends Component {
                                                                                     </div>
                                                                                 </div>
 
+                                                                                <br/>
+                                                                                <div className="row">
+
+                                                                                    {this.state.terrace && (
+                                                                                        <div className="col-md-6 mx-auto">
+                                                                                            <label className="labels">
+                                                                                                Nombre de terrasse
+                                                                                                <span className="text-danger">*</span>
+                                                                                            </label>
+                                                                                            <div className="form-group">
+                                                                                                <FieldInput name="terrace_number"
+                                                                                                            type='number'
+                                                                                                            placeholder="Nombre de terrasse"
+                                                                                                            value={this.state.terrace_number || ''}
+                                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                                            renderErrorFor={this.renderErrorFor}/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    )}
+
+                                                                                    {this.state.balcony && (
+                                                                                        <div className="col-md-6 mx-auto">
+                                                                                            <label className="labels">
+                                                                                                Nombre de balcon
+                                                                                                <span className="text-danger">*</span>
+                                                                                            </label>
+                                                                                            <div className="form-group">
+                                                                                                <FieldInput name="balcony_number"
+                                                                                                            type='number'
+                                                                                                            placeholder="Nombre de balcon"
+                                                                                                            value={this.state.balcony_number || ''}
+                                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                                            renderErrorFor={this.renderErrorFor}/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    )}
+
+                                                                                </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1013,6 +1066,61 @@ class AnnonceventeEdit extends Component {
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    {$auth.can('dashboard') && (
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true"
+                                                             className="card-collapse">
+                                                            <div className="card card-plain">
+                                                                <div className="card-header" role="tab" id="headingAdmin">
+                                                                    <a data-toggle="collapse" data-parent="#accordion"
+                                                                       href="#collapseAdmin" aria-expanded="true"
+                                                                       aria-controls="collapseOne">
+                                                                        <b>Information en plus (Pour les moderateurs à ne pas ramplire si le bien vous appartient)</b>
+                                                                    </a>
+                                                                </div>
+                                                                <div id="collapseAdmin" className="collapse show" role="tabpanel"
+                                                                     aria-labelledby="headingAdmin">
+                                                                    <div className="card-body">
+                                                                        <div className="row">
+                                                                            <div className="col-md-12">
+                                                                                <div id="accordion" role="tablist"
+                                                                                     aria-multiselectable="true"
+                                                                                     className="card-collapse">
+
+                                                                                    <div className="row">
+                                                                                        <div
+                                                                                            className="col-md-6 ml-auto mr-auto">
+                                                                                            <label className="labels">
+                                                                                                Téléphone du vendeur
+                                                                                                <span className="text-danger">*</span>
+                                                                                            </label>
+                                                                                            <div className="form-group">
+                                                                                                <FieldInput name="phone_seller" type='text' placeholder="Téléphone du vendeur" value={this.state.phone_seller}
+                                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                                            renderErrorFor={this.renderErrorFor}/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div className="col-md-6 ml-auto mr-auto">
+                                                                                            <label htmlFor="pieces">
+                                                                                                Email du vendeur ou lien contact
+                                                                                            </label>
+                                                                                            <div className="form-group">
+                                                                                                <FieldInput name="contact_seller" type='text' placeholder="Email du vendeur ou lien" value={this.state.contact_seller}
+                                                                                                            handleFieldChange={this.handleFieldChange}
+                                                                                                            hasErrorFor={this.hasErrorFor}
+                                                                                                            renderErrorFor={this.renderErrorFor}/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
 
                                                     <div id="accordion" role="tablist" aria-multiselectable="true"
                                                          className="card-collapse">

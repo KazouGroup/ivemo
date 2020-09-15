@@ -365,6 +365,24 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
+                                                <div className="text-center ml-auto">
+                                                    {annoncelocation.slug ?
+                                                        <>
+                                                            <h6 className="text-dark"> {annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."} {annoncelocation.rooms && (<>{annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                            <h6 className="text-dark">
+                                                                {annoncelocation.furniture && ("meublé -")}
+                                                                {annoncelocation.terrace && (<> {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
+                                                                {annoncelocation.balcony && (<> - {annoncelocation.balcony_number} {annoncelocation.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
+                                                                {annoncelocation.elevator && ("- Ascenseur")}
+                                                            </h6>
+                                                        </>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
+                                                </div>
+
                                                 {annoncelocation.slug && (
                                                     <h5 className="card-title">
                                                         À propos de <b><span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> {annoncelocation.pieces} pièces à {annoncelocation.city.name} - {annoncelocation.district}</b>
@@ -372,9 +390,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 )}
 
                                                 {annoncelocation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncelocation)} /> : <Skeleton count={3}/>}
-                                                <hr/>
-                                                <h5 className="info-title"><b>Les avantages</b></h5>
-
 
                                             </div>
                                         </div>
@@ -497,8 +512,15 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             </Button>
 
                                                             {this.state.showPhonenumber ?
-                                                                <button type="button" className="btn btn-sm btn-outline-primary">
-                                                                    <i className="now-ui-icons tech_mobile"/><b>{annoncelocation.user.phone !== null ? annoncelocation.user.phone : <>absent</>}</b>
+                                                                <button type="button" className="btn btn-sm btn-outline-success">
+                                                                    <i className="now-ui-icons tech_mobile"/><b>
+                                                                    {annoncelocation.phone_seller !== null ?
+                                                                    <>{annoncelocation.phone_seller}</>
+                                                                    :
+                                                                    <>
+                                                                        {annoncelocation.user.phone !== null ? annoncelocation.user.phone : <>absent</>}
+                                                                    </>
+                                                                }</b>
                                                                 </button>
                                                                 :
                                                                 <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-icon btn-sm btn-primary">
@@ -704,9 +726,17 @@ class Annoncelocationbycategorycityshow extends Component {
                                                             </div>
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-sm btn-outline-primary">
+                                                                    <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-sm btn-outline-success">
                                                                         <i className="now-ui-icons tech_mobile"/>
-                                                                        <b>{this.state.showPhonenumber ? <>{annoncelocation.user.phone !== null ? annoncelocation.user.phone : <>absent</>}</>:<>Afficher le téléphone</>}</b>
+                                                                        <b>{this.state.showPhonenumber ? <>
+                                                                            {annoncelocation.phone_seller !== null ?
+                                                                                <>{annoncelocation.phone_seller}</>
+                                                                                :
+                                                                                <>
+                                                                                    {annoncelocation.user.phone !== null ? annoncelocation.user.phone : <>absent</>}
+                                                                                </>
+                                                                            }
+                                                                            </>:<>Afficher le téléphone</>}</b>
                                                                     </button>
                                                                 </div>
                                                             </div>
