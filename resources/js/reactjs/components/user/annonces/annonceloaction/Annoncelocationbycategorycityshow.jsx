@@ -288,7 +288,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 <div className="text-center ml-auto">
                                                     {annoncelocation.slug ?
-                                                        <h6 className="text-dark"> {annoncelocation.pieces} p . {annoncelocation.rooms && (<>{annoncelocation.rooms} ch</>)}. {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                        <h6 className="text-dark">{annoncelocation.pieces && (<>{annoncelocation.pieces} p .</>)} {annoncelocation.rooms && (<>{annoncelocation.rooms} ch .</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
 
                                                         :
                                                         <h6 className={`ml-auto mr-auto`}>
@@ -368,7 +368,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 <div className="text-center ml-auto">
                                                     {annoncelocation.slug ?
                                                         <>
-                                                            <h6 className="text-dark"> {annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."} {annoncelocation.rooms && (<>{annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                            <h6 className="text-dark">{annoncelocation.pieces && (<>{annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."}</>)} {annoncelocation.rooms && (<>{annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                             <h6 className="text-dark">
                                                                 {annoncelocation.furniture && ("meublé -")}
                                                                 {annoncelocation.terrace && (<> {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
@@ -419,22 +419,26 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <div className="social-line social-line-big-icons">
                                                 <div className="container">
                                                     <div className="row">
-                                                        <div className="col-md-6 mx-auto">
-                                                            <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
+                                    
                                                             {annoncelocation.price && (
+                                                                <div className="col-md-6 mx-auto">
+                                                                <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
 
-                                                                <h3 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
+                                                                    <h3 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
+                                                                </div>
                                                             )}
-                                                        </div>
-                                                        <div className="col-md-6 mx-auto">
-                                                            <h5 className="info-title"><b>Informations supplémentaires</b></h5>
+                                                      
                                                             {annoncelocation.award_price && (
+                                                                
+                                                                <div className="col-md-6 mx-auto">
+                                                                <h5 className="info-title"><b>Informations supplémentaires</b></h5>
                                                                 <p>
                                                                     <b>Caution:</b>
                                                                     <span className="title text-success"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</>:null} </b></span>
                                                                 </p>
+                                                                </div>
                                                             )}
-                                                        </div>
+                                              
                                                     </div>
                                                 </div>
                                             </div>

@@ -320,8 +320,7 @@ class AnnoncelocationCreate extends Component {
                                                                                                         value={this.state.award_price}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
-                                                                                                        renderErrorFor={this.renderErrorFor}
-                                                                                                        required="required"/>
+                                                                                                        renderErrorFor={this.renderErrorFor}/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="col-md-4">
