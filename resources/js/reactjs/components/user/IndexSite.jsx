@@ -40,8 +40,8 @@ class IndexSite extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Trouvez un Job ou participer à un événement</h3>
+                                    <div className="col-md-10 ml-auto mr-auto">
+                                        <h4 className="title">Le portail immobilier pour trouver des maisons à vendre et à louer. Recherchez l'appartement idéal au cameroun et aussi trouvez un Job ou participer à un événement</h4>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -54,16 +54,8 @@ class IndexSite extends Component {
                                             Forums
                                         </Link>
 
-
-                                        <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
-                                            Locations
-                                        </Link>
-
                                         {/*
                                         <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
-                                            Locations
-                                        </Link>
-                                          <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
                                             Locations
                                         </Link>
 
@@ -84,6 +76,42 @@ class IndexSite extends Component {
 
 
                         <div className="container">
+
+
+                            <div className="row mt-5">
+                                <div className="col-md-6">
+                                    <Link to={`/als/locations/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="icon icon-white">
+                                                    <i className="now-ui-icons business_bank"></i>
+                                                </div>
+                                                <div className="description">
+                                                    <h4 className="info-title">LOCATIONS</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <Link to={`/avs/ventes/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="icon icon-white">
+                                                    <i className="now-ui-icons location_map-big"></i>
+                                                </div>
+                                                <div className="description">
+                                                    <h4 className="info-title">VENTES / ACHATS</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                
+                                </div>
+                            </div>
 
                             <div className="row mt-5">
 
@@ -142,7 +170,6 @@ class IndexSite extends Component {
 
 
                             </div>
-
 
                             {/*
 

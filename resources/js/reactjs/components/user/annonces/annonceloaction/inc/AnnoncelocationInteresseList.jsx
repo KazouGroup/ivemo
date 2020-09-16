@@ -105,7 +105,7 @@ class AnnoncelocationInteresseList extends Component {
                                             </div>
                                             <div className="text-right ml-auto">
                                                 <div className="col-md-12 col-12">
-                                                    <h5 className="ivemoColorOrange"><b>{this.props.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b>{this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small></>}</b></h5>
+                                                    <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b>{this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small></>}</b></h5>
                                                 </div>
 
                                             </div>

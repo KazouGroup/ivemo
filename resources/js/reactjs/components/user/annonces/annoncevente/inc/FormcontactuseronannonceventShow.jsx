@@ -11,7 +11,6 @@ class FormcontactuseronannonceventeShow extends Component {
             email: '',
             full_name: '',
             phone: '',
-            subject: '',
             message: '',
             errors: [],
         };
@@ -50,7 +49,6 @@ class FormcontactuseronannonceventeShow extends Component {
             email: this.state.email,
             full_name: this.state.full_name,
             phone: this.state.phone,
-            subject: this.state.subject,
             message: this.state.message,
         };
         let itemannoncetype = this.props.match.params.annoncetype;
@@ -101,6 +99,8 @@ class FormcontactuseronannonceventeShow extends Component {
     }
 
     render() {
+        const { email, full_name, phone,subject, message } = this.state;
+        const enabled = email.length > 0 && full_name.length && phone.length && message.length > 0;
         return (
 
 
@@ -115,7 +115,7 @@ class FormcontactuseronannonceventeShow extends Component {
                                                             <i className="now-ui-icons users_circle-08"/></span>
                             </div>
 
-                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="Nom complete" value={this.state.full_name}
+                            <FieldInput name="full_name" type='text' minLength="4" maxLength="50" placeholder="* Nom complete" value={this.state.full_name}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor} required="required"/>
@@ -130,7 +130,7 @@ class FormcontactuseronannonceventeShow extends Component {
                                                             <i className="now-ui-icons ui-1_email-85"/></span>
                             </div>
 
-                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="Email" value={this.state.email}
+                            <FieldInput name="email" type='email' minLength="3" maxLength="50" placeholder="* Email" value={this.state.email}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor} required="required"/>
@@ -145,7 +145,7 @@ class FormcontactuseronannonceventeShow extends Component {
                             </div>
 
                             <FieldInput name="phone" type='number' minLength="3" maxLength="50"
-                                        placeholder="Votre numéro de Téléphone"
+                                        placeholder="* Votre numéro de Téléphone"
                                         value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
@@ -157,32 +157,19 @@ class FormcontactuseronannonceventeShow extends Component {
                     <div className="row">
 
                         <div className="input-group">
-                            <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                            </div>
-
-                            <FieldInput name="subject" type='text' minLength="3" maxLength="200" placeholder="Object" value={this.state.subject}
-                                        handleFieldChange={this.handleFieldChange}
-                                        hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
-                        </div>
-                    </div>
-                    <div className="row">
-
-                        <div className="input-group">
 
                             <FieldInput name="message" type='textarea' minLength="5" maxLength="5000"
-                                        placeholder="Bonjour, je suis vivement intéressé(e) par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
+                                        placeholder="* Bonjour, je suis vivement intéressé(e) par cette annonce. Merci de me recontacter pour plus d'informations. Bien cordialement"
                                         value={this.state.message}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
                                         renderErrorFor={this.renderErrorFor} rows="17" required="required"/>
                         </div>
                     </div>
+                    <small>les champs avec un astérisque * sont obligatoires</small>
                     <div className="submit text-center">
-                        <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter
+                        <button className="btn btn-primary btn-lg" type="submit" disabled={!enabled}>
+                            <i className="now-ui-icons ui-1_email-85"/> <b>Contacter</b>
                         </button>
                     </div>
                 </div>

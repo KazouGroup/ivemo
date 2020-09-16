@@ -30,8 +30,8 @@ class Categoriesannoncevente extends Component {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_ventes/ventes/${item.slug}/`}>
-                                Trouver un(e) <strong>{item.name}</strong> en vente
+                            <NavLink to={`/avs/ventes/${item.slug}/`}>
+                                 <strong>{item.name} en vente</strong>
                             </NavLink>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>

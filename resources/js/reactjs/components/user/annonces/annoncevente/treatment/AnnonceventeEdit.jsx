@@ -36,6 +36,12 @@ class AnnonceventeEdit extends Component {
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
 
+
+        this.handleStatusTerrace = this.handleStatusTerrace.bind(this);
+        this.handleStatusFurniture = this.handleStatusFurniture.bind(this);
+        this.handleStatusBalcony = this.handleStatusBalcony.bind(this);
+        this.handleStatusElevator = this.handleStatusElevator.bind(this);
+
         this.state = {
             id: '',
             status: '',
@@ -94,8 +100,12 @@ class AnnonceventeEdit extends Component {
     // Handle Change
     handleChangeBody(value) {
         this.setState({ description: value });
-        document.querySelector('.editor-control').classList.remove('is-invalid');
     }
+
+    handleStatusTerrace() {this.setState({terrace: !this.state.terrace});};
+    handleStatusFurniture() {this.setState({furniture: !this.state.furniture});};
+    handleStatusBalcony() {this.setState({balcony: !this.state.balcony});};
+    handleStatusElevator() {this.setState({elevator: !this.state.elevator});};
 
     handleFieldChange(event) {
         this.setState({
@@ -277,6 +287,7 @@ class AnnonceventeEdit extends Component {
                             exit: "animate__animated animate__fadeOutDown"
                         },
                     });
+                this.loadItems();
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors
@@ -537,22 +548,22 @@ class AnnonceventeEdit extends Component {
                                                         <NavLink to={`/profile/${this.state.user.slug}/statistics/avs/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
                                                         </NavLink>
-                                                        {!this.state.status ?
+                                                        {this.state.status ?
                                                             <>
                                                                 <Button
                                                                     onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-primary btn-icon btn-sm"
+                                                                    className="btn btn-success btn-icon btn-sm"
                                                                     title="Annonce activé">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                    <i className="now-ui-icons ui-1_check"/>
                                                                 </Button>
                                                             </>
                                                             :
                                                             <>
                                                                 <Button
                                                                     onClick={() => this.activeItem(this.state.id)}
-                                                                    className="btn btn-success btn-icon btn-sm"
+                                                                    className="btn btn-primary btn-icon btn-sm"
                                                                     title="Annonce déactivé">
-                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </Button>
                                                             </>
 
@@ -577,7 +588,7 @@ class AnnonceventeEdit extends Component {
                                                                href="#collapseAsavoir1"
                                                                aria-expanded="false"
                                                                aria-controls="collapseAsavoir1">
-                                                                <b>Bon a savoir sur la vente !</b>
+                                                                <b>Bon à savoir sur la vente !</b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                             </a>
                                                         </div>
@@ -1095,7 +1106,9 @@ class AnnonceventeEdit extends Component {
                                                                                                 <span className="text-danger">*</span>
                                                                                             </label>
                                                                                             <div className="form-group">
-                                                                                                <FieldInput name="phone_seller" type='text' placeholder="Téléphone du vendeur" value={this.state.phone_seller}
+                                                                                                <FieldInput name="phone_seller" type='text'
+                                                                                                            placeholder="Téléphone du vendeur"
+                                                                                                            value={this.state.phone_seller || ''}
                                                                                                             handleFieldChange={this.handleFieldChange}
                                                                                                             hasErrorFor={this.hasErrorFor}
                                                                                                             renderErrorFor={this.renderErrorFor}/>
@@ -1106,7 +1119,9 @@ class AnnonceventeEdit extends Component {
                                                                                                 Email du vendeur ou lien contact
                                                                                             </label>
                                                                                             <div className="form-group">
-                                                                                                <FieldInput name="contact_seller" type='text' placeholder="Email du vendeur ou lien" value={this.state.contact_seller}
+                                                                                                <FieldInput name="contact_seller" type='text'
+                                                                                                            placeholder="Email du vendeur ou lien"
+                                                                                                            value={this.state.contact_seller || ''}
                                                                                                             handleFieldChange={this.handleFieldChange}
                                                                                                             hasErrorFor={this.hasErrorFor}
                                                                                                             renderErrorFor={this.renderErrorFor}/>

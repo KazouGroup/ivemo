@@ -373,7 +373,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 {annoncelocation.furniture && ("meublé -")}
                                                                 {annoncelocation.terrace && (<> {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
                                                                 {annoncelocation.balcony && (<> - {annoncelocation.balcony_number} {annoncelocation.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
-                                                                {annoncelocation.elevator && ("- Ascenseur")}
+                                                                {annoncelocation.elevator && ("- ascenseur")}
                                                             </h6>
                                                         </>
                                                         :
@@ -385,7 +385,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                 {annoncelocation.slug && (
                                                     <h5 className="card-title">
-                                                        À propos de <b><span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> {annoncelocation.pieces} pièces à {annoncelocation.city.name} - {annoncelocation.district}</b>
+                                                        À propos de <b><span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label} </span> {annoncelocation.pieces && (<>{annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces" : "piece"}</>)} à {annoncelocation.city.name} - {annoncelocation.district}</b>
                                                     </h5>
                                                 )}
 
@@ -419,7 +419,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                             <div className="social-line social-line-big-icons">
                                                 <div className="container">
                                                     <div className="row">
-                                    
+
                                                             {annoncelocation.price && (
                                                                 <div className="col-md-6 mx-auto">
                                                                 <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
@@ -427,9 +427,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                     <h3 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
                                                                 </div>
                                                             )}
-                                                      
+
                                                             {annoncelocation.award_price && (
-                                                                
+
                                                                 <div className="col-md-6 mx-auto">
                                                                 <h5 className="info-title"><b>Informations supplémentaires</b></h5>
                                                                 <p>
@@ -438,7 +438,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 </p>
                                                                 </div>
                                                             )}
-                                              
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -512,7 +512,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 </>
                                                             }
                                                             <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
-                                                                <i className="fas fa-copy"></i>
+                                                                <i className="far fa-share-square"></i>
                                                             </Button>
 
                                                             {this.state.showPhonenumber ?

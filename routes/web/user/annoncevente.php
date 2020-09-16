@@ -14,19 +14,19 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annonceventesbyannoncetypebycity_site');
 
     Route::get(
-        'avscount/{annoncetype}/{city}',
+        'avcount/{annoncetype}/{city}',
         'AnnonceventeController@apiannonceventesbyannoncetypebycitycount'
     )->name('api.annonceventesbyannoncetypebycitycount_site');
-
-    Route::get(
-        'avscount/{annoncetype}/{categoryannoncevente}',
-        'AnnonceventeController@apiannonceventebycategoryannonceventecount'
-    )->name('api.annonceventebycategoryannonceventescount_site');
 
     Route::get(
         'avs/{annoncetype}/{categoryannoncevente}',
         'AnnonceventeController@apiannonceventebycategoryannoncevente'
     )->name('api.annonceventebycategoryannonceventes_site');
+
+    Route::get(
+        'avscount/{annoncetype}/{categoryannoncevente}',
+        'AnnonceventeController@apiannonceventebycategoryannonceventecount'
+    )->name('api.annonceventebycategoryannonceventescount_site');
 
     Route::get(
         'avs/{annoncetype}/{categoryannoncevente}/{city}',
@@ -49,12 +49,12 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.categoryannonceventes_by_user_site');
 
     Route::get(
-        'profile/{user}/personal_settings/annonces_ventes',
+        'profile/{user}/personal_settings/avs',
         'AnnonceventeController@apiannoncesventesbyuser'
     )->name('api.annoncesventesbyuser_site');
 
     Route::get(
-        'profile/{user}/personal_settings/annonces_ventes/{categoryannoncevente}',
+        'profile/{user}/personal_settings/avs/{categoryannoncevente}',
         'AnnonceventeController@apiannoncesventesbyusercategoryannoncevente'
     )->name('api.annoncesventesbyusercategoryannoncevente_site');
 

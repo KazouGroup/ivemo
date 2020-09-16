@@ -75,8 +75,6 @@ class AnnonceventeCreate extends Component {
     // Handle Change
     handleChangeBody(value) {
         this.setState({ description: value });
-        document.querySelector('.editor-control').classList.remove('is-invalid');
-
     }
 
     handleStatusTerrace() {this.setState({terrace: !this.state.terrace});};
@@ -244,7 +242,7 @@ class AnnonceventeCreate extends Component {
                                                                    href="#collapseAsavoir1"
                                                                    aria-expanded="false"
                                                                    aria-controls="collapseAsavoir1">
-                                                                    <b>Bon a savoir sur la vente !</b>
+                                                                    <b>Bon à savoir sur la vente !</b>
                                                                     <i className="now-ui-icons arrows-1_minimal-down"></i>
                                                                 </a>
                                                             </div>

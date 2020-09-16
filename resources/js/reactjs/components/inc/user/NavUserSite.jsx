@@ -201,14 +201,14 @@ class NavUserSite extends PureComponent {
                                 <li className="nav-item">
                                     <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="nav-link">
                                         <i className="now-ui-icons users_circle-08"/>
-                                        <b>Login</b>
+                                        <b>Connexion</b>
                                     </a>
                                 </li>
 
                                 <li className="nav-item">
                                     <Link to={`/register/`} className="nav-link btn btn-primary text-left">
                                         <i className="now-ui-icons tech_mobile"/>
-                                        <b>Signup</b>
+                                        <b>Inscription</b>
                                     </Link>
                                 </li>
                             </>

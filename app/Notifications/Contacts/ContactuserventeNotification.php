@@ -42,7 +42,7 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
      */
     public function via()
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**
@@ -52,13 +52,13 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->greeting('Salut '.$this->annoncevente->user->first_name)
-            ->subject($this->fromSubjectUser)
+            ->subject("Contact sur un bien en vente sur ".config('app.name'))
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,config('app.name'))
             ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en vente sur la platforme - '.config('app.name'))
             ->line('ID: '.$this->annoncevente->id.' | Titre de l\'annonce: '.$this->annoncevente->title.' | Prix: '.$this->annoncevente->price.' | Ville: '.$this->annoncevente->city->name.' | Categorie: '.$this->annoncevente->categoryannoncevente->name)
             ->line($this->fromMessageUser)
-            ->action('En savoir plus', url(route('personal_mails_annonceventes.site',[$this->annoncevente->user->slug])))
+            //->action('En savoir plus', url(route('personal_mails_annonceventes.site',[$this->annoncevente->user->slug])))
             ->line('Thank you for using our application!');
     }
 
@@ -68,7 +68,13 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
     public function toArray()
     {
         return [
-            //
+            'userToID' => $this->annoncevente->id,
+            'userToTitle' => $this->annoncevente->title,
+            'userToSlugCity' => $this->annoncevente->city->slug,
+            'userToUserSlug' =>  $this->annoncevente->user->slug,
+            'userToSlug' =>   $this->annoncevente->slug,
+            'userFromName' => $this->fromFullnameUser,
+            'userFromBodyUser' => $this->fromMessageUser,
         ];
     }
 }

@@ -27,10 +27,9 @@ class BaseRequest extends Request
         }elseif($group === 'sendcontactmessageuser') {
             $rules = [
                 'full_name' => ['required', 'string','min:3', 'max:200'],
-                'message' => 'required',
+                'message' => 'required|min:5|max:5000',
                 'phone' => ['nullable', 'numeric'],
-                'email' => ['required', 'string', 'email', 'max:255'],
-                'subject' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:200'],
             ];
         }elseif($group === 'contactusersfaqs') {
             $rules = [

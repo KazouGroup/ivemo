@@ -30,8 +30,8 @@ class Categoriesannoncereseventecity extends Component {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_ventes/ventes/${item.slug}/${this.props.slug}/`}>
-                                ventes <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{this.props.name}</b>
+                            <NavLink to={`/avs/ventes/${item.slug}/${this.props.slug}/`}>
+                                 <b style={{ textTransform: "lowercase" }}>achat {item.name} à {this.props.name}</b>
                             </NavLink>
                         </td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>

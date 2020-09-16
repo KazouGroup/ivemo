@@ -18,7 +18,7 @@ class BaseRequest extends Request
     {
         if ($group == 'store') {
             $rules = [
-                'title' => 'required|string|min:3|max:250',
+                'title' => 'required|string|min:3|max:200',
                 'district' => 'required|string|min:3|max:200',
                 'description' => 'required|max:50000',
                 'price' => 'required|numeric|digits_between:2,13',
@@ -35,7 +35,7 @@ class BaseRequest extends Request
         }
         else { // 'edit'
             $rules = [
-                'title' => 'required|string|min:3|max:250',
+                'title' => 'required|string|min:3|max:200',
                 'district' => 'required|string|min:3|max:200',
                 'description' => 'required|max:50000',
                 'price' => 'required|numeric|digits_between:2,13',

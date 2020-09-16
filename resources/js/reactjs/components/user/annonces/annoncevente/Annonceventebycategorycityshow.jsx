@@ -367,7 +367,8 @@ class Annonceventebycategorycityshow extends Component {
 
                                                 <div className="text-center ml-auto">
                                                     {annoncevente.slug ?
-                                                        <h6 className="text-dark"> {annoncevente.pieces} p . {annoncevente.rooms && (<>{annoncevente.rooms} ch</>)}. {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                        <h6 className="text-dark">{annoncevente.pieces && (<>{annoncevente.pieces} p .</>)} {annoncevente.rooms && (<>{annoncevente.rooms} ch .</>)} {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+
                                                         :
                                                         <h6 className={`ml-auto mr-auto`}>
                                                             <Skeleton width={150} />
@@ -436,9 +437,29 @@ class Annonceventebycategorycityshow extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <h6 className="card-title">
-                                                    Description
-                                                </h6>
+
+                                                <div className="text-center ml-auto">
+                                                    {annoncevente.slug ?
+                                                        <>
+                                                            <h6 className="text-dark">{annoncevente.pieces && (<>{annoncevente.pieces} {annoncevente.pieces >= 2 ? "pieces " : "piece "}</>)}  {annoncevente.rooms && (<>{annoncevente.rooms} {annoncevente.rooms >= 2 ? "chambres " : "chambre "}</>)}  {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                            <h6 className="text-dark">
+                                                                {annoncevente.furniture && ("meublé ")}
+                                                                {annoncevente.terrace && (<>   {annoncevente.terrace_number} {annoncevente.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
+                                                                {annoncevente.balcony && (<>   {annoncevente.balcony_number} {annoncevente.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
+                                                                {annoncevente.elevator && ("ascenseur")}
+                                                            </h6>
+                                                        </>
+                                                        :
+                                                        <h6 className={`ml-auto mr-auto`}>
+                                                            <Skeleton width={150} />
+                                                        </h6>
+                                                    }
+                                                </div>
+                                                {annoncevente.slug && (
+                                                    <h5 className="card-title">
+                                                        À propos de <b><span style={{ textTransform: "lowercase" }}>{annoncevente.categoryannoncevente.label} </span>{annoncevente.pieces && (<>{annoncevente.pieces} {annoncevente.pieces >= 2 ? "pieces" : "piece"}</>)} en vente à {annoncevente.city.name} - {annoncevente.district}</b>
+                                                    </h5>
+                                                )}
 
                                                 {annoncevente.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncevente)} />: <Skeleton count={3}/>}
 
@@ -452,7 +473,7 @@ class Annonceventebycategorycityshow extends Component {
                                                         <div className="col-md-6">
                                                             <h5 className="info-title"><b> {annoncevente.categoryannoncevente.label || "Ce bien"} est au prix de</b></h5>
                                                             {annoncevente.price && (
-                                                                <h3 className="ivemoColorOrange"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h3>
+                                                                <h2 className="ivemoColorOrange"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h2>
                                                             )}
                                                         </div>
                                                         <div className="col-md-6">
@@ -460,7 +481,7 @@ class Annonceventebycategorycityshow extends Component {
                                                             {annoncevente.award_price && (
                                                                 <p>
                                                                     <b>Ce bien revient a :</b>
-                                                                    <span className="title text-danger"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le m<sup>2</sup></b></small> : <>{$money_country}<small><b> - le m<sup>2</sup></b></small></>}</>:null} </b></span>
+                                                                    <span className="title"><b> {annoncevente.award_price ? <>{annoncevente.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} - le m<sup>2</sup></b></small> : <>{$money_country}<small><b> - le m<sup>2</sup></b></small></>}</>:null} </b></span>
                                                                 </p>
                                                             )}
 
@@ -541,12 +562,19 @@ class Annonceventebycategorycityshow extends Component {
                                                                 </>
                                                             }
                                                             <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
-                                                                <i className="fas fa-copy"></i>
+                                                                <i className="far fa-share-square"></i>
                                                             </Button>
 
                                                             {this.state.showPhonenumber ?
-                                                                <button type="button" className="btn btn-sm btn-outline-primary">
-                                                                    <i className="now-ui-icons tech_mobile"/><b>{annoncevente.user.phone !== null ? annoncevente.user.phone : <>absent</>}</b>
+                                                                <button type="button" className="btn btn-sm btn-outline-success">
+                                                                    <i className="now-ui-icons tech_mobile"/><b>
+                                                                    {annoncevente.phone_seller !== null ?
+                                                                    <>{annoncevente.phone_seller}</>
+                                                                    :
+                                                                    <>
+                                                                        {annoncevente.user.phone !== null ? annoncevente.user.phone : <>absent</>}
+                                                                    </>
+                                                                }</b>
                                                                 </button>
                                                                 :
                                                                 <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-icon btn-sm btn-primary">
@@ -644,7 +672,6 @@ class Annonceventebycategorycityshow extends Component {
                                                         </>
                                                     )}
                                                 </>
-
                                                 <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
                                                     <div className="card card-plain">
                                                         <div className="card-header" role="tab" id="headingOne">
@@ -669,6 +696,7 @@ class Annonceventebycategorycityshow extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -748,9 +776,17 @@ class Annonceventebycategorycityshow extends Component {
                                                             </div>
                                                             <div className="card-header text-center">
                                                                 <div className="card-title">
-                                                                    <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-sm btn-outline-primary">
+                                                                <button type="button" onClick={() => this.showPhonenumberItem()} className="btn btn-sm btn-outline-success">
                                                                         <i className="now-ui-icons tech_mobile"/>
-                                                                        <b>{this.state.showPhonenumber ? <>{annoncevente.user.phone !== null ? annoncevente.user.phone : <>absent</>}</>:<>Afficher le téléphone</>}</b>
+                                                                        <b>{this.state.showPhonenumber ? <>
+                                                                            {annoncevente.phone_seller !== null ?
+                                                                                <>{annoncevente.phone_seller}</>
+                                                                                :
+                                                                                <>
+                                                                                    {annoncevente.user.phone !== null ? annoncevente.user.phone : <>absent</>}
+                                                                                </>
+                                                                            }
+                                                                            </>:<>Afficher le téléphone</>}</b>
                                                                     </button>
                                                                 </div>
                                                             </div>

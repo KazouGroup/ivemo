@@ -70,16 +70,6 @@ class annoncevente extends Model
         return $this->belongsTo(annoncetype::class,'annoncetype_id');
     }
 
-    public function contactusersventes()
-    {
-        return $this->hasMany(contactusersvente::class, 'annoncevente_id');
-    }
-
-    public function signalannonceventes()
-    {
-        return $this->hasMany(signalannoncevente::class, 'annoncevente_id');
-    }
-
     public function visits()
     {
         return visits($this);
@@ -126,8 +116,10 @@ class annoncevente extends Model
 
     public function contactservices()
     {
-        return $this->morphMany(contactservice::class ,'contactserviceable');
+        return $this->morphMany(contactservice::class ,'contactserviceable')
+            ->orderByDesc('created_at');
     }
+
 
     public function uploadimages()
     {

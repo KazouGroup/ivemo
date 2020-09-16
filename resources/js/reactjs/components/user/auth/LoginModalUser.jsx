@@ -95,12 +95,15 @@ class LoginModalUser extends Component {
                     <div className="modal-content">
                         <div className="card card-login card-plain" data-background-color="">
                             <div className="modal-header justify-content-center">
+                                {/**
                                 <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                                     <i className="now-ui-icons ui-1_simple-remove"/>
                                 </button>
+                                 */}
+                           
                                 <div className="header header-primary text-center">
-                                    <b>Se connecter avec</b>
-                                    <div className="modal-footer text-center">
+                                    <b>Se connecter</b>
+                                    {/**    <div className="modal-footer text-center">
                                         <a href={route('social.oauth','facebook')} className="btn btn-facebook btn-block btn-round">
                                             <i className="fab fa-facebook"/> Facebook
                                         </a>
@@ -109,6 +112,8 @@ class LoginModalUser extends Component {
                                         </a>
                                     </div>
                                     <b>Ou</b>
+                                    */}
+                                 
                                 </div>
                             </div>
 

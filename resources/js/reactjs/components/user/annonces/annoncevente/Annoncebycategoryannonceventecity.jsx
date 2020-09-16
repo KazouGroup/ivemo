@@ -372,7 +372,7 @@ class Annoncebycategoryannonceventecity extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
-                                            <NavLink to={`/annonces_ventes/ventes/${itemCategoryannoncevente}/`} className="btn btn-neutral btn-sm">
+                                            <NavLink to={`/avs/${this.props.match.params.annoncetype}/${itemCategoryannoncevente}/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces </b>
                                             </NavLink>
                                         </div>
@@ -417,8 +417,8 @@ class Annoncebycategoryannonceventecity extends Component {
                                                                                         {cityannonceventes.map((item) => (
                                                                                             <tr key={item.id}>
                                                                                                 <td>
-                                                                                                    <NavLink to={`/annonces_ventes/ventes/${item.slug}/${annonceventebycity.slug}/`}>
-                                                                                                        achat <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{annonceventebycity.name}</b>
+                                                                                                    <NavLink to={`/avs/${this.props.match.params.annoncetype}/${item.slug}/${annonceventebycity.slug}/`}>
+                                                                                                         <b style={{ textTransform: "lowercase" }}>achat {item.name} à {annonceventebycity.name}</b>
                                                                                                     </NavLink>
                                                                                                 </td>
                                                                                                 <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
