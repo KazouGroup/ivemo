@@ -225,6 +225,7 @@ class Annonceventebycategorycityshow extends Component {
                 let updatedItems = this.state.annoncevente.filter(isNotId);
                 this.setState({ annoncevente: updatedItems });
 
+                let itemannoncetype = this.props.match.params.annoncetype;
                 const url = route('annonces_ventes_delete.site',[id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
@@ -247,7 +248,7 @@ class Annonceventebycategorycityshow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/`);
+                    this.props.history.push(`/av_data/${itemannoncetype}/new/`);
 
                 }).catch(() => {
                     //Failled message
@@ -389,10 +390,16 @@ class Annonceventebycategorycityshow extends Component {
                                                 {annoncevente.slug && (
                                                     <>
                                                         {$guest ?
-                                                            <Button data-toggle="modal" data-target="#loginModal"
-                                                                    className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
-                                                                <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
-                                                            </Button>
+                                                            <>
+                                                               <Button data-toggle="modal" data-target="#loginModal"
+                                                                        className="btn btn-facebook btn-sm btn-neutral" title="J'aime">
+                                                                    <i className="far fa-heart"></i> <b>J'aime</b>
+                                                                </Button>
+                                                                <Button data-toggle="modal" data-target="#loginModal"
+                                                                        className="btn btn-facebook btn-sm btn-neutral btn-round" title="Ajouter à vos favoris">
+                                                                    <i className="far fa-bookmark"></i> <b>Sauvegarder</b>
+                                                                </Button>
+                                                            </>
                                                             :
                                                             <>
                                                                 {annoncevente.likeked ?
