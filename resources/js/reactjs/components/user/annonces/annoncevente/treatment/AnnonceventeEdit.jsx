@@ -318,28 +318,29 @@ class AnnonceventeEdit extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('blogannoncecategorylocationdelete_site',id);
+                let itemannoncetype = this.props.match.params.annoncetype;
+                const url = route('annonces_ventes_delete.site',id);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
                     /** Alert notify bootstrapp **/
                     $.notify({
-                            // title: 'Update',
-                            message: 'Article de blogs suprimée avec success'
+                        // title: 'Update',
+                        message: 'Annonce supprimé avec succès'
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'primary',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
                         },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.goBack();
+                        animate: {
+                            enter: 'animate__animated animate__fadeInRight',
+                            exit: 'animate__animated animate__fadeOutRight'
+                        },
+                    });
+                /** End alert ***/
+                this.props.history.push(`/av_data/${itemannoncetype}/new/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {

@@ -45,7 +45,8 @@ class AnnonceventeCreate extends Component {
             elevator: '',
             terrace_number: '',
             balcony_number: '',
-            phone: '',
+            phone_seller: '',
+            contact_seller:'',
             categoryannoncevente_id: '',
             errors: [],
             cities: [],
@@ -122,7 +123,8 @@ class AnnonceventeCreate extends Component {
             elevator: this.state.elevator,
             balcony_number: this.state.balcony_number,
             terrace_number: this.state.terrace_number,
-            phone: this.state.phone,
+            phone_seller: this.state.phone_seller,
+            contact_seller: this.state.contact_seller,
             categoryannoncevente_id: this.state.categoryannoncevente_id,
         };
         let itemannoncetype = this.props.match.params.annoncetype;

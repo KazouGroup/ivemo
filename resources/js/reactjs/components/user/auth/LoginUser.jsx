@@ -154,7 +154,7 @@ class LoginUser extends Component {
                                         </div>
                                         <div className="pull-left">
                                             <h6>
-                                                <Link to={`/register/`} className="link footer-link">Nouveau client ?</Link>
+                                                <Link to={`/register/`} className="link footer-link">Nouveau sur {$name_site} ?</Link>
                                             </h6>
                                         </div>
                                         <div className="pull-right">

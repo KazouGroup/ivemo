@@ -17,14 +17,16 @@ class BaseRequest extends Request
     protected function getRules($group)
     {
         $rules = [
-            'title' => 'required|string|min:3|max:250',
+            'title' => 'required|string|min:3|max:200',
             'district' => 'required|string|min:3|max:200',
             'description' => 'required|max:50000',
             'price' => 'required|numeric|digits_between:2,13',
             'surface' => 'required|numeric|digits_between:2,6',
-            'rooms' => 'nullable|numeric|digits_between:1,3',
-            'pieces' => 'nullable|numeric|digits_between:1,3',
+            'rooms' => 'nullable|numeric|digits_between:1,2',
+            'pieces' => 'nullable|numeric|digits_between:1,2',
             'city_id' => 'required|numeric|digits_between:1,3',
+            'terrace_number' => 'nullable|numeric|digits_between:1,2',
+            'balcony_number' => 'nullable|numeric|digits_between:1,2',
             'categoryannoncevente_id' => 'required|numeric|digits_between:1,3',
         ];
 

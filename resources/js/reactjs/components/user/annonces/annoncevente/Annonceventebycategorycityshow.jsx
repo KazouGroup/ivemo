@@ -441,12 +441,12 @@ class Annonceventebycategorycityshow extends Component {
                                                 <div className="text-center ml-auto">
                                                     {annoncevente.slug ?
                                                         <>
-                                                            <h6 className="text-dark">{annoncevente.pieces && (<>{annoncevente.pieces} {annoncevente.pieces >= 2 ? "pieces " : "piece "}</>)}  {annoncevente.rooms && (<>{annoncevente.rooms} {annoncevente.rooms >= 2 ? "chambres " : "chambre "}</>)}  {annoncevente.surface && (<>{annoncevente.surface} m<sup>2</sup></>)}</h6>
+                                                            <h6 className="text-dark">{annoncevente.pieces && (<>{annoncevente.pieces} {annoncevente.pieces >= 2 ? "pieces " : "piece "}</>)}  {annoncevente.rooms && (<> - {annoncevente.rooms} {annoncevente.rooms >= 2 ? "chambres " : "chambre "}</>)}  {annoncevente.surface && (<> - {annoncevente.surface} m<sup>2</sup></>)}</h6>
                                                             <h6 className="text-dark">
-                                                                {annoncevente.furniture && ("meublé ")}
-                                                                {annoncevente.terrace && (<>   {annoncevente.terrace_number} {annoncevente.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
-                                                                {annoncevente.balcony && (<>   {annoncevente.balcony_number} {annoncevente.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
-                                                                {annoncevente.elevator && ("ascenseur")}
+                                                                {annoncevente.furniture && ("meublé -")}
+                                                                {annoncevente.terrace && (<> {annoncevente.terrace_number} {annoncevente.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
+                                                                {annoncevente.balcony && (<> - {annoncevente.balcony_number} {annoncevente.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
+                                                                {annoncevente.elevator && (" - ascenseur")}
                                                             </h6>
                                                         </>
                                                         :

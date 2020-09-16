@@ -122,8 +122,9 @@ class RegisterUser extends Component {
                             <div className="col-md-7 ml-auto mr-auto">
                                 <div className="card">
                                     <div className="card-body">
-                                        <h4 className="card-description text-center"><b>S'inscrire avec</b></h4>
-                                        <div className="social text-center">
+                                        <h4 className="card-description text-center"><b>S'inscrire</b></h4>
+                                        {/**
+                                          <div className="social text-center">
                                             <a href={route('social.oauth', 'facebook')} className="btn btn-facebook btn-round">
                                                 <i className="fab fa-facebook"/> Facebook
                                             </a>
@@ -132,6 +133,8 @@ class RegisterUser extends Component {
                                             </a>
                                             <h4 className="card-description">Ou</h4>
                                         </div>
+                                         */}
+                                       
                                         <form className="form" method="POST" onSubmit={this.saveItem}>
                                             <div className="row mb-4">
                                                 <div className="col-md-6 text-left">
@@ -269,11 +272,11 @@ class RegisterUser extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="card-footer text-center mb-4">
-                                                <input type="submit" value="S' Enregistrer" className="btn btn-primary btn-round btn-lg"/>
+                                            <div className="card-footer text-center mb-3">
+                                                <input type="submit" value="S' Enregistrer" className="btn btn-primary btn-lg"/>
                                             </div>
                                             <hr/>
-                                            <h5 className="card-description">Vous avez déjà un compte sur Ivemo? <Link to="/login" className="ivemoColorOrange">Connectez-vous</Link></h5>
+                                        <h6 className="card-description">Vous avez déjà un compte sur {$name_site}? <Link to="/login" className="ivemoColorOrange">Connectez-vous</Link></h6>
                                         </form>
                                     </div>
                                 </div>

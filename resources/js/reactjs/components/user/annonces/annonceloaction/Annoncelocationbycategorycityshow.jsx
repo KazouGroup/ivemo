@@ -368,12 +368,12 @@ class Annoncelocationbycategorycityshow extends Component {
                                                 <div className="text-center ml-auto">
                                                     {annoncelocation.slug ?
                                                         <>
-                                                            <h6 className="text-dark">{annoncelocation.pieces && (<>{annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."}</>)} {annoncelocation.rooms && (<>{annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
+                                                            <h6 className="text-dark">{annoncelocation.pieces && (<>{annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."}</>)} {annoncelocation.rooms && (<> - {annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                             <h6 className="text-dark">
                                                                 {annoncelocation.furniture && ("meublé -")}
                                                                 {annoncelocation.terrace && (<> {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
                                                                 {annoncelocation.balcony && (<> - {annoncelocation.balcony_number} {annoncelocation.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
-                                                                {annoncelocation.elevator && ("- ascenseur")}
+                                                                {annoncelocation.elevator && (" - ascenseur")}
                                                             </h6>
                                                         </>
                                                         :
