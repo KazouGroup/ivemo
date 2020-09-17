@@ -18,12 +18,6 @@ class Annoncebycategoryannoncelocation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            full_name: '',
-            message: '',
-            subject: '',
-            errors: [],
-            annonceItem: {user:[]},
             annoncelocations:{categoryannoncelocation:[],city:[],user:[]},
             annoncelocationbycategory: [],
             cityannoncelocations:{user:[]},
@@ -31,47 +25,6 @@ class Annoncebycategoryannoncelocation extends Component {
         this.deleteItem = this.deleteItem.bind(this);
         this.favoriteItem = this.favoriteItem.bind(this);
         this.statusItem = this.statusItem.bind(this);
-        this.contactUser = this.contactUser.bind(this);
-        this.sendmessageItem = this.sendmessageItem.bind(this);
-        this.handleCheckClick = this.handleCheckClick.bind(this);
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
-    }
-
-    handleFieldChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-        this.state.errors[event.target.name] = '';
-    }
-
-    handleCheckClick(event){
-        this.setState({
-            object: event.target.value
-        });
-
-    };
-    // Handle Errors
-    hasErrorFor(field) {
-        return !!this.state.errors[field];
-    }
-
-    renderErrorFor(field) {
-        if (this.hasErrorFor(field)) {
-            return (
-                <span className='invalid-feedback'>
-                    <strong>{this.state.errors[field][0]}</strong>
-                </span>
-            )
-        }
-    }
-
-    contactUser(item) {
-        $('#contactNew').modal('show');
-        this.setState({
-            annonceItem: item
-        });
     }
 
     favoriteItem(item) {
@@ -125,54 +78,6 @@ class Annoncebycategoryannoncelocation extends Component {
         })
     }
 
-    sendmessageItem(e) {
-        e.preventDefault();
-
-        let item = {
-            email: this.state.email,
-            full_name: this.state.full_name,
-            phone: this.state.phone,
-            subject: this.state.subject,
-            user_id: this.state.annonceItem.user.id,
-            annoncelocation_id: this.state.annonceItem.id,
-            message: this.state.message,
-        };
-        let url = route('contactuserslocactions.site');
-        dyaxios.post(url, item)
-            .then(() => {
-
-                //Masquer le modal après la création
-                $('#contactNew').modal('hide');
-
-                $.notify({
-                        message: `Votre message a bien été envoyé à cette utilisateur`
-                    },
-                    {
-                        allow_dismiss: false,
-                        type: 'info',
-                        placement: {
-                            from: 'top',
-                            align: 'center'
-                        },
-                        animate: {
-                            enter: "animate__animated animate__fadeInDown",
-                            exit: "animate__animated animate__fadeOutUp"
-                        },
-                    });
-
-                this.setState({
-                    email: "",
-                    full_name: "",
-                    phone: "",
-                    subject: "",
-                    message: "",
-                });
-            }).catch(error => {
-            this.setState({
-                errors: error.response.data.errors
-            });
-        })
-    }
 
     statusItem(item){
         Swal.fire({
@@ -311,7 +216,7 @@ class Annoncebycategoryannoncelocation extends Component {
         return (annoncelocations_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
-        const {annoncelocations,annoncelocationbycategory,cityannoncelocations,annonceItem} = this.state;
+        const {annoncelocations,annoncelocationbycategory,cityannoncelocations} = this.state;
         const mapAnnoncelocations = annoncelocations.length >= 0 ? (
             annoncelocations.map(item => {
                 return(
@@ -412,11 +317,6 @@ class Annoncebycategoryannoncelocation extends Component {
                                         </div>
                                     </div>
 
-                                    <FormModalContactannonceUser {...this.props} {...annonceItem}
-                                                                 renderErrorFor={this.renderErrorFor}
-                                                                 handleFieldChange={this.handleFieldChange}
-                                                                 hasErrorFor={this.hasErrorFor}
-                                                                 sendmessageItem={this.sendmessageItem}/>
 
                                 </div>
                             </div>

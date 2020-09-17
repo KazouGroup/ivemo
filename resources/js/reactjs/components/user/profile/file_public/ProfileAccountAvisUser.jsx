@@ -694,7 +694,7 @@ class ProfileAccountAvisUser extends PureComponent {
                                                                             </ReadMoreAndLess>
                                                                         </div>
                                                                         <small
-                                                                            className="text-muted mt-1">&middot; {moment(lk.user.created_at).format('ll')}</small>
+                                                                            className="text-muted mt-1">&middot; {moment(lk.created_at).format('ll')}</small>
                                                                         {!$guest && (
                                                                             <>
                                                                                 {$userIvemo.id === lk.user.id && (

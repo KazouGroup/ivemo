@@ -32,7 +32,7 @@ class SectionVentebyCity extends Component {
             annoncesbycities.map(item => {
                 return(
                     <tr key={item.id}>
-                        <td> <NavLink to={`/annonce_ventes/ventes/${item.slug}/`}><b style={{ textTransform: "capitalize" }}>{item.name}</b></NavLink></td>
+                        <td> <NavLink to={`/av/ventes/${item.slug}/`}><b style={{ textTransform: "capitalize" }}>{item.name}</b></NavLink></td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annonceventes_count)} {item.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
                     </tr>
                 )

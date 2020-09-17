@@ -2,7 +2,9 @@ import {
     GET_CATEGORYANNONCEVENTES,
     GET_CITYANNONCEVENTES,
     GET_CATEGORYANNONCEVENTES_BY_CITY,
-    FAVORITE_ANNONCEVENTE_ADD, FAVORITE_ANNONCEVENTE_REMOVE,
+    FAVORITE_ANNONCEVENTE_ADD,
+    FAVORITE_ANNONCEVENTE_REMOVE,
+    GET_ALL_ANNONCEVENTES,
     GET_ANNONCEVENTE_INTERESSE_BY_CITY,
     UNACTIVE_ANNONCEVENTE,
 } from "../types";
@@ -24,6 +26,17 @@ export const loadCityannonces = () => dispatch => {
     dyaxios.get(route('api.citiesannonceventes_site'))
         .then(response => dispatch({
                 type: GET_CITYANNONCEVENTES,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadAnnonces = (props) => dispatch => {
+
+    let itemAnnoncevente = props.match.params.annoncetype;
+    dyaxios.get(route('api.citiesannonceventes_site'))
+        .then(response => dispatch({
+                type: GET_ALL_ANNONCEVENTES,
                 payload: response.data
             })
         ).catch(error => console.error(error));

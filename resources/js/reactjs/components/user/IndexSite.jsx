@@ -109,7 +109,7 @@ class IndexSite extends Component {
                                             </div>
                                         </div>
                                     </Link>
-                                
+
                                 </div>
                             </div>
 
@@ -249,6 +249,17 @@ class IndexSite extends Component {
 
                             </div>
                             */}
+                            <div className="row">
+
+                                <div className="col-md-6">
+                                    <SectionLocationbyCity/>
+                                </div>
+
+                                <div className="col-md-6">
+                                    <SectionVentebyCity/>
+                                </div>
+
+                            </div>
 
 
                         </div>

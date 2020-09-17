@@ -207,9 +207,9 @@ class AnnonceventeList extends PureComponent {
                                             </>
                                         }
 
-                                        <Button className="btn btn-icon btn-sm btn-warning" onClick={() => this.props.contactUser(this.props)} title={`Contacter ${this.props.user.first_name}`}>
-                                            <i className="far fa-envelope"/>
-                                        </Button>
+                                        <NavLink to={showlink} className="btn btn-icon btn-sm btn-warning" title={`Contacter ${this.props.user.first_name}`}>
+                                            <i className="now-ui-icons ui-1_email-85"/>
+                                        </NavLink>
                                     </div>
                                 </div>
                             </div>

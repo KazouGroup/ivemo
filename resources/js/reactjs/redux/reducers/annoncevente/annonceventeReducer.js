@@ -24,6 +24,10 @@ export default produce((draft, action = {}) => {
                 draft.annonceventes = action.payload;
                 return;
 
+            case 'GET_ALL_ANNONCEVENTES':
+                draft.annonceventes = action.payload;
+                return;
+
             case 'GET_ANNONCEVENTE_INTERESSE_BY_CATEGORY':
                 draft.annonceventes = action.payload;
                 return;

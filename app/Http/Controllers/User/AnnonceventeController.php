@@ -81,14 +81,15 @@ class AnnonceventeController extends Controller
 
     public function apiannonceventebyannoncetype(annoncetype $annoncetype)
     {
-        $annoncesventes = AnnonceventeResource::collection($annoncetype->annonceventes()->whereIn('annoncetype_id',[$annoncetype->id])
+        $annoncesventes = AnnonceventeResource::collection($annoncetype->annonceventes()
+            ->whereIn('annoncetype_id',[$annoncetype->id])
             ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')
             ->where(['status' => 1,'status_admin' => 1])
-            ->distinct()->paginate(40));
+            ->paginate(40));
 
         return response()->json($annoncesventes, 200);
     }
