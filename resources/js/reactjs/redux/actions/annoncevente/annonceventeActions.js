@@ -6,7 +6,9 @@ import {
     FAVORITE_ANNONCEVENTE_REMOVE,
     GET_ALL_ANNONCEVENTES,
     GET_ANNONCEVENTE_INTERESSE_BY_CITY,
-    UNACTIVE_ANNONCEVENTE,
+    UNACTIVE_ANNONCEVENTE, GET_PROFILE_USER_FOR_PUBLIC,
+    GET_ANNONCEVENTE_BY_USER_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
+    DELETE_ANNONCEVENTE, SUBSCRIBE_USER_FOR_ANNONCEVENTE_ADD, SUBSCRIBE_USER_FOR_ANNONCEVENTE_REMOVE,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -68,6 +70,32 @@ export const loadCategoryannoncesbycity = (props) => dispatch => {
             })
         ).catch(error => console.error(error));
 };
+
+export const loadProfileusersforpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilpublique',[itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadannoncebyuserpublic = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let url = route('api.profilpublique_annonceventes',[itemuser,itemannoncetype]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_ANNONCEVENTE_BY_USER_PUBLIC,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
 
 export const favoriteItem = props => dispatch => {
 
@@ -152,6 +180,134 @@ export const unactiveItem = props => dispatch => {
         }
     });
 
+};
+
+export const deleteItem = props => dispatch => {
+
+    Swal.fire({
+        title: 'Supprimer cette annonce?',
+        text: "êtes-vous sûr de vouloir executer cette action",
+        type: 'warning',
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-success",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, confirmer',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            const url = route('annonces_ventes_delete.site',[props.id]);
+            //Envoyer la requet au server
+            dyaxios.get(url).then(() => {
+
+                dispatch({
+                    type: DELETE_ANNONCEVENTE,
+                    payload: props.id
+                });
+
+                /** Alert notify bootstrapp **/
+                $.notify({
+                        message: 'Annonce supprimée avec succès'
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'primary',
+                        placement: {
+                            from: 'bottom',
+                            align: 'right'
+                        },
+                        animate: {
+                            enter: 'animate__animated animate__fadeInRight',
+                            exit: 'animate__animated animate__fadeOutRight'
+                        },
+                    });
+                /** End alert ***/
+
+            }).catch(() => {
+                //Failled message
+                $.notify("Ooop! Une erreur est survenue", {
+                    allow_dismiss: false,
+                    type: 'danger',
+                    animate: {
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
+                    }
+                });
+            })
+        }
+    });
+
+};
+
+
+/*
+Avec le code ci dessous je recupere m'abonne à l'utilisateur
+*/
+export const followerItem = (props) => dispatch => {
+
+
+    let url = route('users_followeuser.follow',[props.id]);
+    dyaxios.post(url)
+        .then(() => dispatch({
+                type: FOLLOWERUSER_ADD,
+                payload: props.id
+            })
+        ).catch(error => console.error(error));
+};
+
+export const unfollowerItem = (props) => dispatch => {
+
+    Swal.fire({
+        text:  "Se désabonner de "+props.first_name+" ?",
+        buttonsStyling: false,
+        confirmButtonClass: "btn btn-info",
+        cancelButtonClass: 'btn btn-danger',
+        confirmButtonText: 'Oui, se désabonner',
+        cancelButtonText: 'Non, annuller',
+        showCancelButton: true,
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.value) {
+
+            let url = route('users_followeuser.follow',[props.id]);
+            dyaxios.post(url)
+                .then(() => dispatch({
+                        type: FOLLOWERUSER_REMOVE,
+                        payload: props.id
+                    })
+                ).catch(error => console.error(error));
+        }
+    })
+};
+/*
+End
+*/
+export const   subscribeItem = props => dispatch => {
+
+    const url = route('annonces_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_ANNONCEVENTE_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const  unsubscribeItem = props => dispatch => {
+
+    const url = route('annonces_subscribe.subscribe', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: SUBSCRIBE_USER_FOR_ANNONCEVENTE_REMOVE,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
 };
 
 

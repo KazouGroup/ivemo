@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnoncereservationResource;
+use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Http\Resources\BlogannonceventeResource;
@@ -244,7 +245,7 @@ class ProfileService
 
     public static function apiprofilannoncelocations($user,$annoncetype)
     {
-        $personnalreservations = AnnoncelocationResource::collection($user->annoncelocations()
+        $personnaldata = AnnoncelocationResource::collection($user->annoncelocations()
                     ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('user_id',[$user->id])
@@ -252,24 +253,20 @@ class ProfileService
                     ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
                     ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
 
-        return $personnalreservations;
+        return $personnaldata;
     }
 
-    public static function apiprofilannoncereserventes($user)
+    public static function apiprofilannoncereserventes($user,$annoncetype)
     {
-        $personnalblogannonces = HelpersService::helpersdatabyuseractive($user)
-            ->with(['annonceventes' => function ($q) use ($user){
-                $q->with('user','categoryannoncevente','city','annoncetype')
-                    ->whereIn('annoncetype_id',[2])
-                    ->whereIn('user_id',[$user->id])
-                    ->whereHas('city', function ($q) {$q->where('status',1);})
-                    ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
-                    ->where(['status' => 1,'status_admin' => 1])->distinct()->get()->toArray()
-                ;},
-            ])
-            ->first();
+        $personnaldata = AnnonceventeResource::collection($user->annonceventes()
+                ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
+                ->whereIn('annoncetype_id',[$annoncetype->id])
+                ->whereIn('user_id',[$user->id])
+                ->whereHas('city', function ($q) {$q->where('status',1);})
+                ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                ->where(['status' => 1,'status_admin' => 1])->distinct()->get());
 
-        return $personnalblogannonces;
+        return $personnaldata;
     }
 
     public static function apiprofilemployments($user)

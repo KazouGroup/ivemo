@@ -9,7 +9,6 @@ import Categoriesannoncereselocation from "./inc/Categoriesannoncereselocation";
 import Swal from "sweetalert2";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
-import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";

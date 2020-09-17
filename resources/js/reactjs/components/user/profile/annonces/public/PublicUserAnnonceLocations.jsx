@@ -6,12 +6,9 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import AnnonceslocationList from "../../../annonces/annonceloaction/inc/AnnonceslocationList";
 import Swal from "sweetalert2";
-import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
-import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import AnnoncesListSkeleton from "../../../../inc/user/annonce/AnnoncesListSkeleton";
-import NavLinkPublicEmploymentUser from "../../../../inc/vendor/NavLinkPublicUser";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
@@ -25,7 +22,6 @@ import {
 } from "../../../../../redux/actions/annoncelocation/annoncelocationActions";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import NavLinkPublicUser from "../../../../inc/vendor/NavLinkPublicUser";
-import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
 import Navlinknewannoncelocation from "../../../annonces/annonceloaction/treatment/Navlinknewannoncelocation";
 import ButonMiniSubscribedAllAnnonce from "../../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
@@ -94,8 +90,7 @@ class PublicUserAnnonceLocations extends Component {
         );
         return (
             <>
-                <HelmetSite
-                    title={`Annonce locations ${useranoncelocationPublick.first_name || 'Profile'} - ${$name_site}`}/>
+                <HelmetSite title={`Annonce locations ${useranoncelocationPublick.first_name || 'Profile'} - ${$name_site}`}/>
 
 
                 <div className="landing-page sidebar-collapse">
@@ -146,9 +141,9 @@ class PublicUserAnnonceLocations extends Component {
                                     <br/>
                                     <Link  className="text-white" to={useranoncelocationPublick.status_profile ?
 
-                                        `/user/${useranoncelocationPublick.slug}/`
+                                        `/pro/${useranoncelocationPublick.slug}/`
                                         :
-                                        `/pro/${useranoncelocationPublick.slug}/`}
+                                        `/user/${useranoncelocationPublick.slug}/`}
                                     >
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {useranoncelocationPublick.first_name}</b>
 

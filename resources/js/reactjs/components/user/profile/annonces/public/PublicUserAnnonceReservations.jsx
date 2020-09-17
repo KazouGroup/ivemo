@@ -5,7 +5,6 @@ import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
 import AnnoncereservationList from "../../../annonces/annoncereservation/inc/AnnoncereservationList";
-import NavLinkPublicAnnonceUser from "../NavLinkPublicAnnonceUser";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "../../blogs/public/NavLinkPublicBlogannoncesUser";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
@@ -393,7 +392,6 @@ class PublicUserAnnonceReservations extends Component {
                                                                     </a>
                                                                 </div>
 
-                                                                <NavLinkPublicAnnonceUser {...this.props} {...useranoncereservationPublick}/>
 
                                                             </div>
                                                         </div>

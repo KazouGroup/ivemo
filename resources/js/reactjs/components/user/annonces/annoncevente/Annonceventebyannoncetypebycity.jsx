@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereseventecity from "./inc/Categoriesannoncereseventecity";
 import AnnonceventeList from "./inc/AnnonceventeList";
-import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import SectionVentebyCity from "../../../inc/user/section_indexsite/SectionVentebyCity";

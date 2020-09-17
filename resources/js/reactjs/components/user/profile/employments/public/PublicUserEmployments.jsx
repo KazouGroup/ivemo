@@ -24,7 +24,6 @@ import {
 import ButonMiniSubscribedEmployment from "../../../../inc/vendor/ButonMiniSubscribedEmployment";
 import ButonFollowerUser from "../../../../inc/vendor/follow/ButonFollowerUser";
 import NavLinkPublicUser from "../../../../inc/vendor/NavLinkPublicUser";
-import ButonMiniSubscribedForum from "../../../../inc/vendor/ButonMiniSubscribedForum";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PublicUserEmployments extends Component {
@@ -137,9 +136,9 @@ class PublicUserEmployments extends Component {
                                     <br/>
                                     <Link  className="text-white" to={userPublick.status_profile ?
 
-                                        `/user/${userPublick.slug}/`
+                                        `/pro/${userPublick.slug}/`
                                         :
-                                        `/pro/${userPublick.slug}/`}
+                                        `/user/${userPublick.slug}/`}
                                     >
                                         <i className="fa fa-chevron-circle-left" /> <b>Retour au profile de {userPublick.first_name}</b>
 

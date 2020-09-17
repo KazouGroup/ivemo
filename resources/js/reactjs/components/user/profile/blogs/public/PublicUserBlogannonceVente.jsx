@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import LazyLoad from "react-lazyload";
 import FormContactProfileAccountUser from "../../form/FormContactProfileAccountUser";
 import NavLinkPublicBlogannoncesUser from "./NavLinkPublicBlogannoncesUser";
-import NavLinkPublicAnnonceUser from "../../annonces/NavLinkPublicAnnonceUser";
 import PublicUserBlogannonceventeList from "./inc/PublicUserBlogannonceventeList";
 import FormNewletterSubcribeProfileAccountUser from "../../form/FormNewletterSubcribeProfileAccountUser";
 import Navlinknewblogannoncevente from "../../../blog/blognnoncevente/treatement/Navlinknewblogannoncevente";

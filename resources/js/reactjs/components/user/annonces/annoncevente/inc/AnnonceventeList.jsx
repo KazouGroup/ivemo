@@ -191,7 +191,7 @@ class AnnonceventeList extends PureComponent {
                                                 {this.props.favoriteted ?
 
                                                     <>
-                                                        <Button onClick={() => this.props.favoriteItem(this.props)}
+                                                        <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                                                 className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                             <i className="fas fa-bookmark"></i>
                                                         </Button>

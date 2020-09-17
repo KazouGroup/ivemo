@@ -9,7 +9,6 @@ import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkel
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import {Form, Input} from "reactstrap";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
-import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncelocation from "./treatment/Navlinknewannoncelocation";
 import HelmetSite from "../../../inc/user/HelmetSite";
 

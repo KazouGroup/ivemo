@@ -18,7 +18,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.profilpublique_annoncereservations');
 
     Route::get(
-        'pro/{user}/annonces_ventes',
+        'pro/{user}/avs/{annoncetype}',
         'ProfilepublicController@apiprofilannoncereserventes'
     )->name('api.profilpublique_annonceventes');
 
@@ -91,7 +91,7 @@ Route::get(
 )->name('public_profile_annoncereservations.site');
 
 Route::get(
-    'pro/{user}/annonces_ventes',
+    'pro/{user}/avs/{annoncetype}',
     'ProfilepublicController@publicprofilannonceventes'
 )->name('public_profile_annonceventes.site');
 

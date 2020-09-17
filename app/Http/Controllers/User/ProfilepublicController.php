@@ -39,9 +39,9 @@ class ProfilepublicController extends Controller
         return response()->json($annoncesreservations, 200);
     }
 
-    public function apiprofilannoncereserventes(user $user)
+    public function apiprofilannoncereserventes(user $user,annoncetype $annoncetype)
     {
-        $annoncesreservations = ProfileService::apiprofilannoncereserventes($user);
+        $annoncesreservations = ProfileService::apiprofilannoncereserventes($user,$annoncetype);
 
         return response()->json($annoncesreservations, 200);
     }

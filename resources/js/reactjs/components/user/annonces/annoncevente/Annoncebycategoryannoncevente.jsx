@@ -9,7 +9,6 @@ import Categoriesannoncevente from "./inc/Categoriesannoncevente";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import LinkValicationEmail from "../../../inc/user/LinkValicationEmail";
-import FormModalContactannonceUser from "../../../inc/user/annonce/FormModalContactannonceUser";
 import Navlinknewannoncevente from "./treatment/Navlinknewannoncevente";
 import HelmetSite from "../../../inc/user/HelmetSite";
 

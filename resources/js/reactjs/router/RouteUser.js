@@ -224,7 +224,7 @@ const RouteUser = props => (
           <Route exact path="/pro/:user/" component={ProfileAccountPublicUser}/>
           <Route exact path="/pro/:user/als/:annoncetype/" component={PublicUserAnnonceLocations}/>
           <Route exact path="/pro/:user/annonces_reservations/" component={PublicUserAnnonceReservations}/>
-          <Route exact path="/pro/:user/annonces_ventes/" component={PublicUserAnnonceVentes}/>
+          <Route exact path="/pro/:user/avs/:annoncetype/" component={PublicUserAnnonceVentes}/>
 
           <Route exact path="/pro/:user/employments/" component={PublicUserEmployments}/>
           <Route exact path="/pro/:user/forums/" component={PublicUserForums}/>

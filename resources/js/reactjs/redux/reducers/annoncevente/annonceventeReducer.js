@@ -28,6 +28,10 @@ export default produce((draft, action = {}) => {
                 draft.annonceventes = action.payload;
                 return;
 
+            case 'GET_ANNONCEVENTE_BY_USER_PUBLIC':
+                draft.annonceventes = action.payload;
+                return;
+
             case 'GET_ANNONCEVENTE_INTERESSE_BY_CATEGORY':
                 draft.annonceventes = action.payload;
                 return;
@@ -45,6 +49,11 @@ export default produce((draft, action = {}) => {
             case 'UNACTIVE_ANNONCEVENTE':
                 let dataunactive = draft.annonceventes.findIndex(i => i.id === action.payload);
                 if (dataunactive !== -1) draft.annonceventes.splice(dataunactive, 1);
+                return draft;
+
+            case 'DELETE_ANNONCEVENTE':
+                let datadelete = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (datadelete !== -1) draft.annonceventes.splice(datadelete, 1);
                 return draft;
         }
     },
