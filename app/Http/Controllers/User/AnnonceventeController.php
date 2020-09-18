@@ -309,10 +309,10 @@ class AnnonceventeController extends Controller
         }
     }
 
-    public function apiannoncesventesbyuser(user $user)
+    public function apiannoncesventesbyuser(user $user,annoncetype $annoncetype)
     {
         if (auth()->user()->id === $user->id){
-            $annonceventes = AnnonceventeService::apiannoncesventesbyuser($user);
+            $annonceventes = AnnonceventeService::apiannoncesventesbyuser($user,$annoncetype);
 
             return response()->json($annonceventes, 200);
         }else{

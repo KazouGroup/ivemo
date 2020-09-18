@@ -32,6 +32,10 @@ export default produce((draft, action = {}) => {
                 draft.annonceventes = action.payload;
                 return;
 
+            case 'GET_ANNONCEVENTE_BY_USER_PRIVATE':
+                draft.annonceventes = action.payload;
+                return;
+
             case 'GET_ANNONCEVENTE_INTERESSE_BY_CATEGORY':
                 draft.annonceventes = action.payload;
                 return;
@@ -49,6 +53,17 @@ export default produce((draft, action = {}) => {
             case 'UNACTIVE_ANNONCEVENTE':
                 let dataunactive = draft.annonceventes.findIndex(i => i.id === action.payload);
                 if (dataunactive !== -1) draft.annonceventes.splice(dataunactive, 1);
+                return draft;
+
+
+            case 'ACTIVE_CO_ANNONCEVENTE':
+                let datacounactive = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (datacounactive !== -1) draft.annonceventes[datacounactive].status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_CO_ANNONCEVENTE':
+                let datacoactive = draft.annonceventes.findIndex(i => i.id === action.payload);
+                if (datacoactive !== -1) draft.annonceventes[datacoactive].status = !action.payload;
                 return draft;
 
             case 'DELETE_ANNONCEVENTE':

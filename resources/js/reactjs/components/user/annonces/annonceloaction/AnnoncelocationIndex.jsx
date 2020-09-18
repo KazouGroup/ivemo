@@ -223,7 +223,7 @@ class AnnoncelocationIndex extends Component {
                     </nav>
 
                     <div className="wrapper">
-                        <div className="page-header page-header-small">
+                        <div className="page-header page-header-mini">
                             <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
                             </div>
                             <div className="content-center">

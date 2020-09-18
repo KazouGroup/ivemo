@@ -6,9 +6,18 @@ import {
     FAVORITE_ANNONCEVENTE_REMOVE,
     GET_ALL_ANNONCEVENTES,
     GET_ANNONCEVENTE_INTERESSE_BY_CITY,
-    UNACTIVE_ANNONCEVENTE, GET_PROFILE_USER_FOR_PUBLIC,
-    GET_ANNONCEVENTE_BY_USER_PUBLIC, FOLLOWERUSER_ADD, FOLLOWERUSER_REMOVE,
-    DELETE_ANNONCEVENTE, SUBSCRIBE_USER_FOR_ANNONCEVENTE_ADD, SUBSCRIBE_USER_FOR_ANNONCEVENTE_REMOVE,
+    UNACTIVE_ANNONCEVENTE,
+    GET_PROFILE_USER_FOR_PUBLIC,
+    GET_ANNONCEVENTE_BY_USER_PUBLIC,
+    FOLLOWERUSER_ADD,
+    FOLLOWERUSER_REMOVE,
+    DELETE_ANNONCEVENTE,
+    SUBSCRIBE_USER_FOR_ANNONCEVENTE_ADD,
+    SUBSCRIBE_USER_FOR_ANNONCEVENTE_REMOVE,
+    GET_ANNONCEVENTE_BY_USER_PRIVATE,
+    GET_PROFILE_USER_FOR_PRIVATE,
+    ACTIVE_CO_ANNONCEVENTE,
+    UNACTIVE_CO_ANNONCEVENTE,
 } from "../types";
 
 import Swal from "sweetalert2";
@@ -96,6 +105,30 @@ export const loadannoncebyuserpublic = (props) => dispatch => {
         ).catch(error => console.error(error));
 };
 
+export const loadannoncebyuserprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let url = route('api.profilprivate_annonceventes',[itemuser,itemannoncetype]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_ANNONCEVENTE_BY_USER_PRIVATE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
+export const loadProfileusersforprivate = (props) => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let url = route('api.profilprivate', [itemuser]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_PROFILE_USER_FOR_PRIVATE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
 
 export const favoriteItem = props => dispatch => {
 
@@ -180,6 +213,64 @@ export const unactiveItem = props => dispatch => {
         }
     });
 
+};
+
+export const activeaslItem = props => dispatch => {
+
+    const url = route('annonces_ventes_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_CO_ANNONCEVENTE,
+                payload: props.id
+            });
+
+            $.notify({
+                    message: "Cette annonce est visible aux utilisateurs",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const unactiveprivatealsItem = props => dispatch => {
+
+    const url = route('annonces_ventes_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: UNACTIVE_CO_ANNONCEVENTE,
+                payload: props.id
+            });
+
+            $.notify({
+                    message: "Cette annonce a été masquée aux utilisateurs",
+                },
+                {
+                    allow_dismiss: false,
+                    type: 'info',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    animate: {
+                        enter: "animate__animated animate__fadeInUp",
+                        exit: "animate__animated animate__fadeOutDown"
+                    },
+                });
+        }
+    ).catch(error => console.error(error));
 };
 
 export const deleteItem = props => dispatch => {

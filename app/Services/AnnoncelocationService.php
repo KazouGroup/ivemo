@@ -150,7 +150,7 @@ class AnnoncelocationService
 
     public static function apiannonceslocationsbyuser($user,$annoncetype)
     {
-        $personnalreservations = PrivateAnnoncelocationResource::collection($user->annoncelocations()
+        $personnals = PrivateAnnoncelocationResource::collection($user->annoncelocations()
             ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('user_id',[$user->id])
@@ -158,7 +158,7 @@ class AnnoncelocationService
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->distinct()->get());
 
-        return $personnalreservations;
+        return $personnals;
     }
 
     public static function apiannoncelocationbycategoryannoncelocationslug($annoncetype,$categoryannoncelocation,$city,$user,$annoncelocation)

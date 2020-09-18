@@ -286,7 +286,7 @@ const RouteUser = props => (
           <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
           <Route exact path="/profile/:user/personal_settings/als/:annoncetype/" component={PrivateUserAnnonceLocations}/>
-          <Route exact path="/profile/:user/personal_settings/annonces_ventes/" component={PrivateUserAnnonceVentes}/>
+          <Route exact path="/profile/:user/personal_settings/avs/:annoncetype/" component={PrivateUserAnnonceVentes}/>
           <Route exact path="/profile/:user/personal_settings/annonces_ventes/:categoryannoncevente/" component={withRouter(PrivateUserAnnonceVentesByCategory)}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>

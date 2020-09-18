@@ -41,6 +41,14 @@ class NavlinkconfigurationUser extends Component {
                                                         </tr>
                                                         <tr>
                                                             <td>
+                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/ventes/`}>
+                                                                    <b>Ventes</b>
+                                                                </NavLink>
+                                                            </td>
+                                                            <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
                                                                 <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
                                                                     <b>Emplois & Services</b>
                                                                 </NavLink>
