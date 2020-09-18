@@ -74,6 +74,7 @@ class AnnonceventeList extends PureComponent {
 
                                     {!$guest && (
                                         <>
+
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                 <>
                                                     {this.props.status ?

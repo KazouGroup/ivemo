@@ -55,12 +55,12 @@ class AnnoncereservationResource extends JsonResource
                 ->where('likeable_type', annoncereservation::class)
                 ->count(),
             'uploadimages' => $this->uploadimages()
-                ->where('status',1)
+                ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncereservation::class)
                 ->take(1)->get(),
             'countuploadimages' => $this->uploadimages()
-                ->where('status',1)
+                ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncereservation::class)
                 ->count(),

@@ -56,7 +56,7 @@ class ContactuserventeNotification extends Notification implements ShouldQueue
             ->salutation('Cordiale')
             ->from($this->fromEmailUser,config('app.name'))
             ->line($this->fromFullnameUser.' vous a contacter sur un de vos bien mise en vente sur la platforme - '.config('app.name'))
-            ->line('ID: '.$this->annoncevente->id.' | Titre de l\'annonce: '.$this->annoncevente->title.' | Prix: '.$this->annoncevente->price.' | Ville: '.$this->annoncevente->city->name.' | Categorie: '.$this->annoncevente->categoryannoncevente->name)
+            ->line('ID: '.$this->annoncevente->id.' | Type: '.$this->annoncevente->annoncetype->name.' | Titre de l\'annonce: '.$this->annoncevente->title.' | Prix: '.$this->annoncevente->price.' | Ville: '.$this->annoncevente->city->name.' | Categorie: '.$this->annoncevente->categoryannoncevente->name)
             ->line($this->fromMessageUser)
             //->action('En savoir plus', url(route('personal_mails_annonceventes.site',[$this->annoncevente->user->slug])))
             ->line('Thank you for using our application!');

@@ -54,12 +54,12 @@ class AnnoncelocationResource extends JsonResource
                 ->where('likeable_type', annoncelocation::class)
                 ->count(),
             'uploadimages' => $this->uploadimages()
-                ->where('status',1)
+                ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncelocation::class)
                 ->take(1)->get(),
             'countuploadimages' => $this->uploadimages()
-                ->where('status',1)
+                ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncelocation::class)
                 ->count(),

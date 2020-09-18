@@ -263,6 +263,13 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                         <b>video</b>
                                                                     </Button>
                                                                 )}
+
+                                                                {($userIvemoIsadmin.status_user) && (
+
+                                                                    <NavLink to={`/al_data/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/edit/`} className="btn btn-sm btn-primary btn-icon btn-sm" title="Editer cette annonce">
+                                                                        <i className="now-ui-icons education_atom" />
+                                                                    </NavLink>
+                                                                )}
                                                             </>
                                                         :
                                                         <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>

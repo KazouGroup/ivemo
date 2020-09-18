@@ -5,6 +5,7 @@ namespace App\Services\Contactusers;
 
 use App\Jobs\Contacts\ContactadminsActivitycityJob;
 use App\Jobs\Contacts\ContactadminsJob;
+use App\Jobs\Contacts\ContactuploadimagesstatusJob;
 use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
 use App\Jobs\Contacts\ContactadminsfaqsJob;
@@ -126,6 +127,13 @@ class ContactuserService
             ->with('user')->get();
 
         $emailToUser = (new ContactadminsJob($fromFirstnameUser,$fromLastnameUser,$fromEmailUser,$fromSubjectUser,$fromMessageUser,$toAdminUser));
+
+        dispatch($emailToUser);
+    }
+
+    public static function newEmailuploadimagesadmins($uploadimage)
+    {
+        $emailToUser = (new ContactuploadimagesstatusJob($uploadimage));
 
         dispatch($emailToUser);
     }

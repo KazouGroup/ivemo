@@ -35,7 +35,7 @@ class UploadimageannoncelocationController extends Controller
     public function getuploadimage(annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
     {
         $uploadimages = UploadimageResource::collection($annoncelocation->uploadimages()
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('uploadimagealable_id',[$annoncelocation->id])
             ->where('uploadimagealable_type',annoncelocation::class)
             ->orderByDesc('updated_at')->distinct()->get());

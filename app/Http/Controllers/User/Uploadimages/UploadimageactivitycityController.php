@@ -30,7 +30,7 @@ class UploadimageactivitycityController extends Controller
     public function getuploadimage(city $city,activitycity $activitycity)
     {
         $uploadimages = UploadimageResource::collection( $activitycity->uploadimages()
-            ->where('status',1)
+            ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('uploadimagealable_id',[$activitycity->id])
             ->where('uploadimagealable_type',activitycity::class)
             ->orderByDesc('created_at')->distinct()->get());

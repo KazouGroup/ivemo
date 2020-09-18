@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
-use File;
 use App\Model\uploadimage;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use App\Services\Contactusers\ContactuserService;
+use Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class UploadimageController extends Controller
@@ -29,11 +28,20 @@ class UploadimageController extends Controller
         return response('Success',Response::HTTP_ACCEPTED);
     }
 
+    public function adminstatusuploadimage(uploadimage $uploadimage)
+    {
+        $uploadimage->update(['status_admin' => !$uploadimage->status_admin,]);
+
+        ContactuserService::newEmailuploadimagesadmins($uploadimage);
+
+        return response('Success',Response::HTTP_ACCEPTED);
+    }
+
     public function destroy(uploadimage $uploadimage)
     {
         $oldFilename = $uploadimage->photo;
 
-        $s3 = Storage::disk('s3');
+        $s3 = \Storage::disk('s3');
 
         $s3->delete($oldFilename);
         $uploadimage->delete();

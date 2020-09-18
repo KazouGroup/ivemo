@@ -27,6 +27,7 @@ class AnnoncelocationEdit extends Component {
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.statusuploadimagesItem = this.statusuploadimagesItem.bind(this);
+        this.statusadminuploadimagesItem = this.statusadminuploadimagesItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
         this.uploadimagesModalItem = this.uploadimagesModalItem.bind(this);
@@ -361,6 +362,40 @@ class AnnoncelocationEdit extends Component {
         });
     }
 
+    statusadminuploadimagesItem(item) {
+        Swal.fire({
+            title: 'Changer le status cette immage?',
+            text: "êtes-vous sûr de vouloir executer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                let url = route('adminstatusuploadimage_site', [item.id]);
+                //Envoyer la requet au server
+                dyaxios.post(url).then(() => {
+                    this.loadItems();
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooops! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
 
     statusuploadimagesItem(item) {
         //Envoyer la requet au server
@@ -499,7 +534,7 @@ class AnnoncelocationEdit extends Component {
     }
 
     render() {
-        const {categoryannoncelocations, cities,periodeannonces, visiable, uploadimages} = this.state;
+        const {categoryannoncelocations, cities, user, periodeannonces, visiable, uploadimages} = this.state;
         const avatar_style = {
             width: "80px",
             height: "40px",
@@ -563,35 +598,39 @@ class AnnoncelocationEdit extends Component {
                                                     <NavProfileTraitement/>
 
                                                     <div className="text-right ml-auto">
-                                                        <NavLink to={`/profile/${this.state.user.slug}/statistics/als/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
-                                                            <i className="now-ui-icons business_chart-bar-32"/>
-                                                        </NavLink>
-                                                        {this.state.status ?
+                                                        {($userIvemo.id === user.id) && (
                                                             <>
-                                                                <Button
-                                                                    onClick={() => this.unactiveItem(this.state.id)}
-                                                                    className="btn btn-success btn-icon btn-sm"
-                                                                    title="Annonce activé">
-                                                                    <i className="now-ui-icons ui-1_check"/>
-                                                                </Button>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <Button
-                                                                    onClick={() => this.activeItem(this.state.id)}
-                                                                    className="btn btn-primary btn-icon btn-sm"
-                                                                    title="Annonce déactivé">
-                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                </Button>
-                                                            </>
+                                                                <NavLink to={`/profile/${this.state.user.slug}/statistics/als/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                    <i className="now-ui-icons business_chart-bar-32"/>
+                                                                </NavLink>
+                                                                {this.state.status ?
+                                                                    <>
+                                                                        <Button
+                                                                            onClick={() => this.unactiveItem(this.state.id)}
+                                                                            className="btn btn-success btn-icon btn-sm"
+                                                                            title="Annonce activé">
+                                                                            <i className="now-ui-icons ui-1_check"/>
+                                                                        </Button>
+                                                                    </>
+                                                                    :
+                                                                    <>
+                                                                        <Button
+                                                                            onClick={() => this.activeItem(this.state.id)}
+                                                                            className="btn btn-primary btn-icon btn-sm"
+                                                                            title="Annonce déactivé">
+                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                        </Button>
+                                                                    </>
 
-                                                        }
-                                                        <Button
-                                                            className="btn btn-sm btn-icon btn-danger"
-                                                            onClick={() => this.deleteItem(this.state.id)}
-                                                            title="Suprimer cette annonce">
-                                                            <i className="now-ui-icons ui-1_simple-remove"/>
-                                                        </Button>
+                                                                }
+                                                                <Button
+                                                                    className="btn btn-sm btn-icon btn-danger"
+                                                                    onClick={() => this.deleteItem(this.state.id)}
+                                                                    title="Suprimer cette annonce">
+                                                                    <i className="now-ui-icons ui-1_simple-remove"/>
+                                                                </Button>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <hr/>
@@ -674,38 +713,78 @@ class AnnoncelocationEdit extends Component {
                                                                                                                     }
                                                                                                                 </div>
                                                                                                             </td>
+                                                                                                            <td>
+                                                                                                                <div
+                                                                                                                    className="timeline-heading">
+                                                                                                                    {!item.status_admin && (
+                                                                                                                        <h6 className="card-category text-primary">
+                                                                                                                            CETTE IMAGE N'EST PAS CONFORME
+                                                                                                                        </h6>
+                                                                                                                    ) }
+                                                                                                                </div>
+                                                                                                            </td>
 
                                                                                                             <th  className="text-right">
                                                                                                                 {moment(item.created_at).fromNow()}
                                                                                                             </th>
                                                                                                             <td className="text-right">
-                                                                                                                {item.status ?
-                                                                                                                    <>
-                                                                                                                        <Button
-                                                                                                                            onClick={() => this.statusuploadimagesItem(item)}
-                                                                                                                            className="btn btn-success btn-icon btn-sm btn-neutral"
-                                                                                                                            title={item.full_name}>
-                                                                                                                            <i className="now-ui-icons ui-1_check"/>
-                                                                                                                        </Button>
-                                                                                                                    </>
-                                                                                                                    :
-                                                                                                                    <>
-                                                                                                                        <Button
-                                                                                                                            onClick={() => this.statusuploadimagesItem(item)}
-                                                                                                                            className="btn btn-primary btn-icon btn-sm btn-neutral"
-                                                                                                                            title={item.full_name}>
-                                                                                                                            <i className="now-ui-icons ui-1_simple-delete"/>
-                                                                                                                        </Button>
-                                                                                                                    </>
 
-                                                                                                                }
+                                                                                                                {($userIvemo.id === user.id) && (
+                                                                                                                    <>
+                                                                                                                        {item.status ?
+                                                                                                                            <>
+                                                                                                                                <Button
+                                                                                                                                    onClick={() => this.statusuploadimagesItem(item)}
+                                                                                                                                    className="btn btn-success btn-icon btn-sm btn-neutral"
+                                                                                                                                    title={item.full_name}>
+                                                                                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                                                                                </Button>
+                                                                                                                            </>
+                                                                                                                            :
+                                                                                                                            <>
+                                                                                                                                <Button
+                                                                                                                                    onClick={() => this.statusuploadimagesItem(item)}
+                                                                                                                                    className="btn btn-primary btn-icon btn-sm btn-neutral"
+                                                                                                                                    title={item.full_name}>
+                                                                                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                                                                </Button>
+                                                                                                                            </>
 
-                                                                                                                <button
-                                                                                                                    type="button"
-                                                                                                                    onClick={() => this.deleteimageItem(item)}
-                                                                                                                    className="btn btn-danger btn-icon btn-sm btn-neutral">
-                                                                                                                    <i className="now-ui-icons ui-1_simple-remove"></i>
-                                                                                                                </button>
+                                                                                                                        }
+                                                                                                                        <button
+                                                                                                                            type="button"
+                                                                                                                            onClick={() => this.deleteimageItem(item)}
+                                                                                                                            className="btn btn-danger btn-icon btn-sm btn-neutral">
+                                                                                                                            <i className="now-ui-icons ui-1_simple-remove"></i>
+                                                                                                                        </button>
+                                                                                                                    </>
+                                                                                                                )}
+
+                                                                                                                {($userIvemoIsadmin.status_user) && (
+                                                                                                                    <>
+                                                                                                                        {item.status_admin ?
+                                                                                                                            <>
+                                                                                                                                <Button
+                                                                                                                                    onClick={() => this.statusadminuploadimagesItem(item)}
+                                                                                                                                    className="btn btn-success btn-icon btn-sm btn-neutral"
+                                                                                                                                    title={item.full_name}>
+                                                                                                                                    <i className="now-ui-icons ui-1_check"/>
+                                                                                                                                </Button>
+                                                                                                                            </>
+                                                                                                                            :
+                                                                                                                            <>
+                                                                                                                                <Button
+                                                                                                                                    onClick={() => this.statusadminuploadimagesItem(item)}
+                                                                                                                                    className="btn btn-primary btn-icon btn-sm btn-neutral"
+                                                                                                                                    title={item.full_name}>
+                                                                                                                                    <i className="now-ui-icons ui-1_simple-delete"/>
+                                                                                                                                </Button>
+                                                                                                                            </>
+
+                                                                                                                        }
+                                                                                                                    </>
+                                                                                                                )}
+
                                                                                                             </td>
                                                                                                         </tr>
                                                                                                     ))}
@@ -1320,16 +1399,18 @@ class AnnoncelocationEdit extends Component {
                                                         </div>
                                                     </div>
 
-                                                    <div className="submit text-center">
-                                                        <button className="btn btn-secondary" type="button"
-                                                                onClick={this.props.history.goBack} title="Annuler">
-                                                            <b>Annuler</b>
-                                                        </button>
-                                                        <button className="btn btn-primary" type="submit"
-                                                                title="Mettre à jour l'annonce">
-                                                            <b>Enregister</b>
-                                                        </button>
-                                                    </div>
+                                                    {($userIvemo.id === user.id) && (
+                                                        <div className="submit text-center">
+                                                            <button className="btn btn-secondary" type="button"
+                                                                    onClick={this.props.history.goBack} title="Annuler">
+                                                                <b>Annuler</b>
+                                                            </button>
+                                                            <button className="btn btn-primary" type="submit"
+                                                                    title="Mettre à jour l'annonce">
+                                                                <b>Enregister</b>
+                                                            </button>
+                                                        </div>
+                                                    )}
                                                 </Form>
 
                                             </div>
