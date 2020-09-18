@@ -43,7 +43,7 @@ class ContactuploadimagesstatusNotification extends Notification
             return (new MailMessage)
                 ->greeting('Salut '.$this->uploadimage->uploadimagealable->user->first_name)
                 ->subject("Changement du status de l'image")
-                ->line("Status de d'image changé sur le bien ci-dessous")
+                ->line("Status de l'image changé sur le bien ci-dessous")
                 ->line('ID: '.$this->uploadimage->uploadimagealable->id.' | Type: '.$this->uploadimage->uploadimagealable->annoncetype->name.' | Titre de l\'annonce: '.$this->uploadimage->uploadimagealable->title.' | Prix: '.$this->uploadimage->uploadimagealable->price.' | Ville: '.$this->uploadimage->uploadimagealable->city->name.' | Categorie: '.$this->uploadimage->uploadimagealable->categoryannoncelocation->name)
                 ->action('Voir l\'annonce', url(route('annoncelocationsedit_site',
                     [
@@ -57,7 +57,7 @@ class ContactuploadimagesstatusNotification extends Notification
             return (new MailMessage)
                 ->greeting('Salut '.$this->uploadimage->uploadimagealable->user->first_name)
                 ->subject("Changement du status de l'image")
-                ->line("Status de d'image changé sur le bien ci-dessous")
+                ->line("Status de l'image changé sur le bien ci-dessous")
                 ->line('ID: '.$this->uploadimage->uploadimagealable->id.' | Type: '.$this->uploadimage->uploadimagealable->annoncetype->name.' | Titre de l\'annonce: '.$this->uploadimage->uploadimagealable->title.' | Prix: '.$this->uploadimage->uploadimagealable->price.' | Ville: '.$this->uploadimage->uploadimagealable->city->name.' | Categorie: '.$this->uploadimage->uploadimagealable->categoryannoncevente->name)
                 ->action('Voir l\'annonce', url(route('annonceventesedit_site',
                     [

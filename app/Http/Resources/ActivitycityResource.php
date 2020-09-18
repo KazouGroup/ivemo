@@ -28,7 +28,7 @@ class ActivitycityResource extends JsonResource
                 ->where('likeable_type', activitycity::class)
                 ->count(),
             'countcomments' => $this->comments()
-                ->where(['status' => 1,'status_admin' => 1])
+                ->where(['status' => 1])
                 ->count(),
             'uploadimages' => $this->uploadimages()
                 ->where(['status' => 1,'status_admin' => 1])
