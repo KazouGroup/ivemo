@@ -41,7 +41,7 @@ class NavlinkconfigurationUser extends Component {
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/ventes/`}>
+                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/avs/ventes/`}>
                                                                     <b>Ventes</b>
                                                                 </NavLink>
                                                             </td>

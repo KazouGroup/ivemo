@@ -93,8 +93,6 @@ import PubliciteIndexSite from "../components/user/pages/PubliciteIndexSite";
 import PolicyprivacyIndexSite from "../components/user/pages/PolicyprivacyIndexSite";
 import AnnonceventeEdit from "../components/user/annonces/annoncevente/treatment/AnnonceventeEdit";
 import AnnoncelocationEdit from "../components/user/annonces/annonceloaction/treatment/AnnoncelocationEdit";
-import PrivateUserAnnonceVentesByCategory
-    from "../components/user/profile/annonces/private/annoncevente/PrivateUserAnnonceVentesByCategory";
 import BlogannonceIndexSite from "../components/user/blog/BlogannonceIndexSite";
 import EmailresetUser from "../components/user/auth/EmailresetUser";
 import WorkwithusIndexSite from "../components/user/pages/workwithus/WorkwithusIndexSite";
@@ -287,7 +285,6 @@ const RouteUser = props => (
 
           <Route exact path="/profile/:user/personal_settings/als/:annoncetype/" component={PrivateUserAnnonceLocations}/>
           <Route exact path="/profile/:user/personal_settings/avs/:annoncetype/" component={PrivateUserAnnonceVentes}/>
-          <Route exact path="/profile/:user/personal_settings/annonces_ventes/:categoryannoncevente/" component={withRouter(PrivateUserAnnonceVentesByCategory)}/>
 
           <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>
 
