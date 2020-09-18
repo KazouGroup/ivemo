@@ -1,5 +1,5 @@
-import React, {useState, useEffect, Fragment, Component} from "react";
-import {Link, NavLink} from 'react-router-dom';
+import React, { useState, useEffect, Fragment, Component } from "react";
+import { Link, NavLink } from 'react-router-dom';
 import NavUserSite from "../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../inc/user/FooterBigUserSite";
 import LinkValicationEmail from "../../inc/user/LinkValicationEmail";
@@ -7,10 +7,10 @@ import HelmetSite from "../../inc/user/HelmetSite";
 import ReadMoreAndLess from "react-read-more-less";
 import CitycommentIndex from "../comments/CitycommentIndex";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {loadCityItemshow,likecityItem,unlikecityItem} from "../../../redux/actions/citiesActions";
+import { connect } from "react-redux";
+import { loadCityItemshow, likecityItem, unlikecityItem } from "../../../redux/actions/citiesActions";
 import Skeleton from "react-loading-skeleton";
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
 import ActivitycityInteresse from "./activitycity/ActivitycityInteresse";
 
 
@@ -22,15 +22,15 @@ class CityIndexSite extends Component {
     }
 
     getDescription(city) {
-        return {__html: city.description};
+        return { __html: city.description };
     }
 
     render() {
-        const {city} = this.props;
+        const { city } = this.props;
         return (
             <Fragment>
 
-                <HelmetSite title={`${city.name || $name_site}  - ${$name_site}`}/>
+                <HelmetSite title={`${city.name || $name_site}  - ${$name_site}`} />
 
                 <div className="about-us sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -51,14 +51,14 @@ class CityIndexSite extends Component {
                         </div>
 
                         <div className="main main-raised">
-                            <br/>
+                            <br />
                             <div className="container">
                                 <div className="row justify-content-center">
                                     <div className="col-md-12 ml-auto mr-auto">
-                                        {!$guest &&(
+                                        {!$guest && (
                                             <>
-                                                {!$userIvemo.email_verified_at &&(
-                                                    <LinkValicationEmail/>
+                                                {!$userIvemo.email_verified_at && (
+                                                    <LinkValicationEmail />
                                                 )}
                                             </>
                                         )}
@@ -76,7 +76,7 @@ class CityIndexSite extends Component {
                                             {$guest ?
                                                 <>
                                                     <Button data-toggle="modal" data-target="#loginModal"
-                                                            className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
+                                                        className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
                                                         <i className="far fa-heart"></i> <b> J'aime</b>
                                                     </Button>
                                                 </>
@@ -86,14 +86,14 @@ class CityIndexSite extends Component {
                                                     {city.likeked ?
                                                         <>
                                                             <Button onClick={() => this.props.unlikecityItem(city)}
-                                                                    className="btn btn-danger btn-sm" title={`${city.countlikes} J\'aime`}>
+                                                                className="btn btn-danger btn-sm" title={`${city.countlikes} J\'aime`}>
                                                                 <i className="fas fa-heart"></i> <b> J'aime</b>
                                                             </Button>
                                                         </>
                                                         :
                                                         <>
                                                             <Button onClick={() => this.props.likecityItem(city)}
-                                                                    className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
+                                                                className="btn btn-facebook btn-sm btn-neutral" title={`${city.countlikes} J\'aime`}>
                                                                 <i className="far fa-heart"></i> <b> J'aime</b>
                                                             </Button>
                                                         </>
@@ -120,7 +120,7 @@ class CityIndexSite extends Component {
                                                                     <div className="card-body">
                                                                         <table>
                                                                             <tbody>
-                                                                            {city.name ?
+                                                                                {city.name ?
                                                                                     <>
                                                                                         <tr>
                                                                                             <td> <Link to={`/al/locations/${city.slug}/`} className="text-info" >Location à {city.name}</Link></td>
@@ -133,15 +133,15 @@ class CityIndexSite extends Component {
                                                                                         </tr>
                                                                                     </>
 
-                                                                                :
+                                                                                    :
 
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <strong><Skeleton width={200} count={5}/></strong>
-                                                                                    </td>
-                                                                                </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <strong><Skeleton width={200} count={5} /></strong>
+                                                                                        </td>
+                                                                                    </tr>
 
-                                                                            }
+                                                                                }
 
                                                                             </tbody>
                                                                         </table>
@@ -164,7 +164,7 @@ class CityIndexSite extends Component {
                                                 <div className="row">
                                                     <div className="col-md-12">
 
-                                                        {city.name ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(city)} />: <Skeleton count={5}/>}
+                                                        {city.name ? <div className="title text-justify" dangerouslySetInnerHTML={this.getDescription(city)} /> : <Skeleton count={5} />}
 
                                                     </div>
                                                 </div>
@@ -180,10 +180,10 @@ class CityIndexSite extends Component {
                                                             <h5><b>{city.name} - Guide en vidéo</b></h5>
 
                                                             <iframe border="2px solid #ccc" width="100%" height="315"
-                                                                    src={city.link_video}
-                                                                    frameBorder="0"
-                                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                                    allowFullScreen></iframe>
+                                                                src={city.link_video}
+                                                                frameBorder="0"
+                                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowFullScreen></iframe>
 
                                                         </div>
                                                     </div>
@@ -228,7 +228,7 @@ class CityIndexSite extends Component {
                                     <div className="col-md-3">
                                         <Link to={`/city/yaounde/`}>
                                             <div className="card card-background card-raised" data-background-color=""
-                                                 style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg1.jpg' + ")" }}>
+                                                style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
                                                 <div className="info">
 
                                                     <div className="description">
@@ -242,7 +242,7 @@ class CityIndexSite extends Component {
                                     <div className="col-md-3">
                                         <Link to={`/city/douala/`}>
                                             <div className="card card-background card-raised" data-background-color=""
-                                                 style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
+                                                style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
                                                 <div className="info">
                                                     <div className="description">
                                                         <h4 className="info-title">Douala</h4>
@@ -253,12 +253,12 @@ class CityIndexSite extends Component {
                                     </div>
 
                                     <div className="col-md-3">
-                                        <Link to={`/city/bafousam/`}>
+                                        <Link to={`/city/bafoussam/`}>
                                             <div className="card card-background card-raised" data-background-color=""
-                                                 style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
+                                                style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
                                                 <div className="info">
                                                     <div className="description">
-                                                        <h4 className="info-title">Bafousam</h4>
+                                                        <h4 className="info-title">Bafoussam</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,7 +268,7 @@ class CityIndexSite extends Component {
                                     <div className="col-md-3">
                                         <Link to={`/city/dschang/`}>
                                             <div className="card card-background card-raised" data-background-color=""
-                                                 style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg3.jpg' + ")" }}>
+                                                style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
                                                 <div className="info">
                                                     <div className="description">
                                                         <h4 className="info-title">Dschang</h4>
@@ -277,7 +277,6 @@ class CityIndexSite extends Component {
                                             </div>
                                         </Link>
                                     </div>
-
 
 
                                 </div>
@@ -311,4 +310,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {loadCityItemshow,likecityItem,unlikecityItem})(CityIndexSite);
+export default connect(mapStateToProps, { loadCityItemshow, likecityItem, unlikecityItem })(CityIndexSite);

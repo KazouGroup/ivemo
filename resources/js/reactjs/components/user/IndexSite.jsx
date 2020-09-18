@@ -25,7 +25,7 @@ class IndexSite extends Component {
     render() {
         return (
             <>
-                <HelmetSite title={`Trouvez un boulo, evenement, job bien d\'autre service - ${$name_site}`}/>
+                <HelmetSite title={`Trouvez une maison, un appartement, une villa, un terrain un boulo, evenement, job bien d\'autre service - ${$name_site}`}/>
 
                 <div className="pricing sidebar-collapse">
                     <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
@@ -77,7 +77,6 @@ class IndexSite extends Component {
 
                         <div className="container">
 
-
                             <div className="row mt-5">
                                 <div className="col-md-6">
                                     <Link to={`/als/locations/`}>
@@ -113,62 +112,66 @@ class IndexSite extends Component {
                                 </div>
                             </div>
 
-                            <div className="row mt-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <div className="row mt-5">
 
-                                <div className="col-md-3">
-                                    <Link to={`/city/yaounde/`}>
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg1.jpg' + ")" }}>
-                                            <div className="info">
+                                        <div className="col-md-3">
+                                            <Link to={`/city/yaounde/`}>
+                                                <div className="card card-background card-raised" data-background-color=""
+                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                                    <div className="info">
 
-                                                <div className="description">
-                                                    <h4 className="info-title">Yaounde</h4>
+                                                        <div className="description">
+                                                            <h4 className="info-title">Yaounde</h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </div>
-                                    </Link>
-                                </div>
 
-                                <div className="col-md-3">
-                                    <Link to={`/city/douala/`}>
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
-                                            <div className="info">
-                                                <div className="description">
-                                                    <h4 className="info-title">Douala</h4>
+                                        <div className="col-md-3">
+                                            <Link to={`/city/douala/`}>
+                                                <div className="card card-background card-raised" data-background-color=""
+                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                                    <div className="info">
+                                                        <div className="description">
+                                                            <h4 className="info-title">Douala</h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </div>
-                                    </Link>
-                                </div>
 
-                                <div className="col-md-3">
-                                    <Link to={`/city/bafousam/`}>
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg4.jpg' + ")" }}>
-                                            <div className="info">
-                                                <div className="description">
-                                                    <h4 className="info-title">Bafousam</h4>
+                                        <div className="col-md-3">
+                                            <Link to={`/city/bafoussam/`}>
+                                                <div className="card card-background card-raised" data-background-color=""
+                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                                    <div className="info">
+                                                        <div className="description">
+                                                            <h4 className="info-title">Bafoussam</h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </div>
-                                    </Link>
-                                </div>
 
-                                <div className="col-md-3">
-                                    <Link to={`/city/dschang/`}>
-                                        <div className="card card-background card-raised" data-background-color=""
-                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg3.jpg' + ")" }}>
-                                            <div className="info">
-                                                <div className="description">
-                                                    <h4 className="info-title">Dschang</h4>
+                                        <div className="col-md-3">
+                                            <Link to={`/city/dschang/`}>
+                                                <div className="card card-background card-raised" data-background-color=""
+                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                                    <div className="info">
+                                                        <div className="description">
+                                                            <h4 className="info-title">Dschang</h4>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                         </div>
-                                    </Link>
+
+
+                                    </div>
                                 </div>
-
-
                             </div>
 
                             {/*
