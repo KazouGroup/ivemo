@@ -655,25 +655,28 @@ class AnnoncelocationEdit extends Component {
                                                                              className="card-collapse">
 
                                                                             {uploadimages.length >= 1 && (
+                                                                                <>
+                                                                                    {($userIvemo.id === user.id) && (
+                                                                                        <div className="toolbar">
+                                                                                            {this.state.uploadimages_count < 10 && (
 
-                                                                                <div className="toolbar">
-                                                                                    {this.state.uploadimages_count < 10 && (
-
-                                                                                        <div className="submit text-center">
-                                                                                            <a style={{cursor: "pointer"}}
-                                                                                               onClick={() => this.uploadimagesModalItem(this.state.title)}
-                                                                                               className="text-info">
+                                                                                                <div className="submit text-center">
+                                                                                                    <a style={{cursor: "pointer"}}
+                                                                                                       onClick={() => this.uploadimagesModalItem(this.state.title)}
+                                                                                                       className="text-info">
                                                                                        <span className="btn-label">
                                                                                            <i className="now-ui-icons ui-1_simple-add"/>
                                                                                        </span>
-                                                                                                <b className="title_hover"> Nouvelle image</b>
-                                                                                            </a>
+                                                                                                        <b className="title_hover"> Nouvelle image</b>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            )}
+
+
+                                                                                            <br/>
                                                                                         </div>
                                                                                     )}
-
-
-                                                                                    <br/>
-                                                                                </div>
+                                                                                </>
                                                                             )}
 
                                                                             {this.state.slug ?
@@ -796,16 +799,20 @@ class AnnoncelocationEdit extends Component {
                                                                                         :
                                                                                         <>
                                                                                             {this.state.slug && (
-                                                                                                <div className="row">
-                                                                                                    <div className="col-md-8 ml-auto mr-auto text-center">
-                                                                                                        <a style={{cursor: "pointer"}}
-                                                                                                           className="text-info"
-                                                                                                           onClick={() => this.uploadimagesModalItem(this.state.title)}>
-                                                                                                            <b>Aucune image enregisté sur cette annonce <i className="now-ui-icons ui-1_simple-add"/> ajouter une image
-                                                                                                            </b>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                </div>
+                                                                                                <>
+                                                                                                    {($userIvemo.id === user.id) && (
+                                                                                                        <div className="row">
+                                                                                                            <div className="col-md-8 ml-auto mr-auto text-center">
+                                                                                                                <a style={{cursor: "pointer"}}
+                                                                                                                   className="text-info"
+                                                                                                                   onClick={() => this.uploadimagesModalItem(this.state.title)}>
+                                                                                                                    <b>Aucune image enregisté sur cette annonce <i className="now-ui-icons ui-1_simple-add"/> ajouter une image
+                                                                                                                    </b>
+                                                                                                                </a>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    )}
+                                                                                                </>
                                                                                             )}
                                                                                         </>
 

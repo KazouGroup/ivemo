@@ -429,7 +429,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                             {annoncelocation.price && (
                                                                 <div className="col-md-6 mx-auto">
-                                                                <h5 className="info-title"><b>La location <span style={{ textTransform: "lowercase" }}>{annoncelocation.categoryannoncelocation.label}</span> est de</b></h5>
+                                                                <h5 className="info-title"><b><span style={{ textTransform: "capitalize" }}>{annoncelocation.categoryannoncelocation.label}</span> revient à</b></h5>
 
                                                                     <h3 className="ivemoColorOrange"><b>{annoncelocation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncelocation.periodeannonce_id !== null && (" - " + annoncelocation.periodeannonce.name)}</b></small></>}</b></h3>
                                                                 </div>
