@@ -26,6 +26,7 @@ import {
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
 import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import AnnonceventeuploadimageIndex from "../../uploadimages/AnnonceventeuploadimageIndex";
+import FooterUserSite from "../../../inc/user/FooterUserSite";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -831,7 +832,7 @@ class Annonceventebycategorycityshow extends Component {
                             </div>
                         </div>
 
-                        <FooterBigUserSite />
+                        <FooterUserSite />
 
                     </div>
                 </div>

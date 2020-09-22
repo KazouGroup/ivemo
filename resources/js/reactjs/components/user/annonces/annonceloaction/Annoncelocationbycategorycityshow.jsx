@@ -27,6 +27,7 @@ import {
 import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
 import AnnoncelocactionuploadimageIndex from "../../uploadimages/AnnoncelocactionuploadimageIndex";
+import FooterUserSite from "../../../inc/user/FooterUserSite";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -780,7 +781,7 @@ class Annoncelocationbycategorycityshow extends Component {
                             </div>
                         </div>
 
-                        <FooterBigUserSite />
+                        <FooterUserSite />
                     </div>
                 </div>
             </>

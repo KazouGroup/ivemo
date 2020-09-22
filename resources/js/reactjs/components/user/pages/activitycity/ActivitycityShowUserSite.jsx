@@ -18,6 +18,7 @@ import ActivitycityInteresse from "./ActivitycityInteresse";
 import ActivitycitycommentIndex from "../../comments/ActivitycitycommentIndex";
 import ActivitycityuploadimageIndex from "../../uploadimages/ActivitycityuploadimageIndex";
 import FormcontactuseronactivitycityShow from "../inc/FormcontactuseronactivitycityShow";
+import FooterUserSite from "../../../inc/user/FooterUserSite";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -386,7 +387,7 @@ class ActivitycityShowUserSite extends Component {
 
                         </div>
 
-                        <FooterBigUserSite />
+                        <FooterUserSite />
                     </div>
                 </div>
             </>

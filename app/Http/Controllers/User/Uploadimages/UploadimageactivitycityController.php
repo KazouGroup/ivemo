@@ -33,7 +33,7 @@ class UploadimageactivitycityController extends Controller
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('uploadimagealable_id',[$activitycity->id])
             ->where('uploadimagealable_type',activitycity::class)
-            ->orderByDesc('created_at')->distinct()->get());
+            ->orderByDesc('updated_at')->distinct()->get());
 
         return response()->json($uploadimages,200);
     }

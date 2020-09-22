@@ -23,6 +23,12 @@ class FooterUserSite extends Component {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link to={`/faqs/`}>
+                                        Faqs
+                                    </Link>
+                                </li>
+                                {/*
+                                 <li>
                                     <Link to={`/about/`}>
                                         About
                                     </Link>
@@ -32,6 +38,8 @@ class FooterUserSite extends Component {
                                         Blog
                                     </Link>
                                 </li>
+                                */}
+
                                 <li>
                                     <Link to={`/contact/`}>
                                         Contact
@@ -43,7 +51,7 @@ class FooterUserSite extends Component {
                             &copy;
                             { new Date().getFullYear()}, Designed by
                             <Link to={`/`}> {$name_site}</Link>. Coded by
-                            <a href="https://www.kazougroup.com" target="_bank"> KazouGroup Srl</a>.
+                            <a href="/" target="_bank"> KazouGroup Srl</a>.
                         </div>
                     </div>
                 </footer>
