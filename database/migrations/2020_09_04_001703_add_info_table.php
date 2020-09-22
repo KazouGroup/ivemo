@@ -24,11 +24,11 @@ class AddInfoTable extends Migration
             $table->boolean('terrace')->after('status')->default(false)->nullable();
             $table->boolean('balcony')->after('status')->default(false)->nullable();
             $table->boolean('elevator')->after('status')->default(false)->nullable();
+            $table->text('link_video')->after('title')->nullable();
             $table->string('phone_seller')->after('link_video')->nullable();
             $table->unsignedBigInteger('terrace_number')->after('link_video')->nullable();
             $table->unsignedBigInteger('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
-            $table->text('link_video')->after('title')->nullable();
             $table->unsignedBigInteger('periodeannonce_id')->after('user_id')->nullable()->index();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
         });
@@ -38,11 +38,11 @@ class AddInfoTable extends Migration
             $table->boolean('terrace')->after('status')->default(false)->nullable();
             $table->boolean('balcony')->after('status')->default(false)->nullable();
             $table->boolean('elevator')->after('status')->default(false)->nullable();
+            $table->text('link_video')->after('title')->nullable();
             $table->string('phone_seller')->after('link_video')->nullable();
             $table->unsignedBigInteger('terrace_number')->after('link_video')->nullable();
             $table->unsignedBigInteger('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
-            $table->text('link_video')->after('title')->nullable();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
         });
 
@@ -51,11 +51,11 @@ class AddInfoTable extends Migration
             $table->boolean('terrace')->after('status')->default(false)->nullable();
             $table->boolean('balcony')->after('status')->default(false)->nullable();
             $table->boolean('elevator')->after('status')->default(false)->nullable();
+            $table->text('link_video')->after('title')->nullable();
             $table->string('phone_seller')->after('link_video')->nullable();
             $table->unsignedBigInteger('terrace_number')->after('link_video')->nullable();
             $table->unsignedBigInteger('balcony_number')->after('link_video')->nullable();
             $table->string('contact_seller')->after('link_video')->nullable();
-            $table->text('link_video')->after('title')->nullable();
             $table->timestamp('expired_at')->default(now()->addDays(7))->after('created_at');
         });
 

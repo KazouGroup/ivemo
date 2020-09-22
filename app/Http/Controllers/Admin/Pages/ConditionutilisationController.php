@@ -81,7 +81,7 @@ class ConditionutilisationController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
@@ -94,7 +94,7 @@ class ConditionutilisationController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  conditionutilisation  $conditionutilisation
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(conditionutilisation $conditionutilisation)
     {
@@ -109,7 +109,7 @@ class ConditionutilisationController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function update(Request $request, $id)
     {
@@ -150,7 +150,7 @@ class ConditionutilisationController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function destroy($id)
     {

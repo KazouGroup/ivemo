@@ -1,72 +1,89 @@
 <template>
-    <div class="main-panel" id="main-panel">
-        <vue-progress-bar/>
-        <navsmall-admin></navsmall-admin>
+    <div class="main-panel">
+        <vue-progress-bar />
 
-        <div class="panel-header">
-            <div class="header text-center">
-                <h2 class="title">New condition for users</h2>
-                <p class="title">{{this.form.title}}</p>
-            </div>
-        </div>
+        <admin-horizontalenavusersite/>
 
         <div class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form id="RegisterValidation" @submit.prevent="createItem()" role="form"
-                                  method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating"></label>
-                                            <input v-model="form.title" type="text" minlength="5" maxlength="255" name="title" placeholder="Title policy" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"/>
-                                            <has-error :form="form" field="title"></has-error>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <h4 class="card-title">
+                                            <b>{{this.form.title || "Conditions d'utilisation"}}</b>
+                                        </h4>
+                                        <p class="card-title">{{this.form.title || "Conditions d'utilisation"}}</p>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                      <span>
+                                        <i id="tooltipSize" class="material-icons">description</i>
+                                      </span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Description <span style="color:red;">*</span></label>
-                                            <br>
-                                            <quill-editor v-model="form.body"
-                                                          :class="{ 'is-invalid': form.errors.has('body') }"
-                                                          :options="editorOption">
-                                            </quill-editor>
-                                            <div class="form-check">
-                                                <label class="form-check-label pull-right">
-                                                    You can use the
-                                                    <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/" class="text-danger" target="_blank">
-                                                        Markdown here
-                                                    </a>
-                                                    <span class="form-check-sign"></span>
-                                                </label>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="RegisterValidation" @submit.prevent="createItem()" role="form"
+                                          method="POST" action="" accept-charset="UTF-8" @keydown="form.onKeydown($event)">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating"></label>
+                                                    <input v-model="form.title" type="text" minlength="5" maxlength="255" name="title" placeholder="Title policy" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }"/>
+                                                    <has-error :form="form" field="title"></has-error>
+                                                </div>
                                             </div>
-                                            <has-error :form="form" field="body"></has-error>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">Description <span style="color:red;">*</span></label>
+                                                    <br>
+                                                    <quill-editor v-model="form.body"
+                                                                  :class="{ 'is-invalid': form.errors.has('body') }"
+                                                                  :options="editorOption">
+                                                    </quill-editor>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label pull-right">
+                                                            You can use the
+                                                            <a href="https://help.github.com/articles/getting-started-with-writing-and-formatting-on-github/" class="text-danger" target="_blank">
+                                                                Markdown here
+                                                            </a>
+                                                            <span class="form-check-sign"></span>
+                                                        </label>
+                                                    </div>
+                                                    <has-error :form="form" field="body"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="submit">
+                                            <div class="text-center">
+                                                <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-secondary btn-raised">
+                                                    <b class="title_hover">Annuler</b>
+                                                </router-link>
+                                                <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
+                                                    <b class="title_hover">Sauvegarder</b>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <hr>
-                                <div class="submit">
-                                    <div class="text-center">
-                                        <router-link :to="{ name: 'conditionutilisations.index' }" class="btn btn-secondary btn-raised">
-                                            <b class="title_hover">Annuler</b>
-                                        </router-link>
-                                        <button v-if="$auth.can('manage-faq')" :disabled="form.busy" type="submit" class="btn btn-success btn-raised">
-                                            <b class="title_hover">Sauvegarder</b>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer-admin></footer-admin>
+        <footer-admin/>
+
     </div>
 </template>
 
