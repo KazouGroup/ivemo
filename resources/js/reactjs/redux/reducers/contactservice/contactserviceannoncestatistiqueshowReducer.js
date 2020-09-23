@@ -2,13 +2,16 @@ import produce from "immer"
 
 
 const initialState = {
-    annonce: {uploadimages:[],annoncetype: [], city: [], user: []},
-    contactservices: {contactservicesannonceventes: {to:[],from:[],contactserviceable:[]}},
+    annonce: {city: [], user: []},
 };
 
 
 export default produce((draft, action = {}) => {
         switch (action.type) {
+
+            case 'GET_RED_CONTACTSERVICEMPLOYMENT':
+                draft.annonce = action.payload;
+                return;
 
             case 'GET_RED_CONTACTSERVICEVENTE':
                 draft.annonce = action.payload;
@@ -68,6 +71,14 @@ export default produce((draft, action = {}) => {
                 return draft;
 
             case 'UNACTIVE_CO_P_ANNONCELOCATION':
+                draft.annonce.status = !action.payload;
+                return draft;
+
+            case 'ACTIVE_ANNONCE_EMPLOYMENT':
+                draft.annonce.status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_ANNONCE_EMPLOYMENT':
                 draft.annonce.status = !action.payload;
                 return draft;
         }

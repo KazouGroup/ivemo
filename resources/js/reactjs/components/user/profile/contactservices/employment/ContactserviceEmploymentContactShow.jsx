@@ -387,7 +387,7 @@ ContactserviceEmploymentContactShow.propTypes = {
 
 const mapStateToProps = state => ({
 
-    contactservice: state.contactservicemploymentcontactshow.item,
+    contactservice: state.contactserviceannonceshow.item,
     contactusersprofile: state.contactusers.contactservices
 
 

@@ -83,9 +83,7 @@ class CategoryFaqController extends Controller
         ]);
 
         $categoryfaq = new categoryfaq;
-        $categoryfaq->name = $request->name;
-        $categoryfaq->save();
-
+        $categoryfaq->create($request->all());
 
         return response('Created',Response::HTTP_CREATED);
     }

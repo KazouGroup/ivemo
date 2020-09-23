@@ -1,7 +1,6 @@
 import {combineReducers} from "redux";
 import workwithuseReducer from "./workwithuseReducer";
 import employmentReducer from "./employment/employmentReducer";
-import contactservicemploymentcontactshowReducer from "./contactservice/contactservicemploymentcontactshowReducer";
 import employmentshowReducer from "./employment/employmentshowReducer";
 import forumshowReducer from "./forum/forumshowReducer";
 import forumReducer from "./forum/forumReducer";
@@ -20,8 +19,6 @@ import contactservicesReducer from "./contactservice/contactservicesReducer";
 import favoritesReducer from "./favoritesReducer";
 import pageReducer from "./pageReducer";
 import uploadimagesReducer from "./uploadimagesReducer";
-import contactserviceemployemantstatistiqueshowReducer
-    from "./contactservice/contactserviceemployemantstatistiqueshowReducer";
 import contactserviceannonceshowReducer from "./contactservice/contactserviceannonceshowReducer";
 import contactserviceventestatistiqueshowReducer from "./contactservice/contactserviceannoncestatistiqueshowReducer";
 
@@ -48,8 +45,6 @@ export default combineReducers({
     uploadimagesites: uploadimagesReducer,
     profile: profileReducer,
     contactusers: contactservicesReducer,
-    contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactserviceannonceshow: contactserviceannonceshowReducer,
-    contactserviceemploymentstatistiqueshow: contactserviceemployemantstatistiqueshowReducer,
     contactserviceannoncestatistiqueshow: contactserviceventestatistiqueshowReducer,
 })

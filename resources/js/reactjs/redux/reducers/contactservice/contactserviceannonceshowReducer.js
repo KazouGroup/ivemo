@@ -33,6 +33,8 @@ export default produce((draft, action = {}) => {
                 draft.item.status_red = !action.payload;
                 return draft;
 
+                //Location
+
             case 'GET_RED_CONTACTSERVICANONCELOCATION_SHOW':
                 draft.item = action.payload;
                 return;
@@ -45,6 +47,8 @@ export default produce((draft, action = {}) => {
                 draft.item.contactserviceable.status = !action.payload;
                 return draft;
 
+                //Ventes
+
             case 'GET_RED_CONTACTSERVICANONCEVENTE_SHOW':
                 draft.item = action.payload;
                 return;
@@ -54,6 +58,20 @@ export default produce((draft, action = {}) => {
                 return draft;
 
             case 'UNACTIVE_CO_P_ANNONCEVENTE':
+                draft.item.contactserviceable.status = !action.payload;
+                return draft;
+
+                //Employment
+
+            case 'GET_RED_CONTACTSERVICEMPLOYMENT_SHOW':
+                draft.item = action.payload;
+                return;
+
+            case 'ACTIVE_ANNONCE_EMPLOYMENT':
+                draft.item.contactserviceable.status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_ANNONCE_EMPLOYMENT':
                 draft.item.contactserviceable.status = !action.payload;
                 return draft;
         }

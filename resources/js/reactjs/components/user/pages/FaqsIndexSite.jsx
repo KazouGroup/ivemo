@@ -75,6 +75,32 @@ const FaqsIndexSite = () => {
                                     <h3 className="text-center title">Questions fréquentes posées aux particuliers</h3>
                                     <h5 className="text-center description">Dans cette rubrique, vous trouverez une réponse aux doutes les plus fréquents de nos utilisateurs.</h5>
 
+                                    <div className="row">
+                                        <div className="col-md-6 mx-auto">
+                                            <ul className="nav nav-pills nav-pills-primary nav-pills-icons" role="tablist">
+                                                <li className="nav-item">
+                                                    <a className="nav-link" data-toggle="tab" href="#link7" role="tablist">
+                                                        Home
+                                                    </a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a className="nav-link active" data-toggle="tab" href="#link8"
+                                                       role="tablist">
+                                                        Messages
+                                                    </a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a className="nav-link" data-toggle="tab" href="#link9" role="tablist">
+                                                        Settings
+                                                    </a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+
+                                    </div>
+
+
                                     <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
                                         {mapFaqs}
