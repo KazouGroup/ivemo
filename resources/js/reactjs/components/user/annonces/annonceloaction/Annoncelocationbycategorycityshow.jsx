@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form, Input, Navbar, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
 import FormcontactuseronlocationShow from "./inc/FormcontactuseronlocationShow";
 import Swal from "sweetalert2";
 import AnnoncelocationInteresse from "./AnnoncelocationInteresse";
@@ -561,6 +560,9 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                className="btn btn-sm btn-secondary" title={`${annoncelocation.visits_count} ${annoncelocation.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                 <i className="far fa-eye"></i> <b>{this.data_countFormatter(annoncelocation.visits_count)}</b>
                                                                             </a>
+                                                                            <NavLink to={`/profile/${annoncelocation.user.slug}/statistics/als/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                                <i className="now-ui-icons business_chart-bar-32"/>
+                                                                            </NavLink>
                                                                             <button type="button" rel="tooltip" onClick={() => this.statusItem(annoncelocation)}
                                                                                     className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                                                                 <i className="now-ui-icons ui-1_check" />

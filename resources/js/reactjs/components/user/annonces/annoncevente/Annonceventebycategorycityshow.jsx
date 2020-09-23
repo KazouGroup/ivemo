@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Button, Form, Input} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
-import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import BlogannonceventeIntesseAnnonseShow from "../../blog/blognnoncevente/BlogannonceventeIntesseAnnonseShow";
 import FormcontactuseronannonceventeShow from "./inc/FormcontactuseronannonceventShow";
 import AnnonceventeInteresse from "./AnnonceventeInteresse";
 import Skeleton from "react-loading-skeleton";
@@ -620,6 +618,9 @@ class Annonceventebycategorycityshow extends Component {
                                                                                className="btn btn-sm btn-secondary" title={`${annoncevente.visits_count} ${annoncevente.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                 <i className="far fa-eye"></i> <b>{this.data_countFormatter(annoncevente.visits_count)}</b>
                                                                             </a>
+                                                                            <NavLink to={`/profile/${annoncevente.user.slug}/statistics/avs/${annoncevente.annoncetype.slug}/${annoncevente.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                                <i className="now-ui-icons business_chart-bar-32"/>
+                                                                            </NavLink>
                                                                             <button type="button" rel="tooltip" onClick={() => this.statusItem(annoncevente)}
                                                                                     className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                                                                 <i className="now-ui-icons ui-1_check" />
