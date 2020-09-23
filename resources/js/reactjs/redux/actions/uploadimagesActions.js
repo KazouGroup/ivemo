@@ -2,7 +2,7 @@ import {
     GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
     GET_UPLOADIMAGES_ACTIVITYCITIES,
     GET_UPLOADIMAGES_ANNONCEVENTE_SHOW_USER_SITE,
-} from "./types";
+} from "./index";
 
 import Swal from "sweetalert2";
 

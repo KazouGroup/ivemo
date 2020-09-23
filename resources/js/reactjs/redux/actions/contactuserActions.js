@@ -8,7 +8,7 @@ import {
     ACTIVE_CONTACTUSER_ADD,
     ACTIVE_CONTACTUSER_REMOVE,
     DELETE_CONTACTUSER, GET_ALL_CONTACTSERVICE,
-} from "./types";
+} from "./index";
 import Swal from "sweetalert2";
 import {history} from "../utils/history"
 

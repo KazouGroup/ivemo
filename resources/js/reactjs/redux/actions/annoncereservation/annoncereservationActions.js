@@ -6,7 +6,7 @@ import {
     FAVORITE_ANNONCERESERVATION_ADD,
     FAVORITE_ANNONCERESERVATION_REMOVE,
     UNACTIVE_ANNONCERESERVATION,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

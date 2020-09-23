@@ -6,7 +6,8 @@ const initialState = {
         contactusers: [],
         notifications: [],
         contactservicesemployments: {to: [], from: [], contactserviceable: []},
-        contactservicesannoncelocations: {to: [], from: [], contactserviceable: []}
+        contactservicesannoncelocations: {to: [], from: [], contactserviceable: []},
+        contactservicesannonceventes: {to: [], from: [], contactserviceable: []}
     },
 };
 
@@ -28,7 +29,7 @@ export default produce((draft, action = {}) => {
 
             /* *********End****** */
 
-            /* ********Init contactservice employment****** */
+            /* ********Init contactservice ****** */
 
             case 'GET_RED_CONTACTUSER_SHOW':
                 draft.contactuser = action.payload;
@@ -159,6 +160,50 @@ export default produce((draft, action = {}) => {
             case 'DELETE_CONTACTSERVICE_ANONCELOCATION':
                 let dataalsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
                 if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataalsdelete, 1);
+                //if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
+                return draft;
+
+            /* *********End****** */
+
+            /* ********Init contactservice ventes ****** */
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCEVENTE_ADD':
+                draft.contactservices.contactservicesannonceventes[
+                    draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload)
+                    ].status_favorite = action.payload;
+                return draft;
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCEVENTE_REMOVE':
+                draft.contactservices.contactservicesannonceventes[
+                    draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload)
+                    ].status_favorite = !action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_ADD':
+                let dataavsdd = draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannonceventes[dataavsdd].status_archvement = action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_REMOVE':
+                let dataavsremove = draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannonceventes[dataavsremove].status_archvement = !action.payload;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCEVENTE_ADD':
+                let dataavsactive = draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload);
+                if (dataavsactive !== -1) draft.contactservices.contactservicesannonceventes[dataavsactive].status_red = action.payload;
+                if (dataavsactive !== -1) draft.contactservices.contactservicesannonceventes_count--;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCEVENTE_REMOVE':
+                let dataavsremoveactive = draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload);
+                if (dataavsremoveactive !== -1) draft.contactservices.contactservicesannonceventes[dataavsremoveactive].status_red = !action.payload;
+                if (dataavsremoveactive !== -1) draft.contactservices.contactservicesannonceventes_count++;
+                return draft;
+
+            case 'DELETE_CONTACTSERVICE_ANONCEVENTE':
+                let dataavsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
+                if (dataavsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataavsdelete, 1);
                 //if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
                 return draft;
 

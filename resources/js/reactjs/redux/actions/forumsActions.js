@@ -2,7 +2,7 @@ import {
     GET_ALL_FAVORITES_BY_USER,
     DELETE_FAVORITES_FORUMS,
     DELETE_FAVORITES_EMPLOYMENTS,
-} from "./types";
+} from "./index";
 
 import Swal from "sweetalert2";
 

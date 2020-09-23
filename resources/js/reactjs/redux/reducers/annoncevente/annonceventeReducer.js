@@ -55,7 +55,6 @@ export default produce((draft, action = {}) => {
                 if (dataunactive !== -1) draft.annonceventes.splice(dataunactive, 1);
                 return draft;
 
-
             case 'ACTIVE_CO_ANNONCEVENTE':
                 let datacounactive = draft.annonceventes.findIndex(i => i.id === action.payload);
                 if (datacounactive !== -1) draft.annonceventes[datacounactive].status = action.payload;

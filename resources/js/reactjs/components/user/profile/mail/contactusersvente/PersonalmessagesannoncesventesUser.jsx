@@ -3,72 +3,30 @@ import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import HeadermailmessageUser from "../inc/HeadermailmessageUser";
-import Swal from "sweetalert2";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {
+    activecontactaddItem, activecontactremoveItem,
+    archvementaddItem, archvementremoveItem, deletecontactItem,
+    favoriteaddItem, favoriteremoveItem,
+    loadAllcontactservices
+} from "../../../../../redux/actions/annoncevente/contactuserannonceventeActions";
+import HelmetSite from "../../../../inc/user/HelmetSite";
+import EmptyItems from "../../../../inc/user/EmptyItems";
+import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
 
 
 class PersonalmessagesannoncesventesUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactusersventes: {contactusersventes:[]},
             visiable: 20,
         };
 
-        this.deleteItem = this.deleteItem.bind(this);
         this.readItem = this.readItem.bind(this);
-        this.activeItem = this.activeItem.bind(this);
-        this.unactiveItem = this.unactiveItem.bind(this);
         this.loadmoresItem = this.loadmoresItem.bind(this);
-        this.unfavoriteItem = this.unfavoriteItem.bind(this);
-        this.favoriteItem = this.favoriteItem.bind(this);
-        this.unarchvementItem = this.unarchvementItem.bind(this);
-        this.archvementItem = this.archvementItem.bind(this);
-    }
-
-
-    unfavoriteItem(id){
-        const url = route('personal_contactusersvente_mails_unfavorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    favoriteItem(id){
-        const url = route('personal_contactusersvente_mails_favorite.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    activeItem(id) {
-        const url = route('personal_contactusersvente_mails_active.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    unactiveItem(id) {
-        const url = route('personal_contactusersvente_mails_unactive.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    unarchvementItem(id){
-        const url = route('personal_contactusersvente_mails_unarchvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
-    }
-
-    archvementItem(id){
-        const url = route('personal_contactusersvente_mails_archvement.site', [id]);
-        dyaxios.get(url).then(() => {
-            this.loadItems();
-        })
     }
 
     loadmoresItem() {
@@ -77,101 +35,49 @@ class PersonalmessagesannoncesventesUser extends Component {
         })
     }
 
-    readItem(item) {
-
-        const url = route('personal_contactusersvente_mails_unactive.site', [item.id]);
-        dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/annonces_ventes/${item.slug}/`);
-        })
-
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('personal_annonces_ventes_mails_delete.site', id);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    this.loadItems();
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                        // title: 'Update',
-                        message: 'Message suprimée avec success'
-                    },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
     loadItems() {
-        let itemuser = this.props.match.params.user;
-        dyaxios.get(route('api.personal_mails_annonces_ventes.site', [itemuser])).then(response => this.setState({ contactusersventes: response.data, }));
+        this.props.loadAllcontactservices(this.props);
     }
 
-   // Lifecycle Component Method
+
+    readItem(item) {
+        const url = route('contactservice_red', [item.id]);
+        dyaxios.get(url).then(() => {
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/avs_contactservice_show/${item.slug}/`);
+        })
+    }
+
+    // Lifecycle Component Method
     componentDidMount() {
         this.loadItems();
 
     }
 
-
     render() {
-        const { contactusersventes, visiable } = this.state;
-        const mapContactusers = contactusersventes.contactusersventes.length ? (
-            contactusersventes.contactusersventes.slice(0, visiable).map(item => {
+        const { contactusersprofile } = this.props;
+        const {  visiable } = this.state;
+        const mapContactusers = contactusersprofile.contactservicesannonceventes.length ? (
+            contactusersprofile.contactservicesannonceventes.slice(0, visiable).map(item => {
                 return (
 
-                    <HeadermailmessageUser key={item.id} {...item} readItem={this.readItem} deleteItem={this.deleteItem}
-                                           activeItem={this.activeItem} unactiveItem={this.unactiveItem}
-                                           archvementItem={this.archvementItem} unarchvementItem={this.unarchvementItem}
-                                           unfavoriteItem={this.unfavoriteItem} favoriteItem={this.favoriteItem} />
+                    <MailcontactserviceList key={item.id} {...item}
+                                            favoriteaddItem={this.props.favoriteaddItem}
+                                            favoriteremoveItem={this.props.favoriteremoveItem}
+                                            archvementaddItem={this.props.archvementaddItem}
+                                            archvementremoveItem={this.props.archvementremoveItem}
+                                            activecontactaddItem={this.props.activecontactaddItem}
+                                            activecontactremoveItem={this.props.activecontactremoveItem}
+                                            readItem={this.readItem} deletecontactItem={this.props.deletecontactItem} />
                 )
             })
         ) : (
-                <></>
-            );
+            <></>
+        );
+
         return (
 
             <>
-                <Helmet>
-                    <title>Messages contact annonces ventes {`${$userIvemo.first_name}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Messages contact ${$userIvemo.first_name} - ${$name_site}`} />
 
                 <div className="landing-page sidebar-collapse">
 
@@ -198,41 +104,12 @@ class PersonalmessagesannoncesventesUser extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <NavlinkmailmessageUser {...this.props} {...contactusersventes}/>
+                                                            <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div className="card">
-                                            <div className="card-body">
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
-                                                            <div className="card-body">
-                                                                <table>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/${contactusersventes.slug}/personal_mails/archvement_annonces_ventes/`}>{contactusersventes.archvementcontactusersventes_count > 1 ? "Messages archivés" : "Message archivé"}</NavLink></td>
-                                                                        <td className="text-right"> {contactusersventes.archvementcontactusersventes_count} {contactusersventes.archvementcontactusersventes_count > 1 ? "messages" : "message"}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> <NavLink to={`/profile/${contactusersventes.slug}/personal_mails/favorite_annonces_ventes/`}>{contactusersventes.favoritecontactusersventes_count > 1 ? "Messages suivis" : "Message suivis"}</NavLink></td>
-                                                                        <td className="text-right"> {contactusersventes.favoritecontactusersventes_count} {contactusersventes.favoritecontactusersventes_count > 1 ? "messages" : "message"}</td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
-
                                         </div>
 
                                     </div>
@@ -242,7 +119,7 @@ class PersonalmessagesannoncesventesUser extends Component {
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception des messages de vos annonces sur la vente.</strong>
+                                                <strong>Boite de réception des ventes</strong>
                                             </div>
                                         </div>
 
@@ -255,16 +132,22 @@ class PersonalmessagesannoncesventesUser extends Component {
                                         )}
 
                                         <div className="card">
+
                                             <div className="card-body">
                                                 <table>
                                                     <tbody>
 
-                                                        {mapContactusers}
+                                                    {contactusersprofile.contactservicesannonceventes.length ?
+                                                        <>
+                                                            {contactusersprofile.contactservicesannonceventes.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Contacts Ventes"}/>}
+                                                        </>:null}
 
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            {visiable < contactusersventes.contactusersventes.length && (
+
+
+                                            {visiable < contactusersprofile.contactservicesannonceventes.length && (
                                                 <div className="row">
                                                     <div className="col-md-4 ml-auto mr-auto text-center">
                                                         <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -281,14 +164,16 @@ class PersonalmessagesannoncesventesUser extends Component {
 
                                 </div>
 
+
                             </div>
+
+
 
                         </div>
 
                         <FooterBigUserSite />
 
                     </div>
-
                 </div>
 
 
@@ -297,4 +182,20 @@ class PersonalmessagesannoncesventesUser extends Component {
         )
     }
 }
-export default PersonalmessagesannoncesventesUser;
+PersonalmessagesannoncesventesUser.propTypes = {
+    loadAllcontactservices: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+
+    contactusersprofile: state.contactusers.contactservices
+
+});
+
+export default connect(mapStateToProps, {
+    loadAllcontactservices,
+    favoriteaddItem,favoriteremoveItem,
+    archvementaddItem,archvementremoveItem,
+    activecontactaddItem,activecontactremoveItem,
+    deletecontactItem
+})(PersonalmessagesannoncesventesUser);

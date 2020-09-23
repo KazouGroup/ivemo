@@ -3,7 +3,7 @@ import {
     LIKE_CITY_ADD,
     LIKE_CITY_REMOVE,
     LIKE_ANNONCELOCATION_ADD,
-} from "./types";
+} from "./index";
 
 import Swal from "sweetalert2";
 

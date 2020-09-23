@@ -6,7 +6,7 @@ import {
     UNACTIVE_BLOGANNONCEVENTE,
     LIKE_BLOGANNONCEVENTE_ADD,
     LIKE_BLOGANNONCEVENTE_REMOVE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

@@ -55,12 +55,12 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_annonceventes_site');
 
             Route::get(
-                'profile/{user}/statistics/als/{annoncevente:slugin}',
+                'profile/{user}/statistics/avs/{annoncevente:slugin}',
                 'ContactservicannonceventeController@apicontactservice_statistique'
             )->name('api.contactservice_annonceventesbyuserbystatistique_site');
 
             Route::get(
-                'profile/{user}/statistics/avss_contactservice_show/{contactservice:slug}',
+                'profile/{user}/statistics/avs_contactservice_show/{contactservice:slug}',
                 'ContactservicannonceventeController@apicontactservice_statistiqueshow'
             )->name('api.contactservice_annonceventesbyuserbystatistiqueshow_site');
 

@@ -4,7 +4,7 @@ import {
     LIKE_BLOGANNONCELOCATION_SHOW_REMOVE,
     FAVORITE_BLOGANNONCELOCATION_SHOW_ADD,
     FAVORITE_BLOGANNONCELOCATION_SHOW_REMOVE,
-} from "../types";
+} from "../index";
 
 
 export const loadBlogannoncelocationshow = (props) => dispatch => {

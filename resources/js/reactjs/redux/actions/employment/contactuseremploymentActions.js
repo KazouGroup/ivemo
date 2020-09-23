@@ -7,7 +7,7 @@ import {
     ACTIVE_CONTACTSERVICE_EMPLOYMENT_ADD,
     ACTIVE_CONTACTSERVICE_EMPLOYMENT_REMOVE,
     DELETE_CONTACTSERVICE_EMPLOYMENT,
-} from "../types";
+} from "../index";
 import Swal from "sweetalert2";
 
 

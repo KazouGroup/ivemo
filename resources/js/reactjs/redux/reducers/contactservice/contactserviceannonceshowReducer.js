@@ -2,15 +2,12 @@ import produce from "immer"
 
 
 const initialState = {
-    item: {contactserviceable: {categoryannoncelocation: [],annoncetype:[],uploadimages:[], user: {profile: []}, city: []}, from: []}
+    item: {contactserviceable: {}, from: []}
 };
 
 
 export default produce((draft, action = {}) => {
         switch (action.type) {
-            case 'GET_RED_CONTACTSERVICANONCELOCATION_SHOW':
-                draft.item = action.payload;
-                return;
 
             case 'FAVORITE_CONTACTSERVICE_ADD':
                 draft.item.status_favorite = action.payload;
@@ -36,11 +33,27 @@ export default produce((draft, action = {}) => {
                 draft.item.status_red = !action.payload;
                 return draft;
 
+            case 'GET_RED_CONTACTSERVICANONCELOCATION_SHOW':
+                draft.item = action.payload;
+                return;
+
             case 'ACTIVE_CO_ANNONCELOCATION':
                 draft.item.contactserviceable.status = action.payload;
                 return draft;
 
             case 'UNACTIVE_CO_ANNONCELOCATION':
+                draft.item.contactserviceable.status = !action.payload;
+                return draft;
+
+            case 'GET_RED_CONTACTSERVICANONCEVENTE_SHOW':
+                draft.item = action.payload;
+                return;
+
+            case 'ACTIVE_CO_P_ANNONCEVENTE':
+                draft.item.contactserviceable.status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_CO_P_ANNONCEVENTE':
                 draft.item.contactserviceable.status = !action.payload;
                 return draft;
         }

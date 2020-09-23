@@ -1,6 +1,7 @@
 import {
     GET_RED_CONTACTSERVICEMPLOYMENT_SHOW,
     GET_RED_CONTACTSERVICANONCELOCATION_SHOW,
+    GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
     GET_RED_CONTACTSERVICEMPLOYMENT,
     GET_RED_CONTACTSERVICELOCATION,
     FAVORITE_CONTACTSERVICE_ADD,
@@ -10,12 +11,14 @@ import {
     ACTIVE_CONTACTSERVICE_ADD,
     ACTIVE_CONTACTSERVICE_REMOVE,
     UNACTIVE_ANNONCE_EMPLOYMENT,
-    UNACTIVE_CO_ANNONCELOCATION,
     ACTIVE_ANNONCE_EMPLOYMENT,
+    UNACTIVE_CO_ANNONCELOCATION,
     ACTIVE_CO_ANNONCELOCATION,
+    UNACTIVE_CO_P_ANNONCEVENTE,
+    ACTIVE_CO_P_ANNONCEVENTE,
     DELETE_CONTACTSERVICE,
     GET_ALL_CONTACTSERVICE,
-} from "./types";
+} from "./index";
 import Swal from "sweetalert2";
 import {history} from "../utils/history"
 
@@ -248,6 +251,64 @@ export const unactiveprivatealsItem = props => dispatch => {
     ).catch(error => console.error(error));
 };
 
+export const activeavsItem = props => dispatch => {
+
+    const url = route('annonces_ventes_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_CO_P_ANNONCEVENTE,
+                payload: props.id
+            });
+
+        $.notify({
+                message: "Cette annonce est visible aux utilisateurs",
+            },
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const unactiveprivateavsItem = props => dispatch => {
+
+    const url = route('annonces_ventes_status.site', [props.id]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: UNACTIVE_CO_P_ANNONCEVENTE,
+                payload: props.id
+            });
+
+        $.notify({
+                message: "Cette annonce a été masquée aux utilisateurs",
+            },
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
 export const deletecontactItem = id => dispatch => {
 
     Swal.fire({
@@ -329,6 +390,19 @@ export const loadContactserviceannoncelocationsredmessage = props => dispatch =>
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICANONCELOCATION_SHOW,
+            payload: response.data
+        })
+    ).catch(error => console.error(error));
+};
+
+export const loadContactserviceannonceventesredmessage = props => dispatch => {
+
+    let itemUser = props.match.params.user;
+    let itemContactservice = props.match.params.contactservice;
+    let url = route('api.contactservice_annonceventesbyuserbystatistiqueshow_site', [itemUser, itemContactservice]);
+    dyaxios.get(url).then(response =>
+        dispatch({
+            type: GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
             payload: response.data
         })
     ).catch(error => console.error(error));

@@ -48,8 +48,7 @@ class FooterUserSite extends Component {
                             </ul>
                         </nav>
                         <div className="copyright" id="copyright">
-                            &copy;
-                            { new Date().getFullYear()}, Designed by
+                            Copyright &copy; 2020 - {new Date().getFullYear()}. Designed by
                             <Link to={`/`}> {$name_site}</Link>. Coded by
                             <a href="/" target="_bank"> KazouGroup Srl</a>.
                         </div>

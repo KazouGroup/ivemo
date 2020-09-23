@@ -248,8 +248,8 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/statistics/als_contactservice_show/:contactservice/" component={PersonalmessagesannonceslocationsShowUser}/>
 
 
-          <Route exact path="/profile/:user/personal_mails/annonces_ventes/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
-          <Route exact path="/profile/:user/personal_mails/annonces_ventes/:contactusersvente/" component={PersonalmessagesannoncesventesShowUser}/>
+          <Route exact path="/profile/:user/personal_mails/avs/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
+          <Route exact path="/profile/:user/statistics/avs_contactservice_show/:contactservice/" component={PersonalmessagesannoncesventesShowUser}/>
 
           <Route exact path="/profile/:user/personal_mails/employments/" component={PersonalmessagesemploymentsUser}/>
 

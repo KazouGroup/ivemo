@@ -23,7 +23,7 @@ import {
     SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
     UNACTIVE_EMPLOYEMENT,
     UNACTIVE_PRIVATE_EMPLOYEMENT,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

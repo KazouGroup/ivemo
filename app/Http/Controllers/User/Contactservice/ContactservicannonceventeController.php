@@ -14,6 +14,7 @@ use App\Model\user;
 use App\Services\Contactusers\ContactusersventeService;
 use App\Model\contactservice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactservicannonceventeController extends Controller
 {
@@ -31,17 +32,27 @@ class ContactservicannonceventeController extends Controller
 
     public function contactservice(user $user)
     {
-        return view('user.contactservice.employment.index', compact('user'));
+        $this->authorize('update',$user);
+
+        return view('user.contactservice.index', compact('user'));
     }
 
-    public function contactservice_statistique($user, annoncevente $annoncevente)
+    public function personalmessagesdatas(user $user)
     {
-        return view('user.contactservice.annoncevente.show', compact('annoncevente'));
+        $this->authorize('update',$user);
+
+        return view('user.contactservice.index', compact('user'));
     }
 
-    public function contactservice_statistiqueshow($user, $annoncevente,contactservice $contactservice )
+    public function contactservice_statistique(user $user, annoncetype $annoncetype,annoncevente $annoncevente)
     {
-        return view('user.contactservice.annoncevente.showcontact', compact('contactservice'));
+        return view('user.contactservice.show', compact('user'));
+    }
+
+    public function contactservice_statistiqueshow($user,contactservice $contactservice)
+    {
+
+        return view('user.contactservice.showcontact', compact('contactservice'));
     }
 
     public function sendcontactserviceannonce(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
@@ -68,19 +79,25 @@ class ContactservicannonceventeController extends Controller
     {
         $this->authorize('update',$user);
 
-        $contactservices = $user->annonceventes()
-        ->with('user','city','annoncetype','categoryannoncevente')
-        ->whereIn('user_id',[$user->id])
-        ->with(['user' => function ($q) {$q->with('profile')
-            ->distinct()->get();}])
-        ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-        ->whereHas('city', function ($q) {$q->where('status',1);})
-        ->withCount(['contactservices' => function ($q) use ($user){
-            $q->where(['status_red' => 0])->whereIn('to_id',[$user->id]);
-        }])->orderBy('contactservices_count','desc')
-        ->has('contactservices','>=',1)
-        //->having('contactservices_count', '>=', 1)
-        ->distinct()->get();
+        $contactservices = $user->annoncelocations()
+            ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
+            ->whereIn('user_id',[$user->id])
+            ->with(['user' => function ($q) {$q->with('profile')
+                ->distinct()->get();}])
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->with(['uploadimages' => function ($q) use ($user){
+                $q->where(['status' => 1])
+                    ->get();
+            }])
+            ->withCount(['uploadimages' => function ($q) use ($user){
+                $q->where(['status' => 1]);
+            }])
+            ->withCount(['contactservices' => function ($q) use ($user){
+                $q->where(['status_red' => 0])->whereIn('to_id',[$user->id]);
+            }])->orderBy('contactservices_count','desc')
+            ->has('contactservices','>=',1)
+            ->distinct()->get();
 
         return response()->json($contactservices,200);
 
@@ -115,17 +132,18 @@ class ContactservicannonceventeController extends Controller
     //}
 
 
-    public function apicontactservice_statistiqueshow(user $user, annoncevente $annoncevente,contactservice $contactservice)
+    public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
     {
         $contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
         ->with('to','from','contactserviceable')
-        ->whereIn('to_id',[$user->id])
-        ->with(['contactserviceable' => function ($q) use ($user){
-            $q->whereIn('user_id',[$user->id])
-            ->with('user','city','categoryemployment','member')
-            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
-            ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},
+        ->whereIn('to_id',[Auth::id()])
+        ->with(['contactserviceable' => function ($q){
+            $q->whereIn('user_id',[Auth::id()])
+                ->withCount(['uploadimages'])
+                ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
+                ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
+                ->whereHas('city', function ($q) {$q->where('status',1);})
+                ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},
         ])->first());
 
 

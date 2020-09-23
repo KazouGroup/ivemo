@@ -1,4 +1,4 @@
-import {GET_WORKWITHUSES, GET_WORKWITHUSES_BY_CATEGORIES,GET_WORKWITHUSES_SHOW} from "../actions/types";
+import {GET_WORKWITHUSES, GET_WORKWITHUSES_BY_CATEGORIES,GET_WORKWITHUSES_SHOW} from "../actions";
 
 const initialState = {
     items: [],

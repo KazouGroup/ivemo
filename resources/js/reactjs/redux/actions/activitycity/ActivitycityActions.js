@@ -9,7 +9,7 @@ import {
     LIKE_ACTIVITYCITIES_SHOW_REMOVE,
     FAVORITE_ACTIVITYCITIES_SHOW_ADD,
     FAVORITE_ACTIVITYCITIES_SHOW_REMOVE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

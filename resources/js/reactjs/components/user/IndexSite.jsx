@@ -40,8 +40,8 @@ class IndexSite extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-10 ml-auto mr-auto">
-                                        <h4 className="title">Le portail immobilier pour trouver des maisons à vendre et à louer. Recherchez l'appartement idéal au cameroun et aussi trouvez un Job ou participer à un événement</h4>
+                                    <div className="col-md-11 ml-auto mr-auto">
+                                        <h3 className="title">Le portail immobilier pour trouver des maisons à vendre et à louer</h3>
                                     </div>
                                 </div>
                                 <div className="row">

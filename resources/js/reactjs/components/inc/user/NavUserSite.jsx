@@ -238,6 +238,10 @@ class NavUserSite extends PureComponent {
                                                                 <Link to={`/profile/${$userIvemo.slug}/personal_mails/als/`} className="dropdown-item">
                                                                     <span className="ivemoItemsCount">{contactusersprofile.contactservicesannoncelocations_count}</span> {contactusersprofile.contactservicesannoncelocations_count > 1 ? "Locations" : "Location"}
                                                                 </Link>
+
+                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/avs/`} className="dropdown-item">
+                                                                    <span className="ivemoItemsCount">{contactusersprofile.contactservicesannonceventes_count}</span> {contactusersprofile.contactservicesannonceventes_count > 1 ? "Ventes" : "Vente"}
+                                                                </Link>
                                                             </div>
                                                         </li>
 

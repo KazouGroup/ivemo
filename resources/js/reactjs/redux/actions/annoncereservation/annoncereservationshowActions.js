@@ -11,7 +11,7 @@ import {
     FOLLOWERUSER_REMOVE,
     SUBSCRIBE_USER_FOR_ANNONCERESERVATION_ADD,
     SUBSCRIBE_USER_FOR_ANNONCERESERVATION_REMOVE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

@@ -18,7 +18,7 @@ import {
     GET_PROFILE_USER_FOR_PRIVATE,
     ACTIVE_CO_ANNONCEVENTE,
     UNACTIVE_CO_ANNONCEVENTE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

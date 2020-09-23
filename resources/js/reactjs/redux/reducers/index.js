@@ -20,12 +20,11 @@ import contactservicesReducer from "./contactservice/contactservicesReducer";
 import favoritesReducer from "./favoritesReducer";
 import pageReducer from "./pageReducer";
 import uploadimagesReducer from "./uploadimagesReducer";
-import contactserviceannoncelocationcontactshowReducer
-    from "./contactservice/contactserviceannoncelocationcontactshowReducer";
 import contactserviceemployemantstatistiqueshowReducer
     from "./contactservice/contactserviceemployemantstatistiqueshowReducer";
 import contactservicelocationstatistiqueshowReducer
     from "./contactservice/contactservicelocationstatistiqueshowReducer";
+import contactserviceannonceshowReducer from "./contactservice/contactserviceannonceshowReducer";
 
 
 
@@ -51,7 +50,7 @@ export default combineReducers({
     profile: profileReducer,
     contactusers: contactservicesReducer,
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
-    contactserviceannoncelocationcontactshow: contactserviceannoncelocationcontactshowReducer,
+    contactserviceannonceshow: contactserviceannonceshowReducer,
     contactserviceemploymentstatistiqueshow: contactserviceemployemantstatistiqueshowReducer,
     contactservicelocationstatistiqueshow: contactservicelocationstatistiqueshowReducer,
 })

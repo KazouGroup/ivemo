@@ -10,7 +10,7 @@ import {
     FOLLOWERUSER_ADD,
     FOLLOWERUSER_REMOVE,
     SUBSCRIBE_USER_FOR_EMPLOYEMENT_ADD, SUBSCRIBE_USER_FOR_EMPLOYEMENT_REMOVE,
-} from "../types";
+} from "../index";
 import Swal from "sweetalert2";
 
 

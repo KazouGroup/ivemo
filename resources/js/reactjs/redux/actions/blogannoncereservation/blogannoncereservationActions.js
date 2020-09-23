@@ -6,7 +6,7 @@ import {
     UNACTIVE_BLOGANNONCERESERVATION,
     LIKE_BLOGANNONCERESERVATION_ADD,
     LIKE_BLOGANNONCERESERVATION_REMOVE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

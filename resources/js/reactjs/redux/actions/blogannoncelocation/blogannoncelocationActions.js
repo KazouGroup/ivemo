@@ -6,7 +6,7 @@ import {
     UNACTIVE_BLOGANNONCELOCATION,
     LIKE_BLOGANNONCELOCATION_ADD,
     LIKE_BLOGANNONCELOCATION_REMOVE,
-} from "../types";
+} from "../index";
 
 import Swal from "sweetalert2";
 

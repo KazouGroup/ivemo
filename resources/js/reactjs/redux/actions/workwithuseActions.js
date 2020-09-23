@@ -1,4 +1,4 @@
-import {GET_WORKWITHUSES, GET_WORKWITHUSES_BY_CATEGORIES,GET_WORKWITHUSES_SHOW} from "./types";
+import {GET_WORKWITHUSES, GET_WORKWITHUSES_BY_CATEGORIES,GET_WORKWITHUSES_SHOW} from "./index";
 
 
 export const loadItems = () => dispatch => {

@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment, Suspense} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {loadUploadimageActivitycities} from "../../../redux/actions/uploadimagesActions";

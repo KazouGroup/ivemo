@@ -98,14 +98,14 @@ class PrivateUserAnnonceventeList extends PureComponent {
                                                     <>
                                                         {this.props.status ?
                                                             <>
-                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveprivatealsItem(this.props)}
+                                                                <button type="button" rel="tooltip" onClick={() => this.props.unactiveprivateavsItem(this.props)}
                                                                         className="btn btn-success btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_check"/>
                                                                 </button>
                                                             </>
                                                             :
                                                             <>
-                                                                <button type="button" onClick={() => this.props.activeaslItem(this.props)}
+                                                                <button type="button" onClick={() => this.props.activeavsItem(this.props)}
                                                                         className="btn btn-primary btn-icon btn-sm">
                                                                     <i className="now-ui-icons ui-1_simple-delete"/>
                                                                 </button>

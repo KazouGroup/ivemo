@@ -100,7 +100,7 @@ class PersonalmessagesemploymentsUser extends Component {
                                 <div className="row">
 
 
-                                    <div className="col-lg-3 col-md-12 mx-auto">
+                                    <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="card">
                                             <div className="card-body">
@@ -119,7 +119,7 @@ class PersonalmessagesemploymentsUser extends Component {
                                     </div>
 
 
-                                    <div className="col-lg-9 col-md-12 mx-auto">
+                                    <div className="col-lg-8 col-md-12 mx-auto">
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">

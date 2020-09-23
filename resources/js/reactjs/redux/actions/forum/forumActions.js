@@ -17,7 +17,7 @@ import {
     FOLLOWERUSER_REMOVE,
     GET_PROFILE_USER_FOR_PRIVATE, SUBSCRIBE_USER_FOR_FORUM_ADD, SUBSCRIBE_USER_FOR_FORUM_REMOVE,
 
-} from "../types";
+} from "../index";
 import Swal from "sweetalert2";
 
 

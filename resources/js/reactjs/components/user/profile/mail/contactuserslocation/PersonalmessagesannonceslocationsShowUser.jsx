@@ -404,7 +404,7 @@ PersonalmessagesannonceslocationsShowUser.propTypes = {
 
 const mapStateToProps = state => ({
 
-    contactservice: state.contactserviceannoncelocationcontactshow.item,
+    contactservice: state.contactserviceannonceshow.item,
     contactusersprofile: state.contactusers.contactservices
 
 });

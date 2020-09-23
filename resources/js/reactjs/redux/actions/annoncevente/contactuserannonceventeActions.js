@@ -1,12 +1,12 @@
 import {
     GET_ALL_CONTACTSERVICE,
-    ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_ADD,
-    ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_REMOVE,
-    FAVORITE_CONTACTSERVICE_ANONCELOCATION_ADD,
-    FAVORITE_CONTACTSERVICE_ANONCELOCATION_REMOVE,
-    ACTIVE_CONTACTSERVICE_ANONCELOCATION_ADD,
-    ACTIVE_CONTACTSERVICE_ANONCELOCATION_REMOVE,
-    DELETE_CONTACTSERVICE_ANONCELOCATION,
+    ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_ADD,
+    ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_REMOVE,
+    FAVORITE_CONTACTSERVICE_ANONCEVENTE_ADD,
+    FAVORITE_CONTACTSERVICE_ANONCEVENTE_REMOVE,
+    ACTIVE_CONTACTSERVICE_ANONCEVENTE_ADD,
+    ACTIVE_CONTACTSERVICE_ANONCEVENTE_REMOVE,
+    DELETE_CONTACTSERVICE_ANONCEVENTE,
 } from "../index";
 import Swal from "sweetalert2";
 
@@ -17,7 +17,7 @@ export const activecontactaddItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: ACTIVE_CONTACTSERVICE_ANONCELOCATION_ADD,
+                type: ACTIVE_CONTACTSERVICE_ANONCEVENTE_ADD,
                 payload: id
             });
         }
@@ -30,7 +30,7 @@ export const activecontactremoveItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: ACTIVE_CONTACTSERVICE_ANONCELOCATION_REMOVE,
+                type: ACTIVE_CONTACTSERVICE_ANONCEVENTE_REMOVE,
                 payload: id
             });
         }
@@ -44,7 +44,7 @@ export const archvementaddItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_ADD,
+                type: ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_ADD,
                 payload: id
             });
         }
@@ -57,7 +57,7 @@ export const archvementremoveItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: ARCHVEMENT_CONTACTSERVICE_ANONCELOCATION_REMOVE,
+                type: ARCHVEMENT_CONTACTSERVICE_ANONCEVENTE_REMOVE,
                 payload: id
             });
         }
@@ -70,7 +70,7 @@ export const favoriteaddItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: FAVORITE_CONTACTSERVICE_ANONCELOCATION_ADD,
+                type: FAVORITE_CONTACTSERVICE_ANONCEVENTE_ADD,
                 payload: id
             });
         }
@@ -83,7 +83,7 @@ export const favoriteremoveItem = id => dispatch => {
     dyaxios.post(url).then(() => {
 
             dispatch({
-                type: FAVORITE_CONTACTSERVICE_ANONCELOCATION_REMOVE,
+                type: FAVORITE_CONTACTSERVICE_ANONCEVENTE_REMOVE,
                 payload: id
             });
         }
@@ -111,7 +111,7 @@ export const deletecontactItem = id => dispatch => {
             dyaxios.delete(url).then(() => {
 
                 dispatch({
-                    type: DELETE_CONTACTSERVICE_ANONCELOCATION,
+                    type: DELETE_CONTACTSERVICE_ANONCEVENTE,
                     payload: id
                 });
 

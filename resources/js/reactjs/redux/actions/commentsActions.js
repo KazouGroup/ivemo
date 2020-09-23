@@ -12,7 +12,7 @@ import {
     LIKE_COMMENT_REMOVE,
     UNACTIVE_COMMENTS,
     DELETE_COMMENTS,
-} from "./types";
+} from "./index";
 
 import Swal from "sweetalert2";
 
