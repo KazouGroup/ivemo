@@ -93,7 +93,7 @@ class ContactservicannoncelocationController extends Controller
         $this->authorize('update',$user);
 
         $contactservices = $user->annoncelocations()
-        ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+        ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce','uploadimages')
         ->whereIn('user_id',[$user->id])
         ->with(['user' => function ($q) {$q->with('profile')
             ->distinct()->get();}])
@@ -132,7 +132,7 @@ class ContactservicannoncelocationController extends Controller
                     ->distinct()->get()
                 ;},
             ])
-            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+            ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce','uploadimages')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])->first());
@@ -154,7 +154,7 @@ class ContactservicannoncelocationController extends Controller
         ->with(['contactserviceable' => function ($q){
             $q->whereIn('user_id',[Auth::id()])
                 ->withCount(['uploadimages'])
-            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages')
+            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages','periodeannonce')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},

@@ -12,8 +12,8 @@ import {
     ACTIVE_CONTACTSERVICE_REMOVE,
     UNACTIVE_ANNONCE_EMPLOYMENT,
     ACTIVE_ANNONCE_EMPLOYMENT,
-    UNACTIVE_CO_ANNONCELOCATION,
-    ACTIVE_CO_ANNONCELOCATION,
+    UNACTIVE_CO_P_ANNONCELOCATION,
+    ACTIVE_CO_P_ANNONCELOCATION,
     UNACTIVE_CO_P_ANNONCEVENTE,
     ACTIVE_CO_P_ANNONCEVENTE,
     DELETE_CONTACTSERVICE,
@@ -199,7 +199,7 @@ export const activeaslItem = props => dispatch => {
     dyaxios.get(url).then(() => {
 
             dispatch({
-                type: ACTIVE_CO_ANNONCELOCATION,
+                type: ACTIVE_CO_P_ANNONCELOCATION,
                 payload: props.id
             });
 
@@ -228,7 +228,7 @@ export const unactiveprivatealsItem = props => dispatch => {
     dyaxios.get(url).then(() => {
 
             dispatch({
-                type: UNACTIVE_CO_ANNONCELOCATION,
+                type: UNACTIVE_CO_P_ANNONCELOCATION,
                 payload: props.id
             });
 

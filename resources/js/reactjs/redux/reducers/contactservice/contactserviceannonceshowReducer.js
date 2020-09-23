@@ -37,11 +37,11 @@ export default produce((draft, action = {}) => {
                 draft.item = action.payload;
                 return;
 
-            case 'ACTIVE_CO_ANNONCELOCATION':
+            case 'ACTIVE_CO_P_ANNONCELOCATION':
                 draft.item.contactserviceable.status = action.payload;
                 return draft;
 
-            case 'UNACTIVE_CO_ANNONCELOCATION':
+            case 'UNACTIVE_CO_P_ANNONCELOCATION':
                 draft.item.contactserviceable.status = !action.payload;
                 return draft;
 
