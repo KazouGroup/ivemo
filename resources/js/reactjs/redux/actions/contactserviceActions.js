@@ -4,6 +4,7 @@ import {
     GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
     GET_RED_CONTACTSERVICEMPLOYMENT,
     GET_RED_CONTACTSERVICELOCATION,
+    GET_RED_CONTACTSERVICEVENTE,
     FAVORITE_CONTACTSERVICE_ADD,
     FAVORITE_CONTACTSERVICE_REMOVE,
     ARCHVEMENT_CONTACTSERVICE_ADD,
@@ -441,6 +442,20 @@ export const loadContactservicelocationshow = props => dispatch => {
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICELOCATION,
+            payload: response.data
+        })
+    ).catch(error => console.error(error));
+};
+
+export const loadContactserviceventeshow = props => dispatch => {
+
+    let itemUser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemannoncevente = props.match.params.annoncevente;
+    let url = route('api.contactservice_annonceventesbyuserbystatistique_site', [itemUser,itemannoncetype,itemannoncevente]);
+    dyaxios.get(url).then(response =>
+        dispatch({
+            type: GET_RED_CONTACTSERVICEVENTE,
             payload: response.data
         })
     ).catch(error => console.error(error));

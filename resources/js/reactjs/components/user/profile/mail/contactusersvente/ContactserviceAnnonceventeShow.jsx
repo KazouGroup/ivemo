@@ -4,29 +4,27 @@ import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import Swal from "sweetalert2";
-import moment from "moment";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import { Button } from "reactstrap";
 import {connect} from "react-redux";
 import {
     activecontactaddItem, activecontactremoveItem,
-    unactiveprivateItem, activeItem,
+    unactiveprivateavsItem, activeavsItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
-    loadContactservicelocationshow, deletecontactItem,
-    activeaslItem, unactiveprivatealsItem,
+    loadContactserviceventeshow, deletecontactItem,
 
 } from "../../../../../redux/actions/contactserviceActions";
 import PropTypes from "prop-types";
-import Navannoncelocationsbyuser from "../../../annonces/annonceloaction/inc/Navannoncelocationsbyuser";
-import Navlinknewannoncelocation from "../../../annonces/annonceloaction/treatment/Navlinknewannoncelocation";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
 import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
-import PrivateUserAnnonceslocationList from "../../../annonces/annonceloaction/inc/PrivateUserAnnonceslocationList";
+import Navlinknewannoncevente from "../../../annonces/annoncevente/treatment/Navlinknewannoncevente";
+import PrivateUserAnnonceventeList from "../../../annonces/annoncevente/inc/PrivateUserAnnonceventeList";
+import Navannonceventesbyuser from "../../../annonces/annoncevente/inc/Navannonceventesbyuser";
 
 
-class ContactserviceAnnoncelocationShow extends Component {
+class ContactserviceAnnonceventeShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -42,7 +40,7 @@ class ContactserviceAnnoncelocationShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/als_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/avs_contactservice_show/${item.slug}/`);
         })
 
     }
@@ -62,7 +60,7 @@ class ContactserviceAnnoncelocationShow extends Component {
         }).then((result) => {
             if (result.value) {
 
-                const url = route('annonces_locations_delete.site', [id]);
+                const url = route('annonces_ventes_delete.site', [id]);
                 //Envoyer la requet au server
                 dyaxios.delete(url).then(() => {
 
@@ -84,7 +82,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/als/`);
+                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/avs/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -101,7 +99,7 @@ class ContactserviceAnnoncelocationShow extends Component {
     }
 
     loadItems() {
-        this.props.loadContactservicelocationshow(this.props);
+        this.props.loadContactserviceventeshow(this.props);
     }
 
     reloadItem(){
@@ -113,7 +111,7 @@ class ContactserviceAnnoncelocationShow extends Component {
     }
 
     render() {
-        const { annoncelocation } = this.props;
+        const { annoncevente } = this.props;
         return (
             <>
                 <HelmetSite title={`${$userIvemo.first_name} - ${$name_site}`} />
@@ -136,7 +134,7 @@ class ContactserviceAnnoncelocationShow extends Component {
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
-                                        <Navlinknewannoncelocation {...this.props} />
+                                        <Navlinknewannoncevente {...this.props} />
 
                                         <div className="card">
                                             <div className="card-body">
@@ -144,7 +142,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                                                     <div className="col-md-12">
                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                            <Navannoncelocationsbyuser/>
+                                                            <Navannonceventesbyuser/>
 
                                                         </div>
                                                     </div>
@@ -165,7 +163,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/als/${this.props.match.params.annoncetype}/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/avs/${this.props.match.params.annoncetype}/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces</b>
                                             </Link>
 
@@ -175,30 +173,33 @@ class ContactserviceAnnoncelocationShow extends Component {
                                             </Button>
                                         </div>
 
-                                        {annoncelocation.title ?
+                                        {annoncevente.title ?
 
                                             <>
-                                                <PrivateUserAnnonceslocationList {...this.props} {...annoncelocation} unactiveprivatealsItem={this.props.unactiveprivatealsItem} activeaslItem={this.props.activeaslItem} deleteItem={this.deleteItem} />
+                                                <PrivateUserAnnonceventeList {...this.props} {...annoncevente}
+                                                                             unactiveprivateavsItem={this.props.unactiveprivateavsItem}
+                                                                             activeavsItem={this.props.activeavsItem}
+                                                                             deleteItem={this.deleteItem}/>
 
                                                 <div className="card">
                                                     <div className="social-line social-line-big-icons">
                                                         <div className="container">
                                                             <div className="row">
                                                                 <div className="col-md-4">
-                                                                    <h5 className="info-title"><b>{annoncelocation.countcomments > 1 ? "Commentaires" : "Commentaire"}</b></h5>
-                                                                    {annoncelocation.countcomments}
+                                                                    <h5 className="info-title"><b>{annoncevente.countcomments > 1 ? "Commentaires" : "Commentaire"}</b></h5>
+                                                                    {annoncevente.countcomments}
                                                                 </div>
                                                                 <div className="col-md-2">
-                                                                    <h5 className="info-title"><b> {annoncelocation.visits_count > 1 ? "Vues" : "Vue"}</b></h5>
-                                                                    {annoncelocation.visits_count}
+                                                                    <h5 className="info-title"><b> {annoncevente.visits_count > 1 ? "Vues" : "Vue"}</b></h5>
+                                                                    {annoncevente.visits_count}
                                                                 </div>
                                                                 <div className="col-md-2">
-                                                                    <h5 className="info-title"><b> {annoncelocation.countlikes > 1 ? "Likes" : "Like"}</b></h5>
-                                                                    {annoncelocation.countlikes}
+                                                                    <h5 className="info-title"><b> {annoncevente.countlikes > 1 ? "Likes" : "Like"}</b></h5>
+                                                                    {annoncevente.countlikes}
                                                                 </div>
                                                                 <div className="col-md-4">
-                                                                    <h5 className="info-title"><b>  {annoncelocation.contactservices_count > 1 ? "Messages non lus" : "Message non lu"}</b></h5>
-                                                                    {annoncelocation.contactservices_count}
+                                                                    <h5 className="info-title"><b>  {annoncevente.contactservices_count > 1 ? "Messages non lus" : "Message non lu"}</b></h5>
+                                                                    {annoncevente.contactservices_count}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -206,9 +207,9 @@ class ContactserviceAnnoncelocationShow extends Component {
                                                 </div>
 
 
-                                                {annoncelocation.contactservices.length >= 1 && (
+                                                {annoncevente.contactservices.length >= 1 && (
                                                     <>
-                                                     <a href={`${route('contactservice_annoncelocationsbyuserbyexport_site',[annoncelocation.user.slug, annoncelocation.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
+                                                     <a href={`${route('contactservice_annonceventesbyuserbyexport_site',[annoncevente.user.slug, annoncevente.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
                                                          <i className="fa fa-file-excel" />
                                                      </a>
                                                     <div className="card">
@@ -217,7 +218,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                                                             <table>
                                                                 <tbody>
 
-                                                                    {annoncelocation.contactservices.map(item => (
+                                                                    {annoncevente.contactservices.map(item => (
                                                                         <MailcontactserviceList key={item.id} {...item}
                                                                                                 favoriteaddItem={this.props.favoriteaddItem}
                                                                                                 favoriteremoveItem={this.props.favoriteremoveItem}
@@ -265,21 +266,20 @@ class ContactserviceAnnoncelocationShow extends Component {
         )
     }
 }
-ContactserviceAnnoncelocationShow.propTypes = {
-    loadContactservicelocationshow: PropTypes.func.isRequired,
+ContactserviceAnnonceventeShow.propTypes = {
+    loadContactserviceventeshow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 
-    annoncelocation: state.contactserviceannoncestatistiqueshow.annonce,
+    annoncevente: state.contactserviceannoncestatistiqueshow.annonce,
 
 });
 
 export default connect(mapStateToProps, {
-    loadContactservicelocationshow,
+    loadContactserviceventeshow,
     favoriteaddItem,favoriteremoveItem,
     archvementaddItem,archvementremoveItem,
-    activecontactaddItem,activecontactremoveItem,
-    unactiveprivateItem,activeItem,deletecontactItem,
-    activeaslItem, unactiveprivatealsItem,
-})(ContactserviceAnnoncelocationShow);
+    activecontactaddItem,activecontactremoveItem,deletecontactItem,
+    activeavsItem, unactiveprivateavsItem,
+})(ContactserviceAnnonceventeShow);

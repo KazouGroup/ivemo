@@ -215,7 +215,7 @@ export const unactiveItem = props => dispatch => {
 
 };
 
-export const activeaslItem = props => dispatch => {
+export const activeavsItem = props => dispatch => {
 
     const url = route('annonces_ventes_status.site', [props.id]);
     dyaxios.get(url).then(() => {
@@ -244,7 +244,7 @@ export const activeaslItem = props => dispatch => {
     ).catch(error => console.error(error));
 };
 
-export const unactiveprivatealsItem = props => dispatch => {
+export const unactiveprivateavsItem = props => dispatch => {
 
     const url = route('annonces_ventes_status.site', [props.id]);
     dyaxios.get(url).then(() => {

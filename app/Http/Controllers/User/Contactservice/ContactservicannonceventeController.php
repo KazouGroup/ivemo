@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\ContactserviceResource;
 use App\Http\Resources\PrivateEmploymentResource;
+use App\Http\Resources\Profile\PrivateAnnonceventeResource;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
 use App\Model\categoryannoncevente;
@@ -103,9 +104,9 @@ class ContactservicannonceventeController extends Controller
 
     }
 
-    public function apicontactservice_statistique(user $user, annoncevente $annoncevente)
+    public function apicontactservice_statistique(user $user,annoncetype $annoncetype, annoncevente $annoncevente)
     {
-        $contactservice = new PrivateEmploymentResource(annoncevente::whereSlugin($annoncevente->slugin)
+        $contactservice = new PrivateAnnonceventeResource(annoncevente::whereSlugin($annoncevente->slugin)
             ->withCount(['contactservices' => function ($q) use ($user){
                 $q->where(['status_red' => 0])
                     ->with('to','from')
@@ -118,13 +119,14 @@ class ContactservicannonceventeController extends Controller
                     ->distinct()->get()
                 ;},
             ])
-            ->with('user','city','categoryemployment','member')
-            ->whereHas('categoryemployment', function ($q) {$q->where('status',1);})
+            ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
+            ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])->first());
 
         return response()->json($contactservice,200);
     }
+
 
     //public function contactservice_export(user $user, annoncevente $annoncevente)
     //{

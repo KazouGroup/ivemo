@@ -22,9 +22,8 @@ import pageReducer from "./pageReducer";
 import uploadimagesReducer from "./uploadimagesReducer";
 import contactserviceemployemantstatistiqueshowReducer
     from "./contactservice/contactserviceemployemantstatistiqueshowReducer";
-import contactservicelocationstatistiqueshowReducer
-    from "./contactservice/contactservicelocationstatistiqueshowReducer";
 import contactserviceannonceshowReducer from "./contactservice/contactserviceannonceshowReducer";
+import contactserviceventestatistiqueshowReducer from "./contactservice/contactserviceannoncestatistiqueshowReducer";
 
 
 
@@ -52,5 +51,5 @@ export default combineReducers({
     contactservicemploymentcontactshow: contactservicemploymentcontactshowReducer,
     contactserviceannonceshow: contactserviceannonceshowReducer,
     contactserviceemploymentstatistiqueshow: contactserviceemployemantstatistiqueshowReducer,
-    contactservicelocationstatistiqueshow: contactservicelocationstatistiqueshowReducer,
+    contactserviceannoncestatistiqueshow: contactserviceventestatistiqueshowReducer,
 })

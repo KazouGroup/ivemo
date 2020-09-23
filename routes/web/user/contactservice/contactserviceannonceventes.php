@@ -29,12 +29,12 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('contactservice_annonceventes.site');
 
         Route::get(
-            'profile/{user}/statistics/als/{annoncevente:slugin}',
+            'profile/{user}/statistics/avs/{annoncetype}/{annoncevente:slugin}',
             'ContactservicannonceventeController@contactservice_statistique'
         )->name('contactservice_annonceventesbyuserbystatistique_site');
 
         Route::get(
-            'profile/{user}/statistics/als_export/{annoncevente:slugin}',
+            'profile/{user}/statistics/avs_export/{annoncevente:slugin}',
             'ContactservicannonceventeController@contactservice_export'
         )->name('contactservice_annonceventesbyuserbyexport_site');
 
@@ -55,7 +55,7 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_annonceventes_site');
 
             Route::get(
-                'profile/{user}/statistics/avs/{annoncevente:slugin}',
+                'profile/{user}/statistics/avs/{annoncetype}/{annoncevente:slugin}',
                 'ContactservicannonceventeController@apicontactservice_statistique'
             )->name('api.contactservice_annonceventesbyuserbystatistique_site');
 

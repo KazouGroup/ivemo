@@ -11,7 +11,7 @@ import Navannonceventesbyuser from "../../../../annonces/annoncevente/inc/Navann
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
-    activeaslItem,unactiveprivatealsItem,
+    activeavsItem,unactiveprivateavsItem,
     deleteItem,
     loadannoncebyuserprivate,
     loadProfileusersforprivate,
@@ -51,7 +51,7 @@ class PrivateUserAnnonceVentes extends Component {
             annonceventes.slice(0, visiable).map(item => {
                 return (
 
-                    <PrivateUserAnnonceventeList key={item.id} {...item} deleteItem={this.props.deleteItem} activeaslItem={this.props.activeaslItem} unactiveprivatealsItem={this.props.unactiveprivatealsItem} />
+                    <PrivateUserAnnonceventeList key={item.id} {...item} deleteItem={this.props.deleteItem} activeavsItem={this.props.activeavsItem} unactiveprivateavsItem={this.props.unactiveprivateavsItem} />
                 )
             })
         ) : (
@@ -144,8 +144,7 @@ export default connect(mapStoreToProps,
     {
         loadannoncebyuserprivate,
         loadProfileusersforprivate,
-        unactiveprivatealsItem,
-        activeaslItem,
+        activeavsItem,unactiveprivateavsItem,
         deleteItem,
     }
 )(PrivateUserAnnonceVentes);

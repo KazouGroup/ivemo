@@ -153,6 +153,8 @@ import ContactserviceAnnoncelocationShow
     from "../components/user/profile/mail/contactuserslocation/ContactserviceAnnoncelocationShow";
 import Annoncebycategoryannoncereservationcityshow
     from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcityshow";
+import ContactserviceAnnonceventeShow
+    from "../components/user/profile/mail/contactusersvente/ContactserviceAnnonceventeShow";
 
 
 const RouteUser = props => (
@@ -249,6 +251,7 @@ const RouteUser = props => (
 
 
           <Route exact path="/profile/:user/personal_mails/avs/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
+          <Route exact path="/profile/:user/statistics/avs/:annoncetype/:annoncevente/" component={withRouter(ContactserviceAnnonceventeShow)}/>
           <Route exact path="/profile/:user/statistics/avs_contactservice_show/:contactservice/" component={PersonalmessagesannoncesventesShowUser}/>
 
           <Route exact path="/profile/:user/personal_mails/employments/" component={PersonalmessagesemploymentsUser}/>

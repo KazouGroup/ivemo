@@ -80,12 +80,18 @@ class PrivateUserAnnonceventeList extends PureComponent {
                                 </Link>
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
-                                        <NavLink to={`/pro/${this.props.user.slug}/avs/${this.props.annoncetype.slug}/`}>
-                                            <img src={this.props.user.avatar} style={{ height: "40px", width: "80px" }} alt={`${this.props.user.first_name}`} className="avatar" />
-                                        </NavLink>
+                                        {this.props.user.avatar ?
+                                            <NavLink to={`/pro/${this.props.user.slug}/avs/${this.props.annoncetype.slug}/`}>
+                                                <img src={this.props.user.avatar}
+                                                     style={{ height: "40px", width: "80px" }}
+                                                     alt={this.props.user.first_name}
+                                                     className="avatar" />
+                                            </NavLink>
+                                            :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                    src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                         <div className="mx-3">
-                                            <NavLink to={`/pro/${this.props.user.slug}/${this.props.annoncetype.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                <small className="d-block text-muted"><b>{moment(this.props.created_at).format('LL')}</b></small>
+                                            <NavLink to={`/pro/${this.props.user.slug}/avs/${this.props.annoncetype.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                <small className="d-block text-muted"><b> {moment(this.props.created_at).format('LL')}</b></small>
                                             </NavLink>
                                         </div>
                                     </div>
@@ -96,6 +102,10 @@ class PrivateUserAnnonceventeList extends PureComponent {
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <>
+                                                        <NavLink to={`/profile/${this.props.user.slug}/statistics/avs/${this.props.annoncetype.slug}/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                            <i className="now-ui-icons business_chart-bar-32"/>
+                                                        </NavLink>
+
                                                         {this.props.status ?
                                                             <>
                                                                 <button type="button" rel="tooltip" onClick={() => this.props.unactiveprivateavsItem(this.props)}
