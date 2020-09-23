@@ -141,7 +141,7 @@ class PersonalmessagesemploymentsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {contactusersprofile.contactservicesemployments.length ?
+                                                        {contactusersprofile.contactservicesemployments.length >= 0 ?
                                                             <>
                                                                 {contactusersprofile.contactservicesemployments.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Emplois & Services"}/>}
                                                             </>:null}

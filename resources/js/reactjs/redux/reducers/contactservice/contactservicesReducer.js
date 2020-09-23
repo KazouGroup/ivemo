@@ -202,8 +202,8 @@ export default produce((draft, action = {}) => {
                 return draft;
 
             case 'DELETE_CONTACTSERVICE_ANONCEVENTE':
-                let dataavsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
-                if (dataavsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataavsdelete, 1);
+                let dataavsdelete = draft.contactservices.contactservicesannonceventes.findIndex(i => i.id === action.payload);
+                if (dataavsdelete !== -1) draft.contactservices.contactservicesannonceventes.splice(dataavsdelete, 1);
                 //if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
                 return draft;
 

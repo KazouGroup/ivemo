@@ -137,7 +137,7 @@ class PersonalmessagescontactUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                        {contactusersprofile.contactusers.length ?
+                                                        {contactusersprofile.contactusers.length >= 0 ?
                                                             <>
                                                                 {contactusersprofile.contactusers.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Contacts"}/>}
                                                             </>:null}

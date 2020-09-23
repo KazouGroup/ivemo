@@ -140,7 +140,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                    {contactusersprofile.contactservicesannoncelocations.length ?
+                                                    {contactusersprofile.contactservicesannoncelocations.length >= 0 ?
                                                         <>
                                                             {contactusersprofile.contactservicesannoncelocations.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Contacts Locations"}/>}
                                                         </>:null}
