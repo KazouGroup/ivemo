@@ -20,7 +20,9 @@ class AnnonceventeService
 
     public static function apiannonceventesbyannoncetypebyannoncevente(annoncetype $annoncetype,$annoncevente)
     {
-        $data = new PrivateAnnonceventeResource(annoncevente::whereSlugin($annoncevente)->first());
+        $data = annoncevente::whereSlugin($annoncevente)
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
+            ->first();
 
         return $data;
     }
@@ -30,7 +32,7 @@ class AnnonceventeService
     {
         $annonceventes = AnnonceventeResource::collection($categoryannoncevente->annonceventes()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -45,7 +47,7 @@ class AnnonceventeService
         $annonceventes = categoryannoncevente::whereSlug($categoryannoncevente->slug)->where(['status' => 1])
             ->withCount(['annonceventes' => function ($q) use ($annoncetype,$categoryannoncevente){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
+                    ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
                     ->whereIn('annoncetype_id',[$annoncetype->id])
                     ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
                     ->whereHas('city', function ($q) {$q->where('status',1);})
@@ -60,7 +62,7 @@ class AnnonceventeService
     {
         $annonceventes = AnnonceventeResource::collection($city->annonceventes()
             ->where(['status' => 1,'status_admin' => 1])
-            ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
+            ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncevente_id',[$categoryannoncevente->id])
             ->whereIn('city_id',[$city->id])

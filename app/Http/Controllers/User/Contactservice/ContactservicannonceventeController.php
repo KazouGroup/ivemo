@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User\Contactservice;
 
+use App\Exports\ContactserviceannonceventesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\ContactserviceResource;
-use App\Http\Resources\PrivateEmploymentResource;
 use App\Http\Resources\Profile\PrivateAnnonceventeResource;
 use App\Model\annoncetype;
 use App\Model\annoncevente;
@@ -16,6 +16,7 @@ use App\Services\Contactusers\ContactusersventeService;
 use App\Model\contactservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactservicannonceventeController extends Controller
 {
@@ -128,10 +129,10 @@ class ContactservicannonceventeController extends Controller
     }
 
 
-    //public function contactservice_export(user $user, annoncevente $annoncevente)
-    //{
-    //    return Excel::download(new ContactserviceemploymentExport($user,$annoncevente), 'Infos-users.xlsx');
-    //}
+    public function contactservice_export(user $user, annoncevente $annoncevente)
+    {
+        return Excel::download(new ContactserviceannonceventesExport($user,$annoncevente), 'Infos-users.xlsx');
+    }
 
 
     public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
@@ -141,7 +142,9 @@ class ContactservicannonceventeController extends Controller
         ->whereIn('to_id',[Auth::id()])
         ->with(['contactserviceable' => function ($q){
             $q->whereIn('user_id',[Auth::id()])
-                ->withCount(['uploadimages'])
+                ->withCount(['uploadimages' => function ($q){
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->where('uploadimagealable_type', annoncevente::class);}])
                 ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
                 ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                 ->whereHas('city', function ($q) {$q->where('status',1);})

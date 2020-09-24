@@ -3,18 +3,9 @@
 namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PrivateEmploymentResource;
 use App\Model\activitycity;
 use App\Model\city;
-use App\Model\user;
 use App\Services\Contactusers\ContactuserService;
-use App\Services\HelpersService;
-use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ContactserviceemploymentExport;
-use App\Http\Resources\ContactserviceResource;
-use App\Model\employment;
-use App\Model\contactservice;
 use App\Http\Requests\Contactuser\StorecontactuserativitycityRequest;
 use Illuminate\Http\Request;
 

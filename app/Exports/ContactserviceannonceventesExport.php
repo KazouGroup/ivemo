@@ -8,18 +8,18 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
 
-class ContactserviceannoncelocationExport implements FromCollection,ShouldAutoSize,WithMapping,WithHeadings
+class ContactserviceannonceventesExport implements FromCollection,ShouldAutoSize,WithMapping,WithHeadings
 {
 
     use Exportable;
 
     private $user;
-    private $annoncelocation;
+    private $annoncevente;
 
-    public function __construct($user,$annoncelocation)
+    public function __construct($user,$annoncevente)
     {
         $this->user = $user;
-        $this->annoncelocation = $annoncelocation;
+        $this->annoncevente = $annoncevente;
     }
 
     /**
@@ -27,7 +27,7 @@ class ContactserviceannoncelocationExport implements FromCollection,ShouldAutoSi
     */
     public function collection()
     {
-        $contactservices = $this->annoncelocation->contactservices()
+        $contactservices = $this->annoncevente->contactservices()
         ->whereIn('to_id', [$this->user->id])
         ->orderByDesc('created_at')->get();
 

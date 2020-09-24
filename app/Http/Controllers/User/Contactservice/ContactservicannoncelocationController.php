@@ -5,8 +5,6 @@ namespace App\Http\Controllers\User\Contactservice;
 use App\Exports\ContactserviceannoncelocationExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
-use App\Http\Resources\AnnoncelocationResource;
-use App\Http\Resources\PrivateEmploymentResource;
 use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
 use App\Model\annoncelocation;
 use App\Model\annoncetype;
@@ -14,12 +12,9 @@ use App\Model\categoryannoncelocation;
 use App\Model\city;
 use App\Model\user;
 use App\Services\Contactusers\ContactuserslocationService;
-use App\Services\HelpersService;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ContactserviceemploymentExport;
 use App\Http\Resources\ContactserviceResource;
-use App\Model\employment;
 use App\Model\contactservice;
 use Illuminate\Http\Request;
 
@@ -153,7 +148,12 @@ class ContactservicannoncelocationController extends Controller
         ->whereIn('to_id',[Auth::id()])
         ->with(['contactserviceable' => function ($q){
             $q->whereIn('user_id',[Auth::id()])
-                ->withCount(['uploadimages'])
+                ->withCount(['uploadimages' => function ($q){
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->where('uploadimagealable_type', annoncelocation::class);}])
+                ->with(['uploadimages' => function ($q){
+                    $q->where(['status' => 1,'status_admin' => 1])
+                        ->where('uploadimagealable_type', annoncelocation::class)->get();}])
             ->with('user','city','annoncetype','categoryannoncelocation','uploadimages','periodeannonce')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})

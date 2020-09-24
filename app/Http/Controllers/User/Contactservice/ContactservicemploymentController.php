@@ -7,7 +7,6 @@ use App\Http\Resources\PrivateEmploymentResource;
 use App\Model\categoryemployment;
 use App\Model\city;
 use App\Model\user;
-use App\Services\HelpersService;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ContactserviceemploymentExport;

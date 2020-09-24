@@ -18,7 +18,9 @@ class AnnoncelocationService
 
     public static function apiannoncelocationsbyannoncetypebyannoncelocation(annoncetype $annoncetype,$annoncelocation)
     {
-        $data = new PrivateAnnoncelocationResource(annoncelocation::whereSlugin($annoncelocation)->first());
+        $data = annoncelocation::whereSlugin($annoncelocation)
+            ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce','uploadimages')
+            ->first();
 
         return $data;
     }
