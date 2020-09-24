@@ -1,7 +1,7 @@
 import produce from "immer"
 
 const initialState = {
-    item: {annoncetype: [], categoryannoncelocation: [], city: [], user: {profile:[]}},
+    item: {annoncetype: [],periodeannonce:[], categoryannoncelocation: [], city: [],user: {profile:[]}},
 };
 
 

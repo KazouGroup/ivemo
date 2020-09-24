@@ -1,7 +1,7 @@
 import produce from "immer"
 
 const initialState = {
-    annoncelocations: {uploadimages:[],annoncetype: [], categoryannoncelocation: [], city: [], user: []},
+    annoncelocations: {uploadimages:[],annoncetype: [],periodeannonce:[], categoryannoncelocation: [], city: [], user: []},
     catgoryannoncelocations: {user: []},
     cityannoncelocations: {user: []}
 };

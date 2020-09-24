@@ -21,6 +21,8 @@ class PrivateUserAnnonceventeList extends PureComponent {
         return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
+        let showlink = `/avs/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`;
+
         return (
 
             <div className="card ivemoCardContainer">
@@ -32,10 +34,11 @@ class PrivateUserAnnonceventeList extends PureComponent {
                                 <UploadimageList {...this.props} />
 
                                 <div className="text-center">
-                                    <button type="button" className="btn btn-dark btn-sm">
+                                    <NavLink to={showlink} className="btn btn-dark btn-sm">
                                         <i className="now-ui-icons media-1_album"></i>
                                         <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
-                                    </button>
+                                    </NavLink>
+
 
                                     {this.props.link_video && (
                                         <button type="button" className="btn btn-dark btn-sm">
@@ -71,11 +74,11 @@ class PrivateUserAnnonceventeList extends PureComponent {
 
                                 </div>
                                 <h6 className="card-title">
-                                    <Link to={`/avs/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                    <Link to={showlink}>
                                      {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                     </Link>
                                 </h6>
-                                <Link to={`/avs/${this.props.annoncetype.slug}/${this.props.categoryannoncevente.slug}/${this.props.city.slug}/${this.props.slug}/`}>
+                                <Link to={showlink}>
                                     <span dangerouslySetInnerHTML={this.getDescription()}/>
                                 </Link>
                                 <div className="card-header d-flex align-items-center">

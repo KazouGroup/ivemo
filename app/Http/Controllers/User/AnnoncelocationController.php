@@ -167,7 +167,7 @@ class AnnoncelocationController extends Controller
 
     public function apiannoncelocations()
     {
-        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation','city','annoncetype')
+        $annoncelocations = AnnoncelocationResource::collection(annoncelocation::with('user','categoryannoncelocation','city','periodeannonce','annoncetype','uploadimages')
             ->where(['status' => 1,'status_admin' => 1])->latest()->get());
 
         return response()->json($annoncelocations, 200);
@@ -177,7 +177,7 @@ class AnnoncelocationController extends Controller
     {
         $annonceslocations = AnnoncelocationResource::collection($annoncetype->annoncelocations()
             ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
+            ->with('user','categoryannoncelocation','city','periodeannonce','annoncetype','uploadimages')
             ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
