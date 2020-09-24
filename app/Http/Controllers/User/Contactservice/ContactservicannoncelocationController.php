@@ -154,7 +154,7 @@ class ContactservicannoncelocationController extends Controller
                 ->with(['uploadimages' => function ($q){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->where('uploadimagealable_type', annoncelocation::class)->get();}])
-            ->with('user','city','annoncetype','categoryannoncelocation','uploadimages','periodeannonce')
+            ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce')
             ->whereHas('categoryannoncelocation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},
