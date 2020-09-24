@@ -16,11 +16,11 @@ class AnnonceslocationList extends PureComponent {
 
         return { __html: (this.props.description.length > 80 ? this.props.description.substring(0, 80) + "..." : this.props.description) };
     }
-    data_countuploadimageFormatter(countuploadimages, precision) {
-        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(countuploadimages)) / 3);
+    data_countuploadimageFormatter(uploadimages_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(uploadimages_count)) / 3);
         const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
         const suffix = abbrev[order];
-        return (countuploadimages / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+        return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
     render() {
         let showlink = `/als/${this.props.annoncetype.slug}/${this.props.categoryannoncelocation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`;
@@ -62,7 +62,7 @@ class AnnonceslocationList extends PureComponent {
                                     <div className="text-center">
                                         <NavLink to={showlink} className="btn btn-dark btn-sm">
                                             <i className="now-ui-icons media-1_album"></i>
-                                            <b>{this.data_countuploadimageFormatter(this.props.countuploadimages)}</b>
+                                            <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
                                         </NavLink>
 
                                         {this.props.link_video && (

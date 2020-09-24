@@ -256,7 +256,7 @@ class Annoncelocationbycategorycityshow extends Component {
 
                                                                 <Button className="btn btn-dark btn-sm">
                                                                     <i className="now-ui-icons media-1_album"></i>
-                                                                    <b>{annoncelocation.countuploadimages || "0"}</b>
+                                                                    <b>{annoncelocation.uploadimages_count || "0"}</b>
                                                                 </Button>
                                                                 {annoncelocation.link_video && (
                                                                     <Button className="btn btn-dark btn-sm">
@@ -364,10 +364,38 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 }
                                                             </>
                                                         }
-
                                                     </>
                                                 )}
                                             </div>
+
+                                            {/*
+                                                 <div className="text-center">
+                                                {annoncelocation.slug && (
+                                                    <>
+                                                        <Button
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Wi-Fi gratuit">
+                                                            <i className="fas fa-wifi"></i>
+                                                        </Button>
+                                                        <Button
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Petit-déjeuner compris">
+                                                            <i className="fas fa-coffee"></i>
+                                                        </Button>
+                                                        <Button className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Parking compris">
+                                                            <i className="fas fa-parking"></i>
+                                                        </Button>
+                                                        <Button
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Pressing">
+                                                            <i className="fas fa-tshirt"></i>
+                                                        </Button>
+                                                        <Button
+                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Bagagerie : laissez en dépôt vos valises et bagages gratuitement le jour d'arrivée ou de départ et profitez librement de votre journée à yaounde.">
+                                                            <i className="fas fa-luggage-cart"></i>
+                                                        </Button>
+                                                    </>
+                                                )}
+                                            </div>
+                                            */}
+
                                         </div>
 
                                         <div className="card">
@@ -377,8 +405,8 @@ class Annoncelocationbycategorycityshow extends Component {
                                                         <>
                                                             <h6 className="text-dark">{annoncelocation.pieces && (<>{annoncelocation.pieces} {annoncelocation.pieces >= 2 ? "pieces ." : "piece ."}</>)} {annoncelocation.rooms && (<> - {annoncelocation.rooms} {annoncelocation.rooms >= 2 ? "chambres ." : "chambre ."}</>)} {annoncelocation.surface && (<>{annoncelocation.surface} m<sup>2</sup></>)}</h6>
                                                             <h6 className="text-dark">
-                                                                {annoncelocation.furniture && ("meublé -")}
-                                                                {annoncelocation.terrace && (<> {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
+                                                                {annoncelocation.furniture && ("meublé")}
+                                                                {annoncelocation.terrace && (<> - {annoncelocation.terrace_number} {annoncelocation.terrace_number >= 2 ? "terrasses" : "terrasse"}</>)}
                                                                 {annoncelocation.balcony && (<> - {annoncelocation.balcony_number} {annoncelocation.balcony_number >= 2 ? "balcons" : "balcon"}</>)}
                                                                 {annoncelocation.elevator && (" - ascenseur")}
                                                             </h6>
@@ -435,13 +463,13 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                 </div>
                                                             )}
 
-                                                            {annoncelocation.award_price && (
+                                                            {annoncelocation.award_price !== null && (
 
                                                                 <div className="col-md-6 mx-auto">
                                                                 <h5 className="info-title"><b>Informations supplémentaires</b></h5>
                                                                 <p>
                                                                     <b>Caution:</b>
-                                                                    <span className="title text-success"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</>:null} </b></span>
+                                                                    <span className="title text-success"><b> {annoncelocation.award_price ? <>{annoncelocation.award_price.formatMoney(2,'.',',')} <small><b>{$money_country}</b></small></>:<>{<>{annoncelocation.award_price} <small><b>{$money_country}</b></small></>}</>} </b></span>
                                                                 </p>
                                                                 </div>
                                                             )}
@@ -560,9 +588,6 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                className="btn btn-sm btn-secondary" title={`${annoncelocation.visits_count} ${annoncelocation.visits_count > 1 ? "vues" : "vue"}`}>
                                                                                 <i className="far fa-eye"></i> <b>{this.data_countFormatter(annoncelocation.visits_count)}</b>
                                                                             </a>
-                                                                            <NavLink to={`/profile/${annoncelocation.user.slug}/statistics/als/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
-                                                                                <i className="now-ui-icons business_chart-bar-32"/>
-                                                                            </NavLink>
                                                                             <button type="button" rel="tooltip" onClick={() => this.statusItem(annoncelocation)}
                                                                                     className="btn btn-success btn-icon btn-sm" title="Désactiver cette annonce">
                                                                                 <i className="now-ui-icons ui-1_check" />

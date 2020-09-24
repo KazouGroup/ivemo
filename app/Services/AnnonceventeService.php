@@ -169,7 +169,7 @@ class AnnonceventeService
 
     public static function apiannoncesventesbyuser($user,$annoncetype)
     {
-        $personnals = PrivateAnnonceventeResource::collection($user->annonceventes()
+        $personnals = AnnonceventeResource::collection($user->annonceventes()
             ->with('user','categoryannoncevente','city','annoncetype','uploadimages')
             ->whereIn('user_id',[$user->id])
             ->whereIn('annoncetype_id',[$annoncetype->id])

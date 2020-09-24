@@ -329,7 +329,7 @@ class Annonceventebycategorycityshow extends Component {
 
                                                             <Button className="btn btn-dark btn-sm">
                                                                 <i className="now-ui-icons media-1_album"></i>
-                                                                <b>{annoncevente.countuploadimages || "0"}</b>
+                                                                <b>{annoncevente.uploadimages_count || "0"}</b>
                                                             </Button>
                                                             {annoncevente.link_video && (
                                                                 <Button className="btn btn-dark btn-sm">
@@ -486,7 +486,7 @@ class Annonceventebycategorycityshow extends Component {
                                                 <div className="container">
                                                     <div className="row">
                                                         <div className="col-md-6">
-                                                            <h5 className="info-title"><b> {annoncevente.categoryannoncevente.label || "Ce bien"} est au prix de</b></h5>
+                                                            <h5 className="info-title"><b><span style={{ textTransform: "capitalize" }}>{annoncevente.categoryannoncevente.label || "Ce bien"}</span> revient à</b></h5>
                                                             {annoncevente.price && (
                                                                 <h2 className="ivemoColorOrange"><b>{annoncevente.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country}</b></small> : <>{$money_country}</>}</b></h2>
                                                             )}

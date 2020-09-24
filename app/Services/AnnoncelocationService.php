@@ -150,7 +150,7 @@ class AnnoncelocationService
 
     public static function apiannonceslocationsbyuser($user,$annoncetype)
     {
-        $personnals = PrivateAnnoncelocationResource::collection($user->annoncelocations()
+        $personnals = AnnoncelocationService::collection($user->annoncelocations()
             ->with('user','categoryannoncelocation','city','annoncetype','uploadimages')
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('user_id',[$user->id])

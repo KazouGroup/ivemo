@@ -57,7 +57,7 @@ class AnnonceventeResource extends JsonResource
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncevente::class)
                 ->take(1)->get(),
-            'countuploadimages' => $this->uploadimages()
+            'uploadimages_count' => $this->uploadimages()
                 ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncevente::class)
