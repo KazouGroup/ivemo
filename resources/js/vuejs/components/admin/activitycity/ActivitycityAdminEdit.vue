@@ -197,7 +197,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(lk,index) in form.uploadimages" :key="lk.id">
+                                        <tr v-for="lk in form.uploadimages" :key="lk.id">
 
                                             <td><img :src="lk.photo" style="height: 50px; width: 80px;border-radius: 4px"></td>
 
@@ -356,7 +356,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(ck,index) in form.contactservices" :key="ck.id">
+                                        <tr v-for="ck in form.contactservices" :key="ck.id">
                                             <td>
                                                 <template>
 

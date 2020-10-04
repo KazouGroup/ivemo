@@ -95,7 +95,7 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr v-for="(item,index) in activitycities" :key="item.id">
+                                        <tr v-for="item in activitycities" :key="item.id">
                                             <td>
                                                 {{ (item.title.length > 15 ? item.title.substring(0,15)+ "..." : item.title) | upText }}
                                             </td>

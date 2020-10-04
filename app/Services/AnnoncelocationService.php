@@ -20,6 +20,8 @@ class AnnoncelocationService
     {
         $data = annoncelocation::whereSlugin($annoncelocation)
             ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce','uploadimages')
+            ->withCount(['uploadimages' => function ($q){
+                $q->where('uploadimagealable_type', annoncelocation::class);}])
             ->first();
 
         return $data;

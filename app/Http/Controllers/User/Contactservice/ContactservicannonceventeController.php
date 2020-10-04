@@ -145,9 +145,9 @@ class ContactservicannonceventeController extends Controller
                 ->withCount(['uploadimages' => function ($q){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->where('uploadimagealable_type', annoncevente::class);}])
-                      ->with(['uploadimages' => function ($q){
+                        ->with(['uploadimages' => function ($q){
                             $q->where(['status' => 1,'status_admin' => 1])
-                                ->where('uploadimagealable_type', annoncevente::class)->get();}])
+                              ->where('uploadimagealable_type', annoncevente::class)->get();}])
                 ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
                 ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                 ->whereHas('city', function ($q) {$q->where('status',1);})

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import {Button, Input, Row, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import './ProfileAccountUser.css';
+//import './ProfileAccountUser.css';
 import NavProfileAccountPrivate from "./NavProfileAccountPrivate";
 import Swal from "sweetalert2";
 import HeaderProfileAccountPrivate from "./HeaderProfileAccountPrivate";

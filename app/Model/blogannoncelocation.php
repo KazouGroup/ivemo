@@ -31,6 +31,8 @@ class blogannoncelocation extends Model implements Auditable
             if (auth()->check()){
                 $model->user_id = auth()->id();
                 $model->slugin = $myslug;
+                            $model->ip = request()->ip();
+
             }
         });
 

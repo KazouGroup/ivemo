@@ -456,8 +456,15 @@ class AnnonceventeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(annoncetype $annoncetype,$id)
     {
-        //
+        $annoncevente = annoncevente::findOrFail($id);
+        $this->authorize('update',$annoncevente);
+        if (auth()->user()->id === $annoncevente->user_id){
+            $annoncevente->delete();
+            return ['message' => 'message deleted '];
+        }else{
+            abort(404);
+        }
     }
 }

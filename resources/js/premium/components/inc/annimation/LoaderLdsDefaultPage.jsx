@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Link, NavLink} from "react-router-dom";
-import "./LoaderLdsDefault.css";
+//import "./LoaderLdsDefault.css";
 
 
 function LoaderLdsDefaultPage(props) {
