@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Model\subscriberuser;
+use App\Models\subscriberuser;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;

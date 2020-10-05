@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\contactusersadvert;
+use App\Models\contactusersadvert;
 use Faker\Generator as Faker;
 
 $factory->define(contactusersadvert::class, function (Faker $faker) {

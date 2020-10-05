@@ -6,12 +6,12 @@ namespace App\Services;
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
 use App\Jobs\NewannonceJob;
-use App\Model\abonne\subscribeannonce;
-use App\Model\annoncelocation;
-use App\Model\annoncetype;
-use App\Model\categoryannoncelocation;
-use App\Model\city;
-use App\Model\user;
+use App\Models\abonne\subscribeannonce;
+use App\Models\annoncelocation;
+use App\Models\annoncetype;
+use App\Models\categoryannoncelocation;
+use App\Models\city;
+use App\Models\user;
 
 class AnnoncelocationService
 {
@@ -20,8 +20,6 @@ class AnnoncelocationService
     {
         $data = annoncelocation::whereSlugin($annoncelocation)
             ->with('user','city','annoncetype','categoryannoncelocation','periodeannonce','uploadimages')
-            ->withCount(['uploadimages' => function ($q){
-                $q->where('uploadimagealable_type', annoncelocation::class);}])
             ->first();
 
         return $data;

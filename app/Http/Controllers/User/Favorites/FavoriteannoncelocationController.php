@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Favorites;
 
 use App\Http\Controllers\Controller;
-use App\Model\annoncelocation;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class FavoriteannoncelocationController extends Controller

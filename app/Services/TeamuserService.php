@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Model\user;
+use App\Models\user;
 use Intervention\Image\Facades\Image;
 use File;
 

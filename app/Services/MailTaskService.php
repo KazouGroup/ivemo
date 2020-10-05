@@ -5,8 +5,8 @@ namespace App\Services\Admin;
 
 
 use App\Jobs\MailTaskEmailJob;
-use App\Model\admin\note;
-use App\Model\user\User;
+use App\Models\admin\note;
+use App\Models\user\User;
 use Illuminate\Support\Facades\Auth;
 
 class MailTaskService

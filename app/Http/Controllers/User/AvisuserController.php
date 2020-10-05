@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\avisuser;
-use App\Model\responseavisuser;
-use App\Model\user;
+use App\Models\avisuser;
+use App\Models\responseavisuser;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Subscribes;
 
 use App\Http\Controllers\Controller;
-use App\Model\abonne\subscribemployment;
-use App\Model\user;
+use App\Models\abonne\subscribemployment;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class SubscribannoncereservationController extends Controller

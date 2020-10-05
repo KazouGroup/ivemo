@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\categoryworkwithus;
-use App\Model\city;
-use App\Model\user;
-use App\Model\workwithus;
+use App\Models\categoryworkwithus;
+use App\Models\city;
+use App\Models\user;
+use App\Models\workwithus;
 use Faker\Generator as Faker;
 
 $factory->define(workwithus::class, function (Faker $faker) {

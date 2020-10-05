@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User\Subscribes;
 
 use App\Http\Controllers\Controller;
-use App\Model\abonne\subscribeannonce;
-use App\Model\abonne\subscribeforum;
-use App\Model\user;
+use App\Models\abonne\subscribeannonce;
+use App\Models\abonne\subscribeforum;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

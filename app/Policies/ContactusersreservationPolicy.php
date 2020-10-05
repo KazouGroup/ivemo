@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Model\contactuser;
-use App\Model\contactuserslocation;
-use App\Model\contactusersreservation;
-use App\Model\contactusersvente;
-use App\Model\user;
+use App\Models\contactuser;
+use App\Models\contactuserslocation;
+use App\Models\contactusersreservation;
+use App\Models\contactusersvente;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContactusersreservationPolicy
@@ -16,8 +16,8 @@ class ContactusersreservationPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\contactusersreservation  $contactusersreservation
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\contactusersreservation  $contactusersreservation
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, contactusersreservation $contactusersreservation)

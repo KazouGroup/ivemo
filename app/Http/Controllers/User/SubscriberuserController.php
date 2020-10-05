@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Exports\SubscriberuserExport;
 use App\Http\Controllers\Controller;
-use App\Model\subscriberuser;
-use App\Model\user;
+use App\Models\subscriberuser;
+use App\Models\user;
 use Maatwebsite\Excel\Facades\Excel;
 use Newsletter;
 use Illuminate\Http\Request;

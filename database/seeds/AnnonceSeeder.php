@@ -1,16 +1,16 @@
 <?php
 
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\contactuser;
-use App\Model\contactuserslocation;
-use App\Model\contactusersreservation;
-use App\Model\contactusersvente;
-use App\Model\imagereservation;
-use App\Model\reservation;
-use App\Model\subscriber;
-use App\Model\subscriberuser;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\contactuser;
+use App\Models\contactuserslocation;
+use App\Models\contactusersreservation;
+use App\Models\contactusersvente;
+use App\Models\imagereservation;
+use App\Models\reservation;
+use App\Models\subscriber;
+use App\Models\subscriberuser;
 use Illuminate\Database\Seeder;
 
 class AnnonceSeeder extends Seeder

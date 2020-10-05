@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Categories;
 
 use App\Http\Resources\CategoryWorkwithuseResource;
 use App\Http\Controllers\Controller;
-use App\Model\categoryfaq;
-use App\Model\categoryworkwithus;
+use App\Models\categoryfaq;
+use App\Models\categoryworkwithus;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

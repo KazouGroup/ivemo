@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContactResource;
-use App\Model\contactusersadvert;
-use App\Model\contact;
+use App\Models\contactusersadvert;
+use App\Models\contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

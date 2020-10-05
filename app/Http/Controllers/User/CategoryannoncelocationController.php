@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryannoncelocationResource;
-use App\Model\categoryannoncelocation;
+use App\Models\categoryannoncelocation;
 use Illuminate\Http\Request;
 
 class CategoryannoncelocationController extends Controller

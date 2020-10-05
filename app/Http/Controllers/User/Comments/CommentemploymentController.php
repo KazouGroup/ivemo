@@ -4,11 +4,11 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\categoryemployment;
-use App\Model\city;
-use App\Model\comment;
-use App\Model\employment;
-use App\Model\responsecomment;
+use App\Models\categoryemployment;
+use App\Models\city;
+use App\Models\comment;
+use App\Models\employment;
+use App\Models\responsecomment;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 

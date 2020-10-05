@@ -7,9 +7,9 @@ use App\Http\Requests\Blog\Blogannoncereservation\StoreRequest;
 use App\Http\Requests\Blog\Blogannoncereservation\UpdateRequest;
 use App\Http\Resources\BlogannoncereservationResource;
 use App\Services\BlogannoncereservationService;
-use App\Model\blogannoncereservation;
-use App\Model\categoryannoncereservation;
-use App\Model\user;
+use App\Models\blogannoncereservation;
+use App\Models\categoryannoncereservation;
+use App\Models\user;
 use File;
 use Symfony\Component\HttpFoundation\Response;
 

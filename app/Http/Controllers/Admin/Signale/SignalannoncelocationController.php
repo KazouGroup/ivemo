@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Signale;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnoncelocationResource;
-use App\Model\annoncelocation;
+use App\Models\annoncelocation;
 use Symfony\Component\HttpFoundation\Response;
 
 class SignalannoncelocationController extends Controller

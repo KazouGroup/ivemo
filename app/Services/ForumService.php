@@ -5,9 +5,9 @@ namespace App\Services;
 
 use App\Http\Resources\ForumResource;
 use App\Jobs\NewforumJob;
-use App\Model\abonne\subscribeforum;
-use App\Model\categoryforum;
-use App\Model\forum;
+use App\Models\abonne\subscribeforum;
+use App\Models\categoryforum;
+use App\Models\forum;
 use Illuminate\Support\Facades\Auth;
 
 

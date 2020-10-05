@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Model\like;
+use App\Models\like;
 use Illuminate\Support\Facades\Auth;
 
 trait Likesdata

@@ -6,16 +6,16 @@ use App\Exports\ContactserviceannoncelocationExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
 use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
-use App\Model\annoncelocation;
-use App\Model\annoncetype;
-use App\Model\categoryannoncelocation;
-use App\Model\city;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\annoncetype;
+use App\Models\categoryannoncelocation;
+use App\Models\city;
+use App\Models\user;
 use App\Services\Contactusers\ContactuserslocationService;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\ContactserviceResource;
-use App\Model\contactservice;
+use App\Models\contactservice;
 use Illuminate\Http\Request;
 
 class ContactservicannoncelocationController extends Controller

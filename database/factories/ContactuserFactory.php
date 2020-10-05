@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\contactuser;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\contactuser;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(contactuser::class, function (Faker $faker) {

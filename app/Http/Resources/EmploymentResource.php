@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\employment;
+use App\Models\employment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class EmploymentResource extends JsonResource

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
-use App\Model\activitycity;
-use App\Model\city;
+use App\Models\activitycity;
+use App\Models\city;
 use App\Services\Contactusers\ContactuserService;
 use App\Http\Requests\Contactuser\StorecontactuserativitycityRequest;
 use Illuminate\Http\Request;

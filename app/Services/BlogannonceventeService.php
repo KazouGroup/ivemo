@@ -3,9 +3,9 @@ namespace App\Services;
 
 
 use App\Http\Resources\BlogannonceventeResource;
-use App\Model\blogannoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\user;
+use App\Models\blogannoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\user;
 use Intervention\Image\Facades\Image;
 use File;
 

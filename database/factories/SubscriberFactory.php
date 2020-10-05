@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\subscriber;
-use App\Model\user;
+use App\Models\subscriber;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(subscriber::class, function (Faker $faker) {

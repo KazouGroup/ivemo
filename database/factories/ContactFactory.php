@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\contact;
+use App\Models\contact;
 use Faker\Generator as Faker;
 
 /*

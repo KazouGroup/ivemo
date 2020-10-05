@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EmploymentResource;
-use App\Model\contactuseremployment;
+use App\Models\contactuseremployment;
 use App\Services\EmploymentService;
 use Illuminate\Http\Request;
-use App\Model\employment;
-use App\Model\user;
-use App\Model\categoryemployment;
+use App\Models\employment;
+use App\Models\user;
+use App\Models\categoryemployment;
 use Illuminate\Support\Facades\DB;
 
 class PremiumemploymentController extends Controller

@@ -1,11 +1,11 @@
 <?php
 
-use App\Model\activitycity;
-use App\Model\uploadimage;
-use App\Model\user;
-use App\Model\categoryfaq;
-use App\Model\faq;
-use App\Model\contact;
+use App\Models\activitycity;
+use App\Models\uploadimage;
+use App\Models\user;
+use App\Models\categoryfaq;
+use App\Models\faq;
+use App\Models\contact;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

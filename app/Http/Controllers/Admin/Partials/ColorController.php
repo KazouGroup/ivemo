@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Partials;
 
 use App\Http\Resources\ColorResource;
-use App\Model\color;
+use App\Models\color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;

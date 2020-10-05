@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User\Blogs;
 
 use App\Http\Controllers\Controller;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncereservation;
+use App\Models\blogannoncevente;
 
 class BlogannonceController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
 
-use App\Model\avisuser;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
-use App\Model\responseavisuser;
-use App\Model\workwithus;
+use App\Models\avisuser;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncereservation;
+use App\Models\blogannoncevente;
+use App\Models\responseavisuser;
+use App\Models\workwithus;
 use Illuminate\Database\Seeder;
 
 class AnnonceblogSeeder extends Seeder

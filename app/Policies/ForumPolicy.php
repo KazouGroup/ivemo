@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Model\forum;
-use App\Model\user;
+use App\Models\forum;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ForumPolicy
@@ -13,8 +13,8 @@ class ForumPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\forum  $forum
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\forum  $forum
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, forum $forum)

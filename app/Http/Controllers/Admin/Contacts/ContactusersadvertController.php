@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin\Contacts;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ContactuserforadvertsResource;
-use App\Model\contactusersadvert;
+use App\Models\contactusersadvert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ContactusersadvertController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -77,5 +77,5 @@ class ContactusersadvertController extends Controller
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
-    
+
 }

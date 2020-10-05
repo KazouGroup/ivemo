@@ -4,10 +4,10 @@ namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UploadimageResource;
-use App\Model\annoncetype;
-use App\Model\annoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\city;
+use App\Models\annoncetype;
+use App\Models\annoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\city;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;

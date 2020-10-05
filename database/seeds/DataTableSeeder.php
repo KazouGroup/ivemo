@@ -1,14 +1,14 @@
 <?php
 
 
-use App\Model\abonne\subscribeforum;
-use App\Model\abonne\subscribemployment;
-use App\Model\activitycity;
-use App\Model\comment;
-use App\Model\followeruser;
-use App\Model\like;
-use App\Model\signal;
-use App\Model\uploadimage;
+use App\Models\abonne\subscribeforum;
+use App\Models\abonne\subscribemployment;
+use App\Models\activitycity;
+use App\Models\comment;
+use App\Models\followeruser;
+use App\Models\like;
+use App\Models\signal;
+use App\Models\uploadimage;
 use Illuminate\Database\Seeder;
 
 class DataTableSeeder extends Seeder

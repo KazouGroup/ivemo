@@ -5,8 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FolloweruserResource;
 use App\Http\Resources\UserResource;
-use App\Model\abonne\subscribemployment;
-use App\Model\user;
+use App\Models\abonne\subscribemployment;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

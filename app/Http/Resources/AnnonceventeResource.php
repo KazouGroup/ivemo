@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\annoncevente;
+use App\Models\annoncevente;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnnonceventeResource extends JsonResource

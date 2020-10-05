@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Model\annoncelocation;
-use App\Model\avisuser;
-use App\Model\contactuser;
-use App\Model\responseavisuser;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\avisuser;
+use App\Models\contactuser;
+use App\Models\responseavisuser;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ResponseavisuserPolicy
@@ -16,8 +16,8 @@ class ResponseavisuserPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\responseavisuser  $responseavisuser
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\responseavisuser  $responseavisuser
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, responseavisuser $responseavisuser)

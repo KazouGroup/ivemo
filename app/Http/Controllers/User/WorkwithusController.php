@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactworkwithusRequest;
-use App\Model\categoryworkwithus;
-use App\Model\workwithus;
+use App\Models\categoryworkwithus;
+use App\Models\workwithus;
 use App\Services\Contactusers\ContactworkwithusService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

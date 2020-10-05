@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Model\annoncelocation;
-use App\Model\contactuser;
-use App\Model\employment;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\contactuser;
+use App\Models\employment;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EmploymentPolicy
@@ -15,8 +15,8 @@ class EmploymentPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\employment  $employment
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\employment  $employment
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, employment $employment)

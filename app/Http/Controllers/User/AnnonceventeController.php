@@ -8,11 +8,11 @@ use App\Http\Requests\Annonces\Annoncevente\UpdateRequest;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\CategoryannonceventeResource;
 use App\Http\Resources\CityResource;
-use App\Model\annoncevente;
-use App\Model\annoncetype;
-use App\Model\categoryannoncevente;
-use App\Model\city;
-use App\Model\user;
+use App\Models\annoncevente;
+use App\Models\annoncetype;
+use App\Models\categoryannoncevente;
+use App\Models\city;
+use App\Models\user;
 use App\Services\AnnonceventeService;
 use App\Services\Contactusers\ContactusersventeService;
 use Illuminate\Http\Request;
@@ -456,15 +456,8 @@ class AnnonceventeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(annoncetype $annoncetype,$id)
+    public function destroy($id)
     {
-        $annoncevente = annoncevente::findOrFail($id);
-        $this->authorize('update',$annoncevente);
-        if (auth()->user()->id === $annoncevente->user_id){
-            $annoncevente->delete();
-            return ['message' => 'message deleted '];
-        }else{
-            abort(404);
-        }
+        //
     }
 }

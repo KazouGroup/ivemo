@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Signale;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnonceventeResource;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

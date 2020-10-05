@@ -5,7 +5,7 @@ namespace App\Services\Contactusers;
 
 use App\Jobs\Adminaction\AdminactionAnnonceventeJob;
 use App\Jobs\Contacts\ContactuserventeJob;
-use App\Model\contactusersvente;
+use App\Models\contactusersvente;
 use App\Services\HelpersService;
 
 class ContactusersventeService

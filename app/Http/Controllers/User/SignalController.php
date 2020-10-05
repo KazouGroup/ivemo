@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\forum;
-use App\Model\employment;
-use App\Model\categoryemployment;
-use App\Model\annoncelocation;
-use App\Model\annoncetype;
-use App\Model\categoryannoncelocation;
-use App\Model\city;
-use App\Model\annoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\user;
+use App\Models\forum;
+use App\Models\employment;
+use App\Models\categoryemployment;
+use App\Models\annoncelocation;
+use App\Models\annoncetype;
+use App\Models\categoryannoncelocation;
+use App\Models\city;
+use App\Models\annoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class SignalController extends Controller
@@ -33,13 +33,13 @@ class SignalController extends Controller
         $signal = $forum->signals()->create($request->all());
 
         return response()->json($signal,200);
-    }   
+    }
 
     public function sendemploymentsignal(Request $request,categoryemployment $categoryemployment,city $city,employment $employment)
     {
         $this->validate($request,[
             'message'=>'required|max:5000',
-            'subject'=>'required',        
+            'subject'=>'required',
         ]);
 
         $signal = $employment->signals()->create($request->all());
@@ -52,7 +52,7 @@ class SignalController extends Controller
     {
         $this->validate($request,[
             'message'=>'required|max:5000',
-            'subject'=>'required',        
+            'subject'=>'required',
         ]);
 
         $signal = $annoncelocation->signals()->create($request->all());
@@ -65,7 +65,7 @@ class SignalController extends Controller
     {
         $this->validate($request,[
             'message'=>'required|max:5000',
-            'subject'=>'required',        
+            'subject'=>'required',
         ]);
 
         $signal = $annoncevente->signals()->create($request->all());

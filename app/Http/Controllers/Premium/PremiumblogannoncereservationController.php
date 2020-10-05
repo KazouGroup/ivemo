@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncereservationResource;
-use App\Model\blogannoncereservation;
-use App\Model\categoryannoncereservation;
-use App\Model\user;
+use App\Models\blogannoncereservation;
+use App\Models\categoryannoncereservation;
+use App\Models\user;
 use Illuminate\Support\Facades\DB;
 
 class PremiumblogannoncereservationController extends Controller

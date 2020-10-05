@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Profile;
 
-use App\Model\annoncelocation;
+use App\Models\annoncelocation;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PrivateAnnoncelocationResource extends JsonResource

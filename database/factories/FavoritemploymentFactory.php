@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\favorite\favoritemployment;
-use App\Model\employment;
-use App\Model\user;
+use App\Models\favorite\favoritemployment;
+use App\Models\employment;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(favoritemployment::class, function (Faker $faker) {

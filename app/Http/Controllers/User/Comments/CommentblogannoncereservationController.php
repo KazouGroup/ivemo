@@ -4,9 +4,9 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\blogannoncereservation;
-use App\Model\comment;
-use App\Model\responsecomment;
+use App\Models\blogannoncereservation;
+use App\Models\comment;
+use App\Models\responsecomment;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 

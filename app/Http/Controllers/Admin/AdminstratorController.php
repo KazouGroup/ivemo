@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
-use App\Model\user;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class AdminstratorController extends Controller

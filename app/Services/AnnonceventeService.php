@@ -8,12 +8,12 @@ use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\Profile\PrivateAnnonceventeResource;
 use App\Jobs\NewannonceJob;
-use App\Model\abonne\subscribeannonce;
-use App\Model\annoncelocation;
-use App\Model\annoncetype;
-use App\Model\annoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\city;
+use App\Models\abonne\subscribeannonce;
+use App\Models\annoncelocation;
+use App\Models\annoncetype;
+use App\Models\annoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\city;
 
 class AnnonceventeService
 {
@@ -22,8 +22,6 @@ class AnnonceventeService
     {
         $data = annoncevente::whereSlugin($annoncevente)
             ->with('user','city','annoncetype','uploadimages','categoryannoncevente')
-            ->withCount(['uploadimages' => function ($q){
-                $q->where('uploadimagealable_type', annoncevente::class);}])
             ->first();
 
         return $data;

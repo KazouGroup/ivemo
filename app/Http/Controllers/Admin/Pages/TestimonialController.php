@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Resources\TestimonialResource;
-use App\Model\testimonial;
+use App\Models\testimonial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;

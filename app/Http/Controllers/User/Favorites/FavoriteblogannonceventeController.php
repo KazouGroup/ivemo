@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Favorites;
 
 use App\Http\Controllers\Controller;
-use App\Model\blogannoncevente;
-use App\Model\user;
+use App\Models\blogannoncevente;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;

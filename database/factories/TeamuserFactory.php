@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\teamuser;
-use App\Model\user;
+use App\Models\teamuser;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(teamuser::class, function (Faker $faker) {

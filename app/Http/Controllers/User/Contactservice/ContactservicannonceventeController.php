@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\ContactserviceResource;
 use App\Http\Resources\Profile\PrivateAnnonceventeResource;
-use App\Model\annoncetype;
-use App\Model\annoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\city;
-use App\Model\user;
+use App\Models\annoncetype;
+use App\Models\annoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\city;
+use App\Models\user;
 use App\Services\Contactusers\ContactusersventeService;
-use App\Model\contactservice;
+use App\Models\contactservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -145,9 +145,9 @@ class ContactservicannonceventeController extends Controller
                 ->withCount(['uploadimages' => function ($q){
                     $q->where(['status' => 1,'status_admin' => 1])
                         ->where('uploadimagealable_type', annoncevente::class);}])
-                        ->with(['uploadimages' => function ($q){
+                      ->with(['uploadimages' => function ($q){
                             $q->where(['status' => 1,'status_admin' => 1])
-                              ->where('uploadimagealable_type', annoncevente::class)->get();}])
+                                ->where('uploadimagealable_type', annoncevente::class)->get();}])
                 ->with('user','city','annoncetype','categoryannoncevente','uploadimages')
                 ->whereHas('categoryannoncevente', function ($q) {$q->where('status',1);})
                 ->whereHas('city', function ($q) {$q->where('status',1);})

@@ -1,8 +1,8 @@
 <?php
 
 
-use App\Model\contactservice;
-use App\Model\employment;
+use App\Models\contactservice;
+use App\Models\employment;
 use Illuminate\Database\Seeder;
 
 class EmployementSeeder extends Seeder

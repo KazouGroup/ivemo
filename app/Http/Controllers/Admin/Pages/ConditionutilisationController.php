@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ConditionutilisationResource;
-use App\Model\conditionutilisation;
+use App\Models\conditionutilisation;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

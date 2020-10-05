@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\user;
+use App\Models\user;
 
 class AgencesimmobilieController extends Controller
 {

@@ -5,8 +5,8 @@ namespace App\Services;
 
 
 use App\Http\Resources\FaqResource;
-use App\Model\categoryfaq;
-use App\Model\faq;
+use App\Models\categoryfaq;
+use App\Models\faq;
 use Illuminate\Support\Facades\Auth;
 
 class FaqsService

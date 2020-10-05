@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\contactservice;
-use App\Model\employment;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\contactservice;
+use App\Models\employment;
+use App\Models\user;
 use App\Services\HelpersService;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;

@@ -3,10 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 
-use App\Model\comment;
-use App\Model\like;
-use App\Model\uploadimage;
-use App\Model\user;
+use App\Models\comment;
+use App\Models\like;
+use App\Models\uploadimage;
+use App\Models\user;
 use Faker\Generator as Faker;
 /*
 |--------------------------------------------------------------------------

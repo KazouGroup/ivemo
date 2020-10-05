@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
-use App\Model\testimonial;
-use App\Model\user;
+use App\Models;
+use App\Models\testimonial;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(testimonial::class, function (Faker $faker) {

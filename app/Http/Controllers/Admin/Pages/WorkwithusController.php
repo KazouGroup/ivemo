@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin\Pages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StorecontactworkwithusRequest;
 use App\Http\Resources\WorkwithusResource;
-use App\Model\categoryworkwithus;
-use App\Model\contactservice;
-use App\Model\workwithus;
+use App\Models\categoryworkwithus;
+use App\Models\contactservice;
+use App\Models\workwithus;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

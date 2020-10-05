@@ -3,8 +3,8 @@ namespace App\Services;
 
 
 use App\Http\Resources\BlogannoncereservationResource;
-use App\Model\blogannoncereservation;
-use App\Model\user;
+use App\Models\blogannoncereservation;
+use App\Models\user;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Blogs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncereservationResource;
-use App\Model\blogannoncereservation;
-use App\Model\categoryannoncereservation;
+use App\Models\blogannoncereservation;
+use App\Models\categoryannoncereservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;

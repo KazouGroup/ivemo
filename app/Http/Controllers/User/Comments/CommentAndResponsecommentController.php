@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
-use App\Model\comment;
-use App\Model\responsecomment;
+use App\Models\comment;
+use App\Models\responsecomment;
 use Illuminate\Http\Request;
 
 class CommentAndResponsecommentController extends Controller

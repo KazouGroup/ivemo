@@ -4,7 +4,7 @@ namespace App\Services\Contactusers;
 
 
 use App\Jobs\Contacts\ContactworkwithusJob;
-use App\Model\user;
+use App\Models\user;
 
 class ContactworkwithusService
 {

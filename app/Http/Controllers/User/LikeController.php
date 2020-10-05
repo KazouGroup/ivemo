@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\activitycity;
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
-use App\Model\city;
-use App\Model\comment;
-use App\Model\employment;
-use App\Model\forum;
-use App\Model\responsecomment;
+use App\Models\activitycity;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncereservation;
+use App\Models\blogannoncevente;
+use App\Models\city;
+use App\Models\comment;
+use App\Models\employment;
+use App\Models\forum;
+use App\Models\responsecomment;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

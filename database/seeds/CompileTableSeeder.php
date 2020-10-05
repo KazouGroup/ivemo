@@ -1,11 +1,11 @@
 <?php
 
-use App\Model\annoncetype;
-use App\Model\categoryannoncereservation;
-use App\Model\color;
-use App\Model\categoryannoncelocation;
-use App\Model\categoryannoncevente;
-use App\Model\user;
+use App\Models\annoncetype;
+use App\Models\categoryannoncereservation;
+use App\Models\color;
+use App\Models\categoryannoncelocation;
+use App\Models\categoryannoncevente;
+use App\Models\user;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;

@@ -4,12 +4,12 @@ namespace App\Http\Controllers\User\Comments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
-use App\Model\annoncetype;
-use App\Model\annoncevente;
-use App\Model\categoryannoncevente;
-use App\Model\city;
-use App\Model\comment;
-use App\Model\responsecomment;
+use App\Models\annoncetype;
+use App\Models\annoncevente;
+use App\Models\categoryannoncevente;
+use App\Models\city;
+use App\Models\comment;
+use App\Models\responsecomment;
 use App\Services\CommentAndResponseService;
 use Illuminate\Http\Request;
 

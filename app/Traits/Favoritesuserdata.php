@@ -2,20 +2,20 @@
 
 namespace App\Traits;
 
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
-use App\Model\employment;
-use App\Model\favorite\favoriteannoncelocation;
-use App\Model\favorite\favoriteannoncereservation;
-use App\Model\favorite\favoriteannoncevente;
-use App\Model\favorite\favoriteblogannoncelocation;
-use App\Model\favorite\favoriteblogannoncereservation;
-use App\Model\favorite\favoriteblogannoncevente;
-use App\Model\favorite\favoritemployment;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncereservation;
+use App\Models\blogannoncevente;
+use App\Models\employment;
+use App\Models\favorite\favoriteannoncelocation;
+use App\Models\favorite\favoriteannoncereservation;
+use App\Models\favorite\favoriteannoncevente;
+use App\Models\favorite\favoriteblogannoncelocation;
+use App\Models\favorite\favoriteblogannoncereservation;
+use App\Models\favorite\favoriteblogannoncevente;
+use App\Models\favorite\favoritemployment;
 
 trait Favoritesuserdata
 {

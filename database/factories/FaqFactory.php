@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\categoryfaq;
-use App\Model\faq;
-use App\Model\user;
+use App\Models\categoryfaq;
+use App\Models\faq;
+use App\Models\user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

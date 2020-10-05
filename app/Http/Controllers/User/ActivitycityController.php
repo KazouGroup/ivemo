@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ActivitycityResource;
-use App\Model\activitycity;
-use App\Model\city;
+use App\Models\activitycity;
+use App\Models\city;
 use Illuminate\Http\Request;
 
 class ActivitycityController extends Controller

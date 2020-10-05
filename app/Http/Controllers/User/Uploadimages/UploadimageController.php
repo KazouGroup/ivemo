@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
-use App\Model\uploadimage;
+use App\Models\uploadimage;
 use App\Services\Contactusers\ContactuserService;
 use Storage;
 use Symfony\Component\HttpFoundation\Response;

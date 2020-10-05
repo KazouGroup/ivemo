@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\forum;
+use App\Models\forum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ForumResource extends JsonResource

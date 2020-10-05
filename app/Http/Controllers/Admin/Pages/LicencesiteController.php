@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LicencesiteResource;
-use App\Model\licencesite;
+use App\Models\licencesite;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

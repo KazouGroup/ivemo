@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Model\teamuser;
-use App\Model\user;
+use App\Models\teamuser;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TeamuserPolicy
@@ -13,8 +13,8 @@ class TeamuserPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\teamuser  $teamuser
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\teamuser  $teamuser
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, teamuser $teamuser)

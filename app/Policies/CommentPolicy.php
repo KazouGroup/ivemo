@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Model\comment;
-use App\Model\user;
+use App\Models\comment;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy
@@ -13,8 +13,8 @@ class CommentPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\comment  $comment
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\comment  $comment
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function updateComment(user $user, comment $comment)
@@ -26,8 +26,8 @@ class CommentPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\comment  $comment
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\comment  $comment
+     * @param  \App\Models\user  $user
      * @return mixed
      */
 

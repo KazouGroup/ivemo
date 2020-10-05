@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Model\annoncelocation;
-use App\Model\blogannoncelocation;
-use App\Model\contactuser;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\blogannoncelocation;
+use App\Models\contactuser;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BlogannoncelocationPolicy
@@ -15,8 +15,8 @@ class BlogannoncelocationPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\blogannoncelocation  $blogannoncelocation
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\blogannoncelocation  $blogannoncelocation
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, blogannoncelocation $blogannoncelocation)

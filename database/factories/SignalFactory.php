@@ -3,8 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 
-use App\Model\signal;
-use App\Model\user;
+use App\Models\signal;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 

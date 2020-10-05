@@ -4,10 +4,10 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncereservationResource;
-use App\Model\annoncereservation;
-use App\Model\categoryannoncereservation;
-use App\Model\city;
-use App\Model\user;
+use App\Models\annoncereservation;
+use App\Models\categoryannoncereservation;
+use App\Models\city;
+use App\Models\user;
 use Illuminate\Support\Facades\Cache;
 
 class AnnoncereservationService

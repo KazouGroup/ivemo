@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\avisuser;
-use App\Model\user;
+use App\Models\avisuser;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(avisuser::class, function (Faker $faker) {

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Premium;
 
 use App\Http\Controllers\Controller;
-use App\Model\teamuser;
-use App\Model\user;
+use App\Models\teamuser;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

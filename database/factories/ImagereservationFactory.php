@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\annoncereservation;
-use App\Model\imagereservation;
+use App\Models\annoncereservation;
+use App\Models\imagereservation;
 use Faker\Generator as Faker;
 
 $factory->define(imagereservation::class, function (Faker $faker) {

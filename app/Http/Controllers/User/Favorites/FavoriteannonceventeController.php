@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User\Favorites;
 
 use App\Http\Controllers\Controller;
-use App\Model\annoncevente;
-use App\Model\user;
+use App\Models\annoncevente;
+use App\Models\user;
 use Illuminate\Http\Request;
 
 class FavoriteannonceventeController extends Controller

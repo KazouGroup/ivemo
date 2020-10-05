@@ -7,10 +7,10 @@ use App\Http\Resources\CategoryemployementResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\EmploymentResource;
 use App\Jobs\NewemployementJob;
-use App\Model\abonne\subscribemployment;
-use App\Model\categoryemployment;
-use App\Model\city;
-use App\Model\employment;
+use App\Models\abonne\subscribemployment;
+use App\Models\categoryemployment;
+use App\Models\city;
+use App\Models\employment;
 use Intervention\Image\Facades\Image;
 use File;
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Pages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PolicyprivacyResource;
-use App\Model\policyprivacy;
+use App\Models\policyprivacy;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

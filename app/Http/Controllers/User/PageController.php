@@ -7,11 +7,11 @@ use App\Http\Requests\Contactuser\StorecontactuseradvertRequest;
 use App\Http\Requests\Contactuser\StorecontactuserfaqRequest;
 use App\Http\Requests\Contactuser\StorecontactadminsRequest;
 use App\Http\Resources\CityResource;
-use App\Model\city;
-use App\Model\contactusersadvert;
-use App\Model\contactusersfaq;
-use App\Model\contact;
-use App\Model\periodeannonce;
+use App\Models\city;
+use App\Models\contactusersadvert;
+use App\Models\contactusersfaq;
+use App\Models\contact;
+use App\Models\periodeannonce;
 use App\Services\Contactusers\ContactuserService;
 use Symfony\Component\HttpFoundation\Response;
 

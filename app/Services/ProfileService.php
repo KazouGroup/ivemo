@@ -14,15 +14,15 @@ use App\Http\Resources\EmploymentResource;
 use App\Http\Resources\FaqResource;
 use App\Http\Resources\ForumResource;
 use App\Jobs\ConfirmreservationJob;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncereservation;
-use App\Model\blogannoncevente;
-use App\Model\categoryfaq;
-use App\Model\contactuser;
-use App\Model\employment;
-use App\Model\faq;
-use App\Model\reservation;
-use App\Model\user;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncereservation;
+use App\Models\blogannoncevente;
+use App\Models\categoryfaq;
+use App\Models\contactuser;
+use App\Models\employment;
+use App\Models\faq;
+use App\Models\reservation;
+use App\Models\user;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileService

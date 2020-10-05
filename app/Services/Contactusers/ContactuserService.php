@@ -9,7 +9,7 @@ use App\Jobs\Contacts\ContactuploadimagesstatusJob;
 use App\Jobs\Contacts\ContactuserJob;
 use App\Jobs\Contacts\ContactusersadvertsJob;
 use App\Jobs\Contacts\ContactadminsfaqsJob;
-use App\Model\profileadmin;
+use App\Models\profileadmin;
 use App\Services\HelpersService;
 
 class ContactuserService

@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\blogannoncelocation;
+use App\Models\blogannoncelocation;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BlogannoncelocationResource extends JsonResource

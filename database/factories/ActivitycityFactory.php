@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\activitycity;
-use App\Model\city;
+use App\Models\activitycity;
+use App\Models\city;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Blogs;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncelocationResource;
-use App\Model\blogannoncelocation;
-use App\Model\categoryannoncelocation;
+use App\Models\blogannoncelocation;
+use App\Models\categoryannoncelocation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;

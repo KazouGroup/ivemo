@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Model\favorite;
+use App\Models\favorite;
 use Illuminate\Support\Facades\Auth;
 
 trait Favoritesdata

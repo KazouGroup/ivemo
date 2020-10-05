@@ -5,7 +5,7 @@ namespace App\Services\Contactusers;
 
 use App\Jobs\Adminaction\AdminactionAnnoncelocationJob;
 use App\Jobs\Contacts\ContactuserlocationJob;
-use App\Model\contactuserslocation;
+use App\Models\contactuserslocation;
 use App\Services\HelpersService;
 
 class ContactuserslocationService

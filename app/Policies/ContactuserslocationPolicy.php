@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Model\contactuser;
-use App\Model\contactuserslocation;
-use App\Model\user;
+use App\Models\contactuser;
+use App\Models\contactuserslocation;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContactuserslocationPolicy
@@ -14,8 +14,8 @@ class ContactuserslocationPolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\contactuserslocation  $contactuserslocation
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\contactuserslocation  $contactuserslocation
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, contactuserslocation $contactuserslocation)

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Model\contactuser;
-use App\Model\user;
+use App\Models\contactuser;
+use App\Models\user;
 use App\Services\Contactusers\ContactuserService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;

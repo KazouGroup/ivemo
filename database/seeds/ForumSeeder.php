@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\forum;
+use App\Models\forum;
 use Illuminate\Database\Seeder;
 
 class ForumSeeder extends Seeder

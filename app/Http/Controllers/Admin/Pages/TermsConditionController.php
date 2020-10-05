@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TermsCondition\StoreRequest;
 use App\Http\Requests\TermsCondition\UpdateRequest;
 use App\Http\Resources\TermsConditionResource;
-use App\Model\termscondition;
+use App\Models\termscondition;
 use Intervention\Image\Facades\Image;
 use File;
 

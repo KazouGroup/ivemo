@@ -4,10 +4,10 @@ namespace App\Http\Controllers\User\Uploadimages;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UploadimageResource;
-use App\Model\activitycity;
-use App\Model\city;
-use App\Model\uploadimage;
-use App\Model\user;use Illuminate\Http\Request;
+use App\Models\activitycity;
+use App\Models\city;
+use App\Models\uploadimage;
+use App\Models\user;use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;

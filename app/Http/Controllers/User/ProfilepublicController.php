@@ -5,9 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Contactuser\StoreRequest;
 use App\Http\Resources\UserResource;
-use App\Model\annoncetype;
-use App\Model\contactuser;
-use App\Model\user;
+use App\Models\annoncetype;
+use App\Models\contactuser;
+use App\Models\user;
 use App\Services\Contactusers\ContactuserService;
 use App\Services\ProfileService;
 

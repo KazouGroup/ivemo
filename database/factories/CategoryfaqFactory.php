@@ -1,7 +1,7 @@
 <?php
 
-use App\Model\categoryfaq;
-use App\Model\user;
+use App\Models\categoryfaq;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 /*

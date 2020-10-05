@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Faq\StoreRequest;
 use App\Http\Requests\Faq\UpdateRequest;
 use App\Http\Resources\FaqResource;
-use App\Model\categoryfaq;
-use App\Model\faq;
+use App\Models\categoryfaq;
+use App\Models\faq;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

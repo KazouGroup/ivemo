@@ -2,11 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\abonne\subscribeforum;
-use App\Model\abonne\subscribemployment;
-use App\Model\employment;
-use App\Model\followeruser;
-use App\Model\user;
+use App\Models\abonne\subscribeforum;
+use App\Models\abonne\subscribemployment;
+use App\Models\employment;
+use App\Models\followeruser;
+use App\Models\user;
 use Faker\Generator as Faker;
 
 $factory->define(followeruser::class, function (Faker $faker) {

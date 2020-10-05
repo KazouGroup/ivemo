@@ -4,16 +4,16 @@ namespace App\Http\Controllers\User\Contactservice;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PrivateEmploymentResource;
-use App\Model\categoryemployment;
-use App\Model\city;
-use App\Model\user;
+use App\Models\categoryemployment;
+use App\Models\city;
+use App\Models\user;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ContactserviceemploymentExport;
 use App\Http\Resources\ContactserviceResource;
 use App\Services\Contactusers\ContactusersemploymentService;
-use App\Model\employment;
-use App\Model\contactservice;
+use App\Models\employment;
+use App\Models\contactservice;
 use App\Http\Requests\Contactuser\StorecontactuseremploymentRequest;
 use Illuminate\Http\Request;
 

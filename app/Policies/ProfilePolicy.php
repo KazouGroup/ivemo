@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Model\profile;
-use App\Model\user;
+use App\Models\profile;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProfilePolicy
@@ -18,8 +18,8 @@ class ProfilePolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\user  $user
-     * @param  \App\Model\profile  $profile
+     * @param  \App\Models\user  $user
+     * @param  \App\Models\profile  $profile
      * @return mixed
      */
     public function update(user $user, profile $profile)

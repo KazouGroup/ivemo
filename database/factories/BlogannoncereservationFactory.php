@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\blogannoncereservation;
-use App\Model\categoryannoncereservation;
-use App\Model\user;
+use App\Models\blogannoncereservation;
+use App\Models\categoryannoncereservation;
+use App\Models\user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

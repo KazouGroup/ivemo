@@ -3,7 +3,7 @@ namespace App\Http\Requests\Profile;
 
 use App\Helpers\FormatHelper;
 use App\Http\Requests\Request;
-use App\Model\user;
+use App\Models\user;
 use Illuminate\Validation\Rule;
 
 

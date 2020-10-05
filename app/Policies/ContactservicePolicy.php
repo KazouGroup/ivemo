@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Model\contactservice;
-use App\Model\user;
+use App\Models\contactservice;
+use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ContactservicePolicy
@@ -13,8 +13,8 @@ class ContactservicePolicy
     /**
      * Determine whether the user can update the technician.
      *
-     * @param  \App\Model\contactservice  $contactservice
-     * @param  \App\Model\user  $user
+     * @param  \App\Models\contactservice  $contactservice
+     * @param  \App\Models\user  $user
      * @return mixed
      */
     public function update(user $user, contactservice $contactservice)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\city;
+use App\Models\city;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CityResource extends JsonResource

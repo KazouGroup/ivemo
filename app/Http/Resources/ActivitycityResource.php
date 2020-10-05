@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Model\activitycity;
+use App\Models\activitycity;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ActivitycityResource extends JsonResource

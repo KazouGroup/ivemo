@@ -1,12 +1,12 @@
 <?php
 namespace App\Services;
 
-use App\Model\annoncelocation;
-use App\Model\annoncereservation;
-use App\Model\annoncevente;
-use App\Model\employment;
-use App\Model\forum;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\annoncereservation;
+use App\Models\annoncevente;
+use App\Models\employment;
+use App\Models\forum;
+use App\Models\user;
 use Illuminate\Support\Facades\Auth;
 
 class HelpersService

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Categories;
 
-use App\Model\categoryobjet;
-use App\Model\categoryprofile;
+use App\Models\categoryobjet;
+use App\Models\categoryprofile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryFaqResource;
-use App\Model\categoryfaq;
-use App\Model\categoryuser;
+use App\Models\categoryfaq;
+use App\Models\categoryuser;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 

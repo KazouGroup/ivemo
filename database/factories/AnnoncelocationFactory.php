@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model\annoncelocation;
-use App\Model\categoryannoncelocation;
-use App\Model\city;
-use App\Model\user;
+use App\Models\annoncelocation;
+use App\Models\categoryannoncelocation;
+use App\Models\city;
+use App\Models\user;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

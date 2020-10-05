@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Premium;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BlogannoncelocationResource;
 use App\Http\Resources\BlogannonceventeResource;
-use App\Model\blogannoncelocation;
-use App\Model\blogannoncevente;
-use App\Model\categoryannoncelocation;
-use App\Model\categoryannoncevente;
-use App\Model\user;
+use App\Models\blogannoncelocation;
+use App\Models\blogannoncevente;
+use App\Models\categoryannoncelocation;
+use App\Models\categoryannoncevente;
+use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

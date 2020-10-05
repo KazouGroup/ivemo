@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Partials;
 
 use App\Http\Resources\CityResource;
 use App\Http\Resources\ColorResource;
-use App\Model\city;
-use App\Model\color;
+use App\Models\city;
+use App\Models\color;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use File;

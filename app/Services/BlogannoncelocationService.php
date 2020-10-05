@@ -3,9 +3,9 @@ namespace App\Services;
 
 
 use App\Http\Resources\BlogannoncelocationResource;
-use App\Model\blogannoncelocation;
-use App\Model\categoryannoncelocation;
-use App\Model\user;
+use App\Models\blogannoncelocation;
+use App\Models\categoryannoncelocation;
+use App\Models\user;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 

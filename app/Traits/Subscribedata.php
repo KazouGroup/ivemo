@@ -2,11 +2,11 @@
 
 namespace App\Traits;
 
-use App\Model\abonne\subscribeannonce;
-use App\Model\abonne\subscribeblogannonce;
-use App\Model\abonne\subscribeforum;
-use App\Model\abonne\subscribemployment;
-use App\Model\followeruser;
+use App\Models\abonne\subscribeannonce;
+use App\Models\abonne\subscribeblogannonce;
+use App\Models\abonne\subscribeforum;
+use App\Models\abonne\subscribemployment;
+use App\Models\followeruser;
 use Illuminate\Support\Facades\Auth;
 
 trait Subscribedata

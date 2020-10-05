@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Signalblogannonce\SignalblogannoncereservationRequest;
 use App\Http\Requests\Signalblogannonce\SignalblogannonceventeRequest;
 use App\Http\Requests\Signalblogannonce\SignalblogannonlocationRequest;
-use App\Model\signalblogannoncelocation;
-use App\Model\signalblogannoncereservation;
-use App\Model\signalblogannoncevente;
+use App\Models\signalblogannoncelocation;
+use App\Models\signalblogannoncereservation;
+use App\Models\signalblogannoncevente;
 use Illuminate\Http\Request;
 
 class SignalblogannonceController extends Controller

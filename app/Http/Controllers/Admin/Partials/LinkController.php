@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Partials;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FaqResource;
-use App\Model\link;
+use App\Models\link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;

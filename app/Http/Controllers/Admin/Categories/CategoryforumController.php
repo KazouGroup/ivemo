@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Categories;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryforumResource;
-use App\Model\categoryforum;
+use App\Models\categoryforum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
