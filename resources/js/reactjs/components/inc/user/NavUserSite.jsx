@@ -179,18 +179,55 @@ class NavUserSite extends PureComponent {
                             </div>
                         </li> */}
 
-                        <li className="nav-item">
-                            <NavLink to={'/employments/'} className="nav-link">
-                                <i className="now-ui-icons business_briefcase-24"/>
-                                <b>Emplois & Services</b>
-                            </NavLink>
-                        </li>
+                        {$guest ?
+                            <li className="nav-item">
+                                <a href={`/login`} data-toggle="modal" data-target="#loginModal" className="nav-link">
+                                    <i className="now-ui-icons ui-1_simple-add"/>
+                                    <b>Poster votre annonce</b>
+                                </a>
+                            </li>
+                            :
+                            <li className="nav-item dropdown">
+                                <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                    <i className="now-ui-icons ui-1_simple-add" aria-hidden="true"/>
+                                    <b>Poster votre annonce</b>
+                                </a>
+                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <NavLink to={`/al_data/locations/new/`} className="dropdown-item">
+                                        <i className="now-ui-icons business_bank"/> Locations
+                                    </NavLink>
+                                    <NavLink to={`/av_data/ventes/new/`} className="dropdown-item">
+                                        <i className="now-ui-icons location_map-big"/> Ventes
+                                    </NavLink>
+                                    <NavLink to={`/employment/ab/new/`} className="dropdown-item">
+                                        <i className="now-ui-icons business_briefcase-24"/> Emplois & Services
+                                    </NavLink>
+                                </div>
+                            </li>
 
-                        <li className="nav-item">
-                            <NavLink to={'/forums/'} className="nav-link">
-                                <i className="now-ui-icons text_align-left"/>
-                                <b>Forums</b>
-                            </NavLink>
+                        }
+
+                        <li className="nav-item dropdown">
+                            <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                <i className="now-ui-icons text_align-left" aria-hidden="true"/>
+                                <b>Menu</b>
+                            </a>
+                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <NavLink to={`/als/locations/`} className="dropdown-item">
+                                    <i className="now-ui-icons business_bank"/> <b>Locations</b>
+                                </NavLink>
+                                <NavLink to={`/avs/ventes/`} className="dropdown-item">
+                                    <i className="now-ui-icons location_map-big"/> <b>Ventes</b>
+                                </NavLink>
+                                <NavLink to={'/employments/'} className="dropdown-item">
+                                    <i className="now-ui-icons business_briefcase-24"/>
+                                    <b>Emplois & Services</b>
+                                </NavLink>
+                                <NavLink to={'/forums/'} className="dropdown-item">
+                                    <i className="now-ui-icons text_align-left"/>
+                                    <b>Forums</b>
+                                </NavLink>
+                            </div>
                         </li>
 
 
