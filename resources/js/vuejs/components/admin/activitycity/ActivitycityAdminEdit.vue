@@ -299,11 +299,11 @@
                                                                           class="form-control"
                                                                           name="photo" accept="image/*"/>
                                                                </span>
-                                                        <a href="#pablo"
-                                                           class="btn btn-danger fileinput-exists"
-                                                           data-dismiss="fileinput">
-                                                            <b>Remove</b>
-                                                        </a>
+                                                        <!--<a href="#pablo"
+                                                            class="btn btn-danger fileinput-exists"
+                                                            data-dismiss="fileinput">
+                                                                <b>Remove</b>
+                                                            </a>-->
                                                     </div>
                                                 </div>
                                                 <has-error :form="form" field="photo"/>

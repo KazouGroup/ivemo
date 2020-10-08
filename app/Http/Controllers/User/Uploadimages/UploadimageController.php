@@ -39,11 +39,11 @@ class UploadimageController extends Controller
 
     public function destroy(uploadimage $uploadimage)
     {
-        $oldFilename = $uploadimage->photo;
-
-        $s3 = \Storage::disk('s3');
-
-        $s3->delete($oldFilename);
+        $disk = \Storage::disk('s3');
+        $path = $uploadimage->photo;
+        if($disk->exists($path))
+        $disk->delete($path);
+        
         $uploadimage->delete();
 
         return ['message' => 'Deleted successfully'];

@@ -48,10 +48,10 @@ class UploadimageactivitycityController extends Controller
             $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
             $filenametostore='img/activitycity/'. $imageName;
             $imagedecode = base64_decode(explode(",", $image)[1]);
-
+            $disk = Storage::disk('s3');
 
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
-            Storage::disk('s3')->put($filenametostore, $resized_image, 'public');
+            $disk->put($filenametostore, $resized_image, 'public');
 
             $myfilename = config('app.aws_url')."/img/activitycity/{$imageName}";
         }
