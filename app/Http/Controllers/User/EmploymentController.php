@@ -143,11 +143,11 @@ class EmploymentController extends Controller
             $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
             $filenametostore='img/employment/'. $imageName;
             $imagedecode = base64_decode(explode(",", $image)[1]);
-            $disk = Storage::disk('public');
+            $disk = Storage::disk('s3');
 
             $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
             $disk->put($filenametostore, $resized_image, 'public');
-            $myfilename = "/img/employment/{$imageName}";
+            $myfilename = config('app.aws_url')."/img/employment/{$imageName}";
 
         }
 
