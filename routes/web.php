@@ -11,8 +11,7 @@
 |
 */
 
-Artisan::call('storage:link');
-
+//Artisan::call('storage:link', [] );
 /** Dashboard */
 require(__DIR__ . DIRECTORY_SEPARATOR . 'web' . DIRECTORY_SEPARATOR . 'index.php');
 
