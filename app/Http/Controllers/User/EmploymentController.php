@@ -13,7 +13,8 @@ use App\Models\employment;
 use App\Models\user;
 use App\Services\EmploymentService;
 use Illuminate\Http\Request;
-use File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmploymentController extends Controller
@@ -131,13 +132,27 @@ class EmploymentController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $employment= new employment();
+        $employment = new employment();
 
         $employment->fill($request->all());
 
-        $employment->description = clean($request->description);
+        if($request->photo){
 
-        EmploymentService::storeUploadImage($request,$employment);
+            $image = $request->photo;
+            $imageExt = explode(";",explode('/', $image)[1])[0];
+            $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
+            $filenametostore='img/employment/'. $imageName;
+            $imagedecode = base64_decode(explode(",", $image)[1]);
+            $disk = Storage::disk('public');
+
+            $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
+            $disk->put($filenametostore, $resized_image, 'public');
+            $myfilename = "/img/employment/{$imageName}";
+
+        }
+
+        $employment->description = clean($request->description);
+        $employment->photo = $myfilename;
 
         EmploymentService::sendMessageToUser($request);
 
@@ -396,18 +411,13 @@ class EmploymentController extends Controller
     {
         $employment = employment::findOrFail($id);
 
-        $this->authorize('update',$employment);
+        $disk = Storage::disk('public');
+        $oldFilename = $employment->photo;
+        if($disk->exists($oldFilename))
+        $disk->delete($oldFilename);
 
-        if(auth()->user()->id === $employment->user_id){
+        $employment->delete();
 
-            $oldFilename = $employment->photo;
-            File::delete(public_path($oldFilename));
-
-            $employment->delete();
-
-            return ['message' => 'Deleted successfully'];
-        }else{
-            abort(404);
-        }
+        return ['message' => 'Deleted successfully'];
     }
 }

@@ -50,7 +50,7 @@ class EmployementIndexSite extends Component {
         const {employments} = this.props;
         const {visiable} = this.state;
         const mapEmployments = employments.length >= 0 ? (
-            employments.slice(0, visiable).map(item => {
+            employments.slice(0, visiable).map((item) => {
                 return (
                     <>
                         <EmployementList key={item.id} {...item}

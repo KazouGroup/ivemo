@@ -44,6 +44,7 @@ class EmploymentEdit extends Component {
         this.state = {
             id: '',
             title: '',
+            slug: '',
             photo: '',
             price: '',
             status: '',
@@ -54,6 +55,9 @@ class EmploymentEdit extends Component {
             categoryemployment_id: '',
             status_link_contact: '',
             showDefaultImage: false,
+            user: [],
+            city: [],
+            categoryemployment: [],
             errors: [],
             cities: [],
             categoryemployments: [],
@@ -325,13 +329,17 @@ class EmploymentEdit extends Component {
             this.setState({
                 id: response.data.id,
                 title: response.data.title,
+                slug: response.data.slug,
                 price: response.data.price,
                 district: response.data.district,
                 photo: response.data.photo,
                 link_contact: response.data.link_contact,
                 city_id: response.data.city_id,
+                city: response.data.city,
+                user: response.data.user,
                 status: response.data.status,
                 categoryemployment_id: response.data.categoryemployment_id,
+                categoryemployment: response.data.categoryemployment,
                 status_link_contact: response.data.status_link_contact,
                 description: response.data.description,
             }));
@@ -384,11 +392,24 @@ class EmploymentEdit extends Component {
                                         </div>
 
                                         <div className="col-lg-8 col-md-12 mx-auto">
-                                            <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos offres </b>
-                                                </button>
-                                            </div>
+                                            <div className="d-flex align-items-center">
+                                                <div className="d-flex align-items-center">
+                                                    <button type="button" className="btn btn-neutral btn-sm"
+                                                            onClick={this.props.history.goBack}>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à
+                                                        vos annonces </b>
+                                                    </button>
+                                                </div>
+                                                <div className="text-right ml-auto">
+                                                    {this.state.status && (
+                                                        <Link
+                                                            to={`/employments/${this.state.categoryemployment.slug}/${this.state.city.slug}/${this.state.user.slug}/${this.state.slug}/`}
+                                                            className="btn btn-info">
+                                                            <b>Voir votre annonce</b>
+                                                        </Link>
+                                                    )}
+                                                </div>
+                                        </div>
                                             {!$guest &&(
                                                 <>
                                                     {!$userIvemo.email_verified_at &&(
@@ -537,11 +558,14 @@ class EmploymentEdit extends Component {
                                                                     {this.renderErrorFor('photo')}
                                                                     <div className="text-center">
                                                                         <label htmlFor="photo" className="btn btn-primary">
-                                                                            <span className="btn-inner--text">Ajouter l'image</span>
+                                                                            <span className="btn-inner--text">Changer l'image</span>
                                                                         </label>
-                                                                        <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
+                                                                        {/** 
+                                                                         <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
                                                                             <span className="btn-inner--text">Remove</span>
-                                                                        </label>
+                                                                         </label>
+                                                                        */}
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>

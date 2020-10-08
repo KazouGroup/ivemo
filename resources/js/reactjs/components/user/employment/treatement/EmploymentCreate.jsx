@@ -363,9 +363,12 @@ class EmploymentCreate extends Component {
                                                                         <label htmlFor="photo" className="btn btn-primary">
                                                                             <span className="btn-inner--text">Ajouter l'image</span>
                                                                         </label>
+                                                                        {/**
+                                                                         * 
                                                                         <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
                                                                             <span className="btn-inner--text">Remove</span>
                                                                         </label>
+                                                                         */}
                                                                     </div>
                                                                 </div>
                                                             </div>

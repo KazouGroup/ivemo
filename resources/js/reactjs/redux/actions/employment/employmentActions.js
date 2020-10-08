@@ -275,7 +275,7 @@ export const favoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "L\'annonce a été ajoutée à vos favoris.",
+                    message: "L'annonce a été ajoutée à vos favoris.",
                 },
                 {
                     allow_dismiss: false,
@@ -285,8 +285,8 @@ export const favoriteItem = props => dispatch => {
                         align: 'right'
                     },
                     animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     },
                 });
         }
@@ -304,7 +304,7 @@ export const unfavoriteItem = props => dispatch => {
             });
 
             $.notify({
-                    message: "L\'annonce a été retirée de vos favoris.",
+                    message: "L'annonce a été retirée de vos favoris.",
                 },
                 {
                     allow_dismiss: false,
@@ -314,8 +314,8 @@ export const unfavoriteItem = props => dispatch => {
                         align: 'right'
                     },
                     animate: {
-                        enter: "animate__animated animate__fadeInUp",
-                        exit: "animate__animated animate__fadeOutDown"
+                        enter: 'animate__animated animate__bounceInDown',
+                        exit: 'animate__animated animate__bounceOutUp'
                     },
                 });
         }

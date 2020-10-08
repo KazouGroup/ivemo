@@ -11,6 +11,7 @@ use App\Models\abonne\subscribemployment;
 use App\Models\categoryemployment;
 use App\Models\city;
 use App\Models\employment;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use File;
 
@@ -295,40 +296,51 @@ class EmploymentService
 
     }
 
-    public static function storeUploadImage($request,$employment)
+    public static function storeUploadImage($request,$employment,$myfilename)
     {
+        if($request->photo){
 
-        if ($request->photo) {
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
-                ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/employment/';
-            if(!file_exists($dir)){
-                mkdir($dir, 0775, true);
-            }
-            $destinationPath = public_path("assets/img/employment/{$name}");
-            Image::make($request->photo)->fit(1200,650)->save($destinationPath);
+            $image = $request->photo;
+            $imageExt = explode(";",explode('/', $image)[1])[0];
+            $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
+            $filenametostore='img/employment/'. $imageName;
+            $imagedecode = base64_decode(explode(",", $image)[1]);
+            $disk = Storage::disk('public');
 
-            $myfilename = "/assets/img/employment/{$name}";
-            $employment->photo = $myfilename;
+            $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
+            $disk->put($filenametostore, $resized_image, 'public');
+            $myfilename = "/img/employment/{$imageName}";
+
         }
+
+        return $myfilename;
 
     }
 
     public static function updateUploadeImage($request,$employment)
     {
+
         $currentPhoto = $employment->photo;
 
-        if ($request->photo != $currentPhoto){
-            $namefile = sha1(date('YmdHis') . str_random(30));
-            $name =   $namefile.'.' . explode('/',explode(':',substr($request->photo,0,strpos
-                ($request->photo,';')))[1])[1];
-            $dir = 'assets/img/employment/';
-            if(!file_exists($dir)){mkdir($dir, 0775, true);}
-            Image::make($request->photo)->fit(1200,650)->save(public_path('assets/img/employment/').$name);
-            $request->merge(['photo' =>  "/assets/img/employment/{$name}"]);
+        if($request->photo != $currentPhoto){
+
+            $image = $request->photo;
+            $imageExt = explode(";",explode('/', $image)[1])[0];
+            $imageName = sha1(date('YmdHis') . str_random(30)) . '.' . $imageExt;
+            $filenametostore='img/employment/'. $imageName;
+            $imagedecode = base64_decode(explode(",", $image)[1]);
+            $disk = Storage::disk('public');
+
+            $resized_image = Image::make($imagedecode)->fit(1200,703)->stream();
+            $disk->put($filenametostore, $resized_image, 'public');
+            $myfilename = "/img/employment/{$imageName}";
+
+            $request->merge(['photo' =>  $myfilename]);
+
             $oldFilename = $currentPhoto;
-            File::delete(public_path($oldFilename));
+            if($disk->exists($oldFilename))
+            $disk->delete($oldFilename);
         }
+
     }
 }

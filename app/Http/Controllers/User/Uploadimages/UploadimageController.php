@@ -40,10 +40,10 @@ class UploadimageController extends Controller
     public function destroy(uploadimage $uploadimage)
     {
         $disk = \Storage::disk('s3');
-        $path = $uploadimage->photo;
-        if($disk->exists($path))
-        $disk->delete($path);
-        
+        $oldFilename = $uploadimage->photo;
+        if($disk->exists($oldFilename))
+        $disk->delete($oldFilename);
+
         $uploadimage->delete();
 
         return ['message' => 'Deleted successfully'];

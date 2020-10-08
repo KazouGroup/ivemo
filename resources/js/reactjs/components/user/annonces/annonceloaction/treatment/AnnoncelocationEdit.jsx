@@ -934,7 +934,7 @@ class AnnoncelocationEdit extends Component {
                                                                                                 minLength="5"
                                                                                                 maxLength="200"
                                                                                                 placeholder="Titre du bien"
-                                                                                                value={this.state.title}
+                                                                                                value={this.state.title || ""}
                                                                                                 handleFieldChange={this.handleFieldChange}
                                                                                                 hasErrorFor={this.hasErrorFor}
                                                                                                 renderErrorFor={this.renderErrorFor}
@@ -957,7 +957,7 @@ class AnnoncelocationEdit extends Component {
                                                                                             <FieldInput name="price"
                                                                                                         type='number'
                                                                                                         placeholder="Motant de votre bien"
-                                                                                                        value={this.state.price}
+                                                                                                        value={this.state.price || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}
@@ -979,7 +979,7 @@ class AnnoncelocationEdit extends Component {
                                                                                             <FieldInput name="award_price"
                                                                                                         type='number'
                                                                                                         placeholder="Garantie"
-                                                                                                        value={this.state.award_price}
+                                                                                                        value={this.state.award_price || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -1084,7 +1084,7 @@ class AnnoncelocationEdit extends Component {
                                                                                                         minLength="3"
                                                                                                         maxLength="200"
                                                                                                         placeholder="Quartier"
-                                                                                                        value={this.state.district}
+                                                                                                        value={this.state.district || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}
@@ -1132,7 +1132,7 @@ class AnnoncelocationEdit extends Component {
                                                                                             <FieldInput name="surface"
                                                                                                         type='number'
                                                                                                         placeholder="Surface"
-                                                                                                        value={this.state.surface}
+                                                                                                        value={this.state.surface || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -1148,7 +1148,7 @@ class AnnoncelocationEdit extends Component {
                                                                                                         type='number'
                                                                                                         maxLength="2"
                                                                                                         placeholder="Pièces"
-                                                                                                        value={this.state.pieces}
+                                                                                                        value={this.state.pieces || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
@@ -1163,7 +1163,7 @@ class AnnoncelocationEdit extends Component {
                                                                                                         type='number'
                                                                                                         maxLength="2"
                                                                                                         placeholder="Chambres"
-                                                                                                        value={this.state.rooms}
+                                                                                                        value={this.state.rooms || ""}
                                                                                                         handleFieldChange={this.handleFieldChange}
                                                                                                         hasErrorFor={this.hasErrorFor}
                                                                                                         renderErrorFor={this.renderErrorFor}/>
