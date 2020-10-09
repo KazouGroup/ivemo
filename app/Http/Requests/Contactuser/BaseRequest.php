@@ -57,8 +57,8 @@ class BaseRequest extends Request
             ];
         }elseif($group === 'sendcontactserviceannonce') {
             $rules = [
-                'full_name' => 'required|string|min:3|max:200',
-                'email' => 'required|string|email|min:5|max:200',
+                'full_name' => 'nullable|string|min:3|max:200',
+                'email' => 'nullable|string|email|min:5|max:200',
                 'phone' => 'required|numeric',
                 'subject' => 'required|string|min:3|max:200',
                 'message' => 'required|min:5|max:5000',

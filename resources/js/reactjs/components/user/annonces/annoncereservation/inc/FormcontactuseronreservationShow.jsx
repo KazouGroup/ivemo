@@ -6,8 +6,6 @@ class FormcontactuseronreservationShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            full_name: '',
             phone: '',
             subject: '',
             message: '',
@@ -45,8 +43,6 @@ class FormcontactuseronreservationShow extends Component {
         e.preventDefault();
 
         let item = {
-            email: this.state.email,
-            full_name: this.state.full_name,
             phone: this.state.phone,
             subject: this.state.subject,
             message: this.state.message,
@@ -56,7 +52,7 @@ class FormcontactuseronreservationShow extends Component {
         let itemcityannonce = this.props.match.params.city;
         let itemuser = this.props.match.params.user;
         let itemannoncereservation = this.props.match.params.annoncereservation;
-        let url = route('annoncereservationsendcontactmessageuser_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
+        let url = route('annoncereservationsendcontactservice_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
         dyaxios.post(url, item)
             .then(() => {
 
@@ -71,8 +67,8 @@ class FormcontactuseronreservationShow extends Component {
                             align: 'center'
                         },
                         animate: {
-                            enter: "animated fadeInUp",
-                            exit: "animated fadeOutDown"
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
                         },
                     });
 
@@ -102,38 +98,13 @@ class FormcontactuseronreservationShow extends Component {
                         <div className="input-group">
                             <div className="input-group-prepend">
                                                         <span className="input-group-text">
-                                                            <i className="now-ui-icons users_circle-08"/></span>
-                            </div>
-
-                            <FieldInput name="full_name" type='text' minLength="3" maxLength="250" placeholder="Email " value={this.state.full_name}
-                                        handleFieldChange={this.handleFieldChange}
-                                        hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                                                        <span className="input-group-text">
-                                                            <i className="now-ui-icons ui-1_email-85"/></span>
-                            </div>
-                            <FieldInput name="email" type='email' minLength="3" maxLength="30" placeholder="Email " value={this.state.email}
-                                        handleFieldChange={this.handleFieldChange}
-                                        hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="input-group">
-                            <div className="input-group-prepend">
-                                                        <span className="input-group-text">
                                                             <i className="now-ui-icons tech_mobile"/></span>
                             </div>
                             <FieldInput name="phone" type='number' minLength="3" maxLength="30" placeholder="Téléphone " value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}/>
+                                        renderErrorFor={this.renderErrorFor}
+                                        required="required"/>
                         </div>
 
 
@@ -163,7 +134,7 @@ class FormcontactuseronreservationShow extends Component {
                     </div>
                     <div className="submit text-center">
                         <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_email-85"/> Contacter
+                            <i className="now-ui-icons ui-1_send"/> Contacter
                         </button>
                     </div>
                 </div>

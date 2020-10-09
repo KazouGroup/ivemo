@@ -4,18 +4,15 @@ namespace App\Http\Controllers\User\Contactservice;
 
 use App\Exports\ContactserviceannonceventesExport;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Contactuser\StorecontactRequest;
+use App\Http\Requests\Contactuser\StorecontactuserannoncelocationRequest;
 use App\Http\Resources\ContactserviceResource;
 use App\Http\Resources\Profile\PrivateAnnonceventeResource;
 use App\Models\annoncereservation;
 use App\Models\annoncetype;
 use App\Models\annoncevente;
-use App\Models\categoryannoncereservation;
-use App\Models\categoryannoncevente;
 use App\Models\city;
 use App\Models\user;
 use App\Services\Contactusers\ContactusersreservationService;
-use App\Services\Contactusers\ContactusersventeService;
 use App\Models\contactservice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,14 +58,10 @@ class ContactservicannoncereservationController extends Controller
         return view('user.contactservice.showcontact', compact('contactservice'));
     }
 
-    public function sendcontactserviceannonce(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
+    public function sendcontactserviceannonce(StorecontactuserannoncelocationRequest $request, annoncetype $annoncetype,$categoryannoncereservation,$city,$user,annoncereservation $annoncereservation)
     {
-
-
         $contactservice = $annoncereservation->contactservices()->create([
-            'full_name' => $request->full_name,
             'to_id' => $annoncereservation->user_id,
-            'email' => $request->email,
             'phone' => $request->phone,
             'from_id' => auth()->guest() ? null : auth()->id(),
             'slug' => sha1(('YmdHis') . str_random(30)),
@@ -85,7 +78,7 @@ class ContactservicannoncereservationController extends Controller
     {
         $this->authorize('update',$user);
 
-        $contactservices = $user->annoncelocations()
+        $contactservices = $user->annoncereservations()
             ->with('user','city','annoncetype','periodeannonce','categoryannoncereservation','uploadimages')
             ->whereIn('user_id',[$user->id])
             ->with(['user' => function ($q) {$q->with('profile')

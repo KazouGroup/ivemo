@@ -8,6 +8,7 @@ use App\Jobs\Contacts\ContactuserlocationJob;
 use App\Jobs\Contacts\ContactuserreservationJob;
 use App\Models\contactuserslocation;
 use App\Services\HelpersService;
+use Illuminate\Support\Facades\Auth;
 
 class ContactusersreservationService
 {
@@ -15,13 +16,12 @@ class ContactusersreservationService
 
     public static function newEmailToannoncereservationpageShow($request,$annoncereservation)
     {
-        $fromFullnameUser = $request->get('full_name');
         $fromPhoneUser = $request->get('phone');
-        $fromEmailUser = $request->get('email');
         $fromMessageUser = $request->get('message');
+        $userFrom = Auth::user();
 
 
-        $emailToUser = (new ContactuserreservationJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$annoncereservation));
+        $emailToUser = (new ContactuserreservationJob($userFrom,$fromPhoneUser,$fromMessageUser,$annoncereservation));
 
         dispatch($emailToUser);
     }

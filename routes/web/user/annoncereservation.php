@@ -107,15 +107,6 @@ Route::get(
     'AnnoncereservationController@statuscomments'
 )->name('annonces_reservations_status_comments.site');
 
-Route::delete(
-    'annonces_reservations_delete/{id}',
-    'AnnoncereservationController@destroy'
-)->name('annonces_reservations_delete.site');
-
-Route::get(
-    'annonce_reservation/{annoncetype}/new',
-    'AnnoncereservationController@create'
-)->name('annoncereservationsnew_site');
 
 
 Route::group(['middleware' => 'verified'], function(){

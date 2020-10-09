@@ -2,19 +2,17 @@ import React, { Component } from "react";
 import { Link, NavLink } from 'react-router-dom';
 import {Remarkable} from "remarkable";
 import moment from "moment";
+import ReadMoreAndLess from "react-read-more-less";
 
 
 class NotificationsList extends Component {
 
-    getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.data.userFromBodyUser) };
-    }
     render() {
         return (
 
             <tr>
                 <td>
+                    <br/>
                     <div key={this.props.id} className="card-header d-flex align-items-center">
                         <div className="text-left pull-left">
                             {this.props.read_at === null ?
@@ -40,13 +38,32 @@ class NotificationsList extends Component {
                         </div>
 
                     </div>
+                    <br/>
                     {this.props.read_at === null ?
                         <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.props.readnotificationItem(this.props)} className="text-primary">
-                            <span dangerouslySetInnerHTML={this.getDescription()}/>
+                            <span>
+                                <ReadMoreAndLess
+                                        className="read-more-content"
+                                        charLimit={100}
+                                        readMoreText="lire plus"
+                                        readLessText="Masquer"
+                                    >
+                                    {this.props.data.userFromBodyUser || ""}
+                                </ReadMoreAndLess>
+                            </span>
                         </a>
                         :
                         <a href={void(0)} style={{cursor:"pointer"}}>
-                            <span dangerouslySetInnerHTML={this.getDescription()}/>
+                              <span>
+                                    <ReadMoreAndLess
+                                        className="read-more-content"
+                                        charLimit={100}
+                                        readMoreText="lire plus"
+                                        readLessText="Masquer"
+                                    >
+                                    {this.props.data.userFromBodyUser || ""}
+                                </ReadMoreAndLess>
+                            </span>
                         </a>
                     }
                 </td>
