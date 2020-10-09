@@ -110,7 +110,7 @@ export const loadannoncereservationshowusersite = (props) => dispatch => {
     let itemuser = props.match.params.user;
     let itemannoncereservation = props.match.params.annoncereservation;
 
-    let url = route('api.annoncelocationbycategoryannoncereservationslug_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
+    let url = route('api.annoncereservationbycategoryannoncereservationslug_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
 
     dyaxios.get(url)
         .then(response => dispatch({

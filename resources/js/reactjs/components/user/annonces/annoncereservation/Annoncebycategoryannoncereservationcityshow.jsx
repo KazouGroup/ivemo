@@ -4,12 +4,9 @@ import { Helmet } from 'react-helmet';
 import { Button } from "reactstrap";
 import NavUserSite from "../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../inc/user/FooterBigUserSite";
-import BlogannoncereservationIntesseAnnonseShow
-    from "../../blog/blogannoncereservation/BlogannoncereservationIntesseAnnonseShow";
 import AnnonceservationInteresse from "./AnnonceservationInteresse";
 import FormContactAnnoncereservationUser from "./inc/FormContactAnnoncereservationUser";
 import FormcontactuseronreservationShow from "./inc/FormcontactuseronreservationShow";
-import ProfileForallAnnonceShow from "../ProfileForallAnnonceShow";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
 import AnnoncereservationcommentIndex from "../../comments/AnnoncereservationcommentIndex";
@@ -27,6 +24,8 @@ import {
 import Skeleton from "react-loading-skeleton";
 import ButonMiniSubscribedAllAnnonce from "../../../inc/vendor/ButonMiniSubscribedAllAnnonce";
 import ButonFollowerUser from "../../../inc/vendor/follow/ButonFollowerUser";
+import AnnoncereservationuploadimageIndex from "../../uploadimages/AnnoncereservationuploadimageIndex";
+import Navlinknewannoncereservation from "./treatment/Navlinknewannoncereservation";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class Annoncebycategoryannoncereservationcityshow extends Component {
@@ -230,71 +229,47 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     <div className="col-lg-8 col-md-12 mx-auto">
 
                                         <div className="card-body">
-                                            <div className="submit text-left">
-                                                <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
-                                                    <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces</b>
-                                                </button>
-                                            </div>
+                                            <div className="d-flex align-items-center">
+                                                <div className="text-left pull-left">
+                                                    <button type="button" className="btn btn-neutral btn-sm" onClick={this.props.history.goBack}>
+                                                        <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour au annonces </b>
+                                                    </button>
+                                                </div>
 
-                                            {/*
-                                              <div className="card-image">
+                                                <div className="text-right ml-auto">
+                                                    {annoncereservation.title ?
+                                                        <>
+                                                            {annoncereservation.expired_at <= 6 && (
+                                                                <Button className="btn btn-success btn-sm">
+                                                                    <b>New</b>
+                                                                </Button>
+                                                            )}
 
-                                                <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                    <ol className="carousel-indicators">
-                                                        {annoncereservation.imagereservations.map((value,index) => {
-                                                            return <li key={value.id} data-target={`#carouselAnnonceIndicators`} data-slide-to={index} className={index === 0 ? "active" : ""}/>
-                                                        })}
-                                                    </ol>
-                                                    <div className="carousel-inner" role="listbox">
+                                                            <Button className="btn btn-dark btn-sm">
+                                                                <i className="now-ui-icons media-1_album"></i>
+                                                                <b>{annoncereservation.uploadimages_count || "0"}</b>
+                                                            </Button>
+                                                            {annoncereservation.link_video && (
+                                                                <Button className="btn btn-dark btn-sm">
+                                                                    <b>video</b>
+                                                                </Button>
+                                                            )}
 
-                                                        {annoncereservation.imagereservations.map((item,index) => (
-                                                            <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                                                                <img className="d-block"
-                                                                     src={item.photo}
-                                                                     alt={item.title}/>
-                                                            </div>
-                                                        ))}
+                                                            {($userIvemoIsadmin.status_user) && (
 
-                                                    </div>
-                                                    <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"/>
-                                                    </a>
-                                                    <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"/>
-                                                    </a>
+                                                                <NavLink to={`/av_data/${annoncereservation.annoncetype.slug}/${annoncereservation.slugin}/edit/`} className="btn btn-sm btn-primary btn-icon btn-sm" title="Editer cette annonce">
+                                                                    <i className="now-ui-icons education_atom" />
+                                                                </NavLink>
+                                                            )}
+                                                        </>
+                                                        :
+                                                        <h5 className="text-dark"><b><Skeleton width={150} /></b></h5>
+                                                    }
                                                 </div>
                                             </div>
-                                            */}
 
 
-                                            <div className="card-image">
-
-                                                <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                    <ol className="carousel-indicators">
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                        <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                    </ol>
-                                                    <div className="carousel-inner" role="listbox">
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                        </div>
-                                                        <div className="carousel-item">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                        </div>
-                                                        <div className="carousel-item active">
-                                                            <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                        </div>
-                                                    </div>
-                                                    <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                        <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                                    </a>
-                                                    <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                        <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <br />
+                                            <AnnoncereservationuploadimageIndex {...this.props}/>
 
                                             <div className="d-flex align-items-center">
                                                 <div className="text-left pull-left">
@@ -379,6 +354,47 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                         <div className="card">
                                             <div className="card-body">
                                                 <h6 className="card-title">
+                                                    Équipements populaires
+                                                </h6>
+                                                {annoncereservation.status_wifi && (
+                                                    <Button
+                                                        className="btn btn-facebook btn-sm btn-neutral" title="Wi-Fi gratuit">
+                                                        <i className="fas fa-wifi"></i> Wi-Fi gratuit
+                                                    </Button>
+                                                )}
+                                                {annoncereservation.status_lunch && (
+                                                    <Button
+                                                        className="btn btn-facebook btn-sm btn-neutral" title="Petit-déjeuner compris">
+                                                        <i className="fas fa-coffee"></i> Petit-déjeuner compris
+                                                    </Button>
+                                                )}
+                                               {annoncereservation.status_car_sharing && (
+                                                            <Button className="btn btn-facebook btn-sm btn-neutral" title="Service voiturié">
+                                                                <i className="fas fa-car"></i> Service voiturié
+                                                            </Button>
+                                                )}
+                                                {annoncereservation.status_parking && (
+                                                            <Button className="btn btn-facebook btn-sm btn-neutral" title="Parking compris">
+                                                                <i className="fas fa-parking"></i> Parking compris
+                                                            </Button>
+                                                )}
+
+
+                                                {annoncereservation.dry_cleaning && (
+                                                    <Button
+                                                        className="btn btn-facebook btn-sm btn-neutral" title="Pressing">
+                                                        <i className="fas fa-tshirt"></i> Pressing
+                                                    </Button>
+                                                )}
+
+                                                {annoncereservation.status_consiegerie && (
+                                                    <Button
+                                                        className="btn btn-facebook btn-sm btn-neutral" title="Bagagerie : laissez en dépôt vos valises et bagages gratuitement le jour d'arrivée ou de départ et profitez librement de votre journée à yaounde.">
+                                                        <i className="fas fa-luggage-cart"></i> Bagagerie
+                                                    </Button>
+                                                )}
+
+                                                <h6 className="card-title">
                                                     Déscription
                                                 </h6>
                                                 {annoncereservation.description ? <span className="title text-justify" dangerouslySetInnerHTML={this.getDescription(annoncereservation)} />: <Skeleton count={5}/>}
@@ -386,6 +402,45 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
 
 
+                                            </div>
+                                        </div>
+
+                                        {annoncereservation.link_video && (
+
+                                            <div className="card">
+                                                <div className="card-body">
+                                                    <div className="row">
+                                                        <div className="col-md-12 mx-auto">
+                                                            <h5><b>Description en vidéo</b></h5>
+
+                                                            <iframe border="2px solid #ccc" width="100%" height="315"
+                                                                    src={annoncereservation.link_video}
+                                                                    frameBorder="0"
+                                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                    allowFullScreen></iframe>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <div className="card">
+                                            <div className="social-line social-line-big-icons">
+                                                <div className="container">
+                                                    <div className="row">
+
+                                                        {annoncereservation.price && (
+                                                            <div className="col-md-8 mx-auto">
+                                                                <h5 className="info-title"><b><span style={{ textTransform: "capitalize" }}>{annoncereservation.categoryannoncereservation.label}</span> revient à</b></h5>
+
+                                                                <h2 className="ivemoColorOrange"><b>{annoncereservation.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {annoncereservation.periodeannonce_id !== null && (" - " + annoncereservation.periodeannonce.name)}</b></small> : <>{$money_country}<small><b> {annoncereservation.periodeannonce_id !== null && (" - " + annoncereservation.periodeannonce.name)}</b></small></>}</b></h2>
+                                                            </div>
+                                                        )}
+
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -399,20 +454,22 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     </div>
                                                     <div className="card-header d-flex align-items-center">
                                                         <div className="d-flex align-items-center">
+
                                                             {annoncereservation.user.avatar ?
-                                                                <NavLink to={`/pro/${annoncereservation.user.slug}/annonces_annoncereservations/`}>
+                                                                <NavLink to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`}>
                                                                     <img src={annoncereservation.user.avatar}
                                                                          style={{ height: "40px", width: "80px" }}
                                                                          alt={annoncereservation.user.first_name}
                                                                          className="avatar" />
                                                                 </NavLink>
-                                                                : <Skeleton circle={false} height={40} width={80} />}
+                                                                :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                        src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                             {annoncereservation.title && (
                                                                 <>
                                                                     <div className="mx-3">
                                                                             <span className="text-dark font-weight-600 text-sm">
-                                                                                <Link to={`/pro/${annoncereservation.user.slug}/annonces_annoncereservations/`} ><b>{annoncereservation.user.first_name}</b></Link>
+                                                                                <Link to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`} ><b>{annoncereservation.user.first_name}</b></Link>
                                                                                 <small className="d-block text-muted">{annoncereservation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncereservation.created_at).format('LL')}</small>
                                                                                 <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                             </span>
@@ -615,9 +672,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncereservation {...this.props} />
                                         </div>
 
                                         <div className="card">
@@ -629,19 +684,20 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                 <div className="d-flex align-items-center">
 
                                                                     {annoncereservation.user.avatar ?
-                                                                        <NavLink to={`/pro/${annoncereservation.user.slug}/annonces_reservations/`}>
+                                                                        <NavLink to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`}>
                                                                             <img src={annoncereservation.user.avatar}
                                                                                  style={{ height: "40px", width: "80px" }}
                                                                                  alt={annoncereservation.user.first_name}
                                                                                  className="avatar" />
                                                                         </NavLink>
-                                                                        : <Skeleton circle={false} height={40} width={80} />}
+                                                                        :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                                                src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
 
                                                                     {annoncereservation.title && (
                                                                         <>
                                                                             <div className="mx-3">
                                                                                 <span className="text-dark font-weight-600 text-sm">
-                                                                                    <Link to={`/pro/${annoncereservation.user.slug}/annonces_annoncereservations/`} ><b>{annoncereservation.user.first_name}</b></Link>
+                                                                                    <Link to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`} ><b>{annoncereservation.user.first_name}</b></Link>
                                                                                     <small className="d-block text-muted">{annoncereservation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncereservation.created_at).format('LL')}</small>
                                                                                     <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                                 </span>
@@ -699,7 +755,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                 <AnnonceservationInteresse {...this.props}/>
 
-                                <BlogannoncereservationIntesseAnnonseShow {...this.props} />
+                                {/*<BlogannoncereservationIntesseAnnonseShow {...this.props} />*/}
 
                             </div>
 

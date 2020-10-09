@@ -9,6 +9,7 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import HelmetSite from "../../../inc/user/HelmetSite";
 import Swal from "sweetalert2";
 import SectionReservationbyCity from "../../../inc/user/section_indexsite/SectionReservationbyCity";
+import Navlinknewannoncereservation from "./treatment/Navlinknewannoncereservation";
 
 
 class AnnoncereservationIndex extends Component {
@@ -247,12 +248,12 @@ class AnnoncereservationIndex extends Component {
 
                     <div className="wrapper">
                         <div className="page-header page-header-mini">
-                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                            <div className="page-header-image" data-parallax="true" style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project22.jpg' + ")" }}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-8 ml-auto mr-auto">
-                                        <h3 className="title">Reservez votre chambre d'hotel ou un appartement </h3>
+                                        <h4 className="title">Reservez votre chambre d'hotel, une villa ou un appartement </h4>
                                     </div>
                                 </div>
                             </div>
@@ -281,11 +282,8 @@ class AnnoncereservationIndex extends Component {
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
-
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                           <Navlinknewannoncereservation {...this.props} />
                                         </div>
 
                                         <div className="card">

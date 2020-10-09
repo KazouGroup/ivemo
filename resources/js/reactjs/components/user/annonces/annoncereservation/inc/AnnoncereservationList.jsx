@@ -1,16 +1,19 @@
-import React, { PureComponent } from "react";
+import React, {Fragment, PureComponent} from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button } from "reactstrap";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 import ButonFavoris from "../../../../inc/vendor/ButonFavoris";
+import LazyLoad from "react-lazyload";
 
 
 class AnnoncereservationList extends PureComponent {
 
 
     render() {
+
+        let showlink = `/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}`;
         return (
 
             <div className="card">
@@ -19,51 +22,30 @@ class AnnoncereservationList extends PureComponent {
                         <div className="row">
 
                             <div className="col-md-5">
-                                {/*
-                                 <div className="card-image">
-                                    <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                        <ol className="carousel-indicators">
-                                            {this.props.imagereservations.map((value,index) => {
-                                                return <li key={value.id} data-target={`#carouselAnnonceIndicators`} data-slide-to={index} className={index === 0 ? "active" : ""}/>
-                                            })}
-                                        </ol>
-                                        <div className="carousel-inner" role="listbox">
-
-                                            {this.props.imagereservations.map((item,index) => (
-                                                <div key={item.id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                                                    <Link to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`}>
-                                                        <img className="d-block"
-                                                             src={item.photo}
-                                                             alt={item.title}/>
-                                                    </Link>
-                                                </div>
-                                            ))}
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                                */}
                                 <div className="card-image">
-                                    <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                        <ol className="carousel-indicators">
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                            <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                        </ol>
-                                        <div className="carousel-inner" role="listbox">
-                                            <div className="carousel-item">
-                                                <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                            </div>
-                                            <div className="carousel-item">
-                                                <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                            </div>
-                                            <div className="carousel-item active">
-                                                <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    {this.props.uploadimages < 1 ?
+                                        <>
+                                            <Link to={showlink}>
+                                                <LazyLoad>
+                                                    <img className="img rounded"
+                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`} alt={this.props.title}/>
+                                                </LazyLoad>
+                                            </Link>
+                                        </>
+                                        :
+                                        <>
+                                            {this.props.uploadimages.map((item,index) => (
+                                                <Fragment key={item.id} >
+                                                    <Link to={showlink}>
+                                                        <LazyLoad>
+                                                            <img className="img rounded"
+                                                                 src={item.photo} alt={this.props.title}/>
+                                                        </LazyLoad>
+                                                    </Link>
+                                                </Fragment>
+                                            ))}
+                                        </>
+                                    }
                                 </div>
 
 
@@ -129,7 +111,7 @@ class AnnoncereservationList extends PureComponent {
 
                             <div className="col-md-7">
                                 <div className="text-left pull-left">
-                                    <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
+                                    <NavLink to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
                                         <h6 className={`text-${this.props.categoryannoncereservation.color_name}`}>
                                             {this.props.categoryannoncereservation.name}
                                         </h6>
@@ -144,7 +126,7 @@ class AnnoncereservationList extends PureComponent {
                                     </div>
 
                                     <div className="col-md-7 col-6">
-                                        <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
+                                        <NavLink to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
                                             <span className="ml-auto mr-auto">
                                                 <strong>{this.props.city.name} </strong>
                                             </span>
@@ -153,7 +135,7 @@ class AnnoncereservationList extends PureComponent {
                                     </div>
                                 </div>
                                 <h6 className="card-title">
-                                    <Link to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                    <Link to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                         {this.props.title.length > 90 ? this.props.title.substring(0, 90) + "..." : this.props.title}
                                     </Link>
                                 </h6>
@@ -195,34 +177,20 @@ class AnnoncereservationList extends PureComponent {
                                 )}
 
 
-                                {/*
-                                <Button  data-toggle="modal" data-target="#loginModal"
-                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Wi-Fi gratuit">
-                                    <svg><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"></path></svg>
-                                </Button>
-                                <Button  data-toggle="modal" data-target="#loginModal"
-                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Parking compris">
-                                    <svg><path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z"></path></svg>
-                                </Button>
-                                <Button  data-toggle="modal" data-target="#loginModal"
-                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Petit-déjeuner compris">
-                                    <svg><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2a2 2 0 002-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"></path></svg>
-                                </Button>
-                                */}
-
                                 <div className="card-header d-flex align-items-center">
                                     <div className="d-flex align-items-center">
                                         {this.props.user.avatar ?
-                                            <NavLink to={`/pro/${this.props.user.slug}/annonces_reservations/`}>
+                                            <NavLink to={`/pro/${this.props.user.slug}/ars/${this.props.annoncetype.slug}/`}>
                                                 <img src={this.props.user.avatar}
                                                      style={{ height: "40px", width: "80px" }}
                                                      alt={this.props.user.first_name}
                                                      className="avatar" />
                                             </NavLink>
-                                            : <Skeleton circle={false} height={40} width={80} />}
+                                            :  <img className="avatar" style={{ height: "40px", width: "80px" }}
+                                                    src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                         <div className="mx-3">
-                                            <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                <small className="d-block text-muted"><b>{this.props.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(this.props.created_at).format('LL')}</b></small>
+                                            <NavLink to={`/pro/${this.props.user.slug}/ars/${this.props.annoncetype.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                <small className="d-block text-muted"><b> {moment(this.props.created_at).format('LL')}</b></small>
                                             </NavLink>
                                         </div>
                                     </div>
@@ -251,7 +219,7 @@ class AnnoncereservationList extends PureComponent {
                                             </>
                                         }
 
-                                        <NavLink to={`/annonces_reservations/reservations/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`} className="btn btn-sm btn-info">
+                                        <NavLink to={showlink} className="btn btn-sm btn-info">
                                             Reserver
                                         </NavLink>
 

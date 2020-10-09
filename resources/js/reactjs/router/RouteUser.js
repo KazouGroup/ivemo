@@ -190,12 +190,12 @@ const RouteUser = props => (
           <Route exact path="/forums/:categoryforum/" component={withRouter(ForumcategoryforumSite)}/>
           <Route exact path="/forums/:categoryforum/:user/:forum/" component={withRouter(ForumShow)}/>
 
-          <Route exact path="/annonces_reservations/:annoncetype/" component={AnnoncereservationIndex}/>
-          <Route exact path="/annonce_reservations/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
-          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
-          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
-          <Route exact path="/annonces_reservations/:annoncetype/:categoryannoncereservation/:city/:user/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
-          <Route exact path="/annonce_reservation/:annoncetype/new/" component={AnnoncereservationCreate}/>
+          <Route exact path="/ars/:annoncetype/" component={AnnoncereservationIndex}/>
+          <Route exact path="/ar/:annoncetype/:city/" component={withRouter(Annoncereservationbyannoncetypebycity)}/>
+          <Route exact path="/ars/:annoncetype/:categoryannoncereservation/" component={withRouter(Annoncebycategoryannoncereservation)}/>
+          <Route exact path="/ars/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
+          <Route exact path="/ars/:annoncetype/:categoryannoncereservation/:city/:user/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
+          <Route exact path="/ar_data/:annoncetype/new/" component={AnnoncereservationCreate}/>
 
 
           <Route exact path="/als/:annoncetype/" component={AnnoncelocationIndex}/>

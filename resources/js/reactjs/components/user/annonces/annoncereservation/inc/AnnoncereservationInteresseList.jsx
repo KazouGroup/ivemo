@@ -1,24 +1,26 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import {Link,NavLink } from "react-router-dom";
 import moment from 'moment'
 import {Button} from "reactstrap";
 import {Remarkable} from "remarkable";
 import Skeleton from "react-loading-skeleton";
+import LazyLoad from "react-lazyload";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 require("moment/min/locales.min");
 moment.locale('fr');
 
 class AnnoncereservationInteresseList extends Component {
-
-    getDescription() {
-        const md = new Remarkable();
-        return { __html: md.render(this.props.description.length > 40 ? this.props.description.substring(0, 40) + "..." : this.props.description) };
-    }
-    numberWithCommas() {
-        return this.props.price.toLocaleString();
+    data_countuploadimageFormatter(uploadimages_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(uploadimages_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
     }
 
     render() {
+        let showlink = `/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}`;
+
         return (
             <>
 
@@ -28,34 +30,42 @@ class AnnoncereservationInteresseList extends Component {
                             <div className="card card-plain card-blog">
                                 <div className="row">
                                     <div className="col-md-5">
-                                        <div className="card-image">
-                                            <div id="carouselAnnonceIndicators" className="carousel slide" data-ride="carousel">
-                                                <ol className="carousel-indicators">
-                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="0" className=""></li>
-                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="1" className=""></li>
-                                                    <li data-target="#carouselAnnonceIndicators" data-slide-to="2" className="active"></li>
-                                                </ol>
-                                                <div className="carousel-inner" role="listbox">
-                                                    <div className="carousel-item">
-                                                        <img className="d-block" src="/assets/vendor/assets/img/bg1.jpg" alt="First slide" />
-                                                    </div>
-                                                    <div className="carousel-item">
-                                                        <img className="d-block" src="/assets/vendor/assets/img/bg3.jpg" alt="Second slide" />
-                                                    </div>
-                                                    <div className="carousel-item active">
-                                                        <img className="d-block" src="/assets/vendor/assets/img/bg4.jpg" alt="Third slide" />
-                                                    </div>
-                                                </div>
-                                                <a className="carousel-control-prev" href="#carouselAnnonceIndicators" role="button" data-slide="prev">
-                                                    <i className="now-ui-icons arrows-1_minimal-left"></i>
-                                                </a>
-                                                <a className="carousel-control-next" href="#carouselAnnonceIndicators" role="button" data-slide="next">
-                                                    <i className="now-ui-icons arrows-1_minimal-right"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="text-center">
 
+                                        {this.props.uploadimages < 1 ?
+                                            <>
+                                                <Link to={showlink}>
+                                                    <LazyLoad>
+                                                        <img className="img rounded"
+                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`} alt={this.props.title}/>
+                                                    </LazyLoad>
+                                                </Link>
+                                            </>
+                                            :
+                                            <>
+                                                {this.props.uploadimages.map((item,index) => (
+                                                    <Fragment key={item.id} >
+                                                        <Link to={showlink}>
+                                                            <LazyLoad>
+                                                                <img className="img rounded"
+                                                                     src={item.photo} alt={this.props.title}/>
+                                                            </LazyLoad>
+                                                        </Link>
+                                                    </Fragment>
+                                                ))}
+                                            </>
+                                        }
+
+                                        <div className="text-center">
+                                            <NavLink to={showlink} className="btn btn-dark btn-sm">
+                                                <i className="now-ui-icons media-1_album"></i>
+                                                <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
+                                            </NavLink>
+
+                                            {this.props.link_video && (
+                                                <NavLink to={showlink} className="btn btn-dark btn-sm">
+                                                    <b>video</b>
+                                                </NavLink>
+                                            )}
                                             {!$guest && (
                                                 <>
                                                     {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
@@ -68,51 +78,44 @@ class AnnoncereservationInteresseList extends Component {
                                                                     </button>
                                                                 </>
                                                             )}
-                                                            <NavLink to={`/annonces_reservation/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                            <NavLink to={`/ar_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                                 <i className="now-ui-icons ui-2_settings-90"/>
                                                             </NavLink>
                                                         </>
                                                     )}
                                                 </>
                                             )}
-                                            <NavLink to={`/annonces_reservation/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.slug}/`} className="btn btn-sm btn-icon btn-primary">
+                                            <NavLink to={showlink} className="btn btn-sm btn-icon btn-primary">
                                                 <i className="now-ui-icons location_pin" />
                                             </NavLink>
 
                                         </div>
                                     </div>
                                     <div className="col-md-7">
-                                        <div className="card-header d-flex align-items-center">
-                                            <div className="text-left pull-left">
-                                                <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
-                                                    <h6 className="text-info ml-auto mr-auto">
+                                        <div className="row">
+                                            <div className="col-md-10">
+                                                <NavLink to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/`}>
+                                                    <h6 className={`text-${this.props.categoryannoncereservation.color_name} ml-auto mr-auto`}>
                                                         {this.props.categoryannoncereservation.name}
                                                     </h6>
                                                 </NavLink>
                                             </div>
-                                            <div className="text-right ml-auto">
-                                                <div className="col-md-12 col-12">
-                                                    <h5 className="text-dark"><b>{this.numberWithCommas(this.props)} {$money_country.length > 2 ? <small><b>{$money_country} - {this.props.periodeannonce.name}</b></small> : <>{$money_country}<small><b> - {this.props.periodeannonce.name}</b></small></>}</b></h5>
-                                                </div>
-
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-md-10">
+                                                <h5 className="text-dark"><b>{this.props.price.formatMoney(2,'.',',')} {$money_country.length > 2 ? <small><b>{$money_country} {this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small> : <>{$money_country}<small><b>{this.props.periodeannonce_id !== null && (" - "+this.props.periodeannonce.name)}</b></small></>}</b></h5>
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="col-md-5 col-6">
-                                                <h6 className="category text-dark">{this.props.pieces > 0 ?<>{this.props.pieces} p.</>:null } {this.props.rooms > 0 ? <>{this.props.rooms} ch.</>:null} {this.props.surface > 0 ? <>{this.props.surface} m<sup>2</sup></>:null}</h6>
-                                            </div>
-
-                                            <div className="col-md-7 col-6">
-                                                <NavLink to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
-                                            <span className="ml-auto mr-auto">
-                                                <strong>{this.props.city.name} </strong>
-                                            </span>
+                                            <div className="col-md-8">
+                                                <NavLink to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/`}>
+                                                    <strong>{this.props.city.name} </strong>
                                                 </NavLink>
                                                 - {this.props.district.length > 10 ? this.props.district.substring(0, 10) + "..." : this.props.district}
                                             </div>
                                         </div>
                                         <h6 className="card-title">
-                                            <Link to={`/annonces_reservations/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
+                                            <Link to={`/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}/`}>
                                                 {this.props.title.length > 30 ? this.props.title.substring(0, 30) + "..." : this.props.title}
                                             </Link>
                                         </h6>
@@ -153,22 +156,20 @@ class AnnoncereservationInteresseList extends Component {
                                             </Button>
                                         )}
 
-                                        {/*
-                                        <span dangerouslySetInnerHTML={this.getDescription(this.props)}/>
-                                        */}
                                         <div className="card-header d-flex align-items-center">
                                             <div className="d-flex align-items-center">
                                                 {this.props.user.avatar ?
-                                                    <NavLink to={`/pro/${this.props.user.slug}/annonces_reservations/`}>
+                                                    <NavLink to={`/pro/${this.props.user.slug}/ars/${this.props.annoncetype.slug}/`}>
                                                         <img src={this.props.user.avatar}
-                                                             style={{ height: "20px", width: "50px" }}
+                                                             style={{ height: "40px", width: "80px" }}
                                                              alt={this.props.user.first_name}
                                                              className="avatar" />
                                                     </NavLink>
-                                                    : <Skeleton circle={false} height={20} width={50} />}
+                                                    :  <img className="avatar" style={{ height: "20px", width: "50px" }}
+                                                            src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>}
                                                 <div className="mx-3">
-                                                    <NavLink to={`/pro/${this.props.user.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
-                                                        <small className="d-block text-muted">{moment(this.props.created_at).format('LL')}</small>
+                                                    <NavLink to={`/pro/${this.props.user.slug}/ars/${this.props.annoncetype.slug}/`} className="text-dark font-weight-600 text-sm">{this.props.user.first_name}
+                                                        <small className="d-block text-muted"><b> {moment(this.props.created_at).format('LL')}</b></small>
                                                     </NavLink>
                                                 </div>
 

@@ -41,7 +41,7 @@ class IndexSite extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-11 ml-auto mr-auto">
-                                        <h3 className="title">Le portail immobilier pour trouver des maisons à vendre et à louer</h3>
+                                        <h3 className="title">Le portail pour personnels immobiliers et entrepreneurs pour l'acquisitions, ventes, proposition de services et échanges</h3>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -94,6 +94,25 @@ class IndexSite extends Component {
                                     </Link>
                                 </div>
 
+                                {/*
+                                    <div className="col-md-4">
+                                    <Link to={`/ars/reservations/`}>
+                                        <div className="card card-background card-raised" data-background-color=""
+                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project22.jpg' + ")" }}>
+                                            <div className="info">
+                                                <div className="icon icon-white">
+                                                    <i className="now-ui-icons education_agenda-bookmark"></i>
+                                                </div>
+                                                <div className="description">
+                                                    <h4 className="info-title">RESERVATIONS</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                                */}
+
+
                                 <div className="col-md-6">
                                     <Link to={`/avs/ventes/`}>
                                         <div className="card card-background card-raised" data-background-color=""
@@ -108,7 +127,6 @@ class IndexSite extends Component {
                                             </div>
                                         </div>
                                     </Link>
-
                                 </div>
                             </div>
 

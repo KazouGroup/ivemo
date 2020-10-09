@@ -123,9 +123,10 @@ class annoncereservation extends Model
         return $this->hasMany(reservation::class, 'annoncereservation_id');
     }
 
-    public function imagereservations()
+    public function uploadimages()
     {
-        return $this->hasMany(imagereservation::class, 'annoncereservation_id');
+        return $this->morphMany(uploadimage::class ,'uploadimagealable')
+            ->orderByDesc('created_at');
     }
 
     public function signals()

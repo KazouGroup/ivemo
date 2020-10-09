@@ -59,7 +59,7 @@ class AnnoncereservationResource extends JsonResource
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncereservation::class)
                 ->take(1)->get(),
-            'countuploadimages' => $this->uploadimages()
+            'uploadimages_count' => $this->uploadimages()
                 ->where(['status' => 1,'status_admin' => 1])
                 ->whereIn('uploadimagealable_id',[$this->id])
                 ->where('uploadimagealable_type', annoncereservation::class)
@@ -73,7 +73,6 @@ class AnnoncereservationResource extends JsonResource
             'categoryannoncereservation_id' => $this->categoryannoncereservation_id,
             'categoryannoncereservation' => $this->categoryannoncereservation,
             'signalannoncereservations_count' => $this->signalannoncereservations_count,
-            'imagereservations' => $this->imagereservations,
             'disponible_date' => (string) $this->disponible_date,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,

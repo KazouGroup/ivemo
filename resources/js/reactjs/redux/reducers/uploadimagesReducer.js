@@ -20,6 +20,10 @@ export default produce((draft, action = {}) => {
             draft.uploadimages = action.payload;
             return;
 
+        case 'GET_UPLOADIMAGES_ANNONCERESERVATION_SHOW_USER_SITE':
+            draft.uploadimages = action.payload;
+            return;
+
     }
 },
     initialState

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Reservation\StoreRequest;
+use App\Http\Requests\Annonces\Annoncereservation\StoreRequest;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
@@ -66,7 +66,7 @@ class AnnoncereservationController extends Controller
                 ]);
     }
 
-    public function annoncelocationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
+    public function annoncereservationbycategoryannoncereservationslug(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
         visits($annoncereservation)->seconds(60)->increment();
 
@@ -167,7 +167,7 @@ class AnnoncereservationController extends Controller
     public function apiannoncereservationinteresseslugin(categoryannoncereservation $categoryannoncereservation)
     {
         $annoncereservation = AnnoncereservationResource::collection($categoryannoncereservation->annoncereservations()->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->with('user','city','annoncetype','periodeannonce','categoryannoncereservation','imagereservations')
+            ->with('user','city','annoncetype','periodeannonce','categoryannoncereservation')
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','desc')
@@ -319,11 +319,22 @@ class AnnoncereservationController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array|\Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request,annoncetype $annoncetype)
     {
-        //
+        $annoncereservation = new annoncereservation();
+
+        $annoncereservation->fill($request->all());
+
+        $annoncereservation->annoncetype_id = $annoncetype->id;
+        $annoncereservation->description = clean($request->description);
+
+        $annoncereservation->save();
+
+        //AnnoncereservationService::sendMessageToUser($request,$annoncetype);
+
+        return ['redirect' => route('annoncereservationsedit_site',[$annoncetype->slug,$annoncereservation->slugin])];
     }
 
     /**

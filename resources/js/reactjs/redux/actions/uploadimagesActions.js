@@ -2,6 +2,7 @@ import {
     GET_UPLOADIMAGES_ANNONCELOCATION_SHOW_USER_SITE,
     GET_UPLOADIMAGES_ACTIVITYCITIES,
     GET_UPLOADIMAGES_ANNONCEVENTE_SHOW_USER_SITE,
+    GET_UPLOADIMAGES_ANNONCERESERVATION_SHOW_USER_SITE,
 } from "./index";
 
 import Swal from "sweetalert2";
@@ -36,6 +37,23 @@ export const loadUploadimageAnnoncelocations = (props) => dispatch => {
             })
         ).catch(error => console.error(error));
 };
+
+export const loadUploadimageAnnoncereservations = (props) => dispatch => {
+
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemCategoryannoncereservation = props.match.params.categoryannoncereservation;
+    let itemcityannonce = props.match.params.city;
+    let itemuser = props.match.params.user;
+    let itemannoncereservation = props.match.params.annoncereservation;
+    let url = route('api.annoncereservationgetuploadimage_site',[itemannoncetype,itemCategoryannoncereservation,itemcityannonce,itemuser,itemannoncereservation]);
+    dyaxios.get(url)
+        .then(response => dispatch({
+                type: GET_UPLOADIMAGES_ANNONCERESERVATION_SHOW_USER_SITE,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
 
 export const loadUploadimageAnnonceventes = (props) => dispatch => {
 
