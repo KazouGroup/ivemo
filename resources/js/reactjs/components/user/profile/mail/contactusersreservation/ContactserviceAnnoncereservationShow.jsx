@@ -24,7 +24,7 @@ import PrivateUserAnnonceventeList from "../../../annonces/annoncevente/inc/Priv
 import Navannonceventesbyuser from "../../../annonces/annoncevente/inc/Navannonceventesbyuser";
 
 
-class ContactserviceAnnonceventeShow extends Component {
+class ContactserviceAnnoncereservationShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,7 +40,7 @@ class ContactserviceAnnonceventeShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/messages/avs/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/avs_contactservice_show/${item.slug}/`);
         })
 
     }
@@ -82,7 +82,7 @@ class ContactserviceAnnonceventeShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/statistics/avs/${this.props.match.params.annoncetype}`);
+                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/avs/`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -209,7 +209,7 @@ class ContactserviceAnnonceventeShow extends Component {
 
                                                 {annoncevente.contactservices.length >= 1 && (
                                                     <>
-                                                     <a href={`${route('contactservice_annonceventesbyuserbyexport_site',[annoncevente.annoncetype.slug,annoncevente.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
+                                                     <a href={`${route('contactservice_annonceventesbyuserbyexport_site',[annoncevente.user.slug, annoncevente.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
                                                          <i className="fa fa-file-excel" />
                                                      </a>
                                                     <div className="card">
@@ -266,7 +266,7 @@ class ContactserviceAnnonceventeShow extends Component {
         )
     }
 }
-ContactserviceAnnonceventeShow.propTypes = {
+ContactserviceAnnoncereservationShow.propTypes = {
     loadContactserviceventeshow: PropTypes.func.isRequired,
 };
 
@@ -282,4 +282,4 @@ export default connect(mapStateToProps, {
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,deletecontactItem,
     activeavsItem, unactiveprivateavsItem,
-})(ContactserviceAnnonceventeShow);
+})(ContactserviceAnnoncereservationShow);

@@ -148,7 +148,7 @@ class annoncereservation extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\annoncereservation',
+            ->where(['likeable_type' => annoncereservation::class,
                 'likeable_id' => $this->id ])
             ->first();
     }
@@ -161,7 +161,7 @@ class annoncereservation extends Model
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\annoncereservation',
+            ->where(['favoriteable_type' => annoncereservation::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

@@ -35,8 +35,7 @@ export const loadProfileusersforpublic = (props) => dispatch => {
 
 export const loadProfileusersforprivate = (props) => dispatch => {
 
-    let itemuser = props.match.params.user;
-    let url = route('api.profilprivate',[itemuser]);
+    let url = route('api.profilprivate');
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PRIVATE,
@@ -110,8 +109,7 @@ export const loadslugcategoryforum = (props) => dispatch => {
 
 export const loadforumsbyuserprivate = (props) => dispatch => {
 
-    let itemuser = props.match.params.user;
-    let url = route('api.forumbyuser_site', [itemuser]);
+    let url = route('api.forumbyuser_site');
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_FORUM_BY_PRIVATE_USER,

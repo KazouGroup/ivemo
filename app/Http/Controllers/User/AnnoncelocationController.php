@@ -15,6 +15,7 @@ use App\Models\city;
 use App\Models\user;
 use App\Services\AnnoncelocationService;
 use App\Services\Contactusers\ContactuserslocationService;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnoncelocationController extends Controller
@@ -139,29 +140,25 @@ class AnnoncelocationController extends Controller
         return response()->json($data, 200);
     }
 
-    public function apiannonceslocationsbyuser(user $user,annoncetype $annoncetype)
+    public function apiannonceslocationsbyuser(annoncetype $annoncetype)
     {
-        if (auth()->user()->id === $user->id){
+        $user = Auth::user();
 
-            $data = AnnoncelocationService::apiannonceslocationsbyuser($user,$annoncetype);
+        $this->authorize('update',$user);
 
-            return response()->json($data, 200);
+        $data = AnnoncelocationService::apiannonceslocationsbyuser($user,$annoncetype);
 
-        }else{
-            return abort(404);
-        }
+        return response()->json($data, 200);
 
     }
 
-    public function annonceslocationsbyuser(user $user)
+    public function annonceslocationsbyuser()
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.annonces.privateprofilannoncelocations',[
-                'user' => auth()->user(),
-            ]);
-        }else{
-            abort(404);
-        }
+        $user = Auth::user();
+
+        $this->authorize('update',$user);
+
+        return view('user.profile.annonces.privateprofilannoncelocations',compact('user'));
 
     }
 

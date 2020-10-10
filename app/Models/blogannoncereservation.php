@@ -100,7 +100,7 @@ class blogannoncereservation extends Model implements Auditable
 
     public function bookmarked()
     {
-        return (bool) favoriteblogannoncereservation::where('user_id', Auth::guard('web')->id())
+        return (bool) favoriteblogannoncereservation::where('user_id', Auth::id())
             ->where('blogannoncereservation_id', $this->id)
             ->first();
     }
@@ -113,7 +113,7 @@ class blogannoncereservation extends Model implements Auditable
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\blogannoncereservation',
+            ->where(['likeable_type' => blogannoncereservation::class,
             'likeable_id' => $this->id ])
             ->first();
     }
@@ -126,7 +126,7 @@ class blogannoncereservation extends Model implements Auditable
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\blogannoncereservation',
+            ->where(['favoriteable_type' => blogannoncereservation::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

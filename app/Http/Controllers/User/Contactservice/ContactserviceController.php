@@ -139,8 +139,10 @@ class ContactserviceController extends Controller
     /*
      * Ce traitement concerne la table notification rien a voir avec la table contactservices
      */
-    public function allnotifications(user $user)
+    public function allnotifications()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
         return view('user.contactservice.notifications', compact('user'));

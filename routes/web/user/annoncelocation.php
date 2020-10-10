@@ -68,7 +68,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.categoryannoncelocations_by_user_site');
 
     Route::get(
-        'profile/{user}/personal_settings/als/{annoncetype}',
+        'statistics/als/{annoncetype}',
         'AnnoncelocationController@apiannonceslocationsbyuser'
     )->name('api.profilprivate_annoncelocations');
 
@@ -115,7 +115,7 @@ Route::group(['middleware' => 'verified'], function(){
     Route::group(['middleware' => 'verified_status_user'],function (){
 
         Route::get(
-            'profile/{user}/personal_settings/als/{annoncetype}',
+            'statistics/als/{annoncetype}',
             'AnnoncelocationController@annonceslocationsbyuser'
         )->name('profilprivate_annoncelocations');
 

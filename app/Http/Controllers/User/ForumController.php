@@ -10,6 +10,7 @@ use App\Models\user;
 use App\Models\forum;
 use App\Services\ForumService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ForumController extends Controller
@@ -32,8 +33,10 @@ class ForumController extends Controller
         return view ('user.forum.index');
     }
 
-    public function forumsbyuser(user $user)
+    public function forumsbyuser()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
         return view('user.forum.forumsetting', compact ('user'));
@@ -105,8 +108,10 @@ class ForumController extends Controller
         return view ('user.forum.show',compact('forum'));
     }
 
-    public function apiforumsbyuser(user $user)
+    public function apiforumsbyuser()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
         $forums = ForumService::apiforumsbyuser($user);

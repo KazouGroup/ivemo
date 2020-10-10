@@ -21,15 +21,15 @@ use Faker\Generator as Faker;
 $factory->define(like::class, function (Faker $faker) {
 
     $servicemodel = collect([
-        ['name' => 'App\Model\employment'],
-        ['name' => 'App\Model\blogannoncelocation'],
-        ['name' => 'App\Model\blogannoncereservation'],
-        ['name' => 'App\Model\blogannoncevente'],
-        ['name' => 'App\Model\annoncelocation'],
-        ['name' => 'App\Model\annoncereservation'],
-        ['name' => 'App\Model\annoncevente'],
-        ['name' => 'App\Model\forum'],
-        ['name' => 'App\Model\comment']
+        ['name' => 'App\Models\employment'],
+        ['name' => 'App\Models\blogannoncelocation'],
+        ['name' => 'App\Models\blogannoncereservation'],
+        ['name' => 'App\Models\blogannoncevente'],
+        ['name' => 'App\Models\annoncelocation'],
+        ['name' => 'App\Models\annoncereservation'],
+        ['name' => 'App\Models\annoncevente'],
+        ['name' => 'App\Models\forum'],
+        ['name' => 'App\Models\comment']
     ]);
 
     return [

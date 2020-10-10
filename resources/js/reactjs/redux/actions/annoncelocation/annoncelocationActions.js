@@ -91,8 +91,7 @@ export const loadProfileusersforpublic = (props) => dispatch => {
 
 export const loadProfileusersforprivate = (props) => dispatch => {
 
-    let itemuser = props.match.params.user;
-    let url = route('api.profilprivate', [itemuser]);
+    let url = route('api.profilprivate');
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_PROFILE_USER_FOR_PRIVATE,
@@ -104,9 +103,8 @@ export const loadProfileusersforprivate = (props) => dispatch => {
 
 export const loadannoncebyuserprivate = (props) => dispatch => {
 
-    let itemuser = props.match.params.user;
     let itemannoncetype = props.match.params.annoncetype;
-    let url = route('api.profilprivate_annoncelocations',[itemuser,itemannoncetype]);
+    let url = route('api.profilprivate_annoncelocations',[itemannoncetype]);
     dyaxios.get(url)
         .then(response => dispatch({
                 type: GET_ANNONCELOCATION_BY_USER_PRIVATE,

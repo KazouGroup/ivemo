@@ -11,12 +11,12 @@ const EmptyItems = ({title, syntaxe}) => {
                     <h2 className="display-5">Pas {syntaxe} <b className="text-primary">{title}</b> disponible pour le
                         moment.
                     </h2>
-                    <Link className="btn btn-neutral btn-sm ivemoEmptyItemsCta" to="/"><i
-                        className="now-ui-icons arrows-1_minimal-left"></i> <b>Retour à l'Accueil</b></Link>
+                    <Link className="btn btn-neutral btn-sm ivemoEmptyItemsCta" to="/">
+                        <i className="now-ui-icons arrows-1_minimal-left"></i> <b>Retour à l'Accueil</b></Link>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default EmptyItems;

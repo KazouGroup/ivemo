@@ -13,6 +13,7 @@ use App\Models\employment;
 use App\Models\user;
 use App\Services\EmploymentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,8 +73,10 @@ class EmploymentController extends Controller
         ]);
     }
 
-    public function employmentsbyuser(user $user)
+    public function employmentsbyuser()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
         if (auth()->user()->id === $user->id){
@@ -273,20 +276,15 @@ class EmploymentController extends Controller
         return response()->json($categoryemploymentsbycity, 200);
     }
 
-    public function apiemploymentsbyuser(user $user)
+    public function apiemploymentsbyuser()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
-        if (auth()->user()->id === $user->id){
+        $data = EmploymentService::apiemploymentsbyuser($user);
 
-            $data = EmploymentService::apiemploymentsbyuser($user);
-
-            return response()->json($data, 200);
-
-        }else{
-            return abort(404);
-        }
-
+        return response()->json($data, 200);
     }
 
     public function apiemploymentsbyusercategoryemployment(user $user,categoryemployment $categoryemployment)

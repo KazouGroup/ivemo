@@ -35,7 +35,7 @@ class NavlinkmailmessageUser extends Component {
                             <>
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/contacts/`}>
+                                        <NavLink to={`/messages/contacts/`}>
                                             <b>Contacts</b>
                                         </NavLink>
                                     </td>
@@ -47,7 +47,7 @@ class NavlinkmailmessageUser extends Component {
 
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/employments/`}>
+                                        <NavLink to={`/messages/employments/`}>
                                             <b>Contacts emplois & services</b>
                                         </NavLink>
                                     </td>
@@ -57,7 +57,7 @@ class NavlinkmailmessageUser extends Component {
                                 </tr>
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/als/`}>
+                                        <NavLink to={`/messages/als/`}>
                                             <b>Contacts Locations</b>
                                         </NavLink>
                                     </td>
@@ -67,7 +67,17 @@ class NavlinkmailmessageUser extends Component {
                                 </tr>
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/personal_mails/avs/`}>
+                                        <NavLink to={`/messages/ars/`}>
+                                            <b>Contacts Reservations</b>
+                                        </NavLink>
+                                    </td>
+                                    <td>{this.props.contactservicesannoncereservations_count >= 0 ? <span
+                                        className="text-right ivemoItemsCount">{this.props.contactservicesannoncereservations_count} </span> : <Skeleton height={25} width={25} />}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="pb-2 pt-2">
+                                        <NavLink to={`/messages/avs/`}>
                                             <b>Contacts Ventes</b>
                                         </NavLink>
                                     </td>
@@ -78,7 +88,7 @@ class NavlinkmailmessageUser extends Component {
 
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/notifications/`}>
+                                        <NavLink to={`/messages/notifications/`}>
                                             <b>Notifications</b>
                                         </NavLink>
                                     </td>
@@ -91,7 +101,7 @@ class NavlinkmailmessageUser extends Component {
                             <>
                                 <tr>
                                     <td className="pb-2 pt-2">
-                                        <NavLink to={`/profile/${this.props.slug}/notifications/`}>
+                                        <NavLink to={`/messages/notifications/`}>
                                             <b>Notifications</b>
                                         </NavLink>
                                     </td>

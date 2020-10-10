@@ -604,7 +604,7 @@ class Annoncelocationbycategorycityshow extends Component {
                                                                                 </Button>
 
                                                                             }
-                                                                            <NavLink to={`/profile/${annoncelocation.user.slug}/statistics/als/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                            <NavLink to={`/statistics/als/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                                                 <i className="now-ui-icons business_chart-bar-32"/>
                                                                             </NavLink>
                                                                             <NavLink to={`/al_data/${annoncelocation.annoncetype.slug}/${annoncelocation.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer cette annonce">

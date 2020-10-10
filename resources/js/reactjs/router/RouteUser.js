@@ -111,13 +111,10 @@ import EmployementBycategoryemployementbycity
 import EmployementShowUserSite from "../components/user/employment/EmployementShowUserSite";
 import EmploymentEdit from "../components/user/employment/treatement/EmploymentEdit";
 import EmploymentCreate from "../components/user/employment/treatement/EmploymentCreate";
-import ContactserviceEmploymentIndex from "../components/user/profile/contactservices/employment/ContactserviceEmploymentIndex";
 import ContactserviceEmploymentShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentShow";
 import ContactserviceEmploymentContactShow from "../components/user/profile/contactservices/employment/ContactserviceEmploymentContactShow";
 import PrivateUserFavoritEmployments from "../components/user/profile/favorites/PrivateUserFavoritEmployments";
 import PrivateUserEmployments from "../components/user/profile/employments/private/PrivateUserEmployments";
-import PrivateUserEmploymentsByCategoryemployment
-    from "../components/user/profile/employments/private/PrivateUserEmploymentsByCategoryemployment";
 import PublicUserEmployments from "../components/user/profile/employments/public/PublicUserEmployments";
 import EmployementBycity from "../components/user/employment/EmployementBycity";
 import PrivateUserFavoriteblogannoncereservations
@@ -131,8 +128,6 @@ import PrivateUserFavoriteblogannonceventes
     from "../components/user/profile/favorites/PrivateUserFavoriteblogannonceventes";
 import PrivateUserBlogannonceLocationStatistiqueShow
     from "../components/user/profile/blogs/private/blogannoncelocation/PrivateUserBlogannonceLocationStatistiqueShow";
-import PrivateUserEmploymentsByStatistique
-    from "../components/user/profile/employments/private/PrivateUserEmploymentsByStatistique";
 import AnnoncereservationCreate
     from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationCreate";
 import ForumShow from "../components/user/forum/ForumShow";
@@ -155,6 +150,8 @@ import Annoncebycategoryannoncereservationcityshow
     from "../components/user/annonces/annoncereservation/Annoncebycategoryannoncereservationcityshow";
 import ContactserviceAnnonceventeShow
     from "../components/user/profile/mail/contactusersvente/ContactserviceAnnonceventeShow";
+import PersonalmessagesannoncesreservationsUser
+    from "../components/user/profile/mail/contactusersreservation/PersonalmessagesannoncesreservationsUser";
 
 
 const RouteUser = props => (
@@ -245,31 +242,29 @@ const RouteUser = props => (
           <Route exact path="/profile/change_password/" component={ProfileAccountChangePasswordUser}/>
           <Route exact path="/profile/:profile/account/" component={ProfileConfigUser}/>
 
-          <Route exact path="/profile/:user/personal_mails/als/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
-          <Route exact path="/profile/:user/statistics/als/:annoncetype/:annoncelocation/" component={withRouter(ContactserviceAnnoncelocationShow)}/>
-          <Route exact path="/profile/:user/statistics/als_contactservice_show/:contactservice/" component={PersonalmessagesannonceslocationsShowUser}/>
+          <Route exact path="/messages/als/" component={withRouter(PersonalmessagesannonceslocationsUser)}/>
+          <Route exact path="/messages/als/:contactservice/" component={PersonalmessagesannonceslocationsShowUser}/>
+          <Route exact path="/statistics/als/:annoncetype/" component={PrivateUserAnnonceLocations}/>
+          <Route exact path="/statistics/als/:annoncetype/:annoncelocation/" component={withRouter(ContactserviceAnnoncelocationShow)}/>
+
+          <Route exact path="/messages/ars/" component={withRouter(PersonalmessagesannoncesreservationsUser)}/>
+
+          <Route exact path="/messages/avs/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
+          <Route exact path="/messages/avs/:contactservice/" component={PersonalmessagesannoncesventesShowUser}/>
+          <Route exact path="/statistics/avs/:annoncetype/" component={PrivateUserAnnonceVentes}/>
+          <Route exact path="/statistics/avs/:annoncetype/:annoncevente/" component={withRouter(ContactserviceAnnonceventeShow)}/>
+
+          <Route exact path="/messages/notifications/" component={PersonalnotificationsUser}/>
 
 
-          <Route exact path="/profile/:user/personal_mails/avs/" component={withRouter(PersonalmessagesannoncesventesUser)}/>
-          <Route exact path="/profile/:user/statistics/avs/:annoncetype/:annoncevente/" component={withRouter(ContactserviceAnnonceventeShow)}/>
-          <Route exact path="/profile/:user/statistics/avs_contactservice_show/:contactservice/" component={PersonalmessagesannoncesventesShowUser}/>
-
-          <Route exact path="/profile/:user/personal_mails/employments/" component={PersonalmessagesemploymentsUser}/>
-
-          <Route exact path="/profile/:user/notifications/" component={PersonalnotificationsUser}/>
+          <Route exact path="/messages/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
+          <Route exact path="/messages/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
 
 
-          <Route exact path="/profile/:user/personal_mails/contacts/" component={withRouter(PersonalmessagescontactUser)}/>
-          <Route exact path="/profile/:user/personal_mails/contacts/:contactuser/" component={PersonalmessagescontactShowUser}/>
-
-
-          <Route exact path="/profile/:user/statistics/employments/" component={ContactserviceEmploymentIndex}/>
-          <Route exact path="/profile/:user/statistics/employments/:employment/" component={withRouter(ContactserviceEmploymentShow)}/>
-          <Route exact path="/profile/:user/statistics/employments_contactservice_show/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
-
-          <Route exact path="/profile/:user/personal_settings/employments/" component={withRouter(PrivateUserEmployments)}/>
-          <Route exact path="/profile/:user/personal_settings/employments/:categoryemployment/" component={withRouter(PrivateUserEmploymentsByCategoryemployment)}/>
-          <Route exact path="/profile/:user/personal_settings/employment/:employment/" component={PrivateUserEmploymentsByStatistique}/>
+          <Route exact path="/statistics/employments/" component={withRouter(PrivateUserEmployments)}/>
+          <Route exact path="/statistics/employments/:employment/" component={withRouter(ContactserviceEmploymentShow)}/>
+          <Route exact path="/messages/employments/" component={PersonalmessagesemploymentsUser}/>
+          <Route exact path="/messages/employments/:contactservice/" component={withRouter(ContactserviceEmploymentContactShow)}/>
 
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_locations/" component={PrivateUserFavoriteannoncelocations}/>
           <Route exact path="/profile/:user/personal_settings/favorite_annonces_ventes/" component={PrivateUserFavoriteannonceventes}/>
@@ -286,9 +281,6 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/teams/create/" component={TeamsUserCreate}/>
           <Route path="/profile/:user/personal_settings/teams/:id/edit/" component={TeamsUserEdite}/>
 
-          <Route exact path="/profile/:user/personal_settings/als/:annoncetype/" component={PrivateUserAnnonceLocations}/>
-          <Route exact path="/profile/:user/personal_settings/avs/:annoncetype/" component={PrivateUserAnnonceVentes}/>
-
           <Route exact path="/profile/:user/personal_settings/annonces_reservations/" component={PrivateUserAnnonceReservations}/>
 
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_locations/" component={PrivateUserBlogannonceLocation}/>
@@ -301,7 +293,7 @@ const RouteUser = props => (
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/" component={PrivateUserBlogannonceVente}/>
           <Route exact path="/profile/:user/personal_settings/blogs/annonce_ventes/:categoryannoncevente/" component={withRouter(PrivateUserBlogannonceVentebyCategoryannoncevente)}/>
 
-          <Route exact path="/profile/:user/personal_settings/forums/" component={PrivateUserForum}/>
+          <Route exact path="/statistics/forums/" component={PrivateUserForum}/>
 
 
           <Route exact path="/city/:city" component={withRouter(CityIndexSite)}/>

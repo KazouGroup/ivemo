@@ -130,7 +130,7 @@ class EmployementList extends PureComponent {
 
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                 <>
-                                                    <NavLink to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques de l'annonce">
+                                                    <NavLink to={`/statistics/employments/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques de l'annonce">
                                                         <i className="now-ui-icons business_chart-bar-32"/>
                                                     </NavLink>
                                                     {this.props.status ?

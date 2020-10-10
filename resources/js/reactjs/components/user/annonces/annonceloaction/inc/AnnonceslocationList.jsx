@@ -75,7 +75,7 @@ class AnnonceslocationList extends PureComponent {
                                             <>
                                                 {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                                     <>
-                                                        <NavLink to={`/profile/${this.props.user.slug}/statistics/als/${this.props.annoncetype.slug}/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                        <NavLink to={`/statistics/als/${this.props.annoncetype.slug}/${this.props.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                             <i className="now-ui-icons business_chart-bar-32"/>
                                                         </NavLink>
                                                         {this.props.status ?

@@ -29,8 +29,9 @@ class ProfileController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['api']]);
+        $this->middleware('auth', ['except' => ['api']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,9 +43,11 @@ class ProfileController extends Controller
     }
 
 
-    public function api_user_account(user $user)
+    public function api_user_account()
     {
-       $user = HelpersService::helperscontactuserscount($user)->first();
+        $user = Auth::user();
+
+        $user = HelpersService::helperscontactuserscount($user)->first();
 
         return response()->json($user, 200);
 
@@ -53,7 +56,7 @@ class ProfileController extends Controller
 
     public function apiuserblogsannonces(user $user)
     {
-        $this->authorize('update',$user);
+        $this->authorize('update', $user);
 
         $user = HelpersService::helpersannonblogceteambyusercount($user)->first();
 
@@ -61,25 +64,29 @@ class ProfileController extends Controller
     }
 
 
-
     public function apipersonalreservations()
     {
-        $personnalreservations = reservation::whereIn('user_id',[auth()->user()->id])->with('user','annoncereservation')
-            ->orderBy('created_at','DESC')
+        $personnalreservations = reservation::whereIn('user_id', [auth()->user()->id])->with('user', 'annoncereservation')
+            ->orderBy('created_at', 'DESC')
             ->with([
-                'annoncereservation.categoryannoncereservation' => function ($q){
-                    $q->select('id','name','slug','color_name','user_id');},
-                'annoncereservation.imagereservations' => function ($q){
-                    $q->distinct()->get();},
-                'annoncereservation.city' => function ($q){
-                    $q->select('id','name','slug','user_id');},
-                'annoncereservation.annoncetype' => function ($q){
-                    $q->select('id','name','slug');},
-                'annoncereservation.user' => function ($q){
-                    $q->distinct()->get();}
+                'annoncereservation.categoryannoncereservation' => function ($q) {
+                    $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                },
+                'annoncereservation.imagereservations' => function ($q) {
+                    $q->distinct()->get();
+                },
+                'annoncereservation.city' => function ($q) {
+                    $q->select('id', 'name', 'slug', 'user_id');
+                },
+                'annoncereservation.annoncetype' => function ($q) {
+                    $q->select('id', 'name', 'slug');
+                },
+                'annoncereservation.user' => function ($q) {
+                    $q->distinct()->get();
+                }
             ])->whereHas('annoncereservation', function ($q) {
-                 $q->where('status',1);
-             })->distinct()->get()->toArray();
+                $q->where('status', 1);
+            })->distinct()->get()->toArray();
 
         return response()->json($personnalreservations, 200);
     }
@@ -97,12 +104,12 @@ class ProfileController extends Controller
         $user = auth()->user();
         $reservation = reservation::where('id', $id)->findOrFail($id);
 
-        if(auth()->user()->id === $reservation->annoncereservation->user_id){
+        if (auth()->user()->id === $reservation->annoncereservation->user_id) {
             $reservation->update(['status' => 1,]);
 
-            ProfileService::newEmailConfirmationreservation($reservation,$user);
+            ProfileService::newEmailConfirmationreservation($reservation, $user);
 
-          return response('Confirmed',Response::HTTP_ACCEPTED);
+            return response('Confirmed', Response::HTTP_ACCEPTED);
         }
     }
 
@@ -111,17 +118,19 @@ class ProfileController extends Controller
 
         $reservation = reservation::where('id', $id)->findOrFail($id);
 
-           if(auth()->user()->id === $reservation->annoncereservation->user_id){
-            $reservation->update([ 'status' => 0,]);
+        if (auth()->user()->id === $reservation->annoncereservation->user_id) {
+            $reservation->update(['status' => 0,]);
 
-             return response('Unconfirmed',Response::HTTP_ACCEPTED);
-           }
+            return response('Unconfirmed', Response::HTTP_ACCEPTED);
+        }
 
     }
 
 
-    public function apiprofileprivate(user $user)
+    public function apiprofileprivate()
     {
+        $user = Auth::user();
+
         $user = new UserResource(ProfileService::apiprofileprivate($user));
 
         return response()->json($user, 200);
@@ -135,7 +144,7 @@ class ProfileController extends Controller
     }
 
     /**
-      *
+     *
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -144,7 +153,7 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        return view('user.profile.profile_account',[
+        return view('user.profile.profile_account', [
             'user' => $user,
         ]);
     }
@@ -152,7 +161,7 @@ class ProfileController extends Controller
     public function change_password()
     {
         $user = auth()->user();
-        return view('user.profile.change_password_account',[
+        return view('user.profile.change_password_account', [
             'user' => $user,
         ]);
     }
@@ -166,34 +175,34 @@ class ProfileController extends Controller
     {
         $user = new UserResource(auth()->user());
 
-        return response()->json($user,200);
+        return response()->json($user, 200);
     }
 
     public function personal_reservations()
     {
-        return view('user.profile.personal_annoncereservations',[
-        'user' => auth()->user()
+        return view('user.profile.personal_annoncereservations', [
+            'user' => auth()->user()
 
         ]);
     }
 
     public function annonces_reservations_booked()
     {
-        return view('user.profile.personal_annoncereservations',[
-           'user' => auth()->user()
+        return view('user.profile.personal_annoncereservations', [
+            'user' => auth()->user()
 
-           ]);
+        ]);
     }
 
 
-     public function personalmessagesannonces_locations_show(contactuser $contactuser)
+    public function personalmessagesannonces_locations_show(contactuser $contactuser)
     {
-        $this->authorize('update',$contactuser);
+        $this->authorize('update', $contactuser);
 
-         return view('user.profile.contactuser.personal_mailannonces_locations_show',[
-             'user' => auth()->user(),
-             'contactuser' => $contactuser
-             ]);
+        return view('user.profile.contactuser.personal_mailannonces_locations_show', [
+            'user' => auth()->user(),
+            'contactuser' => $contactuser
+        ]);
     }
 
     public function api_profile_add_info_account($profile)
@@ -201,10 +210,10 @@ class ProfileController extends Controller
         $profile = profile::whereSlug($profile)
             ->first();
 
-        return response()->json($profile,200);
+        return response()->json($profile, 200);
     }
 
-    public function profile_add_info_account_update(UpdateprofileRequest $request ,profile $profile)
+    public function profile_add_info_account_update(UpdateprofileRequest $request, profile $profile)
     {
         $profile->update($request->all());
 
@@ -214,7 +223,7 @@ class ProfileController extends Controller
     public function profile_add_info_account($profile)
     {
         $user = auth()->user();
-        return view('user.profile.profile_account',[
+        return view('user.profile.profile_account', [
             'user' => $user,
         ]);
     }
@@ -226,20 +235,20 @@ class ProfileController extends Controller
          * Avatr image upload
          */
         $currentPhoto = $user->avatar;
-        if ($request->avatar != $currentPhoto){
+        if ($request->avatar != $currentPhoto) {
 
             $namefile = sha1(date('YmdHis') . str_random(30));
-            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatar,0,strpos
-                ($request->avatar,';')))[1])[1];
+            $name = $namefile . '.' . explode('/', explode(':', substr($request->avatar, 0, strpos
+                ($request->avatar, ';')))[1])[1];
 
             $dir = 'assets/img/avatars/user/';
-            if(!file_exists($dir)){
+            if (!file_exists($dir)) {
                 mkdir($dir, 0775, true);
             }
-            Image::make($request->avatar)->fit(200,123)->save(public_path('assets/img/avatars/user/').$name);
+            Image::make($request->avatar)->fit(200, 123)->save(public_path('assets/img/avatars/user/') . $name);
 
 
-            $request->merge(['avatar' =>  "/assets/img/avatars/user/{$name}"]);
+            $request->merge(['avatar' => "/assets/img/avatars/user/{$name}"]);
 
             // Ici on suprimme l'image existant
             $oldFilename = $currentPhoto;
@@ -250,20 +259,20 @@ class ProfileController extends Controller
          * Coverpage Uploade
          */
         $currentCoverPhoto = $user->avatarcover;
-        if ($request->avatarcover != $currentCoverPhoto){
+        if ($request->avatarcover != $currentCoverPhoto) {
 
             $namefile = sha1(date('YmdHis') . str_random(30));
-            $name = $namefile .'.' . explode('/',explode(':',substr($request->avatarcover,0,strpos
-                ($request->avatarcover,';')))[1])[1];
+            $name = $namefile . '.' . explode('/', explode(':', substr($request->avatarcover, 0, strpos
+                ($request->avatarcover, ';')))[1])[1];
 
             $dir = 'assets/img/avatarcovers/user/';
-            if(!file_exists($dir)){
+            if (!file_exists($dir)) {
                 mkdir($dir, 0775, true);
             }
-            Image::make($request->avatarcover)->fit(1400,400)->save(public_path('assets/img/avatarcovers/user/').$name);
+            Image::make($request->avatarcover)->fit(1400, 400)->save(public_path('assets/img/avatarcovers/user/') . $name);
 
 
-            $request->merge(['avatarcover' =>  "/assets/img/avatarcovers/user/{$name}"]);
+            $request->merge(['avatarcover' => "/assets/img/avatarcovers/user/{$name}"]);
 
             // Ici on suprimme l'image existant
             $oldCoverFilename = $currentCoverPhoto;
@@ -295,12 +304,13 @@ class ProfileController extends Controller
 
         Auth::logout();
         // TODO: Redirect the user in the login page
-        return response()->json($user,200);
+        return response()->json($user, 200);
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -311,7 +321,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -322,7 +332,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -333,8 +343,8 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -345,19 +355,19 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return array|\Illuminate\Http\Response
      */
     public function profile_account_delete($id)
     {
         $user = user::findOrFail($id);
 
-        if (auth()->user()->id === $user->id){
+        if (auth()->user()->id === $user->id) {
             $oldFilename = $user->avatar;
             File::delete(public_path($oldFilename));
             $user->delete();
             return ['message' => 'message deleted '];
-        }else{
+        } else {
             abort(404);
         }
 

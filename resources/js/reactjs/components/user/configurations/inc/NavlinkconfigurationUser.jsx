@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import React, {Component} from "react";
+import {Link, NavLink, withRouter} from 'react-router-dom';
 
 
 class NavlinkconfigurationUser extends Component {
@@ -10,65 +10,70 @@ class NavlinkconfigurationUser extends Component {
             <>
 
 
-            <div className="card">
-                <div className="card-body">
-                    <div className="row">
-                        <div className="col-md-12">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-md-12">
 
-                            <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+                                <div id="accordion" role="tablist" aria-multiselectable="true"
+                                     className="card-collapse">
 
-                                <div className="card card-plain">
-                                    <div className="card-header" role="tab" id="headingAnnonce">
-                                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonce" aria-expanded="false" aria-controls="collapseAnnonce">
-                                            <b>Rubriques</b>
-                                        </a>
-                                    </div>
+                                    <div className="card card-plain">
+                                        <div className="card-header" role="tab" id="headingAnnonce">
+                                            <a className="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                               href="#collapseAnnonce" aria-expanded="false"
+                                               aria-controls="collapseAnnonce">
+                                                <b>Rubriques</b>
+                                            </a>
+                                        </div>
 
-                                    <div id="collapseOne" className="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                                        <div className="card-body">
-                                            <table>
-                                                <tbody>
-                                                {$userIvemo.status_profile && (
+                                        <div id="collapseOne" className="collapse show" role="tabpanel"
+                                             aria-labelledby="headingOne">
+                                            <div className="card-body">
+                                                <table>
+                                                    <tbody>
+                                                    {$userIvemo.status_profile && (
 
-                                                    <>
-                                                        <tr>
-                                                            <td>
-                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/locations/`}>
-                                                                    <b>Locations</b>
-                                                                </NavLink>
-                                                            </td>
-                                                            <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/avs/ventes/`}>
-                                                                    <b>Ventes</b>
-                                                                </NavLink>
-                                                            </td>
-                                                            <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`}>
-                                                                    <b>Emplois & Services</b>
-                                                                </NavLink>
-                                                            </td>
-                                                            <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
-                                                        </tr>
-                                                    </>
+                                                        <>
+                                                            <tr>
+                                                                <td>
+                                                                    <NavLink to={`/statistics/als/locations/`}>
+                                                                        <b>Locations</b>
+                                                                    </NavLink>
+                                                                </td>
+                                                                <td className="text-right"> {this.props.annoncelocations_count} {this.props.annoncelocations_count > 1 ? "annonces" : "annonce"}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <NavLink to={`/statistics/avs/ventes/`}>
+                                                                        <b>Ventes</b>
+                                                                    </NavLink>
+                                                                </td>
+                                                                <td className="text-right"> {this.props.annonceventes_count} {this.props.annonceventes_count > 1 ? "annonces" : "annonce"}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <NavLink to={`/statistics/employments/`}>
+                                                                        <b>Emplois & Services</b>
+                                                                    </NavLink>
+                                                                </td>
+                                                                <td className="text-right"> {this.props.employments_count} {this.props.employments_count > 1 ? "annonces" : "annonce"}</td>
+                                                            </tr>
+                                                        </>
 
-                                                )}
+                                                    )}
 
-                                                <tr>
-                                                    <td>
-                                                        <NavLink to={`/profile/${this.props.slug}/personal_settings/forums/`}>
-                                                            <b>Forums</b>
-                                                        </NavLink>
-                                                    </td>
-                                                    <td className="text-right"> {this.props.forums_count} {this.props.forums_count > 1 ? "posts" : "post"}</td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <NavLink
+                                                                to={`/statistics/forums/`}>
+                                                                <b>Forums</b>
+                                                            </NavLink>
+                                                        </td>
+                                                        <td className="text-right"> {this.props.forums_count} {this.props.forums_count > 1 ? "posts" : "post"}</td>
+                                                    </tr>
 
-                                                {/*
+                                                    {/*
                                                  <tr>
                                                     <td>
                                                         <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/teams/`}>
@@ -87,12 +92,12 @@ class NavlinkconfigurationUser extends Component {
                                                 </tr>
                                                 */}
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    {/*
+                                        {/*
                                      <div id="collapseAnnonce" className="collapse" role="tabpanel" aria-labelledby="headingAnnonce">
                                         <div className="card-body">
                                             <table>
@@ -128,9 +133,9 @@ class NavlinkconfigurationUser extends Component {
                                     */}
 
 
-                                </div>
+                                    </div>
 
-                                {/*
+                                    {/*
                                   <div className="card card-plain">
                                     <div className="card-header" role="tab" id="headingAnnonceFRS">
                                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseAnnonceFRS" aria-expanded="false" aria-controls="collapseAnnonceFRS">
@@ -197,15 +202,16 @@ class NavlinkconfigurationUser extends Component {
 
                                 */}
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </>
+            </>
 
         )
     }
 }
+
 export default withRouter(NavlinkconfigurationUser);

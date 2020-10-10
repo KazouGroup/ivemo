@@ -74,9 +74,8 @@ class PersonalmessagescontactShowUser extends Component {
     }
 
     loadItem() {
-        let itemuser = this.props.match.params.user;
         let itemcontactuser = this.props.match.params.contactuser;
-        let url = route('api.personal_mails_contacts_show.site', [itemuser,itemcontactuser]);
+        let url = route('api.personal_mails_contacts_show.site', [itemcontactuser]);
         dyaxios.get(url).then(response => this.setState({ contactuser: response.data, }));
     }
 
@@ -117,7 +116,7 @@ class PersonalmessagescontactShowUser extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/`);
+                    this.props.history.push(`/messages/contacts/`);
 
                 }).catch(() => {
                     //Failled message
@@ -163,13 +162,13 @@ class PersonalmessagescontactShowUser extends Component {
 
                                 <div className="row">
 
-                                    <div className="col-lg-3 col-md-12 mx-auto">
+                                    <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <NavlinkmailmessagecontactUserShow/>
 
                                     </div>
 
-                                    <div className="col-lg-9 col-md-12 mx-auto">
+                                    <div className="col-lg-8 col-md-12 mx-auto">
 
                                         <div className="card">
                                             <div className="card-body">

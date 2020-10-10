@@ -16,6 +16,7 @@ use App\Models\user;
 use App\Services\AnnonceventeService;
 use App\Services\Contactusers\ContactusersventeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AnnonceventeController extends Controller
@@ -312,27 +313,24 @@ class AnnonceventeController extends Controller
         }
     }
 
-    public function apiannoncesventesbyuser(user $user,annoncetype $annoncetype)
+    public function apiannoncesventesbyuser(annoncetype $annoncetype)
     {
-        if (auth()->user()->id === $user->id){
-            $annonceventes = AnnonceventeService::apiannoncesventesbyuser($user,$annoncetype);
+        $user = Auth::user();
 
-            return response()->json($annonceventes, 200);
-        }else{
-            abort(404);
-        }
+        $this->authorize('update',$user);
+
+        $annonceventes = AnnonceventeService::apiannoncesventesbyuser($user,$annoncetype);
+
+        return response()->json($annonceventes, 200);
     }
 
     public function annoncesventesbyuser(user $user)
     {
-        if (auth()->user()->id === $user->id){
-            return view('user.profile.annonces.privateprofilannonceventes',[
-                'user' => auth()->user(),
-            ]);
-        }else{
-            abort(404);
-        }
+        $user = Auth::user();
 
+        $this->authorize('update',$user);
+
+        return view('user.profile.annonces.privateprofilannonceventes',compact('user'));
     }
 
     public function annoncesventesbyusercategory(user $user,categoryannoncevente $categoryannoncevente)

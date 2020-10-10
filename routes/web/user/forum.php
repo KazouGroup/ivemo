@@ -43,7 +43,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.forumscategoryinteresse_site');
 
     Route::get(
-        'profile/{user:slug}/personal_settings/forums',
+        'statistics/forums',
         'ForumController@apiforumsbyuser'
     )->name('api.forumbyuser_site');
 
@@ -96,7 +96,7 @@ Route::delete(
 )->name('forumsdelete_site');
 
 Route::get(
-    'profile/{user:slug}/personal_settings/forums',
+    'statistics/forums',
     'ForumController@forumsbyuser'
 )->name('forumbyuser_site');
 

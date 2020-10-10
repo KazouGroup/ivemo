@@ -49,14 +49,9 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.categoryannonceventes_by_user_site');
 
     Route::get(
-        'profile/{user}/personal_settings/avs/{annoncetype}',
+        'statistics/avs/{annoncetype}',
         'AnnonceventeController@apiannoncesventesbyuser'
     )->name('api.profilprivate_annonceventes');
-
-    Route::get(
-        'profile/{user}/personal_settings/avs/{categoryannoncevente}',
-        'AnnonceventeController@apiannoncesventesbyusercategoryannoncevente'
-    )->name('api.annoncesventesbyusercategoryannoncevente_site');
 
     Route::get(
         'avs_interesses/{annoncetype}/{city}',
@@ -105,7 +100,7 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
-            'profile/{user}/personal_settings/avs/{annoncetype}',
+            'statistics/avs/{annoncetype}',
             'AnnonceventeController@annoncesventesbyuser'
         )->name('profilprivate_annonceventes');
 

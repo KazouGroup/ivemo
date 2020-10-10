@@ -11,10 +11,10 @@ $factory->define(contactservice::class, function (Faker $faker) {
     $myslug = sha1(('YmdHis') . str_random(30));
 
     $servicemodel = collect([
-        ['name' => 'App\Model\employment'],
-        ['name' => 'App\Model\annoncelocation'],
-        ['name' => 'App\Model\annoncevente'],
-        ['name' => 'App\Model\workwithuses']
+        ['name' => 'App\Models\employment'],
+        ['name' => 'App\Models\annoncelocation'],
+        ['name' => 'App\Models\annoncevente'],
+        ['name' => 'App\Models\workwithuses']
     ]);
 
     return [

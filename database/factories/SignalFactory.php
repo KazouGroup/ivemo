@@ -11,10 +11,10 @@ use Faker\Generator as Faker;
 $factory->define(signal::class, function (Faker $faker) {
 
     $servicemodel = collect([
-        ['name' => 'App\Model\employment'],
-        ['name' => 'App\Model\annoncelocation'],
-        ['name' => 'App\Model\annoncevente'],
-        ['name' => 'App\Model\forum']
+        ['name' => 'App\Models\employment'],
+        ['name' => 'App\Models\annoncelocation'],
+        ['name' => 'App\Models\annoncevente'],
+        ['name' => 'App\Models\forum']
     ]);
 
     return [

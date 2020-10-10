@@ -25,10 +25,10 @@ $factory->define(uploadimage::class, function (Faker $faker) {
     $foregroundColor = trim($faker->safeHexcolor, '#');
 
     $servicemodel = collect([
-        ['name' => 'App\Model\activitycity'],
-        ['name' => 'App\Model\annoncelocation'],
-        ['name' => 'App\Model\annoncereservation'],
-        ['name' => 'App\Model\annoncevente'],
+        ['name' => 'App\Models\activitycity'],
+        ['name' => 'App\Models\annoncelocation'],
+        ['name' => 'App\Models\annoncereservation'],
+        ['name' => 'App\Models\annoncevente'],
     ]);
 
     return [

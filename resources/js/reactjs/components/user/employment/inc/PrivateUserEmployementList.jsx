@@ -114,7 +114,7 @@ class PrivateUserEmployementList extends PureComponent {
                                         {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (
                                             <div className="text-center">
                                                 <NavLink
-                                                    to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`}
+                                                    to={`/statistics/employments/${this.props.slugin}/`}
                                                     className="btn btn-sm btn-primary"
                                                     title={`${this.props.contactservices_count} ${this.props.contactservices_count > 1 ? "messages non lus" : "message non lu"} `}>
                                                     <b><i
@@ -122,7 +122,7 @@ class PrivateUserEmployementList extends PureComponent {
                                                     </b>
                                                 </NavLink>
                                                 <NavLink
-                                                    to={`/profile/${this.props.user.slug}/statistics/employments/${this.props.slugin}/`}
+                                                    to={`/statistics/employments/${this.props.slugin}/`}
                                                     className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                     <i className="now-ui-icons business_chart-bar-32"/>
                                                 </NavLink>

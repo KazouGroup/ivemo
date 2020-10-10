@@ -372,9 +372,8 @@ export const deletecontactItem = id => dispatch => {
 
 export const loadContactserviceemploymentsredmessage = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemContactservice = props.match.params.contactservice;
-    let url = route('api.contactservice_employmentsbyuserbystatistiqueshow_site', [itemUser, itemContactservice]);
+    let url = route('api.contactservice_employmentsbyuserbystatistiqueshow_site', [itemContactservice]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEMPLOYMENT_SHOW,
@@ -385,9 +384,8 @@ export const loadContactserviceemploymentsredmessage = props => dispatch => {
 
 export const loadContactserviceannoncelocationsredmessage = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemContactservice = props.match.params.contactservice;
-    let url = route('api.contactservice_annoncelocationsbyuserbystatistiqueshow_site', [itemUser, itemContactservice]);
+    let url = route('api.contactservice_annoncelocationsbyuserbystatistiqueshow_site', [itemContactservice]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICANONCELOCATION_SHOW,
@@ -398,9 +396,8 @@ export const loadContactserviceannoncelocationsredmessage = props => dispatch =>
 
 export const loadContactserviceannonceventesredmessage = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemContactservice = props.match.params.contactservice;
-    let url = route('api.contactservice_annonceventesbyuserbystatistiqueshow_site', [itemUser, itemContactservice]);
+    let url = route('api.contactservice_annonceventesbyuserbystatistiqueshow_site', [itemContactservice]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
@@ -422,9 +419,8 @@ export const loadAllcontactservices = props => dispatch => {
 
 export const loadContactserviceemploymentshow = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemEmployment = props.match.params.employment;
-    let url = route('api.contactservice_employmentsbyuserbystatistique_site', [itemUser,itemEmployment]);
+    let url = route('api.contactservice_employmentsbyuserbystatistique_site', [itemEmployment]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEMPLOYMENT,
@@ -435,10 +431,9 @@ export const loadContactserviceemploymentshow = props => dispatch => {
 
 export const loadContactservicelocationshow = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemannoncetype = props.match.params.annoncetype;
     let itemannoncelocation = props.match.params.annoncelocation;
-    let url = route('api.contactservice_annoncelocationsbyuserbystatistique_site', [itemUser,itemannoncetype,itemannoncelocation]);
+    let url = route('api.contactservice_annoncelocationsbyuserbystatistique_site', [itemannoncetype,itemannoncelocation]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICELOCATION,
@@ -449,10 +444,9 @@ export const loadContactservicelocationshow = props => dispatch => {
 
 export const loadContactserviceventeshow = props => dispatch => {
 
-    let itemUser = props.match.params.user;
     let itemannoncetype = props.match.params.annoncetype;
     let itemannoncevente = props.match.params.annoncevente;
-    let url = route('api.contactservice_annonceventesbyuserbystatistique_site', [itemUser,itemannoncetype,itemannoncevente]);
+    let url = route('api.contactservice_annonceventesbyuserbystatistique_site', [itemannoncetype,itemannoncevente]);
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICEVENTE,

@@ -101,7 +101,7 @@ class forum extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\forum',
+            ->where(['likeable_type' => forum::class,
             'likeable_id' => $this->id ])
             ->first();
     }
@@ -114,7 +114,7 @@ class forum extends Model
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\forum',
+            ->where(['favoriteable_type' => forum::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

@@ -22,6 +22,7 @@ import {
 
 } from "../../../../../redux/actions/employment/employmentActions";
 import Navemploymentsbyuser from "../../../employment/inc/Navemploymentsbyuser";
+import HelmetSite from "../../../../inc/user/HelmetSite";
 const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
@@ -68,9 +69,7 @@ class PrivateUserEmployments extends Component {
         );
         return (
             <>
-                <Helmet>
-                    <title>Emplois, Formation & Services {`${$userIvemo.first_name || 'Profile'}`} - {$name_site}</title>
-                </Helmet>
+                <HelmetSite title={`Emplois, Formation & Services ${$userIvemo.first_name || 'Profile'} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 

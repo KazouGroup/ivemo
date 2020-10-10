@@ -32,15 +32,10 @@ class ContactservicannonceventeController extends Controller
         ]]);
     }
 
-    public function contactservice(user $user)
+    public function personalmessagesdatas()
     {
-        $this->authorize('update',$user);
+        $user = Auth::user();
 
-        return view('user.contactservice.index', compact('user'));
-    }
-
-    public function personalmessagesdatas(user $user)
-    {
         $this->authorize('update',$user);
 
         return view('user.contactservice.index', compact('user'));
@@ -51,10 +46,11 @@ class ContactservicannonceventeController extends Controller
         return view('user.contactservice.show', compact('user'));
     }
 
-    public function contactservice_statistiqueshow($user,contactservice $contactservice)
+    public function contactservice_statistiqueshow(contactservice $contactservice)
     {
+        $user = Auth::user();
 
-        return view('user.contactservice.showcontact', compact('contactservice'));
+        return view('user.contactservice.showcontact', compact('user','contactservice'));
     }
 
     public function sendcontactserviceannonce(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncevente $categoryannoncevente,city $city,$user,annoncevente $annoncevente)
@@ -105,8 +101,10 @@ class ContactservicannonceventeController extends Controller
 
     }
 
-    public function apicontactservice_statistique(user $user,annoncetype $annoncetype, annoncevente $annoncevente)
+    public function apicontactservice_statistique(annoncetype $annoncetype, annoncevente $annoncevente)
     {
+        $user = Auth::user();
+
         $contactservice = new PrivateAnnonceventeResource(annoncevente::whereSlugin($annoncevente->slugin)
             ->withCount(['contactservices' => function ($q) use ($user){
                 $q->where(['status_red' => 0])
@@ -129,13 +127,15 @@ class ContactservicannonceventeController extends Controller
     }
 
 
-    public function contactservice_export(user $user, annoncevente $annoncevente)
+    public function contactservice_export($annoncetype,annoncevente $annoncevente)
     {
+        $user = Auth::user();
+
         return Excel::download(new ContactserviceannonceventesExport($user,$annoncevente), 'Infos-users.xlsx');
     }
 
 
-    public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
+    public function apicontactservice_statistiqueshow(contactservice $contactservice)
     {
         $contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
         ->with('to','from','contactserviceable')

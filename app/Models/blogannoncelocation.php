@@ -105,8 +105,8 @@ class blogannoncelocation extends Model implements Auditable
 
     public function favoriteted()
     {
-        return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\blogannoncelocation',
+        return (bool) favorite::where('user_id', Auth::id())
+            ->where(['favoriteable_type' => blogannoncelocation::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }
@@ -118,7 +118,7 @@ class blogannoncelocation extends Model implements Auditable
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\blogannoncelocation',
+            ->where(['likeable_type' => blogannoncelocation::class,
             'likeable_id' => $this->id ])
             ->first();
     }

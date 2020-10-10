@@ -8,7 +8,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api_profile_account.site');
 
     Route::get(
-        'user/{user}',
+        'user/private',
         'ProfileController@apiprofileprivate'
     )->name('api.profilprivate');
 
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.userblogs_and_annonces');
 
     Route::get(
-        'user_profile/{user}',
+        'user_profile/private',
         'ProfileController@api_user_account'
     )->name('api_user_profile_account.site');
 

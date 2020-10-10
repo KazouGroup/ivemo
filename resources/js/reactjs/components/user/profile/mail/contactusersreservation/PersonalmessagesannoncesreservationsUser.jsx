@@ -1,26 +1,24 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { Button } from "reactstrap";
+import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
-import HelmetSite from "../../../../inc/user/HelmetSite";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
-    loadAllcontactservices,
-    favoriteaddItem,favoriteremoveItem,
-    archvementaddItem,archvementremoveItem,
-    activecontactaddItem,activecontactremoveItem,
-    deletecontactItem
-} from "../../../../../redux/actions/annoncelocation/contactuserannoncelocationActions";
+    activecontactaddItem, activecontactremoveItem,
+    archvementaddItem, archvementremoveItem, deletecontactItem,
+    favoriteaddItem, favoriteremoveItem,
+    loadAllcontactservices
+} from "../../../../../redux/actions/annoncereservation/contactuserannoncereservationActions";
+import HelmetSite from "../../../../inc/user/HelmetSite";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
 import EmptyTableItems from "../../../../inc/user/EmptyTableItems";
 
 
-class PersonalmessagesannonceslocationsUser extends Component {
+class PersonalmessagesannoncesreservationsUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,7 +43,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/messages/als/${item.slug}/`);
+            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/ars_contactservice_show/${item.slug}/`);
         })
     }
 
@@ -55,12 +53,11 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
     }
 
-
     render() {
         const { contactusersprofile } = this.props;
         const {  visiable } = this.state;
-        const mapContactusers = contactusersprofile.contactservicesannoncelocations.length ? (
-            contactusersprofile.contactservicesannoncelocations.slice(0, visiable).map(item => {
+        const mapContactusers = contactusersprofile.contactservicesannoncereservations.length ? (
+            contactusersprofile.contactservicesannoncereservations.slice(0, visiable).map(item => {
                 return (
 
                     <MailcontactserviceList key={item.id} {...item}
@@ -122,7 +119,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
 
                                         <div className="alert alert-info" role="alert">
                                             <div className="container text-center">
-                                                <strong>Boite de réception des locations</strong>
+                                                <strong>Boite de réception des reservations</strong>
                                             </div>
                                         </div>
 
@@ -140,9 +137,9 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                                 <table>
                                                     <tbody>
 
-                                                    {contactusersprofile.contactservicesannoncelocations.length >= 0 ?
+                                                    {contactusersprofile.contactservicesannoncereservations.length >= 0 ?
                                                         <>
-                                                            {contactusersprofile.contactservicesannoncelocations.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Locations"}/>}
+                                                            {contactusersprofile.contactservicesannoncereservations.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Reservations"}/>}
                                                         </>:null}
 
                                                     </tbody>
@@ -150,7 +147,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
                                             </div>
 
 
-                                            {visiable < contactusersprofile.contactservicesannoncelocations.length && (
+                                            {visiable < contactusersprofile.contactservicesannoncereservations.length && (
                                                 <div className="row">
                                                     <div className="col-md-4 ml-auto mr-auto text-center">
                                                         <button type="button" onClick={this.loadmoresItem} className="btn btn-primary btn-block">
@@ -185,8 +182,7 @@ class PersonalmessagesannonceslocationsUser extends Component {
         )
     }
 }
-
-PersonalmessagesannonceslocationsUser.propTypes = {
+PersonalmessagesannoncesreservationsUser.propTypes = {
     loadAllcontactservices: PropTypes.func.isRequired,
 };
 
@@ -202,5 +198,4 @@ export default connect(mapStateToProps, {
     archvementaddItem,archvementremoveItem,
     activecontactaddItem,activecontactremoveItem,
     deletecontactItem
-})(PersonalmessagesannonceslocationsUser);
-
+})(PersonalmessagesannoncesreservationsUser);

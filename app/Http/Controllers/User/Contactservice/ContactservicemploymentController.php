@@ -29,34 +29,27 @@ class ContactservicemploymentController extends Controller
         $this->middleware('auth');
     }
 
-    public function contactservice(user $user)
+    public function personalmessagesemployments()
     {
+        $user = Auth::user();
+
         $this->authorize('update',$user);
 
         return view('user.contactservice.index', compact('user'));
     }
 
-    public function personalmessagesemployments(user $user)
+    public function contactservice_statistique(employment $employment)
     {
-        $this->authorize('update',$user);
+        $user = Auth::user();
 
-        return view('user.contactservice.index', compact('user'));
-    }
-
-    public function contactservice_statistique(user $user, employment $employment)
-    {
         return view('user.contactservice.show', compact('user'));
     }
 
-    public function contactservice_statistiqueshow($user,contactservice $contactservice )
+    public function contactservice_statistiqueshow(contactservice $contactservice )
     {
+        $user = Auth::user();
 
-        return view('user.contactservice.showcontact', compact('contactservice'));
-    }
-
-    public function personalmessagesemployments_show($user,contactservice $contactservice )
-    {
-        return view('user.contactservice.showcontact', compact('contactservice'));
+        return view('user.contactservice.showcontact', compact('user','contactservice'));
     }
 
     public function sendcontactservice(StorecontactuseremploymentRequest $request,categoryemployment $categoryemployment,city $city,employment $employment)
@@ -81,6 +74,7 @@ class ContactservicemploymentController extends Controller
 
     public function apicontactservice(user $user)
     {
+
         $this->authorize('update',$user);
 
         $contactservices = $user->employments()
@@ -101,17 +95,18 @@ class ContactservicemploymentController extends Controller
 
     }
 
-    public function apicontactservice_statistique(user $user, employment $employment)
+    public function apicontactservice_statistique(employment $employment)
     {
+
         $contactservice = new PrivateEmploymentResource(employment::whereSlugin($employment->slugin)
-            ->withCount(['contactservices' => function ($q) use ($user){
+            ->withCount(['contactservices' => function ($q){
                 $q->where(['status_red' => 0])
                     ->with('to','from')
-                    ->whereIn('to_id',[$user->id]);},])
-            ->whereIn('user_id',[$user->id])
-            ->with(['contactservices' => function ($q) use ($user){
+                    ->whereIn('to_id',[Auth::id()]);},])
+            ->whereIn('user_id',[Auth::id()])
+            ->with(['contactservices' => function ($q){
                 $q->with('to','from')
-                    ->whereIn('to_id',[$user->id])
+                    ->whereIn('to_id',[Auth::id()])
                     ->orderBy('created_at','DESC')
                     ->distinct()->get()
                 ;},
@@ -124,13 +119,15 @@ class ContactservicemploymentController extends Controller
         return response()->json($contactservice,200);
     }
 
-    public function contactservice_export(user $user, employment $employment)
+    public function contactservice_export(employment $employment)
     {
+        $user = Auth::user();
+
         return Excel::download(new ContactserviceemploymentExport($user,$employment), 'Infos-users.xlsx');
     }
 
 
-    public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
+    public function apicontactservice_statistiqueshow(contactservice $contactservice)
     {
         $contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
         ->with('to','from','contactserviceable')

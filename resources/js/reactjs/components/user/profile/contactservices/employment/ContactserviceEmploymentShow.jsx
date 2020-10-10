@@ -40,7 +40,7 @@ class ContactserviceEmploymentShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/messages/employments/${item.slug}/`);
         })
 
     }
@@ -163,7 +163,7 @@ class ContactserviceEmploymentShow extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/statistics/employments/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/statistics/employments/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces</b>
                                             </Link>
 
@@ -206,7 +206,7 @@ class ContactserviceEmploymentShow extends Component {
 
                                                 {employment.contactservices.length >= 1 && (
                                                     <>
-                                                     <a href={`${route('contactservice_employmentsbyuserbyexport_site',[employment.user.slug, employment.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
+                                                     <a href={`${route('contactservice_employmentsbyuserbyexport_site',[employment.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
                                                          <i className="fa fa-file-excel" />
                                                      </a>
                                                     <div className="card">

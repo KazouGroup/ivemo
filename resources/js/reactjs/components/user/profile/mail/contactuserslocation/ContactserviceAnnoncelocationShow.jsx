@@ -42,7 +42,7 @@ class ContactserviceAnnoncelocationShow extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/als_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/messages/als/${item.slug}/`);
         })
 
     }
@@ -84,7 +84,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                             },
                         });
                     /** End alert ***/
-                    this.props.history.push(`/profile/${$userIvemo.slug}/personal_settings/als/`);
+                    this.props.history.push(`/statistics/als/${this.props.match.params.annoncetype}`);
                 }).catch(() => {
                     //Failled message
                     $.notify("Ooop! Une erreur est survenue", {
@@ -165,7 +165,7 @@ class ContactserviceAnnoncelocationShow extends Component {
                                         )}
 
                                         <div className="submit text-left">
-                                            <Link to={`/profile/${$userIvemo.slug}/personal_settings/als/${this.props.match.params.annoncetype}/`} className="btn btn-neutral btn-sm">
+                                            <Link to={`/statistics/als/${this.props.match.params.annoncetype}/`} className="btn btn-neutral btn-sm">
                                                 <i className="now-ui-icons arrows-1_minimal-left" /> <b>Retour à vos annonces</b>
                                             </Link>
 
@@ -208,7 +208,7 @@ class ContactserviceAnnoncelocationShow extends Component {
 
                                                 {annoncelocation.contactservices.length >= 1 && (
                                                     <>
-                                                     <a href={`${route('contactservice_annoncelocationsbyuserbyexport_site',[annoncelocation.user.slug, annoncelocation.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
+                                                     <a href={`${route('contactservice_annoncelocationsbyuserbyexport_site',[annoncelocation.annoncetype.slug,annoncelocation.slugin])}`} className="btn btn-primary btn-sm pull-right" title="Télécharger vos contacts">
                                                          <i className="fa fa-file-excel" />
                                                      </a>
                                                     <div className="card">

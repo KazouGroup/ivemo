@@ -4,13 +4,14 @@ import {Remarkable} from "remarkable";
 import { Badge } from "reactstrap";
 import moment from "moment";
 import {Button} from "reactstrap";
+import ReadMoreAndLess from "react-read-more-less";
 
 
 class MailcontactserviceList extends Component {
 
     getDescription() {
         const md = new Remarkable();
-        return { __html: md.render(this.props.message.length > 86 ? this.props.message.substring(0, 86) + "..." : this.props.message) };
+        return { __html: md.render(this.props.message.length > 70 ? this.props.message.substring(0, 70) + "..." : this.props.message) };
     }
     render() {
         return (
@@ -22,7 +23,7 @@ class MailcontactserviceList extends Component {
                             <a href={void(0)} onClick={() => this.props.readItem(this.props)} style={{cursor:"pointer"}}>
                                 <div className={`ml-auto mr-auto`}>
                                     <b className={`${this.props.status_red ? "" : "text-primary"}`}>
-                                        {this.props.status_red ? "" : <i className="fas fa-circle"></i> } {this.props.full_name} - {this.props.phone}
+                                        {this.props.status_red ? "" : <i className="fas fa-circle"></i> } {this.props.from_id === null ? <>{this.props.full_name}</>:<>{this.props.from.first_name}</>} - {this.props.phone}
                                     </b>
                                     {/* {this.props.status_red ? <Badge className="mr-1" color="success">Lu</Badge> : <Badge className="mr-1" color="danger">Non lu</Badge> }*/}
                                 </div>
@@ -72,12 +73,20 @@ class MailcontactserviceList extends Component {
                             <span><b>{moment(this.props.created_at).fromNow()}</b></span>
                         </div>
                     </div>
-                    <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "" : "text-primary"}`}>
-                        <span dangerouslySetInnerHTML={this.getDescription()}/>
-                    </a>
 
-                </td>
-                <td className="text-right">
+                    <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "" : "text-primary"}`}>
+                        {/*<span dangerouslySetInnerHTML={this.getDescription()}/>**/}
+                        <span>
+                                    <ReadMoreAndLess
+                                        className="read-more-content"
+                                        charLimit={86}
+                                        readMoreText=""
+                                        readLessText=""
+                                    >
+                                    {this.props.message || ""}
+                                </ReadMoreAndLess>
+                        </span>
+                    </a>
 
                 </td>
             </tr>

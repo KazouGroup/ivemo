@@ -285,26 +285,30 @@ class NavUserSite extends PureComponent {
                                                             </a>
                                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 
-                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/contacts/`} className="dropdown-item">
+                                                                <Link to={`/messages/contacts/`} className="dropdown-item">
                                                                     <span className="ivemoItemsCount">{contactusersprofile.contactusers_count}</span> {contactusersprofile.contactusers_count > 1 ? "Contacts" : "Contact"}
                                                                 </Link>
 
-                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/employments/`} className="dropdown-item">
+                                                                <Link to={`/messages/employments/`} className="dropdown-item">
                                                                     <span className="ivemoItemsCount">{contactusersprofile.contactservicesemployments_count}</span> Emplois & Services
                                                                 </Link>
 
-                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/als/`} className="dropdown-item">
+                                                                <Link to={`/messages/als/`} className="dropdown-item">
                                                                     <span className="ivemoItemsCount">{contactusersprofile.contactservicesannoncelocations_count}</span> {contactusersprofile.contactservicesannoncelocations_count > 1 ? "Locations" : "Location"}
                                                                 </Link>
 
-                                                                <Link to={`/profile/${$userIvemo.slug}/personal_mails/avs/`} className="dropdown-item">
+                                                                <Link to={`/messages/ars/`} className="dropdown-item">
+                                                                    <span className="ivemoItemsCount">{contactusersprofile.contactservicesannoncereservations_count}</span> {contactusersprofile.contactservicesannoncereservations_count > 1 ? "Reservations" : "Reservation"}
+                                                                </Link>
+
+                                                                <Link to={`/messages/avs/`} className="dropdown-item">
                                                                     <span className="ivemoItemsCount">{contactusersprofile.contactservicesannonceventes_count}</span> {contactusersprofile.contactservicesannonceventes_count > 1 ? "Ventes" : "Vente"}
                                                                 </Link>
                                                             </div>
                                                         </li>
 
                                                         <li className="nav-item">
-                                                            <NavLink to={`/profile/${$userIvemo.slug}/notifications/`} className="nav-link">
+                                                            <NavLink to={`/messages/notifications/`} className="nav-link">
                                                                 <i className="now-ui-icons ui-1_bell-53"/>
                                                                 <span className="notification"><b>{unreadnotificationsTotal >= 1 &&(this.data_countunread_notifications_countFormatter(unreadnotificationsTotal || ""))}</b></span>
                                                             </NavLink>
@@ -314,7 +318,7 @@ class NavUserSite extends PureComponent {
                                                     <>
 
                                                         <li className="nav-item">
-                                                            <NavLink to={`/profile/${$userIvemo.slug}/notifications/`} className="nav-link">
+                                                            <NavLink to={`/messages/notifications/`} className="nav-link">
                                                                 <i className="now-ui-icons ui-1_bell-53"/>
                                                                 <span className="notification"><b>{unreadnotificationsTotal >= 1 &&(this.data_countunread_notifications_countFormatter(unreadnotificationsTotal || ""))}</b></span>
                                                             </NavLink>
@@ -362,18 +366,18 @@ class NavUserSite extends PureComponent {
                                                         <i className="now-ui-icons shopping_bag-16"/>Reservations
                                                     </a>
                                                   */}
-                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/als/locations/`} className="dropdown-item">
+                                                <NavLink to={`/statistics/als/locations/`} className="dropdown-item">
                                                     <i className="now-ui-icons business_bank"/>Locations
                                                 </NavLink>
 
-                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/avs/ventes/`} className="dropdown-item">
+                                                <NavLink to={`/statistics/avs/ventes/`} className="dropdown-item">
                                                     <i className="now-ui-icons location_map-big"></i>Ventes
                                                 </NavLink>
 
-                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/employments/`} className="dropdown-item">
+                                                <NavLink to={`/statistics/employments/`} className="dropdown-item">
                                                     <i className="now-ui-icons business_briefcase-24"/>Emplois & Services
                                                 </NavLink>
-                                                <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
+                                                <NavLink to={`/statistics/forums/`} className="dropdown-item">
                                                     <i className="now-ui-icons text_align-left"/>Forums
                                                 </NavLink>
 
@@ -395,7 +399,7 @@ class NavUserSite extends PureComponent {
                                         </li>
 
                                         <li className="nav-item">
-                                            <NavLink to={`/profile/${$userIvemo.slug}/notifications/`} className="nav-link">
+                                            <NavLink to={`/messages/notifications/`} className="nav-link">
                                                 <i className="now-ui-icons ui-1_bell-53"/>
                                                 <span className="notification"><b>{unreadnotificationsTotal >= 1 &&(this.data_countunread_notifications_countFormatter(unreadnotificationsTotal || ""))}</b></span>
                                             </NavLink>
@@ -404,7 +408,7 @@ class NavUserSite extends PureComponent {
                                 }
 
                                 <li className="nav-item dropdown">
-                                    <a href=".." className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                    <a href={void(0)} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                         <i className="now-ui-icons users_single-02"/>
                                         <b>{$userIvemo.first_name}</b>
                                     </a>
@@ -441,7 +445,7 @@ class NavUserSite extends PureComponent {
                                         <NavLink to={`/profile/account/`}  className="dropdown-item">
                                             <i className="now-ui-icons users_circle-08"/> Editer mon profil
                                         </NavLink>
-                                        <NavLink to={`/profile/${$userIvemo.slug}/personal_settings/forums/`} className="dropdown-item">
+                                        <NavLink to={`/statistics/forums/`} className="dropdown-item">
                                             <i className="now-ui-icons text_align-left"/> Forums
                                         </NavLink>
                                         {/*<a style={{ cursor: "pointer" }} className="dropdown-item" onClick={() => this.navLogout()}>

@@ -5,6 +5,7 @@ import { Badge } from "reactstrap";
 import moment from "moment";
 import {Button} from "reactstrap";
 import {archvementaddItem, archvementremoveItem} from "../../../../../redux/actions/contactuserActions";
+import ReadMoreAndLess from "react-read-more-less";
 
 
 class HeadermailmessageUser extends Component {
@@ -74,7 +75,17 @@ class HeadermailmessageUser extends Component {
                         </div>
                     </div>
                     <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.props.readItem(this.props)} className={`${this.props.status_red ? "text-primary" : ""}`}>
-                        <span dangerouslySetInnerHTML={this.getDescription()}/>
+                        {/*<span dangerouslySetInnerHTML={this.getDescription()}/>**/}
+                        <span>
+                                    <ReadMoreAndLess
+                                        className="read-more-content"
+                                        charLimit={86}
+                                        readMoreText=""
+                                        readLessText=""
+                                    >
+                                    {this.props.message || ""}
+                                </ReadMoreAndLess>
+                        </span>
                     </a>
 
                 </td>

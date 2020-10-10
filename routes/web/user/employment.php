@@ -49,7 +49,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.employmentlugin_site');
 
     Route::get(
-        'profile/{user}/personal_settings/employments',
+        'statistics/employments',
         'EmploymentController@apiemploymentsbyuser'
     )->name('api.employmentsbyuser_site');
 
@@ -102,14 +102,9 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
-            'profile/{user}/personal_settings/employments',
+            'statistics/employments',
             'EmploymentController@employmentsbyuser'
         )->name('employmentsbyuser_site');
-
-        Route::get(
-            'profile/{user}/personal_settings/employments/{categoryemployment}',
-            'EmploymentController@employmentsbyusercategoryemployment'
-        )->name('employmentsbyuserbycategoryemployment_site');
 
         Route::get(
             'employment/ab/new',

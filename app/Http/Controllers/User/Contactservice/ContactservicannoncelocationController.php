@@ -32,15 +32,10 @@ class ContactservicannoncelocationController extends Controller
         ]]);
     }
 
-    public function contactservice(user $user)
+    public function personalmessagesdatas()
     {
-        $this->authorize('update',$user);
+        $user = Auth::user();
 
-        return view('user.contactservice.index', compact('user'));
-    }
-
-    public function personalmessagesdatas(user $user)
-    {
         $this->authorize('update',$user);
 
         return view('user.contactservice.index', compact('user'));
@@ -51,15 +46,11 @@ class ContactservicannoncelocationController extends Controller
         return view('user.contactservice.show', compact('user'));
     }
 
-    public function contactservice_statistiqueshow($user,contactservice $contactservice )
+    public function personalmessages_show(contactservice $contactservice )
     {
+        $user = Auth::user();
 
-        return view('user.contactservice.showcontact', compact('contactservice'));
-    }
-
-    public function personalmessagesemployments_show($user,contactservice $contactservice )
-    {
-        return view('user.contactservice.showcontact', compact('contactservice'));
+        return view('user.contactservice.showcontact', compact('user','contactservice'));
     }
 
     public function sendcontactserviceannonce(StorecontactuserannoncelocationRequest $request,annoncetype $annoncetype,categoryannoncelocation $categoryannoncelocation,city $city,$user,annoncelocation $annoncelocation)
@@ -111,8 +102,10 @@ class ContactservicannoncelocationController extends Controller
 
     }
 
-    public function apicontactservice_statistique(user $user,annoncetype $annoncetype, annoncelocation $annoncelocation)
+    public function apicontactservice_statistique(annoncetype $annoncetype, annoncelocation $annoncelocation)
     {
+        $user = Auth::user();
+
         $contactservice = new PrivateAnnoncelocationResource(annoncelocation::whereSlugin($annoncelocation->slugin)
 
             ->withCount(['contactservices' => function ($q) use ($user){
@@ -135,13 +128,15 @@ class ContactservicannoncelocationController extends Controller
         return response()->json($contactservice,200);
     }
 
-    public function contactservice_export(user $user, annoncelocation $annoncelocation)
+    public function contactservice_export(annoncelocation $annoncelocation)
     {
+        $user = Auth::user();
+
         return Excel::download(new ContactserviceannoncelocationExport($user,$annoncelocation), 'Infos-users.xlsx');
     }
 
 
-    public function apicontactservice_statistiqueshow($user,contactservice $contactservice)
+    public function apicontactservice_statistiqueshow(contactservice $contactservice)
     {
         $contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
         ->with('to','from','contactserviceable')

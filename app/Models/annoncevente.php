@@ -130,7 +130,7 @@ class annoncevente extends Model
     public function iscontactservice()
     {
         return (bool) contactservice::where('from_id', Auth::id())
-            ->where(['contactserviceable_type' => 'App\Model\annoncevente',
+            ->where(['contactserviceable_type' => annoncevente::class,
                 'contactserviceable_id' => $this->id ])
             ->first();
     }
@@ -143,7 +143,7 @@ class annoncevente extends Model
     public function likeked()
     {
         return (bool) like::where('user_id', Auth::guard('web')->id())
-            ->where(['likeable_type' => 'App\Model\annoncevente',
+            ->where(['likeable_type' => annoncevente::class,
                 'likeable_id' => $this->id ])
             ->first();
     }
@@ -156,7 +156,7 @@ class annoncevente extends Model
     public function favoriteted()
     {
         return (bool) favorite::where('user_id', Auth::guard('web')->id())
-            ->where(['favoriteable_type' => 'App\Model\annoncevente',
+            ->where(['favoriteable_type' => annoncevente::class,
                 'favoriteable_id' => $this->id ])
             ->first();
     }

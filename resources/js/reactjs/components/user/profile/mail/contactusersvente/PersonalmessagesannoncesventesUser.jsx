@@ -14,8 +14,8 @@ import {
     loadAllcontactservices
 } from "../../../../../redux/actions/annoncevente/contactuserannonceventeActions";
 import HelmetSite from "../../../../inc/user/HelmetSite";
-import EmptyItems from "../../../../inc/user/EmptyItems";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
+import EmptyTableItems from "../../../../inc/user/EmptyTableItems";
 
 
 class PersonalmessagesannoncesventesUser extends Component {
@@ -43,7 +43,7 @@ class PersonalmessagesannoncesventesUser extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/avs_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/messages/avs/${item.slug}/`);
         })
     }
 
@@ -139,7 +139,7 @@ class PersonalmessagesannoncesventesUser extends Component {
 
                                                     {contactusersprofile.contactservicesannonceventes.length >= 0 ?
                                                         <>
-                                                            {contactusersprofile.contactservicesannonceventes.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Contacts Ventes"}/>}
+                                                            {contactusersprofile.contactservicesannonceventes.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Ventes"}/>}
                                                         </>:null}
 
                                                     </tbody>

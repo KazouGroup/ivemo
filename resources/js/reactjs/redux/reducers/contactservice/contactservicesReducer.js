@@ -3,11 +3,12 @@ import produce from "immer"
 
 const initialState = {
     contactservices: {
-        contactusers: [],
-        notifications: [],
+        contactusers: {},
+        notifications: {},
         contactservicesemployments: {to: [], from: [], contactserviceable: []},
         contactservicesannoncelocations: {to: [], from: [], contactserviceable: []},
-        contactservicesannonceventes: {to: [], from: [], contactserviceable: []}
+        contactservicesannonceventes: {to: [], from: [], contactserviceable: []},
+        contactservicesannoncereservations: {to: [], from: [], contactserviceable: []}
     },
 };
 
@@ -161,6 +162,50 @@ export default produce((draft, action = {}) => {
                 let dataalsdelete = draft.contactservices.contactservicesannoncelocations.findIndex(i => i.id === action.payload);
                 if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations.splice(dataalsdelete, 1);
                 //if (dataalsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
+                return draft;
+
+            /* *********End****** */
+
+            /* ********Init contactservice reservations ****** */
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCERESERVATION_ADD':
+                draft.contactservices.contactservicesannoncereservations[
+                    draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload)
+                    ].status_favorite = action.payload;
+                return draft;
+
+            case 'FAVORITE_CONTACTSERVICE_ANONCERESERVATION_REMOVE':
+                draft.contactservices.contactservicesannoncereservations[
+                    draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload)
+                    ].status_favorite = !action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCERESERVATION_ADD':
+                let dataarsdd = draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannoncereservations[dataarsdd].status_archvement = action.payload;
+                return draft;
+
+            case 'ARCHVEMENT_CONTACTSERVICE_ANONCERESERVATION_REMOVE':
+                let dataarsremove = draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload);
+                draft.contactservices.contactservicesannoncereservations[dataarsremove].status_archvement = !action.payload;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCERESERVATION_ADD':
+                let dataarsactive = draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload);
+                if (dataarsactive !== -1) draft.contactservices.contactservicesannoncereservations[dataarsactive].status_red = action.payload;
+                if (dataarsactive !== -1) draft.contactservices.contactservicesannoncereservations_count--;
+                return draft;
+
+            case 'ACTIVE_CONTACTSERVICE_ANONCERESERVATION_REMOVE':
+                let dataarsremoveactive = draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload);
+                if (dataarsremoveactive !== -1) draft.contactservices.contactservicesannoncereservations[dataarsremoveactive].status_red = !action.payload;
+                if (dataarsremoveactive !== -1) draft.contactservices.contactservicesannoncereservations_count++;
+                return draft;
+
+            case 'DELETE_CONTACTSERVICE_ANONCERESERVATION':
+                let dataarsdelete = draft.contactservices.contactservicesannoncereservations.findIndex(i => i.id === action.payload);
+                if (dataarsdelete !== -1) draft.contactservices.contactservicesannoncereservations.splice(dataarsdelete, 1);
+                //if (dataarsdelete !== -1) draft.contactservices.contactservicesannoncelocations_count--;
                 return draft;
 
             /* *********End****** */

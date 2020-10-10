@@ -2,12 +2,12 @@
 
 
 Route::get(
-    'api/personal_mails/contactservices',
+    'api/messages/contactservices',
     'ContactserviceController@apipersonacontactservices'
 )->name('api.personal_mails_contactservices_site');
 
 Route::get(
-    'profile/{user}/notifications',
+    'messages/notifications',
     'ContactserviceController@allnotifications'
 )->name('personal_notifications.site');
 

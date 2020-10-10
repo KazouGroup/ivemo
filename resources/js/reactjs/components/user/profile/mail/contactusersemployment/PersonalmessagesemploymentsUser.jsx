@@ -17,7 +17,7 @@ import {
     deletecontactItem
 } from "../../../../../redux/actions/employment/contactuseremploymentActions";
 import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
-import EmptyItems from "../../../../inc/user/EmptyItems";
+import EmptyTableItems from "../../../../inc/user/EmptyTableItems";
 
 
 class PersonalmessagesemploymentsUser extends Component {
@@ -45,7 +45,7 @@ class PersonalmessagesemploymentsUser extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/employments_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/messages/employments/${item.slug}/`);
         })
 
     }
@@ -143,7 +143,7 @@ class PersonalmessagesemploymentsUser extends Component {
 
                                                         {contactusersprofile.contactservicesemployments.length >= 0 ?
                                                             <>
-                                                                {contactusersprofile.contactservicesemployments.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Emplois & Services"}/>}
+                                                                {contactusersprofile.contactservicesemployments.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Emplois & Services"}/>}
                                                             </>:null}
 
                                                     </tbody>

@@ -16,53 +16,35 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
-            'profile/{user}/personal_mails/als',
+            'messages/als',
             'ContactservicannoncelocationController@personalmessagesdatas'
         )->name('personal_mails_annoncelocations.site');
 
         Route::get(
-            'profile/{user}/personal_mails/als/{contactservice:slug}',
+            'messages/als/{contactservice:slug}',
             'ContactservicannoncelocationController@personalmessages_show'
         )->name('personal_mails_annoncelocations_show.site');
 
         Route::get(
-            'profile/{user}/statistics/als',
-            'ContactservicannoncelocationController@contactservice'
-        )->name('contactservice_annoncelocations.site');
-
-        Route::get(
-            'profile/{user}/statistics/als/{annoncetype}/{annoncelocation:slugin}',
+            'statistics/als/{annoncetype}/{annoncelocation:slugin}',
             'ContactservicannoncelocationController@contactservice_statistique'
         )->name('contactservice_annoncelocationsbyuserbystatistique_site');
 
         Route::get(
-            'profile/{user}/statistics/als_export/{annoncelocation:slugin}',
+            'statistics/als_export/{annoncetype}/{annoncelocation:slugin}/exports',
             'ContactservicannoncelocationController@contactservice_export'
         )->name('contactservice_annoncelocationsbyuserbyexport_site');
-
-        Route::get(
-            'profile/{user}/statistics/als_contactservice_show/{contactservice:slug}',
-            'ContactservicannoncelocationController@contactservice_statistiqueshow'
-        )->name('contactservice_annoncelocationsbyuserbystatistiqueshow_site');
-
-
 
 
         Route::group(['prefix' => 'api'], function () {
 
-
             Route::get(
-                'profile/{user}/statistics/als',
-                'ContactservicannoncelocationController@apicontactservice'
-            )->name('api.contactservice_annoncelocations_site');
-
-            Route::get(
-                'profile/{user}/statistics/als/{annoncetype}/{annoncelocation:slugin}',
+                'statistics/als/{annoncetype}/{annoncelocation:slugin}',
                 'ContactservicannoncelocationController@apicontactservice_statistique'
             )->name('api.contactservice_annoncelocationsbyuserbystatistique_site');
 
             Route::get(
-                'profile/{user}/statistics/als_contactservice_show/{contactservice:slug}',
+                'messages/als/{contactservice:slug}',
                 'ContactservicannoncelocationController@apicontactservice_statistiqueshow'
             )->name('api.contactservice_annoncelocationsbyuserbystatistiqueshow_site');
 

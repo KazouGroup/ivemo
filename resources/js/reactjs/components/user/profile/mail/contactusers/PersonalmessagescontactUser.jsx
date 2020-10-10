@@ -16,7 +16,7 @@ import {
     favoriteaddItem,favoriteremoveItem,
     loadAllcontactservices,
 } from "../../../../../redux/actions/contactuserActions";
-import EmptyItems from "../../../../inc/user/EmptyItems";
+import EmptyTableItems from "../../../../inc/user/EmptyTableItems";
 
 
 class PersonalmessagescontactUser extends Component {
@@ -45,7 +45,7 @@ class PersonalmessagescontactUser extends Component {
 
         const url = route('personal_contactusers_mails_unactive.site', [item.id]);
         dyaxios.post(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/personal_mails/contacts/${item.slug}/`);
+            this.props.history.push(`/messages/contacts/${item.slug}/`);
         })
 
     }
@@ -139,7 +139,8 @@ class PersonalmessagescontactUser extends Component {
 
                                                         {contactusersprofile.contactusers.length >= 0 ?
                                                             <>
-                                                                {contactusersprofile.contactusers.length >= 1 ? <>{mapContactusers}</>:<EmptyItems syntaxe={"de Message"} title={"Contacts"}/>}
+                                                                {contactusersprofile.contactusers.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts"}/>}
+
                                                             </>:null}
 
 
