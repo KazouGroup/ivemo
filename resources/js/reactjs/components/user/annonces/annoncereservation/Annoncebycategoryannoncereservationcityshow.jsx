@@ -61,7 +61,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
             if (result.value) {
 
                 //Envoyer la requet au server
-                let url = route('annonces_reservations_status.site', annoncereservation.id);
+                let url = route('annonces_reservations_status.site', annoncereservation.slugin);
                 dyaxios.get(url).then(() => {
 
                     /** Alert notify bootstrapp **/
@@ -104,7 +104,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                             });
                     }
 
-                    this.props.history.push("/annonces_reservations/"+ this.props.match.params.annoncetype +"/");
+                    this.props.history.push("/ars/"+ this.props.match.params.annoncetype +"/");
 
                     /** End alert ***/
                 }).catch(() => {

@@ -29,84 +29,114 @@ class ContactserviceController extends Controller
         $user = Auth::user();
 
         $contactservices = HelpersService::helperscontactuserscount($user)
-            ->with(['contactusers' => function ($q) use ($user){
-                $q->whereIn('user_id',[$user->id])
-                    ->latest()->distinct()->get()->toArray()
-                ;},
+            ->with(['contactusers' => function ($q) use ($user) {
+                $q->whereIn('user_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
             ])
-            ->with(['notifications' => function ($q) use ($user){
-                $q->whereIn('notifiable_id',[$user->id])
-                    ->latest()->distinct()->get();},
+            ->with(['notifications' => function ($q) use ($user) {
+                $q->whereIn('notifiable_id', [$user->id])
+                    ->latest()->distinct()->get();
+            },
             ])
-
-            ->with(['contactservicesemployments' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',employment::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->latest()->distinct()->get()->toArray()
-                ;},
+            ->with(['contactservicesemployments' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', employment::class)
+                    ->whereIn('to_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
             ])
-            ->with(['contactservicesannoncelocations' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',annoncelocation::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->latest()->distinct()->get()->toArray()
-                ;},
+            ->with(['contactservicesannoncelocations' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncelocation' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncelocation::class)
+                    ->whereIn('to_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
             ])
-            ->with(['contactservicesannonceventes' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',annoncevente::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->latest()->distinct()->get()->toArray()
-                ;},
+            ->with(['contactservicesannonceventes' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncevente' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncevente::class)
+                    ->whereIn('to_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
             ])
-            ->with(['contactservicesannoncereservations' => function ($q) use ($user){
-                $q->with('to','from','contactserviceable')
-                    ->where('contactserviceable_type',annoncereservation::class)
-                    ->whereIn('to_id',[$user->id])
-                    ->latest()->distinct()->get()->toArray()
-                ;},
+            ->with(['contactservicesannoncereservations' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncereservation' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncereservation::class)
+                    ->whereIn('to_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
             ])
             ->first();
 
-        return response()->json($contactservices,200);
+        return response()->json($contactservices, 200);
 
     }
 
     public function statusarchvement(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
+        $this->authorize('update', $contactservice);
 
         $contactservice->update(['status_archvement' => !$contactservice->status_archvement,]);
 
-        return response('Success',Response::HTTP_ACCEPTED);
+        return response('Success', Response::HTTP_ACCEPTED);
     }
 
     public function favorite(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
+        $this->authorize('update', $contactservice);
 
         $contactservice->update(['status_favorite' => 1]);
 
-        return response('Favorite',Response::HTTP_ACCEPTED);
+        return response('Favorite', Response::HTTP_ACCEPTED);
     }
 
     public function unfavorite(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
+        $this->authorize('update', $contactservice);
 
         $contactservice->update(['status_favorite' => 0,]);
 
-        return response('Unfavorite',Response::HTTP_ACCEPTED);
+        return response('Unfavorite', Response::HTTP_ACCEPTED);
     }
 
     public function statuscontacts(contactservice $contactservice)
     {
-        $this->authorize('update',$contactservice);
+        $this->authorize('update', $contactservice);
 
         $contactservice->update(['status_red' => !$contactservice->status_red,]);
 
-        return response('Success',Response::HTTP_ACCEPTED);
+        return response('Success', Response::HTTP_ACCEPTED);
     }
 
     public function statuscontactsisadmin(contactservice $contactservice)
@@ -114,7 +144,7 @@ class ContactserviceController extends Controller
 
         $contactservice->update(['status_red' => !$contactservice->status_red,]);
 
-        return response('Success',Response::HTTP_ACCEPTED);
+        return response('Success', Response::HTTP_ACCEPTED);
     }
 
     /*
@@ -126,7 +156,7 @@ class ContactserviceController extends Controller
 
         $contactservice->update(['status_red' => 1,]);
 
-        return response('Red',Response::HTTP_ACCEPTED);
+        return response('Red', Response::HTTP_ACCEPTED);
     }
 
     public function destroy(contactservice $contactservice)
@@ -143,7 +173,7 @@ class ContactserviceController extends Controller
     {
         $user = Auth::user();
 
-        $this->authorize('update',$user);
+        $this->authorize('update', $user);
 
         return view('user.contactservice.notifications', compact('user'));
     }

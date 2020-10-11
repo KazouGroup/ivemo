@@ -371,13 +371,11 @@ class AnnoncereservationController extends Controller
         //
     }
 
-    public function statusitem($id)
+    public function statusitem(annoncereservation $annoncereservation)
     {
-        $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
-
         $this->authorize('update',$annoncereservation);
 
-        $annoncereservation->update(['status' => !$annoncereservation->status_comments]);
+        $annoncereservation->update(['status' => !$annoncereservation->status]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }

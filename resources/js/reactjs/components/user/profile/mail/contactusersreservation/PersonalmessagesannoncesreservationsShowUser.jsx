@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React, {Component, Fragment, Suspense} from "react";
 import PropTypes from "prop-types";
 import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import {Button, UncontrolledTooltip} from "reactstrap";
+import {Button, Form, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import moment from "moment";
 import FootermailmessageUser from "../inc/FootermailmessageUser";
 import Swal from "sweetalert2";
 import ReadMoreAndLess from "react-read-more-less";
@@ -13,7 +12,7 @@ import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import {connect} from "react-redux";
 import {
-    activeavsItem, unactiveprivateavsItem,
+    activearsItem, unactiveprivatearsItem,
     activecontactaddItem, activecontactremoveItem,
     archvementaddItem, archvementremoveItem,
     favoriteaddItem, favoriteremoveItem,
@@ -22,9 +21,12 @@ import {
 } from "../../../../../redux/actions/contactserviceActions";
 import HelmetSite from "../../../../inc/user/HelmetSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
-import Buttonctionshowmailcontactservice from "../../contactservices/inc/Buttonctionshowmailcontactservice";
 import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
 import PrivateUserAnnoncereservationList from "../../../annonces/annoncereservation/inc/PrivateUserAnnoncereservationList";
+import FormComment from "../../../../inc/vendor/comment/FormComment";
+import ProfileUserComment from "../../../../inc/vendor/comment/ProfileUserComment";
+import CommentViewList from "../../../comments/inc/CommentViewList";
+import moment from "moment";
 
 
 class PersonalmessagesannoncesreservationsShowUser extends Component {
@@ -34,121 +36,9 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
             showPhonenumber: false
         };
 
-        this.deletecontactItem = this.deletecontactItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
-        this.showPhonenumberItem = this.showPhonenumberItem.bind(this);
 
     }
 
-    showPhonenumberItem() {
-        this.setState({showPhonenumber: true});
-    }
-
-    deletecontactItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('contactservicedelete', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.goBack();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
-
-    deleteItem(id) {
-        Swal.fire({
-            title: 'Confirmer la supression?',
-            text: "êtes-vous sûr de vouloir executer cette action",
-            type: 'warning',
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            cancelButtonClass: 'btn btn-danger',
-            confirmButtonText: 'Oui, confirmer',
-            cancelButtonText: 'Non, annuller',
-            showCancelButton: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.value) {
-
-                const url = route('annonces_reservations_delete.site', [id]);
-                //Envoyer la requet au server
-                dyaxios.delete(url).then(() => {
-
-                    /** Alert notify bootstrapp **/
-                    $.notify({
-                            // title: 'Update',
-                            message: 'Annonce suprimée avec success'
-                        },
-                        {
-                            allow_dismiss: false,
-                            type: 'primary',
-                            placement: {
-                                from: 'bottom',
-                                align: 'right'
-                            },
-                            animate: {
-                                enter: 'animate__animated animate__fadeInRight',
-                                exit: 'animate__animated animate__fadeOutRight'
-                            },
-                        });
-                    /** End alert ***/
-                    this.props.history.goBack();
-                }).catch(() => {
-                    //Failled message
-                    $.notify("Ooop! Une erreur est survenue", {
-                        allow_dismiss: false,
-                        type: 'danger',
-                        animate: {
-                            enter: 'animate__animated animate__bounceInDown',
-                            exit: 'animate__animated animate__bounceOutUp'
-                        }
-                    });
-                })
-            }
-        });
-    }
 
     loadItems() {
         this.props.loadContactserviceannoncereservationsredmessage(this.props);
@@ -159,7 +49,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
         this.loadItems();
     }
     render() {
-        const {contactservice, contactusersprofile} = this.props;
+        const {annoncereservation, contactusersprofile} = this.props;
         const avatar_style = {
             height: "35px",
             width: "35px",
@@ -169,7 +59,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
             <>
                 <HelmetSite
-                    title={`${contactservice.subject || 'Messages contact annonces reservations'} ${$userIvemo.first_name} - ${$name_site}`}/>
+                    title={`${annoncereservation.title || 'Messages contact annonces reservations'} ${$userIvemo.first_name} - ${$name_site}`}/>
 
                 <div className="landing-page sidebar-collapse">
 
@@ -221,141 +111,108 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                             <div className="card-body">
                                                 <div className="card card-plain card-blog">
                                                     <div className="card-header d-flex align-items-center">
-                                                        <div className="d-flex align-items-center">
 
-                                                            {contactservice.from_id === null ?
-                                                                <>
-                                                                    <img className="avatar"
-                                                                         alt={contactservice.full_name}
-                                                                         style={avatar_style}
-                                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                                    <div className="mx-3">
-                                                                        {contactservice.full_name}
-                                                                    </div>
-                                                                </>
-                                                                :
-                                                                <>
-                                                                    {contactservice.from.avatar === null ?
-                                                                        <img style={avatar_style}
-                                                                             alt={contactservice.from.first_name}
-                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                                        :
-                                                                        <img style={avatar_style}
-                                                                             alt={contactservice.from.first_name}
-                                                                             src={contactservice.from.avatar}/>
-                                                                    }
-                                                                    <div className="mx-3">
-                                                                        {contactservice.from.first_name}
-                                                                    </div>
-                                                                </>
-                                                            }
-                                                        </div>
 
                                                         <div className="text-right ml-auto">
-                                                            {contactservice.slug && (
-                                                                <span className="ml-auto mr-auto">
-                                                                    {this.state.showPhonenumber ?
-                                                                        <b>{contactservice.phone !== null ? contactservice.phone : <>absent</>}</b>
-                                                                        :
-                                                                        <a style={{cursor: "pointer"}}
-                                                                           onClick={() => this.showPhonenumberItem()}>
-                                                                            Afficher le téléphone
-                                                                        </a>
-                                                                    } - <strong>{moment(contactservice.created_at).format('DD/MM/YYYY')}</strong>
 
-                                                                     <Buttonctionshowmailcontactservice {...contactservice}
-                                                                                                        deletecontactItem={this.deletecontactItem}
-                                                                                                        activecontactaddItem={this.props.activecontactaddItem}
-                                                                                                        activecontactremoveItem={this.props.activecontactremoveItem}
-                                                                     />
-                                                            </span>
-                                                            )}
 
                                                         </div>
                                                     </div>
 
-                                                    {contactservice.contactserviceable.title ?
+                                                    {annoncereservation.title ?
 
-                                                        <PrivateUserAnnoncereservationList {...this.props} {...contactservice.contactserviceable}
-                                                                                         unactiveprivateavsItem={this.props.unactiveprivateavsItem}
-                                                                                         activeavsItem={this.props.activeavsItem}
+                                                        <PrivateUserAnnoncereservationList {...this.props} {...annoncereservation}
+                                                                                         unactiveprivatearsItem={this.props.unactiveprivatearsItem}
+                                                                                         activearsItem={this.props.activearsItem}
                                                                                          deleteItem={this.deleteItem}/>
                                                         :
                                                         <AnnoncesListOnSkeleton/>}
 
 
-                                                    {contactservice.message ?
-                                                        <>
-                                                            <div className="row">
-                                                                <div className="col-md-4">
-                                                                    <div className="form-group">
-                                                                        <input type="text"
-                                                                               defaultValue={contactservice.full_name || ""}
-                                                                               className="form-control"
-                                                                               placeholder="Name"/>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="col-md-4">
-                                                                    <div className="form-group">
-                                                                        <input type="email"
-                                                                               defaultValue={contactservice.email || ""}
-                                                                               className="form-control"
-                                                                               placeholder="Email"/>
-                                                                    </div>
-                                                                </div>
 
-                                                                <div className="col-md-4">
-                                                                    <div className="form-group">
-                                                                        <input type="email"
-                                                                               defaultValue={contactservice.phone || ""}
-                                                                               className="form-control"
-                                                                               placeholder="Phone"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
-                                                            <div className="mb-2 text-justify">
+                                                    <h5 className="title text-center">
+                                                        <b>{annoncereservation.contactservices_count > 1 ? `${annoncereservation.contactservices_count || ""} Messages non lus` : `${annoncereservation.contactservices_count || ""} Message non lu`}</b>
+                                                    </h5>
 
-                                                                <ReadMoreAndLess
-                                                                    className="read-more-content"
-                                                                    charLimit={300}
-                                                                    readMoreText="(Plus)"
-                                                                    readLessText=""
-                                                                >
-                                                                    {contactservice.message}
-                                                                </ReadMoreAndLess>
-                                                            </div>
-                                                        </>
-                                                        :
-                                                        <Skeleton count={2}/>
-                                                    }
-                                                    <hr/>
-                                                    <div className="media-footer">
-                                                        <a href={`mailto:${contactservice.email}`}
-                                                           className="btn btn-primary pull-left" id="TooltipMail">
-                                                            <i className="fas fa-reply-all"></i> Répondre
-                                                        </a>
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipMail"
-                                                                             delay={0}>
-                                                            Repondre à {contactservice.email}
-                                                        </UncontrolledTooltip>
-                                                        {contactservice.phone ?
-                                                            <a href={`tel:${contactservice.phone}`} rel="tooltip"
-                                                               title={contactservice.phone} data-placement="bottom"
-                                                               className="btn btn-success pull-left">
-                                                                <i className="now-ui-icons tech_mobile"/>
-                                                                Phone
-                                                            </a> : null}
-                                                        <Button
-                                                            onClick={() => this.deletecontactItem(contactservice.id)}
-                                                            id="TooltipDelete"
-                                                            className="btn btn-danger pull-left" title="Supprimer">
-                                                            <i className="far fa-trash-alt"></i> Supprimer
-                                                        </Button>
-                                                        <UncontrolledTooltip placement="bottom" target="TooltipDelete"
-                                                                             delay={0}>
-                                                            Supprimer ce message
-                                                        </UncontrolledTooltip>
+                                                    <div className="media-area">
+
+                                                        {annoncereservation.contactservices.length >= 0 ?
+                                                            <>
+                                                                {annoncereservation.contactservices.map((item) => (
+
+                                                                    <Fragment key={item.id}>
+
+                                                                        <div className="media">
+
+
+
+                                                                            <a className="pull-left" href={item.from.status_profile ?
+
+                                                                                `${route('public_profile.site',[item.from.slug])}`
+                                                                                :
+                                                                                `${route('userpublic_profile.site',[item.from.slug])}`}
+                                                                            >
+                                                                                <div className="author">
+                                                                                    {item.from.avatar === null ?
+                                                                                        <img className="avatar" alt={item.from.first_name}
+                                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                                        :
+                                                                                        <img className="avatar" alt={item.from.first_name}
+                                                                                             src={item.from.avatar}/>
+                                                                                    }
+                                                                                </div>
+                                                                            </a>
+
+                                                                            <div className="media-body">
+
+                                                                                <a href={void(0)} style={{cursor:"pointer"}}>
+                                                                                    <h6 className={`media-heading ${item.status_red ? "" : "text-primary"}`}>{item.from.first_name}
+                                                                                        <small className="text-muted">· {moment(item.created_at).fromNow()}</small>
+                                                                                    </h6>
+                                                                                </a>
+                                                                                <a href={void(0)} style={{cursor:"pointer"}} className={`${item.status_red ? "" : "text-primary"}`}>
+                                                                                    {/*<span dangerouslySetInnerHTML={this.getDescription()}/>**/}
+                                                                                    <span>
+                                                                                                <ReadMoreAndLess
+                                                                                                    className="read-more-content"
+                                                                                                    charLimit={100}
+                                                                                                    readMoreText="lire plus"
+                                                                                                    readLessText="lire moins"
+                                                                                                >
+                                                                                                {item.message || ""}
+                                                                                            </ReadMoreAndLess>
+                                                                                    </span>
+                                                                                </a>
+
+                                                                                <div className="media-footer">
+
+
+                                                                                    <button type="button"
+                                                                                            className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
+                                                                                        <i className="now-ui-icons files_single-copy-04"></i> Repondre
+                                                                                    </button>
+
+                                                                                </div>
+
+
+
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </Fragment>
+
+                                                                ))}
+                                                            </>
+                                                            :null}
+
+
+
+                                                        <br/>
+
+
                                                     </div>
 
                                                 </div>
@@ -401,7 +258,7 @@ PersonalmessagesannoncesreservationsShowUser.propTypes = {
 
 const mapStateToProps = state => ({
 
-    contactservice: state.contactserviceannonceshow.item,
+    annoncereservation: state.contactserviceannonceshow.itemreservation,
     contactusersprofile: state.contactusers.contactservices
 
 });
@@ -412,5 +269,5 @@ export default connect(mapStateToProps, {
     favoriteaddItem, favoriteremoveItem,
     archvementaddItem, archvementremoveItem,
     activecontactaddItem, activecontactremoveItem,
-    activeavsItem, unactiveprivateavsItem,
+    activearsItem, unactiveprivatearsItem,
 })(PersonalmessagesannoncesreservationsShowUser);

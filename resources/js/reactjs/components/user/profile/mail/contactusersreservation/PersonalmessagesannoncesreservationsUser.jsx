@@ -43,7 +43,7 @@ class PersonalmessagesannoncesreservationsUser extends Component {
     readItem(item) {
         const url = route('contactservice_red', [item.id]);
         dyaxios.get(url).then(() => {
-            this.props.history.push(`/profile/${$userIvemo.slug}/statistics/ars_contactservice_show/${item.slug}/`);
+            this.props.history.push(`/messages/ars/${item.from.slug}/${item.contactserviceable.annoncetype.slug}/${item.contactserviceable.slugin}/`);
         })
     }
 

@@ -1,6 +1,7 @@
 import {
     GET_RED_CONTACTSERVICEMPLOYMENT_SHOW,
     GET_RED_CONTACTSERVICANONCELOCATION_SHOW,
+    GET_RED_CONTACTSERVICANONCERESERVATION_SHOW,
     GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
     GET_RED_CONTACTSERVICEMPLOYMENT,
     GET_RED_CONTACTSERVICELOCATION,
@@ -17,6 +18,8 @@ import {
     ACTIVE_CO_P_ANNONCELOCATION,
     UNACTIVE_CO_P_ANNONCEVENTE,
     ACTIVE_CO_P_ANNONCEVENTE,
+    UNACTIVE_CO_P_ANNONCERESERVATION,
+    ACTIVE_CO_P_ANNONCERESERVATION,
     DELETE_CONTACTSERVICE,
     GET_ALL_CONTACTSERVICE,
 } from "./index";
@@ -310,6 +313,64 @@ export const unactiveprivateavsItem = props => dispatch => {
     ).catch(error => console.error(error));
 };
 
+export const activearsItem = props => dispatch => {
+
+    const url = route('annonces_reservations_status.site', [props.slugin]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_CO_P_ANNONCERESERVATION,
+                payload: props.slugin
+            });
+
+        $.notify({
+                message: "Cette annonce est visible aux utilisateurs",
+            },
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
+export const unactiveprivatearsItem = props => dispatch => {
+
+    const url = route('annonces_reservations_status.site', [props.slugin]);
+    dyaxios.get(url).then(() => {
+
+            dispatch({
+                type: UNACTIVE_CO_P_ANNONCERESERVATION,
+                payload: props.slugin
+            });
+
+        $.notify({
+                message: "Cette annonce a été masquée aux utilisateurs",
+            },
+            {
+                allow_dismiss: false,
+                type: 'info',
+                placement: {
+                    from: 'bottom',
+                    align: 'center'
+                },
+                animate: {
+                    enter: "animate__animated animate__fadeInUp",
+                    exit: "animate__animated animate__fadeOutDown"
+                },
+            });
+        }
+    ).catch(error => console.error(error));
+};
+
 export const deletecontactItem = id => dispatch => {
 
     Swal.fire({
@@ -401,6 +462,20 @@ export const loadContactserviceannonceventesredmessage = props => dispatch => {
     dyaxios.get(url).then(response =>
         dispatch({
             type: GET_RED_CONTACTSERVICANONCEVENTE_SHOW,
+            payload: response.data
+        })
+    ).catch(error => console.error(error));
+};
+
+export const loadContactserviceannoncereservationsredmessage = props => dispatch => {
+
+    let itemuser = props.match.params.user;
+    let itemannoncetype = props.match.params.annoncetype;
+    let itemannoncereservation = props.match.params.annoncereservation;
+    let url = route('api.contactservice_annoncereservationsbyuserbystatistiqueshow_site', [itemuser,itemannoncetype,itemannoncereservation]);
+    dyaxios.get(url).then(response =>
+        dispatch({
+            type: GET_RED_CONTACTSERVICANONCERESERVATION_SHOW,
             payload: response.data
         })
     ).catch(error => console.error(error));

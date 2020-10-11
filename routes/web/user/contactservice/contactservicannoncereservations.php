@@ -21,7 +21,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('personal_mails_annoncereservations.site');
 
         Route::get(
-            'messages/ars/{contactservice:slug}',
+            'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
             'ContactservicannoncereservationController@contactservice_statistiqueshow'
         )->name('contactservice_annoncereservationsbyuserbystatistiqueshow_site');
 
@@ -45,7 +45,7 @@ Route::group(['middleware' => 'verified'], function(){
             )->name('api.contactservice_annoncereservationsbyuserbystatistique_site');
 
             Route::get(
-                'messages/ars/{contactservice:slug}',
+                'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
                 'ContactservicannoncereservationController@apicontactservice_statistiqueshow'
             )->name('api.contactservice_annoncereservationsbyuserbystatistiqueshow_site');
 

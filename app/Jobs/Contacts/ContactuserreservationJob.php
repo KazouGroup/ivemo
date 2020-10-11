@@ -14,20 +14,24 @@ class ContactuserreservationJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $userFrom;
+    protected $fromFullnameUser;
     protected $fromPhoneUser;
+    protected $fromEmailUser;
     protected $fromMessageUser;
+    protected $userFrom;
     protected $annoncereservation;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($userFrom,$fromPhoneUser,$fromMessageUser,$annoncereservation)
+    public function __construct($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$userFrom,$annoncereservation)
     {
-        $this->userFrom = $userFrom;
+        $this->fromFullnameUser = $fromFullnameUser;
         $this->fromPhoneUser = $fromPhoneUser;
+        $this->fromEmailUser = $fromEmailUser;
         $this->fromMessageUser = $fromMessageUser;
+        $this->userFrom = $userFrom;
         $this->annoncereservation = $annoncereservation;
 
     }
@@ -41,9 +45,11 @@ class ContactuserreservationJob implements ShouldQueue
     {
         $this->annoncereservation->user
             ->notify(new ContactuserreservationNotification(
-                $this->userFrom,
+                $this->fromFullnameUser,
                 $this->fromPhoneUser,
+                $this->fromEmailUser,
                 $this->fromMessageUser,
+                $this->userFrom,
                 $this->annoncereservation));
     }
 }

@@ -119,7 +119,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('profilprivate_annoncereservations');
 
         Route::get(
-            'ars_status/{id}/status',
+            'ars_status/{annoncereservation:slugin}/status',
             'AnnoncereservationController@statusitem'
         )->name('annonces_reservations_status.site');
 

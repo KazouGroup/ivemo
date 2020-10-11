@@ -55,6 +55,7 @@ class ContactuseremploymentNotification extends Notification
             ->line($this->fromFullnameUser.' vous a contacté sur cette annonce ci-dessous posté sur la plateforme - '.config('app.name'))
             ->line('ID: '.$this->employment->id.' | Titre de l\'annonce: '.$this->employment->title.' | Prix: '.$this->employment->price.' | Ville: '.$this->employment->city->name.' | Categorie: '.$this->employment->categoryemployment->name)
             ->line($this->fromMessageUser)
+            ->action('En savoir plus', url(route('personal_mails_employments.site')))
             ->line('Thank you for using our application!');
     }
 

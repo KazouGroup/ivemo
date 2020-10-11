@@ -2,7 +2,8 @@ import produce from "immer"
 
 
 const initialState = {
-    item: {contactserviceable: {}, from: []}
+    item: {contactserviceable: {}, from: []},
+    itemreservation: {annoncetype: [], categoryannoncereservation: [], city: [], user: [],contactservices:{}},
 };
 
 
@@ -31,6 +32,20 @@ export default produce((draft, action = {}) => {
 
             case 'ACTIVE_CONTACTSERVICE_REMOVE':
                 draft.item.status_red = !action.payload;
+                return draft;
+
+                //Reservation
+
+            case 'GET_RED_CONTACTSERVICANONCERESERVATION_SHOW':
+                draft.itemreservation = action.payload;
+                return;
+
+            case 'ACTIVE_CO_P_ANNONCERESERVATION':
+                draft.itemreservation.status = action.payload;
+                return draft;
+
+            case 'UNACTIVE_CO_P_ANNONCERESERVATION':
+                draft.itemreservation.status = !action.payload;
                 return draft;
 
                 //Location

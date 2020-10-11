@@ -99,13 +99,13 @@ export const unactiveItem = props => dispatch => {
     }).then((result) => {
         if (result.value) {
 
-            const url = route('annonces_reservations_status.site',[props.id]);
+            const url = route('annonces_reservations_status.site',[props.slugin]);
             //Envoyer la requet au server
             dyaxios.get(url).then(() => {
 
                 dispatch({
                     type: UNACTIVE_ANNONCERESERVATION,
-                    payload: props.id
+                    payload: props.slugin
                 });
 
                 /** Alert notify bootstrapp **/

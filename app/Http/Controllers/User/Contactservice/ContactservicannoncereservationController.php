@@ -180,24 +180,5 @@ class ContactservicannoncereservationController extends Controller
             }])->first();
 
         return response()->json($contactservice, 200);
-        //$contactservice = new ContactserviceResource(contactservice::whereSlug($contactservice->slug)
-        //->with('to','from','contactserviceable')
-        //->whereIn('to_id',[Auth::id()])
-        //->with(['contactserviceable' => function ($q){
-        //    $q->whereIn('user_id',[Auth::id()])
-        //        ->withCount(['uploadimages' => function ($q){
-        //            $q->where(['status' => 1,'status_admin' => 1])
-        //                ->where('uploadimagealable_type', annoncereservation::class);}])
-        //              ->with(['uploadimages' => function ($q){
-        //                    $q->where(['status' => 1,'status_admin' => 1])
-        //                        ->where('uploadimagealable_type', annoncereservation::class)->get();}])
-        //        ->with('user','city','annoncetype','periodeannonce','categoryannoncereservation','uploadimages')
-        //        ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-        //        ->whereHas('city', function ($q) {$q->where('status',1);})
-        //        ->with(['user.profile' => function ($q){$q->distinct()->get();},]);},
-        //])->first());
-
-
-        //return response()->json($contactservice,200);
     }
 }
