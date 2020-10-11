@@ -140,27 +140,6 @@ class NavUserSite extends PureComponent {
                         */}
 
 
-                        {/**
-                         <li className={`nav-item dropdown`}>
-                            <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                                <i className="now-ui-icons files_paper" aria-hidden="true"/>
-                                <b>Annonces</b>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a href={`/annonces_locations/locations/`} className="dropdown-item">
-                                    <i className="now-ui-icons files_paper"/> Locations
-                                </a>
-                                <a href={`/annonces_reservations/reservations/`} className="dropdown-item">
-                                    <i className="now-ui-icons business_money-coins"/> Reservations
-                                </a>
-                                <a href={`/annonces_ventes/ventes/`} className="dropdown-item">
-                                    <i className="now-ui-icons business_money-coins"/> Ventes
-                                </a>
-                            </div>
-                        </li>
-
-                        */}
-
                       {/** <li className="nav-item dropdown">
                             <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons text_align-left" aria-hidden="true"/>
@@ -193,7 +172,7 @@ class NavUserSite extends PureComponent {
                                     <>
                                         {$userIvemo.status_profile ?
                                             <li className="nav-item dropdown">
-                                                <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                                <a href={void(0)} style={{cursor:"pointer"}} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                                     <i className="now-ui-icons ui-1_simple-add" aria-hidden="true"/>
                                                     <b>Poster votre annonce</b>
                                                 </a>
@@ -229,7 +208,7 @@ class NavUserSite extends PureComponent {
                         }
 
                         <li className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                            <a href={void (0)} style={{cursor:"pointer"}} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                 <i className="now-ui-icons text_align-left" aria-hidden="true"/>
                                 <b>Menu</b>
                             </a>
@@ -279,7 +258,7 @@ class NavUserSite extends PureComponent {
                                                 {$userIvemo.status_profile ?
                                                     <>
                                                         <li className="nav-item dropdown">
-                                                            <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                                            <a href={void (0)} style={{cursor:"pointer"}} className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                                                 <i className="now-ui-icons ui-1_email-85"/>
                                                                 <span className="notification"><b>{unreadmailTotal >= 1 && (this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
                                                             </a>
@@ -325,7 +304,7 @@ class NavUserSite extends PureComponent {
                                                         </li>
 
                                                         <li className="nav-item">
-                                                            <a href={void(0)} onClick={() => this.infoItem()} className="nav-link">
+                                                            <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.infoItem()} className="nav-link">
                                                                 <i className="now-ui-icons ui-1_email-85"/>
                                                                 <span className="notification"><b>{unreadmailTotal >= 1 &&(this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
                                                             </a>
@@ -336,7 +315,7 @@ class NavUserSite extends PureComponent {
                                             :
                                             <>
                                                 <li className="nav-item">
-                                                    <a href={void(0)} onClick={() => this.verifyItem()} className="nav-link">
+                                                    <a href={void(0)} style={{cursor:"pointer"}} onClick={() => this.verifyItem()} className="nav-link">
                                                         <i className="now-ui-icons ui-1_email-85"/>
                                                         <span className="notification"><b>{unreadmailTotal >= 1 &&(this.data_countnotificationFormatter(unreadmailTotal || ""))}</b></span>
                                                     </a>
@@ -346,7 +325,7 @@ class NavUserSite extends PureComponent {
                                         }
 
                                         <li className="nav-item dropdown">
-                                            <a href="#" className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                            <a href={void (0)} style={{cursor:"pointer"}} className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                                 <i className="now-ui-icons business_chart-pie-36"/>
                                             </a>
                                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -408,7 +387,7 @@ class NavUserSite extends PureComponent {
                                 }
 
                                 <li className="nav-item dropdown">
-                                    <a href={void(0)} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
+                                    <a href={void(0)} style={{cursor:"pointer"}} className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
                                         <i className="now-ui-icons users_single-02"/>
                                         <b>{$userIvemo.first_name}</b>
                                     </a>
