@@ -45,6 +45,7 @@ class EmploymentEdit extends Component {
             id: '',
             title: '',
             slug: '',
+            slugin: '',
             photo: '',
             price: '',
             status: '',
@@ -330,6 +331,7 @@ class EmploymentEdit extends Component {
                 id: response.data.id,
                 title: response.data.title,
                 slug: response.data.slug,
+                slugin: response.data.slugin,
                 price: response.data.price,
                 district: response.data.district,
                 photo: response.data.photo,
@@ -438,6 +440,9 @@ class EmploymentEdit extends Component {
                                                             </div>
                                                         </div>
                                                         <div className="text-right ml-auto">
+                                                            <NavLink to={`/statistics/employments/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques de l'annonce">
+                                                                <i className="now-ui-icons business_chart-bar-32"/>
+                                                            </NavLink>
                                                             {this.state.status ?
                                                                 <>
                                                                     <button type="button" rel="tooltip" onClick={() => this.unactiveItem(this.state.id)}
@@ -521,7 +526,7 @@ class EmploymentEdit extends Component {
                                                                     <span className="text-danger">*</span>
                                                                 </label>
                                                                 <FormGroup>
-                                                                    <select name={'city_id'} value={this.state.city_id || ""}
+                                                                    <select name="city_id" value={this.state.city_id || ""}
                                                                             className={`form-control ${this.hasErrorFor('city_id') ? 'is-invalid' : ''}`}
                                                                             id="city_id" onChange={this.handleFieldChange}>
                                                                         <option value="" disabled>Selectioner une ville</option>
@@ -538,7 +543,7 @@ class EmploymentEdit extends Component {
                                                                     <span className="text-danger">*</span>
                                                                 </label>
                                                                 <FormGroup>
-                                                                    <select name={'categoryemployment_id'} value={this.state.categoryemployment_id || ""}
+                                                                    <select name="categoryemployment_id" value={this.state.categoryemployment_id || ""}
                                                                             className={`form-control ${this.hasErrorFor('categoryemployment_id') ? 'is-invalid' : ''}`}
                                                                             id="categoryemployment_id" onChange={this.handleFieldChange}>
                                                                         <option value="" disabled>Selectioner une category</option>
@@ -560,12 +565,12 @@ class EmploymentEdit extends Component {
                                                                         <label htmlFor="photo" className="btn btn-primary">
                                                                             <span className="btn-inner--text">Changer l'image</span>
                                                                         </label>
-                                                                        {/** 
+                                                                        {/**
                                                                          <label hidden={this.state.showDefaultImage ? true : false} onClick={this.removeImage} className="btn btn-danger">
                                                                             <span className="btn-inner--text">Remove</span>
                                                                          </label>
                                                                         */}
-                                                                        
+
                                                                     </div>
                                                                 </div>
                                                             </div>

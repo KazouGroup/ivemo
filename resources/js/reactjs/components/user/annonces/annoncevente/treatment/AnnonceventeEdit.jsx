@@ -583,7 +583,7 @@ class AnnonceventeEdit extends Component {
                                                     <div className="text-right ml-auto">
                                                         {($userIvemo.id === user.id) && (
                                                             <>
-                                                                <NavLink to={`/profile/${this.state.user.slug}/statistics/avs/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
+                                                                <NavLink to={`/statistics/avs/${this.state.annoncetype.slug}/${this.state.slugin}/`} className="btn btn-sm btn-icon btn-secondary" title="Statistiques">
                                                                     <i className="now-ui-icons business_chart-bar-32"/>
                                                                 </NavLink>
                                                                 {this.state.status ?
