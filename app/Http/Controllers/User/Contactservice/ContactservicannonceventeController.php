@@ -46,7 +46,7 @@ class ContactservicannonceventeController extends Controller
         return view('user.contactservice.show', compact('user'));
     }
 
-    public function contactservice_statistiqueshow(contactservice $contactservice)
+    public function personalmessages_show(contactservice $contactservice)
     {
         $user = Auth::user();
 

@@ -78,7 +78,7 @@ class IndexSite extends Component {
                         <div className="container">
 
                             <div className="row mt-5">
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <Link to={`/als/locations/`}>
                                         <div className="card card-background card-raised" data-background-color=""
                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
@@ -94,7 +94,7 @@ class IndexSite extends Component {
                                     </Link>
                                 </div>
 
-                                {/*
+
                                     <div className="col-md-4">
                                     <Link to={`/ars/reservations/`}>
                                         <div className="card card-background card-raised" data-background-color=""
@@ -110,10 +110,10 @@ class IndexSite extends Component {
                                         </div>
                                     </Link>
                                 </div>
-                                */}
 
 
-                                <div className="col-md-6">
+
+                                <div className="col-md-4">
                                     <Link to={`/avs/ventes/`}>
                                         <div className="card card-background card-raised" data-background-color=""
                                             style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
