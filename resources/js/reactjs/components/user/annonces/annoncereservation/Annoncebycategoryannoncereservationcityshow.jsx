@@ -257,7 +257,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                                             {($userIvemoIsadmin.status_user) && (
 
-                                                                <NavLink to={`/av_data/${annoncereservation.annoncetype.slug}/${annoncereservation.slugin}/edit/`} className="btn btn-sm btn-primary btn-icon btn-sm" title="Editer cette annonce">
+                                                                <NavLink to={`/ar_data/${annoncereservation.annoncetype.slug}/${annoncereservation.slugin}/edit/`} className="btn btn-sm btn-primary btn-icon btn-sm" title="Editer cette annonce">
                                                                     <i className="now-ui-icons education_atom" />
                                                                 </NavLink>
                                                             )}

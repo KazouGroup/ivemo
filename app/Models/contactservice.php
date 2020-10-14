@@ -37,4 +37,10 @@ class contactservice extends Model
     {
         return $this->morphTo();
     }
+
+    public function responsecontactservices()
+    {
+        return $this->hasMany(responsecontactservice::class, 'contactservice_id');
+    }
+
 }

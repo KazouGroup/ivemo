@@ -71,7 +71,7 @@ class AnnoncereservationList extends PureComponent {
                                                         </>
                                                     }
 
-                                                    <NavLink to={`/annonce_reservation/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                    <NavLink to={`/ar_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                         <i className="now-ui-icons ui-2_settings-90"/>
                                                     </NavLink>
                                                     <Button
@@ -204,8 +204,8 @@ class AnnoncereservationList extends PureComponent {
                                             </Button>
                                             :
                                             <>
-                                                {this.props.bookmarked ?
-                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
+                                                {this.props.favoriteted ?
+                                                    <Button onClick={() => this.props.unfavoriteItem(this.props)}
                                                             className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
                                                         <i className="fas fa-bookmark"></i>
                                                     </Button>

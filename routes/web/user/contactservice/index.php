@@ -11,5 +11,4 @@ Route::group(['namespace' => 'Contactservice'], function(){
     require(__DIR__ . DIRECTORY_SEPARATOR . 'contactservicemployments.php');
 
 
-
 });

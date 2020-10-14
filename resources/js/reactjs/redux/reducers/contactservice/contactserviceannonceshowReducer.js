@@ -34,6 +34,12 @@ export default produce((draft, action = {}) => {
                 draft.item.status_red = !action.payload;
                 return draft;
 
+            case 'ACTIVE_COMMENT_CONTACTSERVICE_ADD':
+                let dataactivecca = draft.itemreservation.contactservices.findIndex(i => i.id === action.payload);
+                if (dataactivecca !== -1) draft.itemreservation.contactservices[dataactivecca].status_red = action.payload;
+                if (dataactivecca !== -1) draft.itemreservation.contactservices_count--;
+                return draft;
+
                 //Reservation
 
             case 'GET_RED_CONTACTSERVICANONCERESERVATION_SHOW':

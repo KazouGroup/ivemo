@@ -15,7 +15,7 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::post(
-            'avs_uploadimages/{annoncereservation:slugin}/save',
+            'ars_uploadimages/{annoncereservation:slugin}/save',
             'UploadimageannoncereservationController@storeuploadimage'
         )->name('annoncereservationgetuploadimage_site');
 

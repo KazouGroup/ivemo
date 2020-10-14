@@ -9,6 +9,7 @@ use App\Http\Resources\Profile\PrivateAnnonceventeResource;
 use App\Models\annoncereservation;
 use App\Models\annoncetype;
 use App\Models\annoncevente;
+use App\Models\responsecontactservice;
 use App\Models\user;
 use App\Services\Contactusers\ContactusersreservationService;
 use App\Models\contactservice;
@@ -60,14 +61,8 @@ class ContactservicannoncereservationController extends Controller
 
     public function sendcontactserviceannonce(StorecontactuserannoncelocationRequest $request, annoncetype $annoncetype, $categoryannoncereservation, $city, $user, annoncereservation $annoncereservation)
     {
-        $contactservice = $annoncereservation->contactservices()->create([
-            'to_id' => $annoncereservation->user_id,
-            'phone' => $request->phone,
-            'from_id' => auth()->guest() ? null : auth()->id(),
-            'slug' => sha1(('YmdHis') . str_random(30)),
-            'ip' => request()->ip(),
-            'message' => $request->message,
-        ]);
+
+        $contactservice = ContactusersreservationService::formsenddata($request,$annoncereservation);
 
         ContactusersreservationService::newEmailToannoncereservationpageShow($request, $annoncereservation);
 
@@ -153,10 +148,9 @@ class ContactservicannoncereservationController extends Controller
     {
         $contactservice = annoncereservation::whereSlugin($annoncereservation->slugin)
             ->with('user', 'city', 'annoncetype', 'periodeannonce', 'categoryannoncereservation', 'uploadimages')
-            ->whereIn('user_id', [Auth::id()])
+            ->whereIn('user_id', [$annoncereservation->user_id])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status', 1);})
             ->whereHas('city', function ($q) {$q->where('status', 1);})
-            //->with(['user.profile' => function ($q) {$q->distinct()->get();},])
             ->withCount(['uploadimages' => function ($q) {
                 $q->where(['status' => 1, 'status_admin' => 1])
                     ->where('uploadimagealable_type', annoncereservation::class);
@@ -165,20 +159,51 @@ class ContactservicannoncereservationController extends Controller
                 $q->where(['status' => 1, 'status_admin' => 1])
                     ->where('uploadimagealable_type', annoncereservation::class)->get();
             }])
-            ->withCount(['contactservices' => function ($q) use ($user) {
+            ->withCount(['contactservices' => function ($q) use ($user,$annoncereservation) {
                 $q->where(['status_red' => 0])
                     ->with('to', 'from')
                     ->whereIn('from_id', [$user->id])
-                    ->whereIn('to_id', [Auth::id()]);
+                    ->whereIn('to_id', [$annoncereservation->user_id]);
             }])
-            ->with(['contactservices' => function ($q) use ($user) {
+            ->with(['contactservices' => function ($q) use ($user,$annoncereservation) {
                 $q->with('to', 'from')
                     ->whereIn('from_id', [$user->id])
-                    ->whereIn('to_id', [Auth::id()])
+                    ->whereIn('to_id', [$annoncereservation->user_id])
+                    ->with(['responsecontactservices' => function ($q){
+                        $q->where(['status' => 1])
+                            ->with('user','contactservice')
+                            ->orderByDesc('created_at')
+                            ->distinct()->get()
+                        ;},
+                    ])
                     ->orderByDesc('created_at')
                     ->distinct()->get();
             }])->first();
 
         return response()->json($contactservice, 200);
     }
+
+    public function sendsendcommentcontact(Request $request, user $user, annoncetype $annoncetype, annoncereservation $annoncereservation)
+    {
+        $this->validate($request,['message'=>'required|string|min:2|max:5000']);
+
+        $contactservice = ContactusersreservationService::formsenddata($request,$annoncereservation);
+
+        ContactusersreservationService::newEmailToannoncereservationpageShow($request, $annoncereservation);
+
+        return response()->json($contactservice, 200);
+    }
+
+    public function sendresponsecommentcotact(Request $request,user $user, annoncetype $annoncetype, annoncereservation $annoncereservation,contactservice $contactservice)
+    {
+        $validatedData = $request->validate(['message' => 'required|min:2|max:5000']);
+
+        $responsecontactservice = responsecontactservice::create([
+            'message' => $validatedData['message'],
+            'contactservice_id' => $contactservice->id,
+        ]);
+
+        return $responsecontactservice->toJson();
+    }
+
 }

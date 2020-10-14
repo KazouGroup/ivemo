@@ -8,14 +8,11 @@ import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
 import FootermailmessageUser from "../inc/FootermailmessageUser";
 import Swal from "sweetalert2";
 import ReadMoreAndLess from "react-read-more-less";
-import Skeleton from "react-loading-skeleton";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import {connect} from "react-redux";
 import {
     activearsItem, unactiveprivatearsItem,
-    activecontactaddItem, activecontactremoveItem,
-    archvementaddItem, archvementremoveItem,
-    favoriteaddItem, favoriteremoveItem,
+    activecommentcontactaddItem,
     loadAllcontactservices,
     loadContactserviceannoncereservationsredmessage,
 } from "../../../../../redux/actions/contactserviceActions";
@@ -23,20 +20,149 @@ import HelmetSite from "../../../../inc/user/HelmetSite";
 import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
 import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
 import PrivateUserAnnoncereservationList from "../../../annonces/annoncereservation/inc/PrivateUserAnnoncereservationList";
-import FormComment from "../../../../inc/vendor/comment/FormComment";
-import ProfileUserComment from "../../../../inc/vendor/comment/ProfileUserComment";
-import CommentViewList from "../../../comments/inc/CommentViewList";
 import moment from "moment";
+import FormCommentContactPivate from "../../../../inc/vendor/comment/FormCommentContactPivate";
 
 
 class PersonalmessagesannoncesreservationsShowUser extends Component {
     constructor(props) {
         super(props);
+        //itemData correspont a une variable aleatoire donner pour faire le traitement
         this.state = {
-            showPhonenumber: false
+            message: '',
+            editcontactservice: false,
+            responsecontactservice: false,
+            editresponsecontactservice: false,
+            itemData:[],
+            errors: [],
         };
 
+        this.sendcommentItem = this.sendcommentItem.bind(this);
+        this.sendresponsecommentItem = this.sendresponsecommentItem.bind(this);
+        this.cancelresponseCourse = this.cancelresponseCourse.bind(this);
+        this.responsecontactserviceFromItem = this.responsecontactserviceFromItem.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.hasErrorFor = this.hasErrorFor.bind(this);
+        this.renderErrorFor = this.renderErrorFor.bind(this);
 
+    }
+
+    handleFieldChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+        this.state.errors[event.target.name] = '';
+    }
+
+    // Handle Errors
+    hasErrorFor(field) {
+        return !!this.state.errors[field];
+    }
+
+    renderErrorFor(field) {
+        if (this.hasErrorFor(field)) {
+            return (
+                <span className='invalid-feedback'>
+                    <strong>{this.state.errors[field][0]}</strong>
+                </span>
+            )
+        }
+    }
+
+    cancelresponseCourse(){
+        this.setState({message: "",editcontactservice: false,responsecontactservice: false,editresponsecontactservice:false});
+    };
+
+    responsecontactserviceFromItem(item) {
+        this.setState({
+            responsecontactservice: true,
+            id:item.id,
+            itemData: item
+        });
+    }
+
+    sendresponsecommentItem(e) {
+        e.preventDefault();
+
+        let item = {
+            message: this.state.message,
+        };
+
+        let itemuser = this.props.match.params.user;
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let Id = this.state.itemData.id;
+        let url = route('contactservicesarssendresponsecomment_site',[itemuser,itemannoncetype,itemannoncereservation,Id]);
+        dyaxios.post(url, item)
+            .then(() => {
+
+                $.notify({
+                        message: `Réponse sauvegarder`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+
+                this.setState({message: "",responsecontactservice: false,});
+
+                this.loadItems();
+
+            }).catch(error => {
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
+    }
+
+    sendcommentItem(e) {
+        e.preventDefault();
+
+        let item = {
+            message: this.state.message,
+        };
+        let itemuser = this.props.match.params.user;
+        let itemannoncetype = this.props.match.params.annoncetype;
+        let itemannoncereservation = this.props.match.params.annoncereservation;
+        let url = route('contactservicesarssendcomment_site',[itemuser,itemannoncetype,itemannoncereservation]);
+        dyaxios.post(url, item)
+            .then((response) => {
+
+                //console.log(res.status)
+                $.notify({
+                        message: `Message envoyé`
+                    },
+                    {
+                        allow_dismiss: false,
+                        type: 'info',
+                        placement: {
+                            from: 'bottom',
+                            align: 'center'
+                        },
+                        animate: {
+                            enter: "animate__animated animate__fadeInUp",
+                            exit: "animate__animated animate__fadeOutDown"
+                        },
+                    });
+
+                this.setState({message: "",});
+
+                this.loadItems();
+
+            }).catch(error => {
+            //window.location.reload(true);
+            this.setState({
+                errors: error.response.data.errors
+            });
+        })
     }
 
 
@@ -50,11 +176,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
     }
     render() {
         const {annoncereservation, contactusersprofile} = this.props;
-        const avatar_style = {
-            height: "35px",
-            width: "35px",
-            borderRadius: '35px'
-        };
+        const {itemData,editcontactservice,responsecontactservice,editresponsecontactservice} = this.state;
         return (
 
             <>
@@ -131,11 +253,28 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
 
 
-                                                    <h5 className="title text-center">
-                                                        <b>{annoncereservation.contactservices_count > 1 ? `${annoncereservation.contactservices_count || ""} Messages non lus` : `${annoncereservation.contactservices_count || ""} Message non lu`}</b>
-                                                    </h5>
+                                                    {$userIvemo.slug !== this.props.match.params.user && (
+                                                        <h5 className="title text-center">
+                                                            <b>{annoncereservation.contactservices_count > 1 ? `${annoncereservation.contactservices_count || ""} Messages non lus` : `${annoncereservation.contactservices_count || ""} Message non lu`}</b>
+                                                        </h5>
+
+                                                    )}
 
                                                     <div className="media-area">
+
+                                                        {$userIvemo.slug === this.props.match.params.user && (
+                                                            <>
+                                                                {!editcontactservice && !responsecontactservice && !editresponsecontactservice && (
+                                                                    <Form onSubmit={this.sendcommentItem} acceptCharset="UTF-8">
+
+                                                                        <FormCommentContactPivate value={this.state.message} disabled={!this.state.message} cancelresponseCourse={this.cancelresponseCourse}
+                                                                                                  renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                                                  handleFieldChange={this.handleFieldChange} namesubmit={`POSTER VOTRE MESSAGE`}/>
+
+                                                                    </Form>
+                                                                )}
+                                                            </>
+                                                        )}
 
                                                         {annoncereservation.contactservices.length >= 0 ?
                                                             <>
@@ -146,12 +285,11 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                         <div className="media">
 
 
-
                                                                             <a className="pull-left" href={item.from.status_profile ?
 
-                                                                                `${route('public_profile.site',[item.from.slug])}`
+                                                                                `${route('public_profile.site', [item.from.slug])}`
                                                                                 :
-                                                                                `${route('userpublic_profile.site',[item.from.slug])}`}
+                                                                                `${route('userpublic_profile.site', [item.from.slug])}`}
                                                                             >
                                                                                 <div className="author">
                                                                                     {item.from.avatar === null ?
@@ -165,38 +303,145 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                             </a>
 
                                                                             <div className="media-body">
-
-                                                                                <a href={void(0)} style={{cursor:"pointer"}}>
+                                                                                {item.status_red ? 
+                                                                                <>
                                                                                     <h6 className={`media-heading ${item.status_red ? "" : "text-primary"}`}>{item.from.first_name}
-                                                                                        <small className="text-muted">· {moment(item.created_at).fromNow()}</small>
+                                                                                        <small
+                                                                                            className="text-muted">· {moment(item.created_at).fromNow()}</small>
+                                                                                    </h6>
+                                                                                    <span>
+                                                                                         <ReadMoreAndLess
+                                                                                             className="read-more-content"
+                                                                                             charLimit={100}
+                                                                                             readMoreText="lire plus"
+                                                                                             readLessText="lire moins"
+                                                                                         >
+                                                                                           {item.message || ""}
+                                                                                         </ReadMoreAndLess>
+                                                                                   </span>
+                                                                                </> 
+                                                                                : 
+                                                                                <>
+                                                                                <a href={void (0)} style={{cursor: "pointer"}} onClick={() => this.props.activecommentcontactaddItem(item)}>
+                                                                                    <h6 className={`media-heading ${item.status_red ? "" : "text-primary"}`}>{item.from.first_name}
+                                                                                        <small
+                                                                                            className="text-muted">· {moment(item.created_at).fromNow()}</small>
                                                                                     </h6>
                                                                                 </a>
-                                                                                <a href={void(0)} style={{cursor:"pointer"}} className={`${item.status_red ? "" : "text-primary"}`}>
-                                                                                    {/*<span dangerouslySetInnerHTML={this.getDescription()}/>**/}
+                                                                                <a href={void (0)} style={{cursor: "pointer"}} onClick={() => this.props.activecommentcontactaddItem(item)}
+                                                                                   className={`${item.status_red ? "" : "text-primary"}`}>
                                                                                     <span>
-                                                                                                <ReadMoreAndLess
-                                                                                                    className="read-more-content"
-                                                                                                    charLimit={100}
-                                                                                                    readMoreText="lire plus"
-                                                                                                    readLessText="lire moins"
-                                                                                                >
-                                                                                                {item.message || ""}
-                                                                                            </ReadMoreAndLess>
-                                                                                    </span>
+                                                                                         <ReadMoreAndLess
+                                                                                             className="read-more-content"
+                                                                                             charLimit={100}
+                                                                                             readMoreText="lire plus"
+                                                                                             readLessText="lire moins"
+                                                                                         >
+                                                                                           {item.message || ""}
+                                                                                         </ReadMoreAndLess>
+                                                                                   </span>
                                                                                 </a>
+                                                                                </>
+                                                                                }
+                                                                                
 
                                                                                 <div className="media-footer">
+                                                                                    <Button className="btn btn-default btn-neutral pull-right"/>
 
+                                                                                    {responsecontactservice ?
+                                                                                        <>
+                                                                                            {(item.id === itemData.id) && (
+                                                                                                <>
+                                                                                                    <button type="button" onClick={this.cancelresponseCourse}
+                                                                                                            className="btn btn-default btn-neutral pull-right" title="Repondre a ce message">
+                                                                                                        <i className="now-ui-icons files_single-copy-04"></i> Annuler
+                                                                                                    </button>
 
-                                                                                    <button type="button"
-                                                                                            className="btn btn-default btn-neutral pull-right" title="Repondre a ce commentaire">
-                                                                                        <i className="now-ui-icons files_single-copy-04"></i> Repondre
-                                                                                    </button>
+                                                                                                </>
+                                                                                            )}
+                                                                                        </>
+                                                                                        :
+                                                                                        <button type="button" onClick={() => this.responsecontactserviceFromItem(item)}
+                                                                                                className="btn btn-default btn-neutral pull-right" title="Repondre a ce message">
+                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Repondre
+                                                                                        </button>
+                                                                                    }
 
                                                                                 </div>
 
+                                                                                {(item.id === itemData.id) && (
+                                                                                    <>
+                                                                                        {responsecontactservice && (
+
+                                                                                            <Form onSubmit={this.sendresponsecommentItem} acceptCharset="UTF-8">
+
+                                                                                                <FormCommentContactPivate value={this.state.message} disabled={!this.state.message} cancelresponseCourse={this.cancelresponseCourse}
+                                                                                                                          renderErrorFor={this.renderErrorFor} hasErrorFor={this.hasErrorFor}
+                                                                                                                          handleFieldChange={this.handleFieldChange} namesubmit={`POSTER UNE RÉPONSE`}/>
+
+                                                                                            </Form>
+
+                                                                                        )}
+
+                                                                                    </>
+                                                                                )}
+
+                                                                                <Suspense fallback={<p>loading...</p>}>
+
+                                                                                    {item.responsecontactservices.map((lk) =>
+
+                                                                                        <Fragment key={lk.id}>
+
+                                                                                            <div className="media">
+
+                                                                                                <a className="pull-left" href={item.to.status_profile ?
+
+                                                                                                    `${route('public_profile.site', [item.to.slug])}`
+                                                                                                    :
+                                                                                                    `${route('userpublic_profile.site', [item.to.slug])}`}
+                                                                                                >
+                                                                                                    <div className="author">
+                                                                                                        {item.to.avatar === null ?
+                                                                                                            <img className="avatar" alt={item.to.first_name}
+                                                                                                                 src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                                                            :
+                                                                                                            <img className="avatar" alt={item.to.first_name}
+                                                                                                                 src={item.to.avatar}/>
+                                                                                                        }
+                                                                                                    </div>
+                                                                                                </a>
+
+                                                                                                <div className="media-body">
+                                                                                                    <h6 className="media-heading">{lk.user.first_name}
+                                                                                                        <small
+                                                                                                            className="text-muted">· {moment(lk.updated_at).fromNow()} {lk.created_at !== lk.updated_at && ("(Modifié)")}</small>
+                                                                                                    </h6>
+                                                                                                    <ReadMoreAndLess
+                                                                                                        className="read-more-content"
+                                                                                                        charLimit={250}
+                                                                                                        readMoreText="lire plus"
+                                                                                                        readLessText=""
+                                                                                                    >
+                                                                                                        {lk.message || ""}
+                                                                                                    </ReadMoreAndLess>
+
+                                                                                                    <div className="media-footer">
+                                                                                                        <Button className="btn btn-default btn-neutral pull-right"/>
 
 
+
+                                                                                                    </div>
+
+                                                                                                </div>
+
+                                                                                            </div>
+
+
+
+                                                                                        </Fragment>
+                                                                                    )}
+
+                                                                                </Suspense>
 
 
                                                                             </div>
@@ -206,14 +451,15 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                                 ))}
                                                             </>
-                                                            :null}
-
+                                                            : null}
 
 
                                                         <br/>
 
 
                                                     </div>
+
+
 
                                                 </div>
 
@@ -266,8 +512,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
     loadContactserviceannoncereservationsredmessage,
     loadAllcontactservices,
-    favoriteaddItem, favoriteremoveItem,
-    archvementaddItem, archvementremoveItem,
-    activecontactaddItem, activecontactremoveItem,
+    activecommentcontactaddItem,
     activearsItem, unactiveprivatearsItem,
 })(PersonalmessagesannoncesreservationsShowUser);

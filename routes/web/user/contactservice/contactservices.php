@@ -59,3 +59,4 @@ Route::group(['middleware' => 'verified'], function(){
     });
 
 });
+

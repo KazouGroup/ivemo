@@ -53,6 +53,11 @@ Route::group(['prefix' => 'api'], function () {
         'AnnoncereservationController@apiannoncesreservationsbyuser'
     )->name('api.annoncesreservationsbyuser_site');
 
+    Route::get(
+        'ar_show/{annoncetype}/{annoncereservation:slugin}',
+        'AnnoncereservationController@show'
+    )->name('api.annoncereservationsbyannoncetypebyannoncereservation_site');
+
 
 });
 

@@ -12,6 +12,7 @@ import {
     ARCHVEMENT_CONTACTSERVICE_REMOVE,
     ACTIVE_CONTACTSERVICE_ADD,
     ACTIVE_CONTACTSERVICE_REMOVE,
+    ACTIVE_COMMENT_CONTACTSERVICE_ADD,
     UNACTIVE_ANNONCE_EMPLOYMENT,
     ACTIVE_ANNONCE_EMPLOYMENT,
     UNACTIVE_CO_P_ANNONCELOCATION,
@@ -29,6 +30,19 @@ import {history} from "../utils/history"
 
 {/* Bon ici on dois faire beaucoup attention*/
 }
+
+export const activecommentcontactaddItem = props => dispatch => {
+
+    const url = route('contactservice_statusred', [props.id]);
+    dyaxios.post(url).then(() => {
+
+            dispatch({
+                type: ACTIVE_COMMENT_CONTACTSERVICE_ADD,
+                payload: props.id
+            });
+        }
+    ).catch(error => console.error(error));
+};
 
 export const activecontactaddItem = id => dispatch => {
 

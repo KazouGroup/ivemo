@@ -14,6 +14,21 @@ class ContactusersreservationService
 {
 
 
+    public static function formsenddata($request,$annoncereservation)
+    {
+        $data = $annoncereservation->contactservices()->create([
+            'to_id' => $annoncereservation->user_id,
+            'phone' => $request->phone,
+            'from_id' => auth()->guest() ? null : auth()->id(),
+            'slug' => sha1(('YmdHis') . str_random(30)),
+            'ip' => request()->ip(),
+            'message' => $request->message,
+        ]);
+
+
+        return $data;
+    }
+
     public static function newEmailToannoncereservationpageShow($request,$annoncereservation)
     {
         $fromFullnameUser = $annoncereservation->user->first_name;

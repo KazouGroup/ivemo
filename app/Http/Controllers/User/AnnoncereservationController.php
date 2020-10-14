@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Annonces\Annoncereservation\StoreRequest;
+use App\Http\Requests\Annonces\Annoncereservation\UpdateRequest;
 use App\Http\Requests\Contactuser\StorecontactRequest;
 use App\Http\Resources\AnnoncereservationResource;
 use App\Http\Resources\AnnoncetypeResource;
@@ -26,7 +27,8 @@ class AnnoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','statusitem','destroy','statuscomments','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser'
+            'create','store','edit','update','statusitem','destroy','statuscomments','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser',
+            'apiannoncereservationsbyannoncetypebyannoncereservation'
         ]]);
     }
     /**
@@ -224,7 +226,7 @@ class AnnoncereservationController extends Controller
             ->where('status',1)
             ->withCount(['annoncereservations' => function ($q){
                 $q->where(['status' => 1,'status_admin' => 1])
-                    ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
+                    ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','uploadimages')
                     ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
                     ->whereHas('city', function ($q) {$q->where('status',1);});
             }])
@@ -240,7 +242,7 @@ class AnnoncereservationController extends Controller
         $annoncereservation = new AnnoncereservationResource(annoncereservation::whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('city_id',[$city->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->where(['status' => 1,'status_admin' => 1])
+            ->where(['status_admin' => 1])
             ->with(['user.profile' => function ($q){$q->distinct()->get();},])
             ->whereSlug($annoncereservation->slug)->firstOrFail());
 
@@ -341,11 +343,13 @@ class AnnoncereservationController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(annoncetype $annoncetype,$annoncereservation)
     {
-        //
+        $data = AnnoncereservationService::show($annoncetype,$annoncereservation);
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -354,9 +358,11 @@ class AnnoncereservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(annoncetype $annoncetype,annoncereservation $annoncereservation)
     {
-        //
+        return view('user.annoncereservation.edit',[
+            'annoncereservation' => $annoncereservation,
+        ]);
     }
 
     /**
@@ -366,9 +372,17 @@ class AnnoncereservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request,annoncetype $annoncetype,annoncereservation $annoncereservation)
     {
-        //
+        
+        $this->authorize('update',$annoncereservation);
+
+
+        $annoncereservation->description = clean($request->description);
+        $annoncereservation->slug = null;
+        $annoncereservation->update($request->all());
+
+        return response()->json($annoncereservation,200);
     }
 
     public function statusitem(annoncereservation $annoncereservation)

@@ -3,14 +3,18 @@ import { Link, NavLink } from "react-router-dom";
 import { Remarkable } from 'remarkable';
 import { Button } from "reactstrap";
 import moment from "moment";
-import Skeleton from "react-loading-skeleton";
-import ButonFavoris from "../../../../inc/vendor/ButonFavoris";
-import LazyLoad from "react-lazyload";
-
+import UploadimageList from "../../../uploadimages/inc/UploadimageList";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 class PrivateUserAnnoncereservationList extends PureComponent {
 
 
+    data_countuploadimageFormatter(uploadimages_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(uploadimages_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
 
         let showlink = `/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}`;
@@ -23,29 +27,20 @@ class PrivateUserAnnoncereservationList extends PureComponent {
 
                             <div className="col-md-5">
                                 <div className="card-image">
-                                    {this.props.uploadimages < 1 ?
-                                        <>
-                                            <Link to={showlink}>
-                                                <LazyLoad>
-                                                    <img className="img rounded"
-                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`} alt={this.props.title}/>
-                                                </LazyLoad>
-                                            </Link>
-                                        </>
-                                        :
-                                        <>
-                                            {this.props.uploadimages.map((item,index) => (
-                                                <Fragment key={item.id} >
-                                                    <Link to={showlink}>
-                                                        <LazyLoad>
-                                                            <img className="img rounded"
-                                                                 src={item.photo} alt={this.props.title}/>
-                                                        </LazyLoad>
-                                                    </Link>
-                                                </Fragment>
-                                            ))}
-                                        </>
-                                    }
+                                    <UploadimageList {...this.props} />
+
+                                    <div className="text-center">
+                                        <button type="button" className="btn btn-dark btn-sm">
+                                            <i className="now-ui-icons media-1_album"></i>
+                                            <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
+                                        </button>
+
+                                        {this.props.link_video && (
+                                            <button type="button" className="btn btn-dark btn-sm">
+                                                <b>video</b>
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
 
 
@@ -71,7 +66,7 @@ class PrivateUserAnnoncereservationList extends PureComponent {
                                                         </>
                                                     }
 
-                                                    <NavLink to={`/annonce_reservation/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
+                                                    <NavLink to={`/ar_data/${this.props.annoncetype.slug}/${this.props.slugin}/edit/`} className="btn btn-sm btn-info btn-icon btn-sm" title="Editer">
                                                         <i className="now-ui-icons ui-2_settings-90"/>
                                                     </NavLink>
                                                     <Button
@@ -196,29 +191,6 @@ class PrivateUserAnnoncereservationList extends PureComponent {
                                     </div>
 
                                     <div className="text-right mx-auto">
-
-                                        {$guest ?
-                                            <Button  data-toggle="modal" data-target="#loginModal"
-                                                     className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                <i className="far fa-bookmark"></i>
-                                            </Button>
-                                            :
-                                            <>
-                                                {this.props.bookmarked ?
-                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
-                                                            className="btn btn-danger btn-icon btn-sm" title="Retirer de vos favoris">
-                                                        <i className="fas fa-bookmark"></i>
-                                                    </Button>
-
-                                                    :
-                                                    <Button onClick={() => this.props.favoriteItem(this.props)}
-                                                            className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ajouter à vos favoris">
-                                                        <i className="far fa-bookmark"></i>
-                                                    </Button>
-                                                }
-                                            </>
-                                        }
-
                                         <NavLink to={showlink} className="btn btn-sm btn-info">
                                             Reserver
                                         </NavLink>

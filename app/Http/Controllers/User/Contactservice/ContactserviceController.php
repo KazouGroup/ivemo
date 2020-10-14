@@ -153,7 +153,6 @@ class ContactserviceController extends Controller
 
     public function contactred(contactservice $contactservice)
     {
-
         $contactservice->update(['status_red' => 1,]);
 
         return response('Red', Response::HTTP_ACCEPTED);

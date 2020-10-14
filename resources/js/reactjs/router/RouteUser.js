@@ -154,6 +154,7 @@ import PersonalmessagesannoncesreservationsUser
     from "../components/user/profile/mail/contactusersreservation/PersonalmessagesannoncesreservationsUser";
 import PersonalmessagesannoncesreservationsShowUser
     from "../components/user/profile/mail/contactusersreservation/PersonalmessagesannoncesreservationsShowUser";
+import AnnoncereservationEdit from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationEdit";
 
 
 const RouteUser = props => (
@@ -195,6 +196,7 @@ const RouteUser = props => (
           <Route exact path="/ars/:annoncetype/:categoryannoncereservation/:city/" component={withRouter(Annoncebycategoryannoncereservationcity)}/>
           <Route exact path="/ars/:annoncetype/:categoryannoncereservation/:city/:user/:annoncereservation/" component={withRouter(Annoncebycategoryannoncereservationcityshow)}/>
           <Route exact path="/ar_data/:annoncetype/new/" component={AnnoncereservationCreate}/>
+          <Route exact path="/ar_data/:annoncetype/:annoncereservation/edit/" component={AnnoncereservationEdit}/>
 
 
           <Route exact path="/als/:annoncetype/" component={AnnoncelocationIndex}/>

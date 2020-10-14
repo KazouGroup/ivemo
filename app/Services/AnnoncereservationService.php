@@ -14,6 +14,17 @@ class AnnoncereservationService
 {
 
 
+    public static function show($annoncetype,$annoncereservation)
+    {
+        $data = annoncereservation::whereSlugin($annoncereservation)
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','uploadimages')
+            ->withCount('uploadimages')
+            ->first();
+
+        return $data;
+    }
+
+
     public static function apiannoncereservationbyannoncetype($annoncetype)
     {
        $annonces = AnnoncereservationResource::collection($annoncetype->annoncereservations()

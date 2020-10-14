@@ -8,7 +8,15 @@ Route::post(
 )->name('annoncereservationsendcontactservice_site');
 
 
+Route::post(
+    'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}/contactservices/{contactservice}/responses',
+    'ContactservicannoncereservationController@sendresponsecommentcotact'
+)->name('contactservicesarssendresponsecomment_site');
 
+Route::post(
+    'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}/contactservices/',
+    'ContactservicannoncereservationController@sendsendcommentcontact'
+)->name('contactservicesarssendcomment_site');
 
 Route::group(['middleware' => 'verified'], function(){
 
@@ -19,11 +27,6 @@ Route::group(['middleware' => 'verified'], function(){
             'messages/ars',
             'ContactservicannoncereservationController@personalmessagesdatas'
         )->name('personal_mails_annoncereservations.site');
-
-        Route::get(
-            'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
-            'ContactservicannoncereservationController@contactservice_statistiqueshow'
-        )->name('contactservice_annoncereservationsbyuserbystatistiqueshow_site');
 
         Route::get(
             'statistics/ars/{annoncetype}/{annoncereservation:slugin}',
@@ -44,15 +47,20 @@ Route::group(['middleware' => 'verified'], function(){
                 'ContactservicannoncereservationController@apicontactservice_statistique'
             )->name('api.contactservice_annoncereservationsbyuserbystatistique_site');
 
-            Route::get(
-                'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
-                'ContactservicannoncereservationController@apicontactservice_statistiqueshow'
-            )->name('api.contactservice_annoncereservationsbyuserbystatistiqueshow_site');
-
-
         });
 
 
     });
+
+
+    Route::get(
+        'messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
+        'ContactservicannoncereservationController@contactservice_statistiqueshow'
+    )->name('contactservice_annoncereservationsbyuserbystatistiqueshow_site');
+
+    Route::get(
+        'api/messages/ars/{user:slug}/{annoncetype}/{annoncereservation:slugin}',
+        'ContactservicannoncereservationController@apicontactservice_statistiqueshow'
+    )->name('api.contactservice_annoncereservationsbyuserbystatistiqueshow_site');
 
 });
