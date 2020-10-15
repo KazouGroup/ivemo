@@ -41,6 +41,7 @@ class AnnoncereservationResource extends JsonResource
             'children_number' => $this->children_number,
             'annoncetype_id' => $this->annoncetype_id,
             'annoncetype' => $this->annoncetype,
+            'elevator' => $this->elevator,
             'status_wifi' => $this->status_wifi,
             'status_parking' => $this->status_parking,
             'status_lunch' => $this->status_lunch,

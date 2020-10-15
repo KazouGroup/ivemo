@@ -57,12 +57,12 @@ class AnnoncereservationCreate extends Component {
             contact_seller: '',
             balcony_number: '',
             link_video: '',
-            status_wifi: '',
-            status_lunch: '',
-            status_car_sharing: '',
-            status_parking: '',
-            dry_cleaning: '',
-            status_consiegerie: '',
+            status_wifi: false,
+            status_lunch: false,
+            status_car_sharing: false,
+            status_parking: false,
+            dry_cleaning: false,
+            status_consiegerie: false,
             categoryannoncereservation_id: '',
             periodeannonce_id: '',
             errors: [],
@@ -183,7 +183,7 @@ class AnnoncereservationCreate extends Component {
                         },
                     });
 
-                //window.location = response.data.redirect;
+                window.location = response.data.redirect;
             }).catch(error => {
             this.setState({
                 errors: error.response.data.errors

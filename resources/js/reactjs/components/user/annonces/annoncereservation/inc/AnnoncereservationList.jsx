@@ -168,7 +168,12 @@ class AnnoncereservationList extends PureComponent {
                                         <i className="fas fa-tshirt"></i>
                                     </Button>
                                 )}
-
+                                {this.props.elevator && (
+                                    <Button
+                                        className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Ascenceur">
+                                        <i className="fas fa-square"></i>
+                                    </Button>
+                                )}
                                 {this.props.status_consiegerie && (
                                     <Button
                                         className="btn btn-facebook btn-icon btn-sm btn-neutral" title="Bagagerie : laissez en dépôt vos valises et bagages gratuitement le jour d'arrivée ou de départ et profitez librement de votre journée à yaounde.">

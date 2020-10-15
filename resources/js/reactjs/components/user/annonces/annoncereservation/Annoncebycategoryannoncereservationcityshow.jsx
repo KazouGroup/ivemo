@@ -353,9 +353,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
 
                                         <div className="card">
                                             <div className="card-body">
-                                                <h6 className="card-title">
-                                                    Équipements populaires
-                                                </h6>
+
                                                 {annoncereservation.status_wifi && (
                                                     <Button
                                                         className="btn btn-facebook btn-sm btn-neutral" title="Wi-Fi gratuit">
@@ -384,6 +382,13 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     <Button
                                                         className="btn btn-facebook btn-sm btn-neutral" title="Pressing">
                                                         <i className="fas fa-tshirt"></i> Pressing
+                                                    </Button>
+                                                )}
+
+                                                {annoncereservation.elevator && (
+                                                    <Button
+                                                        className="btn btn-facebook btn-sm btn-neutral" title="Ascenceur">
+                                                        <i className="fas fa-square"></i> Ascenceur
                                                     </Button>
                                                 )}
 
