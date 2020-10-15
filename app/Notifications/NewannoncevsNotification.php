@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewannonceNotification extends Notification
+class NewannoncevsNotification extends Notification
 {
     use Queueable;
 
@@ -48,8 +48,8 @@ class NewannonceNotification extends Notification
             ->subject('Nouvelle annonce de '.$this->fromUser->first_name)
             ->salutation('Cordiale')
             ->from($this->fromUser->email,config('app.name'))
-            ->line($this->fromUser->first_name.' à poster une annonce sur la location.')
-            ->action('En savoir plus', url(route('public_profile_annoncelocations.site',[$this->fromUser->slug,$this->annoncetype->slug])))
+            ->line($this->fromUser->first_name.' à poster une annonce sur les '.$this->annoncetype->name.'.')
+            ->action('En savoir plus', url(route('public_profile_als.site',[$this->fromUser->slug,$this->annoncetype->slug])))
             ->line('Thank you for using our application!');
     }
 

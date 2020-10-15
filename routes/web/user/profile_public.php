@@ -83,17 +83,17 @@ Route::post(
 Route::get(
     'pro/{user}/als/{annoncetype}',
     'ProfilepublicController@publicprofilannoncelocations'
-)->name('public_profile_annoncelocations.site');
+)->name('public_profile_als.site');
 
 Route::get(
-    'pro/{user}/annonces_reservations',
+    'pro/{user}/ars/{annoncetype}',
     'ProfilepublicController@publicprofilannoncereservations'
-)->name('public_profile_annoncereservations.site');
+)->name('public_profile_ars.site');
 
 Route::get(
     'pro/{user}/avs/{annoncetype}',
     'ProfilepublicController@publicprofilannonceventes'
-)->name('public_profile_annonceventes.site');
+)->name('public_profile_avs.site');
 
 Route::get(
     'pro/{user}/blogs/annonce_locations/',

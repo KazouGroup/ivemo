@@ -27,7 +27,11 @@ class AnnoncereservationController extends Controller
     public function __construct()
     {
         $this->middleware('auth',['only' => [
-            'create','store','edit','update','statusitem','destroy','statuscomments','sendannoncereservation','annoncesreservationsbyuser','apiannoncesreservationsbyuser',
+            'create','store','edit','update','statusitem',
+            'destroy','statuscomments','sendannoncereservation',
+            'annoncesreservationsbyuser',
+            'apiannoncesreservationsbyuser',
+            'apicategoryannoncereservations_by_user',
             'apiannoncereservationsbyannoncetypebyannoncereservation'
         ]]);
     }
@@ -334,7 +338,7 @@ class AnnoncereservationController extends Controller
 
         $annoncereservation->save();
 
-        //AnnoncereservationService::sendMessageToUser($request,$annoncetype);
+        AnnoncereservationService::sendMessageToUser($request,$annoncetype);
 
         return ['redirect' => route('annoncereservationsedit_site',[$annoncetype->slug,$annoncereservation->slugin])];
     }
@@ -366,15 +370,15 @@ class AnnoncereservationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateRequest $request
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateRequest $request,annoncetype $annoncetype,annoncereservation $annoncereservation)
     {
-        
+
         $this->authorize('update',$annoncereservation);
 
 
@@ -394,32 +398,27 @@ class AnnoncereservationController extends Controller
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
-    public function statuscomments($id)
+    public function statuscomments(annoncereservation $annoncereservation)
     {
-        $annoncereservation = annoncereservation::where('id', $id)->findOrFail($id);
-
         $this->authorize('update',$annoncereservation);
 
         $annoncereservation->update(['status_comments' => !$annoncereservation->status_comments]);
 
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return array|\Illuminate\Http\Response
-     */
-    public function destroy(annoncetype $annoncetype,$id)
-    {
-        $annoncereservation = annoncereservation::findOrFail($id);
-        $this->authorize('update',$annoncereservation);
-        if (auth()->user()->id === $annoncereservation->user_id){
-            $annoncereservation->delete();
 
-            return ['message' => 'message deleted '];
-        }else{
-            abort(404);
-        }
+    /**
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy(annoncetype $annoncetype,annoncereservation $annoncereservation)
+    {
+        $this->authorize('update',$annoncereservation);
+
+        $annoncereservation->delete();
+
+        return ['message' => 'message deleted '];
     }
 }

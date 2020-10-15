@@ -13,6 +13,7 @@ import FieldInputCheck from "../../../../inc/vendor/FieldInputCheck";
 import LazyLoad from "react-lazyload";
 import LoaderLdsDefaultPage from "../../../../inc/user/annimation/LoaderLdsDefaultPage";
 import Navlinknewannoncereservation from "./Navlinknewannoncereservation";
+import Navannoncereservationsbyuser from "../inc/Navannoncereservationsbyuser";
 
 
 class AnnoncereservationEdit extends Component {
@@ -29,6 +30,7 @@ class AnnoncereservationEdit extends Component {
         this.uploadimagesModalItem = this.uploadimagesModalItem.bind(this);
         this.uploadPhotoImage = this.uploadPhotoImage.bind(this);
         this.saveimageItem = this.saveimageItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.activeItem = this.activeItem.bind(this);
         this.unactiveItem = this.unactiveItem.bind(this);
         this.updateimageItem = this.updateimageItem.bind(this);
@@ -444,6 +446,59 @@ class AnnoncereservationEdit extends Component {
 
     }
 
+    deleteItem(id) {
+        Swal.fire({
+            title: 'Confirmer la supression?',
+            text: "êtes-vous sûr de vouloir executer cette action?",
+            type: 'warning',
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Oui, confirmer',
+            cancelButtonText: 'Non, annuller',
+            showCancelButton: true,
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.value) {
+
+                let itemannoncetype = this.props.match.params.annoncetype;
+                const url = route('annonces_reservations_delete.site', id);
+                //Envoyer la requet au server
+                dyaxios.delete(url).then(() => {
+                    /** Alert notify bootstrapp **/
+                    $.notify({
+                            // title: 'Update',
+                            message: 'Annonce supprimé avec succès'
+                        },
+                        {
+                            allow_dismiss: false,
+                            type: 'primary',
+                            placement: {
+                                from: 'bottom',
+                                align: 'right'
+                            },
+                            animate: {
+                                enter: 'animate__animated animate__fadeInRight',
+                                exit: 'animate__animated animate__fadeOutRight'
+                            },
+                        });
+                    /** End alert ***/
+                    this.props.history.push(`/ar_data/${itemannoncetype}/new/`);
+                }).catch(() => {
+                    //Failled message
+                    $.notify("Ooops! Une erreur est survenue", {
+                        allow_dismiss: false,
+                        type: 'danger',
+                        animate: {
+                            enter: 'animate__animated animate__bounceInDown',
+                            exit: 'animate__animated animate__bounceOutUp'
+                        }
+                    });
+                })
+            }
+        });
+    }
+
     loadItems() {
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemannoncereservation = this.props.match.params.annoncereservation;
@@ -525,8 +580,7 @@ class AnnoncereservationEdit extends Component {
                                                         <div className="col-md-12">
                                                             <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                {/*  <Navannoncereservationsbyuser/>*/}
-
+                                                                  <Navannoncereservationsbyuser/>
 
                                                             </div>
                                                         </div>

@@ -4,10 +4,11 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncereservationResource;
+use App\Jobs\NewannoncersJob;
+use App\Models\abonne\subscribeannonce;
 use App\Models\annoncereservation;
 use App\Models\categoryannoncereservation;
 use App\Models\city;
-use App\Models\user;
 use Illuminate\Support\Facades\Cache;
 
 class AnnoncereservationService
@@ -197,6 +198,20 @@ class AnnoncereservationService
             ])->first();;
 
         return $annoncesreservations;
+    }
+
+    public static function sendMessageToUser($request,$annoncetype)
+    {
+        $fromUser = auth()->user();
+
+        $emailsubscribannonce = subscribeannonce::with('user','member')
+            ->whereIn('member_id',[$fromUser->id])
+            ->distinct()->get();
+
+        $emailuserJob = (new NewannoncersJob($emailsubscribannonce,$fromUser,$annoncetype));
+
+        dispatch($emailuserJob);
+
     }
 
 }

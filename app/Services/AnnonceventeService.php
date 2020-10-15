@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Http\Resources\AnnoncelocationResource;
 use App\Http\Resources\AnnonceventeResource;
 use App\Http\Resources\Profile\PrivateAnnonceventeResource;
-use App\Jobs\NewannonceJob;
+use App\Jobs\NewannoncevsJob;
 use App\Models\abonne\subscribeannonce;
 use App\Models\annoncelocation;
 use App\Models\annoncetype;
@@ -193,7 +193,7 @@ class AnnonceventeService
             ->whereIn('member_id',[$fromUser->id])
             ->distinct()->get();
 
-        $emailuserJob = (new NewannonceJob($emailsubscribannonce,$fromUser,$annoncetype));
+        $emailuserJob = (new NewannoncevsJob($emailsubscribannonce,$fromUser,$annoncetype));
 
         dispatch($emailuserJob);
 

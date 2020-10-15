@@ -140,7 +140,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('annonceventesupdate_site');
 
         Route::delete(
-            'als_delete/{id}/delete',
+            'als_delete/{annoncevente:id}/delete',
             'AnnonceventeController@destroy'
         )->name('annonces_ventes_delete.site');
 

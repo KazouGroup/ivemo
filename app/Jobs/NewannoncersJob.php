@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Notifications\NewannonceNotification;
+use App\Notifications\NewannoncersNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
-class NewannonceJob implements ShouldQueue
+class NewannoncersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -45,12 +45,12 @@ class NewannonceJob implements ShouldQueue
             if($this->emailsubscribannonce->count() === 0){
 
                 Notification::route('mail',  $this->fromUser->email)
-                    ->notify(new NewannonceNotification($this->fromUser,$this->annoncetype));
+                    ->notify(new NewannoncersNotification($this->fromUser,$this->annoncetype));
 
             }else{
                 foreach ($this->emailsubscribannonce as $item){
 
-                    $emailData = new NewannonceNotification($this->fromUser,$this->annoncetype);
+                    $emailData = new NewannoncersNotification($this->fromUser,$this->annoncetype);
 
                     Notification::route('mail', $item->user->email)
                         ->notify($emailData);continue;

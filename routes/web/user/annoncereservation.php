@@ -14,7 +14,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncereservationbycategoryannoncereservations_site');
 
     Route::get(
-        'annonces_reservationscount/{annoncetype}/{categoryannoncereservation}',
+        'arscount/{annoncetype}/{categoryannoncereservation}',
         'AnnoncereservationController@apiannoncereservationbycategoryannoncereservationcount'
     )->name('api.annoncereservationbycategoryannoncereservationscount_site');
 
@@ -24,7 +24,12 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncereservationbycities_site');
 
     Route::get(
-        'annonces_reservationscount/{annoncetype}/{categoryannoncereservation}/{city}',
+        'categoryannoncereservations_by_user',
+        'AnnoncereservationController@apicategoryannoncereservations_by_user'
+    )->name('api.categoryannoncereservations_by_user');
+
+    Route::get(
+        'arscount/{annoncetype}/{categoryannoncereservation}/{city}',
         'AnnoncereservationController@apiannoncereservationbycitycount'
     )->name('api.annoncereservationbycitiescount_site');
 
@@ -44,7 +49,7 @@ Route::group(['prefix' => 'api'], function () {
     )->name('api.annoncereservationsbyannoncetypebycitycount_site');
 
     Route::get(
-        'annonces_interesses/{annoncetype}/{user}',
+        'aris/{annoncetype}/{user}',
         'AnnoncereservationController@apiannoncereservationinteresse'
     )->name('api.annoncereservationintersse_site');
 
@@ -61,11 +66,6 @@ Route::group(['prefix' => 'api'], function () {
 
 });
 
-
-Route::get(
-    'api/categoryannoncereservations_by_user',
-    'AnnoncereservationController@apicategoryannoncereservations_by_user'
-)->name('api.categoryannoncereservations_by_user_site');
 
 Route::get(
     'ars/{annoncetype}',
@@ -108,7 +108,7 @@ Route::post(
 )->name('annoncereservationsendcontactmessageuser_site');
 
 Route::get(
-    'annonces_reservations_status_comments/{id}',
+    'annonces_reservations_status_comments/{annoncereservation:id}',
     'AnnoncereservationController@statuscomments'
 )->name('annonces_reservations_status_comments.site');
 
@@ -159,7 +159,7 @@ Route::group(['middleware' => 'verified'], function(){
         )->name('annoncereservationsstore_site');
 
         Route::delete(
-            'ars_delete/{id}/delete',
+            'ars_delete/{annoncereservation:id}/delete',
             'AnnoncereservationController@destroy'
         )->name('annonces_reservations_delete.site');
 

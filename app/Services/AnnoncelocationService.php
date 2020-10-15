@@ -4,8 +4,7 @@ namespace App\Services;
 
 
 use App\Http\Resources\AnnoncelocationResource;
-use App\Http\Resources\Profile\PrivateAnnoncelocationResource;
-use App\Jobs\NewannonceJob;
+use App\Jobs\NewannoncelsJob;
 use App\Models\abonne\subscribeannonce;
 use App\Models\annoncelocation;
 use App\Models\annoncetype;
@@ -186,7 +185,7 @@ class AnnoncelocationService
             ->whereIn('member_id',[$fromUser->id])
             ->distinct()->get();
 
-        $emailuserJob = (new NewannonceJob($emailsubscribannonce,$fromUser,$annoncetype));
+        $emailuserJob = (new NewannoncelsJob($emailsubscribannonce,$fromUser,$annoncetype));
 
         dispatch($emailuserJob);
 

@@ -6,6 +6,7 @@ import {
     FAVORITE_ANNONCERESERVATION_ADD,
     FAVORITE_ANNONCERESERVATION_REMOVE,
     UNACTIVE_ANNONCERESERVATION,
+    GET_CATEGORYANNONCERESERVATIONS_BY_USER,
 } from "../index";
 
 import Swal from "sweetalert2";
@@ -29,6 +30,17 @@ export const loadCityannonces = () => dispatch => {
             })
         ).catch(error => console.error(error));
 };
+
+export const loadCategoryannoncesbyuser = (props) => dispatch => {
+
+    dyaxios.get(route('api.categoryannoncereservations_by_user'))
+        .then(response => dispatch({
+                type: GET_CATEGORYANNONCERESERVATIONS_BY_USER,
+                payload: response.data
+            })
+        ).catch(error => console.error(error));
+};
+
 
 export const loadAnnoncereservationsinteressesbyuser = (props) => dispatch => {
 

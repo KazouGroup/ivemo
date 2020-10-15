@@ -362,6 +362,10 @@ class AnnonceventeController extends Controller
         return response('Confirmed',Response::HTTP_ACCEPTED);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function adminstatusitem($id)
     {
         $annoncevente = annoncevente::where('id', $id)->findOrFail($id);
@@ -374,10 +378,8 @@ class AnnonceventeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource
-     * .
-     *
-     * @return \Illuminate\Http\Response
+     * @param annoncetype $annoncetype
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create(annoncetype $annoncetype)
     {
@@ -387,10 +389,9 @@ class AnnonceventeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Http\Response
+     * @param StoreRequest $request
+     * @param annoncetype $annoncetype
+     * @return array
      */
     public function store(StoreRequest $request,annoncetype $annoncetype)
     {
@@ -409,16 +410,10 @@ class AnnonceventeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param annoncetype $annoncetype
+     * @param annoncevente $annoncevente
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show($id)
-    {
-        //
-    }
-
     public function edit(annoncetype $annoncetype,annoncevente $annoncevente)
     {
         return view('user.annoncevente.edit',[
@@ -427,18 +422,17 @@ class AnnonceventeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $blogannoncevente
+     * @param UpdateRequest $request
+     * @param annoncetype $annoncetype
+     * @param $annoncevente
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateRequest $request,annoncetype $annoncetype, $annoncevente)
     {
         $annoncevente = annoncevente::whereSlugin($annoncevente)->firstOrFail();
 
         $this->authorize('update',$annoncevente);
-
 
         $annoncevente->description = clean($request->description);
         $annoncevente->slug = null;
@@ -449,13 +443,18 @@ class AnnonceventeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param annoncetype $annoncetype
+     * @param annoncevente $annoncevente
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id)
+    public function destroy(annoncetype $annoncetype,annoncevente $annoncevente)
     {
-        //
+
+        $this->authorize('update',$annoncevente);
+
+        $annoncevente->delete();
+
+        return ['message' => 'message deleted '];
     }
 }
