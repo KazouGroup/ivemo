@@ -36,7 +36,7 @@ class Categoriesannonceresereservationcity extends Component {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/${this.props.slug}/`}>
+                            <NavLink to={`/ars/reservations/${item.slug}/${this.props.slug}/`}>
                                  <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <b>{this.props.name}</b>
                             </NavLink>
                         </td>

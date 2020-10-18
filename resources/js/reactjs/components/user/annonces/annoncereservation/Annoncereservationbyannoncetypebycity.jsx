@@ -10,6 +10,7 @@ import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton
 import AnnoncereservationList from "./inc/AnnoncereservationList";
 import Categoriesannonceresereservationcity from "./inc/Categoriesannonceresereservationcity";
 import SectionReservationbyCity from "../../../inc/user/section_indexsite/SectionReservationbyCity";
+import Navlinknewannoncereservation from "./treatment/Navlinknewannoncereservation";
 
 
 class Annoncereservationbyannoncetypebycity extends Component {
@@ -268,20 +269,20 @@ class Annoncereservationbyannoncetypebycity extends Component {
 
                                         {mapAnnoncereservations}
 
-                                        <div className="text-center">
+                                        {/*
+                                         <div className="text-center">
                                             <button type="button"  className="btn btn-outline-info">
                                                 <b>Afficher plus </b>
                                             </button>
                                         </div>
+                                        */}
 
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncereservation {...this.props} />
                                         </div>
 
                                         <div className="card">

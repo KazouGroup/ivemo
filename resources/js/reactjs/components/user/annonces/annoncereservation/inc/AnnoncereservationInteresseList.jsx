@@ -83,11 +83,11 @@ class AnnoncereservationInteresseList extends Component {
                                                             </NavLink>
                                                         </>
                                                     )}
+                                                    <NavLink to={`/messages/ars/${$userIvemo.slug}/${this.props.annoncetype.slug}/${this.props.slugin}`} className="btn btn-sm btn-icon btn-primary">
+                                                        <i className="now-ui-icons ui-1_send" />
+                                                    </NavLink>
                                                 </>
                                             )}
-                                            <NavLink to={`/messages/ars/${$userIvemo.slug}/${this.props.annoncetype.slug}/${this.props.slugin}`} className="btn btn-sm btn-icon btn-primary">
-                                                <i className="now-ui-icons ui-1_send" />
-                                            </NavLink>
 
                                         </div>
                                     </div>

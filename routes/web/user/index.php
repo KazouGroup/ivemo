@@ -21,6 +21,7 @@ require(__DIR__ . DIRECTORY_SEPARATOR . 'followerusers.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'likes.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'workwithus.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'categories'. DIRECTORY_SEPARATOR . 'categoryannoncelocation.php');
+require(__DIR__ . DIRECTORY_SEPARATOR . 'reservations'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'blogs'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'comments'. DIRECTORY_SEPARATOR . 'index.php');
 require(__DIR__ . DIRECTORY_SEPARATOR . 'contactservice'. DIRECTORY_SEPARATOR . 'index.php');

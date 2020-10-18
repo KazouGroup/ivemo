@@ -38,7 +38,7 @@ class SectionReservationbyCity extends Component {
             annoncesbycities.map(item => {
                 return(
                     <tr key={item.id}>
-                        <td> <NavLink to={`/annonce_reservations/reservations/${item.slug}/`}><b style={{ textTransform: "capitalize" }}>{item.name}</b></NavLink></td>
+                        <td> <NavLink to={`/ars/reservations/${item.slug}/`}><b style={{ textTransform: "capitalize" }}>{item.name}</b></NavLink></td>
                         <td className="text-right"> {this.getcountcategoryannonceString(item.annoncereservations_count)} {item.annoncereservations_count > 1 ? "annonces" : "annonce"}</td>
                     </tr>             )
             })

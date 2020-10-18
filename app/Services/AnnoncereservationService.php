@@ -25,7 +25,6 @@ class AnnoncereservationService
         return $data;
     }
 
-
     public static function apiannoncereservationbyannoncetype($annoncetype)
     {
        $annonces = AnnoncereservationResource::collection($annoncetype->annoncereservations()
@@ -35,6 +34,7 @@ class AnnoncereservationService
            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
            ->whereHas('city', function ($q) {$q->where('status',1);})
            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+
         return $annonces;
     }
 
@@ -44,8 +44,22 @@ class AnnoncereservationService
             ->where(['status' => 1,'status_admin' => 1])
             ->whereIn('annoncetype_id',[$annoncetype->id])
             ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
-            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce')
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);})
+            ->orderBy('created_at','DESC')->distinct()->paginate(40));
+
+        return $annonces;
+    }
+
+    public static function apiannoncereservationbycity($annoncetype,$categoryannoncereservation,$city)
+    {
+        $annonces = AnnoncereservationResource::collection($city->annoncereservations()
+            ->where(['status' => 1,'status_admin' => 1])
+            ->whereIn('annoncetype_id',[$annoncetype->id])
+            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
+            ->whereIn('city_id',[$city->id])
+            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce')            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
             ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
             ->whereHas('city', function ($q) {$q->where('status',1);})
             ->orderBy('created_at','DESC')->distinct()->paginate(40));
@@ -112,23 +126,6 @@ class AnnoncereservationService
             ->take(6)->distinct()->get();
 
         return $annoncereservations;
-    }
-
-
-    public static function apiannoncereservationbycity($annoncetype,$categoryannoncereservation,$city)
-    {
-        $annonces = AnnoncereservationResource::collection($city->annoncereservations()
-            ->where(['status' => 1,'status_admin' => 1])
-            ->whereIn('annoncetype_id',[$annoncetype->id])
-            ->whereIn('categoryannoncereservation_id',[$categoryannoncereservation->id])
-            ->whereIn('city_id',[$city->id])
-            ->with('user','categoryannoncereservation','city','annoncetype','periodeannonce','imagereservations')
-            ->with(['user.profile' => function ($q){$q->distinct()->get();}])
-            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-            ->whereHas('city', function ($q) {$q->where('status',1);})
-            ->orderBy('created_at','DESC')->distinct()->paginate(40));
-
-        return $annonces;
     }
 
     public static function apiannoncereservationbycitycount($annoncetype,$categoryannoncereservation,$city)

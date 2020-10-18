@@ -180,6 +180,9 @@ class NavUserSite extends PureComponent {
                                                     <NavLink to={`/al_data/locations/new/`} className="dropdown-item">
                                                         <i className="now-ui-icons business_bank"/> Locations
                                                     </NavLink>
+                                                    <NavLink to={`/ar_data/reservations/new/`} className="dropdown-item">
+                                                        <i className="now-ui-icons education_agenda-bookmark"/> Reservations
+                                                    </NavLink>
                                                     <NavLink to={`/av_data/ventes/new/`} className="dropdown-item">
                                                         <i className="now-ui-icons location_map-big"/> Ventes
                                                     </NavLink>
@@ -215,6 +218,9 @@ class NavUserSite extends PureComponent {
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <NavLink to={`/als/locations/`} className="dropdown-item">
                                     <i className="now-ui-icons business_bank"/> <b>Locations</b>
+                                </NavLink>
+                                <NavLink to={`/ars/reservations/`} className="dropdown-item">
+                                    <i className="now-ui-icons education_agenda-bookmark"/> <b>Reservations</b>
                                 </NavLink>
                                 <NavLink to={`/avs/ventes/`} className="dropdown-item">
                                     <i className="now-ui-icons location_map-big"/> <b>Ventes</b>

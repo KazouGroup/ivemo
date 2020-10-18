@@ -252,8 +252,8 @@ class AnnoncereservationIndex extends Component {
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-8 ml-auto mr-auto">
-                                        <h4 className="title">Reservez votre chambre d'hotel, une villa ou un appartement </h4>
+                                    <div className="col-md-10 ml-auto mr-auto">
+                                        <h2 className="title">Reservez votre chambre d'hotel, une villa ou un appartement </h2>
                                     </div>
                                 </div>
                             </div>
@@ -273,11 +273,13 @@ class AnnoncereservationIndex extends Component {
 
                                         {mapAnnoncereservations}
 
-                                        <div className="text-center">
+                                        {/*
+                                         <div className="text-center">
                                             <button type="button"  className="btn btn-outline-info">
                                                 <b>Afficher plus </b>
                                             </button>
                                         </div>
+                                        */}
 
                                     </div>
 

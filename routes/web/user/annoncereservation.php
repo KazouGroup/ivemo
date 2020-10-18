@@ -98,17 +98,12 @@ Route::get(
 )->name('annoncereservationbycategoryannoncereservationslug_site');
 
 Route::post(
-    'ars/{annoncetype}/{categoryannoncereservation}/{city}/{annoncereservation}/send_reservation',
-    'AnnoncereservationController@sendannoncereservation'
-)->name('sendannoncereservation_site');
-
-Route::post(
     'ars/{annoncetype}/{categoryannoncereservation}/{city}/{user}/{annoncereservation}/send_contact_message_user',
     'AnnoncereservationController@sendcontactmessageuser'
 )->name('annoncereservationsendcontactmessageuser_site');
 
 Route::get(
-    'annonces_reservations_status_comments/{annoncereservation:id}',
+    'ars_status_comments/{annoncereservation:id}',
     'AnnoncereservationController@statuscomments'
 )->name('annonces_reservations_status_comments.site');
 

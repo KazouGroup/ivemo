@@ -10,6 +10,7 @@ import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkeleton";
 import HelmetSite from "../../../inc/user/HelmetSite";
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
+import Navlinknewannoncereservation from "./treatment/Navlinknewannoncereservation";
 
 
 class Annoncebycategoryannoncereservationcity extends Component {
@@ -224,7 +225,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
         dyaxios.get(route('api.annoncereservationbycities_site', [itemannoncetype, itemCategoryannoncereservation, itemcityannonce])).then(response => this.setState({ annoncereservations: response.data, }));
         dyaxios.get(route('api.annoncereservationbycitiescount_site', [itemannoncetype, itemCategoryannoncereservation, itemcityannonce])).then(response => this.setState({ annoncereservationbycity: response.data, }));
         /* Ici c'est le lien pour recuperer les annonces par categorie */
-        let lien = route('api.annoncelocationbycategoryannoncereservations_site', [itemannoncetype, itemCategoryannoncereservation]);
+        let lien = route('api.annoncereservationbycategoryannoncereservations_site', [itemannoncetype, itemCategoryannoncereservation]);
         dyaxios.get(lien).then(response => this.setState({ annoncereservationbycategory: response.data, }));
         /* Ici c'est pour recuperer les categories*/
         dyaxios.get(route('api.annoncereservationcategorybycitycount_site', [itemCategoryannoncereservation, itemcityannonce])).then(response => this.setState({ categoryannoncereservations: response.data, }));
@@ -301,20 +302,20 @@ class Annoncebycategoryannoncereservationcity extends Component {
 
                                         {mapAnnoncereservations}
 
-                                        <div className="text-center">
+                                        {/*
+                                         <div className="text-center">
                                             <button type="button"  className="btn btn-outline-info">
                                                 <b>Afficher plus </b>
                                             </button>
                                         </div>
+                                        */}
 
                                     </div>
 
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add" /> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncereservation {...this.props} />
                                         </div>
 
                                         <div className="card">
@@ -338,7 +339,7 @@ class Annoncebycategoryannoncereservationcity extends Component {
                                                                                 <>{categoryannoncereservations.map((item) => (
                                                                                     <tr key={item.id}>
                                                                                         <td>
-                                                                                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/${annoncereservationbycity.slug}/`} >
+                                                                                            <NavLink to={`/ars/reservations/${item.slug}/${annoncereservationbycity.slug}/`} >
                                                                                                 Reserver un(e) <b style={{ textTransform: "lowercase" }}>{item.name}</b> à <strong> {annoncereservationbycity.name}</strong>
                                                                                             </NavLink>
                                                                                         </td>

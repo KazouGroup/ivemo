@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
 
 export const loadCategoryannonces = () => dispatch => {
 
-    dyaxios.get(route('api.categoryannoncereservations_site'))
+    dyaxios.get(route('api.categoryannoncereservation_site'))
         .then(response => dispatch({
                 type: GET_CATEGORYANNONCERESERVATIONS,
                 payload: response.data

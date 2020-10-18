@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import NavannoncecategorySkeleton from "../../../../inc/user/NavannoncecategorySkeleton";
+import {connect} from "react-redux";
+import {loadCategoryannonces} from "../../../../../redux/actions/annoncereservation/annoncereservationActions";
 
 
 class Categoriesannoncereservation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryannoncereservations : {user:[]},
+           //
         }
     }
 
     componentDidMount() {
-        let url = route('api.categoryannoncereservation_site');
-        dyaxios.get(url).then(response => this.setState({categoryannoncereservations: response.data,}));
+        this.props.loadCategoryannonces(this.props);
     }
 
     getcountcategoryannonceString (annoncereservations_count) {
@@ -29,13 +30,13 @@ class Categoriesannoncereservation extends Component {
     }
 
     render() {
-        const {categoryannoncereservations} = this.state;
-        const mapCategoryannoncereservations = categoryannoncereservations.length ? (
-            categoryannoncereservations.map(item => {
+        const {catgoryannoncereservations} = this.props;
+        const mapCategoryannoncereservations = catgoryannoncereservations.length ? (
+            catgoryannoncereservations.map(item => {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_reservations/reservations/${item.slug}/`}>
+                            <NavLink to={`/ars/reservations/${item.slug}/`}>
                                 <b style={{ textTransform: "lowercase" }}>{item.name}</b>
                             </NavLink>
                         </td>
@@ -72,15 +73,12 @@ class Categoriesannoncereservation extends Component {
     }
 
 }
-Categoriesannoncereservation.defaultProps = {
-    backgroundColor: "black",
+Categoriesannoncereservation.propTypes = {
+    loadCategoryannonces: PropTypes.func.isRequired,
 };
 
-Categoriesannoncereservation.propTypes = {
-    // background color for the component
-    backgroundColor: PropTypes.oneOf([
-        "black",
-        "orange",
-    ]),
-};
-export default Categoriesannoncereservation;
+const mapStoreToProps = store => ({
+    catgoryannoncereservations: store.annoncereservations.catgoryannoncereservations
+
+});
+export default connect(mapStoreToProps, {loadCategoryannonces})(Categoriesannoncereservation);

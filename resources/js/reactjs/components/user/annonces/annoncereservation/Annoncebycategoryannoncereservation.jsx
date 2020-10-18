@@ -11,6 +11,7 @@ import NavannoncecategorySkeleton from "../../../inc/user/NavannoncecategorySkel
 import AnnoncesListSkeleton from "../../../inc/user/annonce/AnnoncesListSkeleton";
 import Categoriesannoncereservation from "./inc/Categoriesannoncereservation";
 import HelmetSite from "../../../inc/user/HelmetSite";
+import Navlinknewannoncereservation from "./treatment/Navlinknewannoncereservation";
 
 
 class Annoncebycategoryannoncereservation extends Component {
@@ -218,8 +219,8 @@ class Annoncebycategoryannoncereservation extends Component {
     loadItems(){
         let itemannoncetype = this.props.match.params.annoncetype;
         let itemCategoryannoncereservation = this.props.match.params.categoryannoncereservation;
-        dyaxios.get(route('api.annoncelocationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservations: response.data}));
-        dyaxios.get(route('api.annoncelocationbycategoryannoncereservationscount_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservationbycategory: response.data}));
+        dyaxios.get(route('api.annoncereservationbycategoryannoncereservations_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservations: response.data}));
+        dyaxios.get(route('api.annoncereservationbycategoryannoncereservationscount_site',[itemannoncetype,itemCategoryannoncereservation])).then(response => this.setState({annoncereservationbycategory: response.data}));
         fetch(route('api.annoncereservationbycategorycount_site',[itemCategoryannoncereservation])).then(res => res.json()).then((result) => {
             this.setState({
                 citiesannoncesreservations: [...result]
@@ -261,7 +262,7 @@ class Annoncebycategoryannoncereservation extends Component {
                 return(
                     <tr key={item.id}>
                         <td>
-                            <NavLink to={`/annonces_reservations/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
+                            <NavLink to={`/ars/${annoncetype}/${annoncereservationbycategory.slug}/${item.slug}/`}>
                                 <b style={{ textTransform: "lowercase" }}>{annoncereservationbycategory.name}</b> à <strong> {item.name}</strong>
                             </NavLink>
                         </td>
@@ -296,7 +297,7 @@ class Annoncebycategoryannoncereservation extends Component {
 
                                     <div className="col-lg-8 col-md-12 mx-auto">
                                         <div className="submit text-left">
-                                            <Link to={`/annonces_reservations/reservations/`} >
+                                            <Link to={`/ars/reservations/`} >
                                                 <i className="now-ui-icons arrows-1_minimal-left"/> <b>Retour à vos annonces </b>
                                             </Link>
                                         </div>
@@ -304,11 +305,13 @@ class Annoncebycategoryannoncereservation extends Component {
 
                                         {mapAnnoncereservations}
 
-                                        <div className="text-center">
+                                        {/*
+                                         <div className="text-center">
                                             <button type="button"  className="btn btn-outline-info">
                                                 <b>Afficher plus </b>
                                             </button>
                                         </div>
+                                        */}
 
                                     </div>
 
@@ -316,9 +319,7 @@ class Annoncebycategoryannoncereservation extends Component {
                                     <div className="col-lg-4 col-md-12 mx-auto">
 
                                         <div className="submit text-center">
-                                            <NavLink className="btn btn-danger" to={`/annonce/show/create/`}>
-                                                <i className="now-ui-icons ui-1_simple-add"/> <b>Poster votre annonce</b>
-                                            </NavLink>
+                                            <Navlinknewannoncereservation {...this.props} />
                                         </div>
 
                                         <div className="card">

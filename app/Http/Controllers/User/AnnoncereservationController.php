@@ -28,7 +28,7 @@ class AnnoncereservationController extends Controller
     {
         $this->middleware('auth',['only' => [
             'create','store','edit','update','statusitem',
-            'destroy','statuscomments','sendannoncereservation',
+            'destroy','statuscomments',
             'annoncesreservationsbyuser',
             'apiannoncesreservationsbyuser',
             'apicategoryannoncereservations_by_user',
@@ -47,7 +47,7 @@ class AnnoncereservationController extends Controller
         ]);
     }
 
-    public function annoncelocationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
+    public function annoncereservationbycategoryannoncereservation(annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation)
     {
        return view('user.annoncereservation.annonces_category',[
                'annoncestype' => $annoncetype,
@@ -253,21 +253,6 @@ class AnnoncereservationController extends Controller
         return response()->json($annoncereservation, 200);
     }
 
-
-    public function sendannoncereservation(StoreRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
-    {
-        $user = auth()->user();
-        $reservation = new reservation();
-
-
-        $reservation->fill($request->all());
-        $reservation->user_id = $user->id;
-        $reservation->annoncereservation_id = $annoncereservation->id;
-
-        $reservation->save();
-
-        return response()->json($reservation,200);
-    }
 
      public function sendcontactmessageuser(StorecontactRequest $request, annoncetype $annoncetype,categoryannoncereservation $categoryannoncereservation,city $city,$user,annoncereservation $annoncereservation)
     {
