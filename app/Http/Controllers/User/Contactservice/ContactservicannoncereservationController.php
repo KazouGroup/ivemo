@@ -11,6 +11,7 @@ use App\Models\annoncetype;
 use App\Models\annoncevente;
 use App\Models\responsecontactservice;
 use App\Models\user;
+use App\Services\CommentAndResponseService;
 use App\Services\Contactusers\ContactusersreservationService;
 use App\Models\contactservice;
 use Illuminate\Http\Request;
@@ -52,11 +53,17 @@ class ContactservicannoncereservationController extends Controller
         return view('user.contactservice.show', compact('user'));
     }
 
-    public function contactservice_statistiqueshow(contactservice $contactservice)
+    /**
+     * @param user $user
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     */
+    public function contactservice_statistiqueshow(user $user, annoncetype $annoncetype, annoncereservation $annoncereservation)
     {
-        $user = Auth::user();
+        if (Auth::id() === $user->id || Auth::id() === $annoncereservation->user_id){
+            return view('user.contactservice.showcontact', compact('user','annoncetype','annoncereservation'));
+        }else (abort(401));
 
-        return view('user.contactservice.showcontact', compact('user','contactservice'));
     }
 
     public function sendcontactserviceannonce(StorecontactuserannoncelocationRequest $request, annoncetype $annoncetype, $categoryannoncereservation, $city, $user, annoncereservation $annoncereservation)
@@ -143,67 +150,109 @@ class ContactservicannoncereservationController extends Controller
         return Excel::download(new ContactserviceannonceventesExport($user, $annoncevente), 'Infos-users.xlsx');
     }
 
+    /**
+     * @param user $user
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function apicontactservice_statistiqueshow(user $user, annoncetype $annoncetype, annoncereservation $annoncereservation)
     {
-        $contactservice = annoncereservation::whereSlugin($annoncereservation->slugin)
-            ->with('user', 'city', 'annoncetype', 'periodeannonce', 'categoryannoncereservation', 'uploadimages')
-            ->whereIn('user_id', [$annoncereservation->user_id])
-            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status', 1);})
-            ->whereHas('city', function ($q) {$q->where('status', 1);})
-            ->withCount(['uploadimages' => function ($q) {
-                $q->where(['status' => 1, 'status_admin' => 1])
-                    ->where('uploadimagealable_type', annoncereservation::class);
-            }])
-            ->with(['uploadimages' => function ($q) {
-                $q->where(['status' => 1, 'status_admin' => 1])
-                    ->where('uploadimagealable_type', annoncereservation::class)->get();
-            }])
-            ->withCount(['contactservices' => function ($q) use ($user,$annoncereservation) {
-                $q->where(['status_red' => 0])
-                    ->with('to', 'from')
-                    ->whereIn('from_id', [$user->id])
-                    ->whereIn('to_id', [$annoncereservation->user_id]);
-            }])
-            ->with(['contactservices' => function ($q) use ($user,$annoncereservation) {
-                $q->with('to', 'from')
-                    ->whereIn('from_id', [$user->id])
-                    ->whereIn('to_id', [$annoncereservation->user_id])
-                    ->with(['responsecontactservices' => function ($q){
-                        $q->where(['status' => 1])
-                            ->with('user','contactservice')
-                            ->orderByDesc('created_at')
-                            ->distinct()->get()
-                        ;},
-                    ])
-                    ->orderByDesc('created_at')
-                    ->distinct()->get();
-            }])->first();
+        if (Auth::id() === $user->id || Auth::id() === $annoncereservation->user_id){
 
-        return response()->json($contactservice, 200);
+            $contactservice = annoncereservation::whereSlugin($annoncereservation->slugin)
+                ->with('user', 'city', 'annoncetype', 'periodeannonce', 'categoryannoncereservation', 'uploadimages')
+                ->whereIn('user_id', [$annoncereservation->user_id])
+                ->whereHas('categoryannoncereservation', function ($q) {$q->where('status', 1);})
+                ->whereHas('city', function ($q) {$q->where('status', 1);})
+                ->withCount(['uploadimages' => function ($q) {
+                    $q->where(['status' => 1, 'status_admin' => 1])
+                        ->where('uploadimagealable_type', annoncereservation::class);
+                }])
+                ->with(['uploadimages' => function ($q) {
+                    $q->where(['status' => 1, 'status_admin' => 1])
+                        ->where('uploadimagealable_type', annoncereservation::class)->get();
+                }])
+                ->withCount(['contactservices' => function ($q) use ($user,$annoncereservation) {
+                    $q->where(['status_red' => 0])
+                        ->with('to', 'from')
+                        ->whereIn('from_id', [$user->id])
+                        ->whereIn('to_id', [$annoncereservation->user_id]);
+                }])
+                ->with(['contactservices' => function ($q) use ($user,$annoncereservation) {
+                    $q->with('to', 'from')
+                        ->whereIn('from_id', [$user->id])
+                        ->whereIn('to_id', [$annoncereservation->user_id])
+                        ->with(['responsecontactservices' => function ($q){
+                            $q->where(['status' => 1])
+                                ->with('user','contactservice')
+                                ->orderByDesc('created_at')
+                                ->distinct()->get()
+                            ;},
+                        ])
+                        ->orderByDesc('created_at')
+                        ->distinct()->get();
+                }])->first();
+
+            return response()->json($contactservice, 200);
+
+        }else (abort(401));
+
     }
+
+    /**
+     * @param Request $request
+     * @param user $user
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
 
     public function sendsendcommentcontact(Request $request, user $user, annoncetype $annoncetype, annoncereservation $annoncereservation)
     {
         $this->validate($request,['message'=>'required|string|min:2|max:5000']);
 
-        $contactservice = ContactusersreservationService::formsenddata($request,$annoncereservation);
+        if (Auth::id() === $user->id || Auth::id() === $annoncereservation->user_id){
 
-        ContactusersreservationService::newEmailToannoncereservationpageShow($request, $annoncereservation);
+            ContactusersreservationService::formsenddata($request,$annoncereservation);
 
-        return response()->json($contactservice, 200);
+            ContactusersreservationService::newEmailToannoncereservationpageShow($request, $annoncereservation);
+
+            return response()->json([
+                'success' => "Message send successfully"
+            ],200);
+
+        }else (abort(401));
+
     }
 
+    /**
+     * @param Request $request
+     * @param user $user
+     * @param annoncetype $annoncetype
+     * @param annoncereservation $annoncereservation
+     * @param contactservice $contactservice
+     * @return mixed
+     */
     public function sendresponsecommentcotact(Request $request,user $user, annoncetype $annoncetype, annoncereservation $annoncereservation,contactservice $contactservice)
     {
         $validatedData = $request->validate(['message' => 'required|min:2|max:5000']);
 
-        $responsecontactservice = responsecontactservice::create([
-            'message' => $validatedData['message'],
-            'contactservice_id' => $contactservice->id,
-        ]);
+        if (Auth::id() === $user->id || Auth::id() === $annoncereservation->user_id){
+           responsecontactservice::create([
+                'message' => $validatedData['message'],
+                'contactservice_id' => $contactservice->id,
+            ]);
 
-        return $responsecontactservice->toJson();
+            CommentAndResponseService::newEmailTonewcoontactservicepageShow($request,$annoncereservation, $contactservice);
+
+            return response()->json([
+                'success' => "Message send successfully"
+            ],200);
+
+        }else (abort(401));
     }
 
 }

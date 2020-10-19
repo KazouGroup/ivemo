@@ -31,13 +31,11 @@ class ContactusersreservationService
 
     public static function newEmailToannoncereservationpageShow($request,$annoncereservation)
     {
-        $fromFullnameUser = $annoncereservation->user->first_name;
         $fromPhoneUser = $request->get('phone');
-        $fromEmailUser = $annoncereservation->user->email;
         $fromMessageUser = $request->get('message');
         $userFrom = Auth::user();
 
-        $emailToUser = (new ContactuserreservationJob($fromFullnameUser,$fromPhoneUser,$fromEmailUser,$fromMessageUser,$userFrom,$annoncereservation));
+        $emailToUser = (new ContactuserreservationJob($fromPhoneUser,$fromMessageUser,$userFrom,$annoncereservation));
 
         dispatch($emailToUser);
     }

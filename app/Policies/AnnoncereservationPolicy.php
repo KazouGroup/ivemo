@@ -7,6 +7,7 @@ use App\Models\annoncereservation;
 use App\Models\contactuser;
 use App\Models\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class AnnoncereservationPolicy
 {
@@ -22,5 +23,11 @@ class AnnoncereservationPolicy
     public function update(user $user, annoncereservation $annoncereservation)
     {
         return auth()->user()->id === $annoncereservation->user_id;
+    }
+
+    public function contactservicears(user $model, annoncereservation $annoncereservation)
+    {
+
+       // return auth()->user()->slug === $model->slug || Auth::id() === $annoncereservation->user_id;
     }
 }

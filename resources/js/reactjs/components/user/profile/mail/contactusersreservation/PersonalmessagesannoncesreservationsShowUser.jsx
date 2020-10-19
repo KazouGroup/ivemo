@@ -284,26 +284,18 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                                         <div className="media">
 
-
-                                                                            <a className="pull-left" href={item.from.status_profile ?
-
-                                                                                `${route('public_profile.site', [item.from.slug])}`
-                                                                                :
-                                                                                `${route('userpublic_profile.site', [item.from.slug])}`}
-                                                                            >
-                                                                                <div className="author">
-                                                                                    {item.from.avatar === null ?
-                                                                                        <img className="avatar" alt={item.from.first_name}
-                                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                                                        :
-                                                                                        <img className="avatar" alt={item.from.first_name}
-                                                                                             src={item.from.avatar}/>
-                                                                                    }
-                                                                                </div>
-                                                                            </a>
+                                                                            <div className="author">
+                                                                                {item.from.avatar === null ?
+                                                                                    <img className="avatar" alt={item.from.first_name}
+                                                                                         src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                                    :
+                                                                                    <img className="avatar" alt={item.from.first_name}
+                                                                                         src={item.from.avatar}/>
+                                                                                }
+                                                                            </div>
 
                                                                             <div className="media-body">
-                                                                                {item.status_red ? 
+                                                                                {item.status_red ?
                                                                                 <>
                                                                                     <h6 className={`media-heading ${item.status_red ? "" : "text-primary"}`}>{item.from.first_name}
                                                                                         <small
@@ -319,8 +311,8 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                                            {item.message || ""}
                                                                                          </ReadMoreAndLess>
                                                                                    </span>
-                                                                                </> 
-                                                                                : 
+                                                                                </>
+                                                                                :
                                                                                 <>
                                                                                 <a href={void (0)} style={{cursor: "pointer"}} onClick={() => this.props.activecommentcontactaddItem(item)}>
                                                                                     <h6 className={`media-heading ${item.status_red ? "" : "text-primary"}`}>{item.from.first_name}
@@ -343,7 +335,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                                 </a>
                                                                                 </>
                                                                                 }
-                                                                                
+
 
                                                                                 <div className="media-footer">
                                                                                     <Button className="btn btn-default btn-neutral pull-right"/>
@@ -361,10 +353,15 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                                             )}
                                                                                         </>
                                                                                         :
-                                                                                        <button type="button" onClick={() => this.responsecontactserviceFromItem(item)}
-                                                                                                className="btn btn-default btn-neutral pull-right" title="Repondre a ce message">
-                                                                                            <i className="now-ui-icons files_single-copy-04"></i> Repondre
-                                                                                        </button>
+                                                                                        <>
+                                                                                            {$userIvemo.slug !== this.props.match.params.user && (
+
+                                                                                                <button type="button" onClick={() => this.responsecontactserviceFromItem(item)}
+                                                                                                        className="btn btn-default btn-neutral pull-right" title="Repondre a ce message">
+                                                                                                    <i className="now-ui-icons files_single-copy-04"></i> Repondre
+                                                                                                </button>
+                                                                                            )}
+                                                                                        </>
                                                                                     }
 
                                                                                 </div>
@@ -394,23 +391,15 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                                                             <div className="media">
 
-                                                                                                <a className="pull-left" href={item.to.status_profile ?
-
-                                                                                                    `${route('public_profile.site', [item.to.slug])}`
-                                                                                                    :
-                                                                                                    `${route('userpublic_profile.site', [item.to.slug])}`}
-                                                                                                >
-                                                                                                    <div className="author">
-                                                                                                        {item.to.avatar === null ?
-                                                                                                            <img className="avatar" alt={item.to.first_name}
-                                                                                                                 src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
-                                                                                                            :
-                                                                                                            <img className="avatar" alt={item.to.first_name}
-                                                                                                                 src={item.to.avatar}/>
-                                                                                                        }
-                                                                                                    </div>
-                                                                                                </a>
-
+                                                                                                <div className="author">
+                                                                                                    {item.to.avatar === null ?
+                                                                                                        <img className="avatar" alt={item.to.first_name}
+                                                                                                             src={`/assets/vendor/assets/img/blurredimage1.jpg`}/>
+                                                                                                        :
+                                                                                                        <img className="avatar" alt={item.to.first_name}
+                                                                                                             src={item.to.avatar}/>
+                                                                                                    }
+                                                                                                </div>
                                                                                                 <div className="media-body">
                                                                                                     <h6 className="media-heading">{lk.user.first_name}
                                                                                                         <small

@@ -11,6 +11,7 @@ use App\Jobs\Comments\CommentBlogannonceventeJob;
 use App\Jobs\Comments\CommentEmploymentJob;
 use App\Jobs\Comments\CommentForumJob;
 use App\Jobs\ResponsecommentJob;
+use App\Jobs\Responses\ResponsecontactreservationsJob;
 
 class CommentAndResponseService
 {
@@ -125,6 +126,16 @@ class CommentAndResponseService
 
             dispatch($emailToUser);
         }
+
+    }
+
+    public static function newEmailTonewcoontactservicepageShow($request,$annoncereservation,$contactservice)
+    {
+        $fromBodyUser = $request->get('message');
+
+        $emailToUser = (new ResponsecontactreservationsJob($fromBodyUser,$annoncereservation,$contactservice));
+
+        dispatch($emailToUser);
 
     }
 
