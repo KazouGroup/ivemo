@@ -89,9 +89,7 @@ class AnnoncereservationController extends Controller
         $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
           ->where(['status' => 1])
           ->withCount(['annoncereservations' => function ($q){
-              $q->where(['status' => 1,'status_admin' => 1])
-                  ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                  ->whereHas('city', function ($q) {$q->where('status',1);});
+              $q->statuspublished();
            }])
             ->withCount(['blogannoncereservations' => function ($q){
                $q->where(['status' => 1,'status_admin' => 1])
@@ -108,10 +106,7 @@ class AnnoncereservationController extends Controller
         $categoryannoncereservations = CategoryannoncereservationResource::collection(categoryannoncereservation::with('user')
           ->where(['status' => 1])
           ->withCount(['annoncereservations' => function ($q) use ($city){
-              $q->where(['status' => 1,'status_admin' => 1])
-                  ->whereIn('city_id',[$city->id])
-                  ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
-                  ->whereHas('city', function ($q) {$q->where('status',1);});
+              $q->statuspublished()->whereIn('city_id',[$city->id]);
            }])
             ->orderBy('annoncereservations_count','desc')
             ->distinct()->get());

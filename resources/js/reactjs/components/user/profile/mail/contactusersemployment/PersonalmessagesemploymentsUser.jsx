@@ -143,7 +143,7 @@ class PersonalmessagesemploymentsUser extends Component {
 
                                                         {contactusersprofile.contactservicesemployments.length >= 0 ?
                                                             <>
-                                                                {contactusersprofile.contactservicesemployments.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Emplois & Services"}/>}
+                                                                {contactusersprofile.contactservicesemployments.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Emplois & Services "}/>}
                                                             </>:null}
 
                                                     </tbody>

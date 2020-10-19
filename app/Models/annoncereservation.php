@@ -113,6 +113,13 @@ class annoncereservation extends Model
         ];
     }
 
+    public function scopeStatusPublished($q)
+    {
+        return $q->where(['status' => 1,'status_admin' => 1])
+            ->whereHas('categoryannoncereservation', function ($q) {$q->where('status',1);})
+            ->whereHas('city', function ($q) {$q->where('status',1);});
+    }
+
     public function comments()
     {
         return $this->morphMany(comment::class ,'commentable');

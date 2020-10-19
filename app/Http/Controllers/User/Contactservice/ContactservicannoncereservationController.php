@@ -46,6 +46,15 @@ class ContactservicannoncereservationController extends Controller
         return view('user.contactservice.index', compact('user'));
     }
 
+    public function personalmessagesdatassend()
+    {
+        $user = Auth::user();
+
+        $this->authorize('update', $user);
+
+        return view('user.contactservice.index', compact('user'));
+    }
+
     public function contactservice_statistique(user $user, annoncetype $annoncetype, annoncereservation $annoncereservation)
     {
         $this->authorize('update', $user);

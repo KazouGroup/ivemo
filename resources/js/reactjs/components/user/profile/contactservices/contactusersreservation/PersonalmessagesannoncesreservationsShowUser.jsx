@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import {Button, Form, UncontrolledTooltip} from "reactstrap";
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import FootermailmessageUser from "../inc/FootermailmessageUser";
+import FootermailmessageUser from "../../mail/inc/FootermailmessageUser";
 import Swal from "sweetalert2";
 import ReadMoreAndLess from "react-read-more-less";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
@@ -17,11 +17,12 @@ import {
     loadContactserviceannoncereservationsredmessage,
 } from "../../../../../redux/actions/contactserviceActions";
 import HelmetSite from "../../../../inc/user/HelmetSite";
-import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
+import NavlinkmailmessageUser from "../../mail/inc/NavlinkmailmessageUser";
 import AnnoncesListOnSkeleton from "../../../../inc/user/annonce/AnnoncesListOnSkeleton";
 import PrivateUserAnnoncereservationList from "../../../annonces/annoncereservation/inc/PrivateUserAnnoncereservationList";
 import moment from "moment";
 import FormCommentContactPivate from "../../../../inc/vendor/comment/FormCommentContactPivate";
+import NavlinkmailmessagesendUser from "../../mail/inc/NavlinkmailmessagesendUser";
 
 
 class PersonalmessagesannoncesreservationsShowUser extends Component {
@@ -30,6 +31,8 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
         //itemData correspont a une variable aleatoire donner pour faire le traitement
         this.state = {
             message: '',
+            visiable: 6,
+            responsecontactservices: 2,
             editcontactservice: false,
             responsecontactservice: false,
             editresponsecontactservice: false,
@@ -44,6 +47,10 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.hasErrorFor = this.hasErrorFor.bind(this);
         this.renderErrorFor = this.renderErrorFor.bind(this);
+
+
+        this.loadmoresItem = this.loadmoresItem.bind(this);
+        this.loadmoresresponseItem = this.loadmoresresponseItem.bind(this);
 
     }
 
@@ -79,6 +86,18 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
             id:item.id,
             itemData: item
         });
+    }
+
+    loadmoresItem() {
+        this.setState((old) => {
+            return { visiable: old.visiable + 6 }
+        })
+    }
+
+    loadmoresresponseItem() {
+        this.setState((old) => {
+            return { responsecontactservices: old.responsecontactservices + 2 }
+        })
     }
 
     sendresponsecommentItem(e) {
@@ -176,7 +195,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
     }
     render() {
         const {annoncereservation, contactusersprofile} = this.props;
-        const {itemData,editcontactservice,responsecontactservice,editresponsecontactservice} = this.state;
+        const {itemData,editcontactservice,responsecontactservice,editresponsecontactservice,visiable,responsecontactservices} = this.state;
         return (
 
             <>
@@ -209,6 +228,21 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                              className="card-collapse">
 
                                                             <NavlinkmailmessageUser {...this.props} {...contactusersprofile}/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <NavlinkmailmessagesendUser {...this.props} {...contactusersprofile}/>
 
                                                         </div>
                                                     </div>
@@ -278,7 +312,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                         {annoncereservation.contactservices.length >= 0 ?
                                                             <>
-                                                                {annoncereservation.contactservices.map((item) => (
+                                                                {annoncereservation.contactservices.slice(0, visiable).map((item) => (
 
                                                                     <Fragment key={item.id}>
 
@@ -385,7 +419,7 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                                                 <Suspense fallback={<p>loading...</p>}>
 
-                                                                                    {item.responsecontactservices.map((lk) =>
+                                                                                    {item.responsecontactservices.slice(0, responsecontactservices).map((lk) =>
 
                                                                                         <Fragment key={lk.id}>
 
@@ -430,6 +464,14 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
                                                                                         </Fragment>
                                                                                     )}
 
+                                                                                    {responsecontactservices < item.responsecontactservices.length && (
+                                                                                        <div className="col-md-8 ml-auto mr-auto text-center">
+                                                                                            <a style={{cursor:"pointer"}} onClick={this.loadmoresresponseItem} className="text-info">
+                                                                                                <b>{item.responsecontactservices.length} Afficher plus de réponses</b>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    )}
+
                                                                                 </Suspense>
 
 
@@ -445,6 +487,14 @@ class PersonalmessagesannoncesreservationsShowUser extends Component {
 
                                                         <br/>
 
+
+                                                        {visiable < annoncereservation.contactservices.length && (
+                                                            <div className="col-md-8 ml-auto mr-auto text-center">
+                                                                <a style={{cursor:"pointer"}} onClick={this.loadmoresItem} className="text-info">
+                                                                    <b>Afficher plus de message</b>
+                                                                </a>
+                                                            </div>
+                                                        )}
 
                                                     </div>
 

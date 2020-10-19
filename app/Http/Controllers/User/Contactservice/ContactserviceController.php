@@ -46,6 +46,13 @@ class ContactserviceController extends Controller
                     ->latest()->distinct()->get()->toArray();
             },
             ])
+            ->with(['contactservicesemploymentsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', employment::class)
+                    ->whereIn('from_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
+            ])
             ->with(['contactservicesannoncelocations' => function ($q) use ($user) {
                 $q->with('to', 'from', 'contactserviceable')
                     ->with([
@@ -60,6 +67,23 @@ class ContactserviceController extends Controller
                         },])
                     ->where('contactserviceable_type', annoncelocation::class)
                     ->whereIn('to_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },
+            ])
+            ->with(['contactservicesannoncelocationsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncelocation' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncelocation::class)
+                    ->whereIn('from_id', [$user->id])
                     ->latest()->distinct()->get()->toArray();
             },
             ])
@@ -78,8 +102,23 @@ class ContactserviceController extends Controller
                     ->where('contactserviceable_type', annoncevente::class)
                     ->whereIn('to_id', [$user->id])
                     ->latest()->distinct()->get()->toArray();
-            },
-            ])
+            },])
+            ->with(['contactservicesannonceventesfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncevente' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncevente::class)
+                    ->whereIn('from_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },])
             ->with(['contactservicesannoncereservations' => function ($q) use ($user) {
                 $q->with('to', 'from', 'contactserviceable')
                     ->with([
@@ -95,8 +134,23 @@ class ContactserviceController extends Controller
                     ->where('contactserviceable_type', annoncereservation::class)
                     ->whereIn('to_id', [$user->id])
                     ->latest()->distinct()->get()->toArray();
-            },
-            ])
+            },])
+            ->with(['contactservicesannoncereservationsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->with([
+                        'contactserviceable.categoryannoncereservation' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'color_name', 'user_id');
+                        },
+                        'contactserviceable.city' => function ($q) {
+                            $q->select('id', 'name', 'slug', 'user_id');
+                        },
+                        'contactserviceable.annoncetype' => function ($q) {
+                            $q->select('id', 'name', 'slug');
+                        },])
+                    ->where('contactserviceable_type', annoncereservation::class)
+                    ->whereIn('from_id', [$user->id])
+                    ->latest()->distinct()->get()->toArray();
+            },])
             ->first();
 
         return response()->json($contactservices, 200);

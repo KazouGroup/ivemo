@@ -21,7 +21,7 @@ class NavlinkmailmessageUser extends Component {
                          className="card-collapse">
                     <div className="card-header" role="tab" id="headingOne">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <b>Mes Messages</b>
+                            <b>Mes messages</b>
                             <i className="now-ui-icons arrows-1_minimal-down"/>
                         </a>
                     </div>

@@ -195,9 +195,19 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactservice::class, 'to_id');
     }
 
+    public function contactservicesemploymentsfrom()
+    {
+        return $this->hasMany(contactservice::class, 'from_id');
+    }
+
     public function contactservicesannoncelocations()
     {
         return $this->hasMany(contactservice::class, 'to_id');
+    }
+
+    public function contactservicesannoncelocationsfrom()
+    {
+        return $this->hasMany(contactservice::class, 'from_id');
     }
 
     public function contactservicesannonceventes()
@@ -205,11 +215,20 @@ class user extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(contactservice::class, 'to_id');
     }
 
+    public function contactservicesannonceventesfrom()
+    {
+        return $this->hasMany(contactservice::class, 'from_id');
+    }
+
     public function contactservicesannoncereservations()
     {
         return $this->hasMany(contactservice::class, 'to_id');
     }
 
+    public function contactservicesannoncereservationsfrom()
+    {
+        return $this->hasMany(contactservice::class, 'from_id');
+    }
 
     public function subscriberusers()
     {

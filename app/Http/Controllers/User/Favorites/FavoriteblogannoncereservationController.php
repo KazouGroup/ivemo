@@ -81,7 +81,7 @@ class FavoriteblogannoncereservationController extends Controller
 
         $blogannoncereservation = blogannoncereservation::whereId($id)->firstOrFail();
 
-        $response = auth()->user()->removelikes()->detach($blogannoncereservation->id);
+        $response = auth()->user()->removelikes()->toggle($blogannoncereservation->id);
 
         return response()->json(['success'=>$response]);
     }

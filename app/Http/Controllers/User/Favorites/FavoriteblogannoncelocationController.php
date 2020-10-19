@@ -53,7 +53,7 @@ class FavoriteblogannoncelocationController extends Controller
     {
         $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoriteblogannoncelocations()->attach($blogannoncelocation->id);
+        Auth::user()->bookmarksfavoriteblogannoncelocations()->toggle($blogannoncelocation->id);
 
 		return response('favorite confirmed',Response::HTTP_ACCEPTED);
 	}
@@ -62,7 +62,7 @@ class FavoriteblogannoncelocationController extends Controller
     {
         $blogannoncelocation = blogannoncelocation::whereId($id)->firstOrFail();
 
-        Auth::user()->bookmarksfavoriteblogannoncelocations()->detach($blogannoncelocation->id);
+        Auth::user()->bookmarksfavoriteblogannoncelocations()->toggle($blogannoncelocation->id);
 
 		return response('unfavorite confirmed',Response::HTTP_ACCEPTED);
 	}

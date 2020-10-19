@@ -151,10 +151,12 @@ import Annoncebycategoryannoncereservationcityshow
 import ContactserviceAnnonceventeShow
     from "../components/user/profile/mail/contactusersvente/ContactserviceAnnonceventeShow";
 import PersonalmessagesannoncesreservationsUser
-    from "../components/user/profile/mail/contactusersreservation/PersonalmessagesannoncesreservationsUser";
+    from "../components/user/profile/contactservices/contactusersreservation/PersonalmessagesannoncesreservationsUser";
 import PersonalmessagesannoncesreservationsShowUser
-    from "../components/user/profile/mail/contactusersreservation/PersonalmessagesannoncesreservationsShowUser";
+    from "../components/user/profile/contactservices/contactusersreservation/PersonalmessagesannoncesreservationsShowUser";
 import AnnoncereservationEdit from "../components/user/annonces/annoncereservation/treatment/AnnoncereservationEdit";
+import PersonalmessagesannoncesreservationssendUser
+    from "../components/user/profile/contactservices/contactusersreservation/PersonalmessagesannoncesreservationssendUser";
 
 
 const RouteUser = props => (
@@ -252,6 +254,7 @@ const RouteUser = props => (
           <Route exact path="/statistics/als/:annoncetype/:annoncelocation/" component={withRouter(ContactserviceAnnoncelocationShow)}/>
 
           <Route exact path="/messages/ars/" component={withRouter(PersonalmessagesannoncesreservationsUser)}/>
+          <Route exact path="/messages/ars/send/" component={withRouter(PersonalmessagesannoncesreservationssendUser)}/>
           <Route exact path="/messages/ars/:user/:annoncetype/:annoncereservation/" component={PersonalmessagesannoncesreservationsShowUser}/>
 
           <Route exact path="/messages/avs/" component={withRouter(PersonalmessagesannoncesventesUser)}/>

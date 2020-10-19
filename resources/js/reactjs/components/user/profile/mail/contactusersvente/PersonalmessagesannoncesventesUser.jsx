@@ -139,7 +139,7 @@ class PersonalmessagesannoncesventesUser extends Component {
 
                                                     {contactusersprofile.contactservicesannonceventes.length >= 0 ?
                                                         <>
-                                                            {contactusersprofile.contactservicesannonceventes.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Ventes"}/>}
+                                                            {contactusersprofile.contactservicesannonceventes.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Ventes "}/>}
                                                         </>:null}
 
                                                     </tbody>

@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import NavUserSite from "../../../../inc/user/NavUserSite";
 import FooterBigUserSite from "../../../../inc/user/FooterBigUserSite";
-import NavlinkmailmessageUser from "../inc/NavlinkmailmessageUser";
+import NavlinkmailmessageUser from "../../mail/inc/NavlinkmailmessageUser";
 import LinkValicationEmail from "../../../../inc/user/LinkValicationEmail";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -14,8 +14,9 @@ import {
     loadAllcontactservices
 } from "../../../../../redux/actions/annoncereservation/contactuserannoncereservationActions";
 import HelmetSite from "../../../../inc/user/HelmetSite";
-import MailcontactserviceList from "../../contactservices/inc/MailcontactserviceList";
+import MailcontactserviceList from "../inc/MailcontactserviceList";
 import EmptyTableItems from "../../../../inc/user/EmptyTableItems";
+import NavlinkmailmessagesendUser from "../../mail/inc/NavlinkmailmessagesendUser";
 
 
 class PersonalmessagesannoncesreservationsUser extends Component {
@@ -112,6 +113,20 @@ class PersonalmessagesannoncesreservationsUser extends Component {
                                             </div>
                                         </div>
 
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <div className="row">
+                                                    <div className="col-md-12">
+                                                        <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
+
+                                                            <NavlinkmailmessagesendUser {...this.props} {...contactusersprofile}/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
 
@@ -139,7 +154,7 @@ class PersonalmessagesannoncesreservationsUser extends Component {
 
                                                     {contactusersprofile.contactservicesannoncereservations.length >= 0 ?
                                                         <>
-                                                            {contactusersprofile.contactservicesannoncereservations.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Reservations"}/>}
+                                                            {contactusersprofile.contactservicesannoncereservations.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Reservations "}/>}
                                                         </>:null}
 
                                                     </tbody>

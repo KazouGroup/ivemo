@@ -24,6 +24,11 @@ Route::group(['middleware' => 'verified'], function(){
 
 
         Route::get(
+            'messages/ars/send',
+            'ContactservicannoncereservationController@personalmessagesdatassend'
+        )->name('personal_mails_annoncereservationssend.site');
+
+        Route::get(
             'messages/ars',
             'ContactservicannoncereservationController@personalmessagesdatas'
         )->name('personal_mails_annoncereservations.site');

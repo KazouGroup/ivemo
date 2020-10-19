@@ -130,11 +130,21 @@ class HelpersService
                     ->where('contactserviceable_type', employment::class)
                     ->whereIn('to_id', [$user->id]);
             }])
+            ->withCount(['contactservicesemploymentsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', employment::class)
+                    ->whereIn('from_id', [$user->id]);
+            }])
             ->withCount(['contactservicesannoncelocations' => function ($q) use ($user) {
                 $q->where(['status_red' => 0])
                     ->with('to', 'from', 'contactserviceable')
                     ->where('contactserviceable_type', annoncelocation::class)
                     ->whereIn('to_id', [$user->id]);
+            }])
+            ->withCount(['contactservicesannoncelocationsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', annoncelocation::class)
+                    ->whereIn('from_id', [$user->id]);
             }])
             ->withCount(['contactservicesannonceventes' => function ($q) use ($user) {
                 $q->where(['status_red' => 0])
@@ -142,11 +152,21 @@ class HelpersService
                     ->where('contactserviceable_type', annoncevente::class)
                     ->whereIn('to_id', [$user->id]);
             }])
+            ->withCount(['contactservicesannonceventesfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', annoncevente::class)
+                    ->whereIn('from_id', [$user->id]);
+            }])
             ->withCount(['contactservicesannoncereservations' => function ($q) use ($user) {
                 $q->where(['status_red' => 0])
                     ->with('to', 'from', 'contactserviceable')
                     ->where('contactserviceable_type', annoncereservation::class)
                     ->whereIn('to_id', [$user->id]);
+            }])
+            ->withCount(['contactservicesannoncereservationsfrom' => function ($q) use ($user) {
+                $q->with('to', 'from', 'contactserviceable')
+                    ->where('contactserviceable_type', annoncereservation::class)
+                    ->whereIn('from_id', [$user->id]);
             }]);
 
         return $data;

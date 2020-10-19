@@ -8,7 +8,8 @@ const initialState = {
         contactservicesemployments: {to: [], from: [], contactserviceable: []},
         contactservicesannoncelocations: {to: [], from: [], contactserviceable: []},
         contactservicesannonceventes: {to: [], from: [], contactserviceable: []},
-        contactservicesannoncereservations: {to: [], from: [], contactserviceable: []}
+        contactservicesannoncereservations: {to: [], from: [], contactserviceable: []},
+        contactservicesannoncereservationsfrom: {to: [], from: [], contactserviceable: []},
     },
 };
 
