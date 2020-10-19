@@ -10,6 +10,7 @@ class FormcontactuseronannonceventeShow extends Component {
         this.state = {
             email: '',
             full_name: '',
+            subject: '',
             phone: '',
             message: '',
             errors: [],
@@ -48,6 +49,7 @@ class FormcontactuseronannonceventeShow extends Component {
         let item = {
             email: this.state.email,
             full_name: this.state.full_name,
+            subject: this.state.subject,
             phone: this.state.phone,
             message: this.state.message,
         };
@@ -99,8 +101,8 @@ class FormcontactuseronannonceventeShow extends Component {
     }
 
     render() {
-        const { email, full_name, phone,subject, message } = this.state;
-        const enabled = email.length > 0 && full_name.length && phone.length && message.length > 0;
+        const { subject, message } = this.state;
+        const enabled = subject.length && message.length > 0;
         return (
 
 
@@ -149,10 +151,22 @@ class FormcontactuseronannonceventeShow extends Component {
                                         value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor} required="required"/>
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
 
 
+                    </div>
+                    <div className="row">
+                        <div className="input-group">
+                            <div className="input-group-prepend">
+                                <span className="input-group-text">
+                                    <i className="now-ui-icons users_circle-08" /></span>
+                            </div>
+                            <FieldInput name="subject" type='text' minLength="5" maxLength="200" placeholder="Object" value={this.state.subject}
+                                        handleFieldChange={this.handleFieldChange}
+                                        hasErrorFor={this.hasErrorFor}
+                                        renderErrorFor={this.renderErrorFor}/>
+                        </div>
                     </div>
                     <div className="row">
 
@@ -167,10 +181,23 @@ class FormcontactuseronannonceventeShow extends Component {
                         </div>
                     </div>
                     <small>les champs avec un astérisque * sont obligatoires</small>
+
                     <div className="submit text-center">
-                        <button className="btn btn-primary btn-lg" type="submit" disabled={!enabled}>
-                            <i className="now-ui-icons ui-1_email-85"/> <b>Contacter</b>
-                        </button>
+                        {!$guest ?
+                            <>
+                                <button className="btn btn-primary btn-lg" type="submit" disabled={!enabled}>
+                                    <i className="now-ui-icons ui-1_email-85"/> <b>Contacter</b>
+                                </button>
+                            </>
+                            :
+                            <>
+                                <a href={`/login`} data-toggle="modal"
+                                   data-target="#loginModal"
+                                   className="btn btn-primary btn-lg">
+                                    <i className="now-ui-icons ui-1_send"/> Contacter
+                                </a>
+                            </>
+                        }
                     </div>
                 </div>
 

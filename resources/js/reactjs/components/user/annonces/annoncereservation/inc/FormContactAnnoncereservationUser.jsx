@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PrivacyInformationsFormContact from "../../../../inc/user/PrivacyInformationsFormContact";
 
 
 class FormContactAnnoncereservationUser extends Component {
@@ -262,6 +263,8 @@ class FormContactAnnoncereservationUser extends Component {
                     </div>
 
                 </div>
+
+                <PrivacyInformationsFormContact />
 
             </form>
 

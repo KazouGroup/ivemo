@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FieldInput from "../../../../inc/vendor/FieldInput";
+import PrivacyInformationsFormContact from "../../../../inc/user/PrivacyInformationsFormContact";
 
 
 class FormcontactuseronreservationShow extends Component {
@@ -103,8 +104,7 @@ class FormcontactuseronreservationShow extends Component {
                             <FieldInput name="phone" type='number' minLength="3" maxLength="30" placeholder="Téléphone " value={this.state.phone}
                                         handleFieldChange={this.handleFieldChange}
                                         hasErrorFor={this.hasErrorFor}
-                                        renderErrorFor={this.renderErrorFor}
-                                        required="required"/>
+                                        renderErrorFor={this.renderErrorFor}/>
                         </div>
 
 
@@ -133,12 +133,25 @@ class FormcontactuseronreservationShow extends Component {
                         </div>
                     </div>
                     <div className="submit text-center">
-                        <button className="btn btn-primary btn-lg" type="submit">
-                            <i className="now-ui-icons ui-1_send"/> Contacter
-                        </button>
+                        {!$guest ?
+                            <>
+                                <button className="btn btn-primary btn-lg" type="submit">
+                                    <i className="now-ui-icons ui-1_send"/> Contacter
+                                </button>
+                            </>
+                            :
+                            <>
+                                <a href={`/login`} data-toggle="modal"
+                                   data-target="#loginModal"
+                                   className="btn btn-primary btn-lg">
+                                    <i className="now-ui-icons ui-1_send"/> Contacter
+                                </a>
+                            </>
+                        }
                     </div>
                 </div>
 
+                <PrivacyInformationsFormContact />
 
             </form>
 

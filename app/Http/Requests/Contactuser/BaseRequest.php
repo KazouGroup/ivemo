@@ -59,7 +59,7 @@ class BaseRequest extends Request
             $rules = [
                 'full_name' => 'nullable|string|min:3|max:200',
                 'email' => 'nullable|string|email|min:5|max:200',
-                'phone' => 'required|numeric',
+                'phone' => 'nullable|numeric|min:3|max:30',
                 'subject' => 'required|string|min:3|max:200',
                 'message' => 'required|min:5|max:5000',
             ];
