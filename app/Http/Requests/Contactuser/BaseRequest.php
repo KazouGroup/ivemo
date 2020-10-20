@@ -20,7 +20,7 @@ class BaseRequest extends Request
             $rules = [
                 'full_name' => 'required|string|min:3|max:200',
                 'message' => 'required|min:5|max:5000',
-                'phone' => 'nullable|numeric',
+                'phone' => 'nullable|numeric|digits_between:4,30',
                 'subject' => 'required|string|min:3|max:200',
                 'email' => 'required|email|min:2|max:200',
             ];
@@ -28,7 +28,7 @@ class BaseRequest extends Request
             $rules = [
                 'full_name' => ['required', 'string','min:3', 'max:200'],
                 'message' => 'required|min:5|max:5000',
-                'phone' => ['nullable', 'numeric'],
+                'phone' => ['nullable', 'numeric','digits_between:4,30'],
                 'email' => ['required', 'string', 'email', 'max:200'],
             ];
         }elseif($group === 'contactusersfaqs') {
@@ -36,7 +36,7 @@ class BaseRequest extends Request
                 'full_name' => ['required', 'string','min:3', 'max:255'],
                 'message' => 'required|min:5|max:5000',
                 'email' => ['required', 'string', 'email', 'min:2', 'max:255'],
-                'phone' => ['nullable', 'numeric'],
+                'phone' => ['nullable', 'numeric','digits_between:4,30'],
                 'categoryuser_id' => ['required', 'numeric'],
                 'categoryobjet_id' => ['required', 'numeric'],
             ];
@@ -46,7 +46,7 @@ class BaseRequest extends Request
                 'appointment_time' => ['required', 'string','min:2','max:20'],
                 'email' => ['required', 'string', 'email','min:2','max:255'],
                 'confirm_send' => ['required'],
-                'phone' => ['nullable', 'numeric'],
+                'phone' => ['nullable', 'numeric','digits_between:4,30'],
             ];
         }elseif($group === 'sendcontactservice') {
             $rules = [
@@ -59,8 +59,8 @@ class BaseRequest extends Request
             $rules = [
                 'full_name' => 'nullable|string|min:3|max:200',
                 'email' => 'nullable|string|email|min:5|max:200',
-                'phone' => 'nullable|numeric|min:3|max:30',
-                'subject' => 'required|string|min:3|max:200',
+                'phone' => 'nullable|numeric|digits_between:4,30',
+                'subject' => 'nullable|string|min:3|max:200',
                 'message' => 'required|min:5|max:5000',
             ];
         }elseif($group === 'contactadmins') {
@@ -68,7 +68,7 @@ class BaseRequest extends Request
                 'first_name' => ['required', 'string','min:3','max:200'],
                 'last_name' => ['required', 'string','min:3','max:200'],
                 'email' => ['required', 'string', 'email','min:2','max:200'],
-                'phone' => ['nullable', 'string','max:30'],
+                'phone' => ['nullable', 'numeric','digits_between:4,30'],
                 'subject' => ['required','string','min:2','max:255'],
                 'message' => 'required|min:5|max:5000',
             ];

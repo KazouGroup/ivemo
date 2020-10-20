@@ -27,9 +27,13 @@ class PrivateUserAnnoncereservationList extends PureComponent {
 
                             <div className="col-md-5">
                                 <div className="card-image">
+
                                     <UploadimageList {...this.props} />
 
-                                    <div className="text-center">
+                                </div>
+
+
+                                <div className="text-center">
                                         <button type="button" className="btn btn-dark btn-sm">
                                             <i className="now-ui-icons media-1_album"></i>
                                             <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
@@ -40,12 +44,6 @@ class PrivateUserAnnoncereservationList extends PureComponent {
                                                 <b>video</b>
                                             </button>
                                         )}
-                                    </div>
-                                </div>
-
-
-                                <div className="text-center">
-
                                     {!$guest && (
                                         <>
                                             {($userIvemo.id === this.props.user_id && $userIvemo.id === this.props.user.id) && (

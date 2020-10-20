@@ -136,7 +136,7 @@ class PersonalmessagesannoncesreservationssendUser extends Component {
 
                                                     {contactusersprofile.contactservicesannoncereservationsfrom.length >= 0 ?
                                                         <>
-                                                            {contactusersprofile.contactservicesannoncereservationsfrom.length >= 1 ? <>{mapContactusers}</>:<EmptyTableItems syntaxe={"de Message"} title={"Contacts Reservations"}/>}
+                                                            {contactusersprofile.contactservicesannoncereservationsfrom.length >= 1 ? <>{mapContactusers}</>:null}
                                                         </>:null}
 
                                                     </tbody>

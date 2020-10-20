@@ -191,7 +191,7 @@ class FavoriteController extends Controller
 
     public function unfavoritannoncereservation(Request $request,$annoncereservation)
     {
-        $annoncereservation = annoncevente::whereId($annoncereservation)->firstOrFail();
+        $annoncereservation = annoncereservation::whereId($annoncereservation)->firstOrFail();
 
         auth()->user()->removefavorites()->detach($annoncereservation);
 

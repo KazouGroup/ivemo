@@ -170,39 +170,7 @@ class ContactservicannoncereservationController extends Controller
     {
         if (Auth::id() === $user->id || Auth::id() === $annoncereservation->user_id){
 
-            $contactservice = annoncereservation::whereSlugin($annoncereservation->slugin)
-                ->with('user', 'city', 'annoncetype', 'periodeannonce', 'categoryannoncereservation', 'uploadimages')
-                ->whereIn('user_id', [$annoncereservation->user_id])
-                ->whereHas('categoryannoncereservation', function ($q) {$q->where('status', 1);})
-                ->whereHas('city', function ($q) {$q->where('status', 1);})
-                ->withCount(['uploadimages' => function ($q) {
-                    $q->where(['status' => 1, 'status_admin' => 1])
-                        ->where('uploadimagealable_type', annoncereservation::class);
-                }])
-                ->with(['uploadimages' => function ($q) {
-                    $q->where(['status' => 1, 'status_admin' => 1])
-                        ->where('uploadimagealable_type', annoncereservation::class)->get();
-                }])
-                ->withCount(['contactservices' => function ($q) use ($user,$annoncereservation) {
-                    $q->where(['status_red' => 0])
-                        ->with('to', 'from')
-                        ->whereIn('from_id', [$user->id])
-                        ->whereIn('to_id', [$annoncereservation->user_id]);
-                }])
-                ->with(['contactservices' => function ($q) use ($user,$annoncereservation) {
-                    $q->with('to', 'from')
-                        ->whereIn('from_id', [$user->id])
-                        ->whereIn('to_id', [$annoncereservation->user_id])
-                        ->with(['responsecontactservices' => function ($q){
-                            $q->where(['status' => 1])
-                                ->with('user','contactservice')
-                                ->orderByDesc('created_at')
-                                ->distinct()->get()
-                            ;},
-                        ])
-                        ->orderByDesc('created_at')
-                        ->distinct()->get();
-                }])->first();
+            $contactservice = $contactservice = ContactusersreservationService::apicontactservice_statistique($user,$annoncereservation);;
 
             return response()->json($contactservice, 200);
 

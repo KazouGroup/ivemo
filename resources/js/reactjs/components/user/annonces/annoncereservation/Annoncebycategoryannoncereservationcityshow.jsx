@@ -516,6 +516,9 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                             <i className="far fa-bookmark"></i>
                                                                         </Button>
                                                                     }
+                                                                     <NavLink to={`/messages/ars/${$userIvemo.slug}/${annoncereservation.annoncetype.slug}/${annoncereservation.slugin}`} title="Laisser un message" className="btn btn-sm btn-icon btn-primary">
+                                                                        <i className="now-ui-icons ui-1_send" />
+                                                                     </NavLink>
                                                                 </>
                                                             }
                                                             <Button className="btn btn-icon btn-sm btn-facebook" title="Copier le lien" onClick={() => this.copyToClipboard()}>
@@ -627,7 +630,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                     <div className="card card-plain">
                                                         <div className="card-header" role="tab" id="headingOne">
                                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                <b>Envie de visiter ? Une question sur cet appartement ?</b>
+                                                                <b>Reserver {annoncereservation.categoryannoncereservation.label} ?</b>
                                                                 <i className="now-ui-icons arrows-1_minimal-down"/>
                                                             </a>
                                                         </div>
@@ -637,7 +640,7 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                     <div className="col-md-12">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="true" className="card-collapse">
 
-                                                                        <FormContactAnnoncereservationUser {...this.props}/>
+                                                                        <FormContactAnnoncereservationUser {...this.props} {...annoncereservation}/>
 
                                                                         </div>
                                                                     </div>
@@ -702,7 +705,9 @@ class Annoncebycategoryannoncereservationcityshow extends Component {
                                                                         <>
                                                                             <div className="mx-3">
                                                                                 <span className="text-dark font-weight-600 text-sm">
-                                                                                    <Link to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`} ><b>{annoncereservation.user.first_name}</b></Link>
+                                                                                    <Link to={`/pro/${annoncereservation.user.slug}/ars/${annoncereservation.annoncetype.slug}/`} >
+                                                                                        <b>{annoncereservation.user.first_name} {/*<i className="fas fa-certificate text-info"></i>*/}</b>
+                                                                                    </Link>
                                                                                     <small className="d-block text-muted">{annoncereservation.statusOnline &&(<i className="fas fa-circle text-success"></i>)} {moment(annoncereservation.created_at).format('LL')}</small>
                                                                                     <Link to={`/pro/${profileUser.slug}/followers/`}><b>{this.data_countfollowFormatter(profileUser.countfollowerusers || "")} {profileUser.countfollowerusers > 1 ? "abonnés" : "abonné"}</b></Link>
                                                                                 </span>

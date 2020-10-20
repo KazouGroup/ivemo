@@ -6,11 +6,18 @@ import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 import ButonFavoris from "../../../../inc/vendor/ButonFavoris";
 import LazyLoad from "react-lazyload";
+const abbrev = ['', 'k', 'M', 'B', 'T'];
 
 
 class AnnoncereservationList extends PureComponent {
 
 
+    data_countuploadimageFormatter(uploadimages_count, precision) {
+        const unrangifiedOrder = Math.floor(Math.log10(Math.abs(uploadimages_count)) / 3);
+        const order = Math.max(0, Math.min(unrangifiedOrder, abbrev.length -1 ));
+        const suffix = abbrev[order];
+        return (uploadimages_count / Math.pow(10, order * 3)).toFixed(precision) + suffix;
+    }
     render() {
 
         let showlink = `/ars/${this.props.annoncetype.slug}/${this.props.categoryannoncereservation.slug}/${this.props.city.slug}/${this.props.user.slug}/${this.props.slug}`;
@@ -50,6 +57,16 @@ class AnnoncereservationList extends PureComponent {
 
 
                                 <div className="text-center">
+                                        <NavLink to={showlink} className="btn btn-dark btn-sm">
+                                                <i className="now-ui-icons media-1_album"></i>
+                                                <b>{this.data_countuploadimageFormatter(this.props.uploadimages_count)}</b>
+                                        </NavLink>
+
+                                        {this.props.link_video && (
+                                            <button type="button" className="btn btn-dark btn-sm">
+                                                <b>video</b>
+                                            </button>
+                                        )}
 
                                     {!$guest && (
                                         <>
@@ -80,6 +97,9 @@ class AnnoncereservationList extends PureComponent {
                                                     </Button>
                                                 </>
                                             )}
+                                            <NavLink to={`/messages/ars/${$userIvemo.slug}/${this.props.annoncetype.slug}/${this.props.slugin}`} title="Laisser un message" className="btn btn-sm btn-icon btn-primary">
+                                                <i className="now-ui-icons ui-1_send" />
+                                            </NavLink>
                                         </>
                                     )}
 
