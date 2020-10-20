@@ -21,12 +21,12 @@ Route::group(['middleware' => 'verified'], function(){
         Route::get(
             'reservations/ars/send',
             'ReservationsannoncereservationController@personalmessagesdatassend'
-        )->name('personal_mails_annoncereservationssend.site');
+        )->name('personal_mails_reservationssend.site');
 
         Route::get(
             'reservations/ars',
             'ReservationsannoncereservationController@personalmessagesdatas'
-        )->name('personal_mails_annoncereservations.site');
+        )->name('personal_mails_reservations.site');
 
     });
 
