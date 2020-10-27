@@ -253,7 +253,7 @@ class AnnoncereservationIndex extends Component {
                             <div className="content-center">
                                 <div className="row">
                                     <div className="col-md-10 ml-auto mr-auto">
-                                        <h2 className="title">Reservez votre chambre d'hotel, une villa ou un appartement </h2>
+                                        <h3 className="title">Reservez votre chambre d'hotel, une villa ou un appartement </h3>
                                     </div>
                                 </div>
                             </div>

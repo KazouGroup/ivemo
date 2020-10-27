@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import React, {Component} from "react";
+import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../inc/user/NavUserSite";
 import FooterBigUserSite from "../inc/user/FooterBigUserSite";
 import SectionLocationbyCity from "../inc/user/section_indexsite/SectionLocationbyCity";
@@ -7,6 +7,7 @@ import SectionReservationbyCity from "../inc/user/section_indexsite/SectionReser
 import SectionVentebyCity from "../inc/user/section_indexsite/SectionVentebyCity";
 import SectionBlogannonce from "../inc/user/section_indexsite/SectionBlogannonce";
 import HelmetSite from "../inc/user/HelmetSite";
+import ButtonNewAnnonce from "../inc/user/ButtonNewAnnonce";
 
 
 class IndexSite extends Component {
@@ -17,7 +18,7 @@ class IndexSite extends Component {
         }
     }
 
-   // Lifecycle Component Method
+    // Lifecycle Component Method
     componentDidMount() {
         //
     }
@@ -25,34 +26,39 @@ class IndexSite extends Component {
     render() {
         return (
             <>
-                <HelmetSite title={`Trouvez une maison, un appartement, une villa, un terrain un boulo, evenement, job bien d\'autre service - ${$name_site}`}/>
+                <HelmetSite
+                    title={`Trouvez une maison, un appartement, une villa, un terrain un boulo, evenement, job bien d\'autre service - ${$name_site}`}/>
 
                 <div className="pricing sidebar-collapse">
-                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="400">
-                        <NavUserSite />
+                    <nav className="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent"
+                         color-on-scroll="400">
+                        <NavUserSite/>
                     </nav>
 
                     <div className="wrapper">
 
                         <div className="page-header page-header-small">
                             <div className="page-header-image" data-parallax="true"
-                                 style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")" }}>
+                                 style={{backgroundImage: "url(" + '/assets/vendor/assets/img/bg32.jpg' + ")"}}>
                             </div>
                             <div className="content-center">
                                 <div className="row">
-                                    <div className="col-md-11 ml-auto mr-auto">
-                                        <h3 className="title">Le portail pour personnels immobiliers et entrepreneurs pour l'acquisitions, ventes, proposition de services et échanges</h3>
-                                    </div>
-                                </div>
-                                <div className="row">
                                     <div className="col-md-12 ml-auto mr-auto">
-                                        <Link to={`/employments/`} className="btn btn-danger btn-lg">
-                                            Emplois et Services
-                                        </Link>
 
-                                        <Link to={`/forums/`} className="btn btn-info btn-lg">
-                                            Forums
-                                        </Link>
+                                        {$guest ?
+                                            <>
+                                                <a href={route('login')} className="btn btn-secondary btn-lg">
+                                                    <i className="now-ui-icons users_circle-08"/>
+                                                    <b>Connexion</b>
+                                                </a>
+                                                <a href={route('register')} className="btn btn-primary btn-lg">
+                                                    <i className="now-ui-icons tech_mobile"/>
+                                                    <b>Inscription</b>
+                                                </a>
+                                            </>
+                                            :
+                                            <ButtonNewAnnonce classNameDrop={`btn btn-danger btn-sm`}/>
+                                        }
 
                                         {/*
                                         <Link to={`/als/locations/`} className="btn btn-danger btn-lg">
@@ -71,6 +77,14 @@ class IndexSite extends Component {
 
                                     </div>
                                 </div>
+
+
+                                <div className="row">
+                                    <div className="col-md-11 ml-auto mr-auto">
+                                        <h3 className="title">Poster vos annonces ou laisser toutes vos preocupations
+                                            sur le forum </h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -81,7 +95,7 @@ class IndexSite extends Component {
                                 <div className="col-md-4">
                                     <Link to={`/als/locations/`}>
                                         <div className="card card-background card-raised" data-background-color=""
-                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")"}}>
                                             <div className="info">
                                                 <div className="icon icon-white">
                                                     <i className="now-ui-icons business_bank"></i>
@@ -97,7 +111,7 @@ class IndexSite extends Component {
                                 <div className="col-md-4">
                                     <Link to={`/ars/reservations/`}>
                                         <div className="card card-background card-raised" data-background-color=""
-                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project22.jpg' + ")" }}>
+                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project22.jpg' + ")"}}>
                                             <div className="info">
                                                 <div className="icon icon-white">
                                                     <i className="now-ui-icons education_agenda-bookmark"></i>
@@ -113,7 +127,7 @@ class IndexSite extends Component {
                                 <div className="col-md-4">
                                     <Link to={`/avs/ventes/`}>
                                         <div className="card card-background card-raised" data-background-color=""
-                                            style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                             style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")"}}>
                                             <div className="info">
                                                 <div className="icon icon-white">
                                                     <i className="now-ui-icons location_map-big"></i>
@@ -133,8 +147,9 @@ class IndexSite extends Component {
 
                                         <div className="col-md-3">
                                             <Link to={`/city/yaounde/`}>
-                                                <div className="card card-background card-raised" data-background-color=""
-                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                                <div className="card card-background card-raised"
+                                                     data-background-color=""
+                                                     style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")"}}>
                                                     <div className="info">
 
                                                         <div className="description">
@@ -147,8 +162,9 @@ class IndexSite extends Component {
 
                                         <div className="col-md-3">
                                             <Link to={`/city/douala/`}>
-                                                <div className="card card-background card-raised" data-background-color=""
-                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")" }}>
+                                                <div className="card card-background card-raised"
+                                                     data-background-color=""
+                                                     style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project21.jpg' + ")"}}>
                                                     <div className="info">
                                                         <div className="description">
                                                             <h4 className="info-title">Douala</h4>
@@ -160,8 +176,9 @@ class IndexSite extends Component {
 
                                         <div className="col-md-3">
                                             <Link to={`/city/bafoussam/`}>
-                                                <div className="card card-background card-raised" data-background-color=""
-                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                                <div className="card card-background card-raised"
+                                                     data-background-color=""
+                                                     style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")"}}>
                                                     <div className="info">
                                                         <div className="description">
                                                             <h4 className="info-title">Bafoussam</h4>
@@ -173,8 +190,9 @@ class IndexSite extends Component {
 
                                         <div className="col-md-3">
                                             <Link to={`/city/dschang/`}>
-                                                <div className="card card-background card-raised" data-background-color=""
-                                                     style={{ backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")" }}>
+                                                <div className="card card-background card-raised"
+                                                     data-background-color=""
+                                                     style={{backgroundImage: "url(" + '/assets/vendor/assets/img/project20.jpg' + ")"}}>
                                                     <div className="info">
                                                         <div className="description">
                                                             <h4 className="info-title">Dschang</h4>
@@ -281,7 +299,7 @@ class IndexSite extends Component {
 
 
                         </div>
-                        <FooterBigUserSite />
+                        <FooterBigUserSite/>
                     </div>
                 </div>
             </>
