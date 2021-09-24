@@ -44,7 +44,7 @@ class CompileTableSeeder extends Seeder
             //'birthday' => now(),
             'email' => "temgoua2012@gmail.com",
             'color_name' => "primary",
-            "password" => bcrypt('0000000'),
+            "password" => bcrypt('00000000'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);

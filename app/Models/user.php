@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 
 class user extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,HasApiTokens,HasRoles,Favoritesuserdata,Subscribedata;
+    use Notifiable,HasApiTokens,HasRoles,Favoritesuserdata,Subscribedata, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -82,13 +82,12 @@ class user extends Authenticatable implements MustVerifyEmail
         $this->notify(new VerifyEmailUsers());
     }
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

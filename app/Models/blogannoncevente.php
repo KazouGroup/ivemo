@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class blogannoncevente extends Model implements Auditable
 {
-    use Purify, AuditableTrait,LogsActivity;
+    use Purify, AuditableTrait, Sluggable;
 
     protected $guarded = [];
 
@@ -77,14 +78,12 @@ class blogannoncevente extends Model implements Auditable
         'status_admin' => 'boolean',
     ];
 
-
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class licencesite extends Model
 {
+    use Sluggable;
+
     protected $guarded = [];
 
     protected  $table = 'licencesites';
@@ -31,13 +33,13 @@ class licencesite extends Model
         'status' => 'boolean',
     ];
 
-    use Sluggable;
+
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

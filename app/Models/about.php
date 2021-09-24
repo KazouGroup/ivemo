@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use App\Models\user\user;
+use App\Models\user;
 use Illuminate\Support\Facades\Cache;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 
 class about extends Model
@@ -16,7 +18,7 @@ class about extends Model
      *
      * @var array
      */
-    use LogsActivity,\OwenIt\Auditing\Auditable;
+    use \OwenIt\Auditing\Auditable, Sluggable;
 
     protected $table = 'abouts';
     protected $fillable = [
@@ -87,14 +89,12 @@ class about extends Model
         return Cache::has('user-is-online-' . $this->id);
     }
 
-    use Sluggable;
-
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable() : array
     {
         return [
             'slug' => [

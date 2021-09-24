@@ -8,6 +8,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 class color extends Model
 {
+    use  Sluggable;
     //use \OwenIt\Auditing\Auditable;
     protected $fillable = ['name','status'];
 
@@ -46,14 +47,12 @@ class color extends Model
         });
     }
 
-
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

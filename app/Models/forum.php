@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class forum extends Model
 {
-
-    use  LogsActivity;
+    use Sluggable;
 
     protected $guarded = [];
 
@@ -27,7 +27,6 @@ class forum extends Model
         'status' => 'boolean',
         'status_admin' => 'boolean',
     ];
-
 
     public function user()
     {
@@ -66,13 +65,13 @@ class forum extends Model
         return visits($this);
     }
 
-    use Sluggable;
+
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

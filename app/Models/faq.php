@@ -10,6 +10,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 class faq extends Model
 {
+    use Sluggable;
     //use AuditableTrait;
 
     protected $fillable = ['body','title','status','categoryfaq_id'];
@@ -62,13 +63,12 @@ class faq extends Model
         return Cache::has('user-is-online-' . $this->id);
     }
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

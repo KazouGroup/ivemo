@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 class annoncereservation extends Model
 {
 
+    use Sluggable;
+
     protected $guarded = [];
 
     protected  $table = 'annoncereservations';
@@ -96,13 +98,12 @@ class annoncereservation extends Model
         'status_consiegerie' => 'boolean',
     ];
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

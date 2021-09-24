@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 class annoncevente extends Model
 {
 
+   use Sluggable;
+
    protected $guarded = [];
 
    protected $table = 'annonceventes';
@@ -87,13 +89,12 @@ class annoncevente extends Model
         'status_admin' => 'boolean',
     ];
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

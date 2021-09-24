@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 
 class activitycity extends Model
 {
+    use Sluggable;
+
     protected $fillable = ['description','link_video','slug','slugin','city_id','title','user_id','member_id','status'];
 
     protected $table = 'activitycities';
@@ -68,13 +70,12 @@ class activitycity extends Model
         return Cache::has('user-is-online-' . $this->id);
     }
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

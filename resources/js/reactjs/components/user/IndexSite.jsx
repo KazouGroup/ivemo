@@ -1,29 +1,14 @@
-import React, {Component} from "react";
 import {Link, NavLink} from 'react-router-dom';
 import NavUserSite from "../inc/user/NavUserSite";
 import FooterBigUserSite from "../inc/user/FooterBigUserSite";
 import SectionLocationbyCity from "../inc/user/section_indexsite/SectionLocationbyCity";
-import SectionReservationbyCity from "../inc/user/section_indexsite/SectionReservationbyCity";
 import SectionVentebyCity from "../inc/user/section_indexsite/SectionVentebyCity";
-import SectionBlogannonce from "../inc/user/section_indexsite/SectionBlogannonce";
 import HelmetSite from "../inc/user/HelmetSite";
 import ButtonNewAnnonce from "../inc/user/ButtonNewAnnonce";
 
 
-class IndexSite extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            //
-        }
-    }
+const IndexSite = () =>  {
 
-    // Lifecycle Component Method
-    componentDidMount() {
-        //
-    }
-
-    render() {
         return (
             <>
                 <HelmetSite
@@ -304,7 +289,6 @@ class IndexSite extends Component {
                 </div>
             </>
         )
-    }
 }
 
 export default IndexSite;

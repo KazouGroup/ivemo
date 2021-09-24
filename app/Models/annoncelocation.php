@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 
 class annoncelocation extends Model
 {
+    use Sluggable;
+
     protected $guarded = [];
 
     protected  $table = 'annoncelocations';
@@ -89,13 +91,12 @@ class annoncelocation extends Model
         'status_admin' => 'boolean',
     ];
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

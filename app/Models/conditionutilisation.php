@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class conditionutilisation extends Model
 {
+    use Sluggable;
+
     protected $guarded = [];
 
     protected  $table = 'conditionutilisations';
@@ -31,13 +33,12 @@ class conditionutilisation extends Model
         'status' => 'boolean',
     ];
 
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

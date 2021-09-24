@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 
 class employment extends Model
 {
+    use Sluggable;
+
     protected $guarded = [];
 
     protected $table = 'employments';
@@ -76,14 +78,12 @@ class employment extends Model
         'status_admin' => 'boolean',
         'status_link_contact' => 'boolean',
     ];
-
-    use Sluggable;
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

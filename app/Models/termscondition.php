@@ -9,6 +9,7 @@ use OwenIt\Auditing\Contracts\Auditable;
 
 class termscondition extends Model
 {
+    use Sluggable;
     //use AuditableTrait;
     protected $fillable = ['title','body','slug','status'];
 
@@ -28,13 +29,13 @@ class termscondition extends Model
         'status' => 'boolean',
     ];
 
-    use Sluggable;
+
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
