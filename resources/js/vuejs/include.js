@@ -9,13 +9,14 @@ import 'es6-promise/auto';
 import  store from './vuex/store';
 
 
-import {Form, HasError, AlertError, AlertSuccess} from 'vform'
+import {Form, HasError, AlertErrors, AlertSuccess} from 'vform/src/components/bootstrap5'
 
-window.Form = Form;
+//window.Form = Form;
 
-Vue.component(HasError.name, HasError);
-Vue.component(AlertError.name, AlertError);
-Vue.component(AlertSuccess.name, AlertSuccess);
+Vue.component(Button.name, Button)
+Vue.component(HasError.name, HasError)
+Vue.component(AlertErrors.name, AlertErrors)
+Vue.component(AlertSuccess.name, AlertSuccess)
 
 
 /**

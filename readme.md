@@ -1,7 +1,6 @@
 ## KazouGroup 
 
 - **[Kazoutech](http://kazoutech.com)**
-- **[Kazoucoin](http://kazoucoin.com)**
 ## Configuration
 
 Cloner le fichier puis faire un ``` composer install ``` si vous ete sur window faite ``` composer install --ignore-platform-reqs ```

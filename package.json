@@ -87,7 +87,7 @@
         "remarkable": "^2.0.1",
         "socket.io-client": "^4.2.0",
         "sweetalert2": "^11.4.14",
-        "vform": "^2.1.1",
+        "vform": "^2.1.2",
         "vue": "^2.6.14",
         "vue-infinite-loading": "^2.4.5",
         "vue-loader": "^15.9.8",
